@@ -1306,8 +1306,8 @@ def gather_news(session: requests.Session) -> Dict[str, Any]:
             "https://news.bitcoin.com/feed/",
         ],
         "macro": [
-            "https://www.cnbc.com/id/20910247/device/rss/rss.html", # Economy
-            "https://finance.yahoo.com/news/rssindex", # Top Finance News
+            "https://www.cnbc.com/id/100003114/device/rss/rss.html", # Top News (Fed, Economy)
+            "https://finance.yahoo.com/news/rssindex", # Yahoo Finance Top
         ],
     }
     news: Dict[str, Any] = {}
