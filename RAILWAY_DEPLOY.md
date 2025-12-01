@@ -37,3 +37,22 @@ This project is configured to run on [Railway](https://railway.app/) as a backgr
 - **"You must specify a workspaceId"**: If you see this error in the CLI, make sure you are logged in (`railway login`) and have created a project (`railway init` or link via UI).
 - **Git Push Fails**: Check the `GITHUB_TOKEN` permissions. It must have "Write" access to the repository contents (or full `repo` scope for classic tokens).
 - **Logs**: Check the "Deployments" -> "View Logs" tab in Railway to see the output of the trading bot.
+
+## ⚠️ CRITICAL: Prevent Infinite Loops
+
+Since the bot pushes data back to the repo, Railway will detect the commit and re-deploy, causing an infinite loop (Deploy -> Run -> Push -> Deploy).
+
+**You MUST configure Railway to ignore data file changes:**
+
+1.  Go to your Railway Project -> **Settings**.
+2.  Find the **"Watch Paths"** (or "Trigger Paths") section.
+3.  Configure it to **ONLY** watch code files. Enter the following paths (one per line):
+    ```text
+    /*.py
+    /requirements.txt
+    /Dockerfile
+    /RAILWAY_DEPLOY.md
+    ```
+    *(Or alternatively, use "Ignore Paths" if available and ignore `*.json`, `*.csv`, `frontpages/`)*
+
+4.  This ensures Railway **only** redeploys when you modify the Python code, NOT when the bot updates the data.

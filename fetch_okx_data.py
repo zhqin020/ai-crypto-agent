@@ -567,10 +567,25 @@ def main():
             failure_count += 1
             continue
             
-        # Fetch Sentiment Data (Only available via OKX, so might be empty if OKX blocked)
-        # We can skip sentiment if OKX fails, or try anyway (maybe public endpoints work differently)
-        fr_df = fetch_funding_rate(symbol, days=730)
-        oi_df = fetch_open_interest(symbol, bar="4H", days=730)
+        # Save candles immediately (Intermediate save)
+        output_path = CSV_DIR / f"{coin_name}_4h.csv"
+        df.to_csv(output_path, index=False)
+        print(f"💾 Saved candles to {output_path} (Intermediate)")
+
+        # Fetch Sentiment Data
+        try:
+            fr_df = fetch_funding_rate(symbol, days=730)
+        except Exception as e:
+            print(f"⚠️ Failed to fetch Funding Rate: {e}")
+            fr_df = pd.DataFrame()
+
+        try:
+            # oi_df = fetch_open_interest(symbol, bar="4H", days=730)
+            print("⚠️ Skipping Open Interest fetch to prevent hang")
+            oi_df = pd.DataFrame()
+        except Exception as e:
+            print(f"⚠️ Failed to fetch Open Interest: {e}")
+            oi_df = pd.DataFrame()
         
         # Merge Funding Rate
         if not fr_df.empty:
@@ -585,10 +600,9 @@ def main():
         else:
             df['open_interest'] = 0.0
             
-        # Save
-        output_path = CSV_DIR / f"{coin_name}_4h.csv"
+        # Save Final
         df.to_csv(output_path, index=False)
-        print(f"💾 Saved to {output_path}")
+        print(f"💾 Saved final data to {output_path}")
         
         time.sleep(1)
     

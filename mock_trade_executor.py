@@ -191,6 +191,8 @@ def apply_actions():
             remaining_positions.append(pos)
             continue
             
+        entry_price = float(pos["entry_price"])
+            
         high = market_data["high"]
         low = market_data["low"]
         close = market_data["close"]
