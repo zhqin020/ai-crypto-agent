@@ -1,5 +1,47 @@
 [
   {
+    "analysis_summary": "当前市场整体处于熊市趋势，波动性中等，杠杆情绪中性。新闻面显示比特币面临矿工压力且价格跌破关键支撑，市场情绪极度恐惧（恐惧贪婪指数24），但过去48小时大量多头被清算（5.75亿美元），可能带来技术性反弹机会。所有币种RSI均低于30（ETH 27.25，DOGE 22.34，BTC 26.08），处于超卖状态，但资金费率分化明显：BTC和ETH为正（0.0088%/0.0038%），DOGE为负（-0.0057%）。Qlib模型显示ETH相对强度最高（0.6075），DOGE次之（0.5697）。考虑到现有持仓已满（3个多头），且市场仍处下行趋势，优先管理现有仓位而非开新仓。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "维持持仓：Qlib排名第一（0.6075），RSI超卖（27.25），但资金费率正（0.0038%）显示多头仍拥挤，需警惕反弹乏力。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3000,
+        "entry_reason": "维持持仓：Qlib排名第三（0.4776），RSI超卖（26.08），但资金费率高达0.0088%（Z-score 192.7%），多头过热风险高，依赖超卖反弹。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": "维持持仓：Qlib排名第二（0.5697），RSI深度超卖（22.34），资金费率为负（-0.0057%）提供轧空潜力，但动量最弱（-0.0993）。",
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.128,
+          "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 18:45:49"
+  },
+  {
     "analysis_summary": "宏观层面，市场处于极端恐惧状态（恐惧贪婪指数24），且过去48小时多头清算远超空头，显示抛压已部分释放，存在技术性反弹可能。新闻方面，比特币面临矿工压力与关键周，但以太坊估值模型显示其被低估，形成背离。技术指标上，所有币种RSI均低于30（ETH 27.25，DOGE 22.34，BTC 26.08），处于超卖区域，MACD均为负值但Qlib模型预测ETH、DOGE、BTC相对强势。资金费率显示BTC和ETH为正（潜在轧多风险），DOGE为负（轧空机会）。综合来看，市场整体熊市但超卖，Qlib排名前三的币种（ETH、DOGE、BTC）有短期反弹潜力，但需控制风险。",
     "actions": [
       {
@@ -1146,35 +1188,5 @@
       }
     ],
     "timestamp": "2025-11-27 17:59:04"
-  },
-  {
-    "analysis_summary": "Market shows bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB lead with strong Qlib scores, while SOL and DOGE lag. Existing BNB and SOL positions are profitable; BNB remains strong (rank 2), but SOL's weak Qlib score (rank 4) and positive funding rate suggest caution. Fear & Greed Index at 22 (Extreme Fear) indicates potential oversold conditions. No new positions opened due to max positions limit (2/3), focus on managing existing ones.",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "close_position",
-        "leverage": null,
-        "position_size_usd": null,
-        "entry_reason": null,
-        "exit_plan": {
-          "take_profit": null,
-          "stop_loss": null,
-          "invalidation": "SOL has weak Qlib score (0.0582, rank 4), positive funding rate (0.0007%), and low momentum, indicating poor relative strength and potential downside risk."
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "adjust_sl",
-        "leverage": null,
-        "position_size_usd": null,
-        "entry_reason": null,
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 830,
-          "invalidation": "Adjusted stop-loss to 830 to lock in profits and protect against reversal, as BNB remains strong (rank 2) but funding rate is positive (0.0054%)."
-        }
-      }
-    ],
-    "timestamp": "2025-11-27 16:14:28"
   }
 ]
