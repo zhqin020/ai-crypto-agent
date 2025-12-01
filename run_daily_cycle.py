@@ -114,9 +114,41 @@ def main():
         log("❌ Trade execution failed.")
         sys.exit(1)
 
+    # 8. Sync Data to Frontend
+    sync_frontend_data()
+
     log("="*50)
     log("🎉 Trading Cycle Completed Successfully")
     log("="*50)
+
+def sync_frontend_data():
+    """Copy latest data files to frontend public directory"""
+    import shutil
+    
+    log("🔄 Syncing data to frontend...")
+    
+    frontend_data_dir = BASE_DIR / "frontpages/public/data"
+    frontend_data_dir.mkdir(parents=True, exist_ok=True)
+    
+    files_to_sync = [
+        "portfolio_state.json",
+        "trade_log.csv",
+        "nav_history.csv",
+        "agent_decision_log.json"
+    ]
+    
+    for filename in files_to_sync:
+        src = BASE_DIR / filename
+        dst = frontend_data_dir / filename
+        
+        if src.exists():
+            try:
+                shutil.copy2(src, dst)
+                log(f"  ✅ Copied {filename}")
+            except Exception as e:
+                log(f"  ❌ Failed to copy {filename}: {e}")
+        else:
+            log(f"  ⚠️ Source file not found: {filename}")
 
 if __name__ == "__main__":
     main()
