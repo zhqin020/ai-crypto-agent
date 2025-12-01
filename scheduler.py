@@ -120,7 +120,7 @@ def push_to_github():
             return
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        subprocess.run(["git", "commit", "-m", f"🤖 Auto-update trading data {timestamp} [skip ci]"], cwd=temp_dir, check=True)
+        subprocess.run(["git", "commit", "-m", f"🤖 Auto-update trading data {timestamp}"], cwd=temp_dir, check=True)
         
         logger.info("Pushing to remote...")
         subprocess.run(["git", "push"], cwd=temp_dir, check=True)
