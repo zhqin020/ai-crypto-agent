@@ -116,7 +116,7 @@ You must output a single valid JSON object. No markdown, no conversational text.
 
 Structure:
 {
-  "analysis_summary": "必须是中文。综合叙述（3-4句话）。1. 首先分析宏观/新闻背景（Section 3），判断利好是否已兑现或存在背离。2. 结合前排币种的技术指标（RSI, MACD, 资金费率）进行分析。3. 最后解释操作理由。例如：'尽管ETF流入利好，但BTC RSI>75且费率过高，显示利好已兑现，存在轧多风险，因此空仓观望...'",
+  "analysis_summary": "必须是中文。综合叙述（3-4句话）。1. 首先分析宏观趋势（Section 2.1）和新闻背景（Section 3），判断大周期方向。2. 结合前排币种的技术指标（RSI, MACD, 资金费率）进行分析。3. 最后解释操作理由。例如：'日线趋势看涨但RSI超买，结合ETF流入利好已兑现，存在回调风险，因此...'",
   "actions": [
     {
       "symbol": "BTC",
