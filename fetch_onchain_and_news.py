@@ -1305,6 +1305,10 @@ def gather_news(session: requests.Session) -> Dict[str, Any]:
             "https://decrypt.co/feed",
             "https://news.bitcoin.com/feed/",
         ],
+        "macro": [
+            "https://www.cnbc.com/id/20910247/device/rss/rss.html", # Economy
+            "https://finance.yahoo.com/news/rssindex", # Top Finance News
+        ],
     }
     news: Dict[str, Any] = {}
     crypto_compare_cache = _fetch_cryptocompare_news(session, categories="BTC,ETH", lang="EN", limit=30)

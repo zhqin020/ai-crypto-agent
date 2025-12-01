@@ -175,7 +175,7 @@ def get_news_context():
         # 1. News - Collect from all available sources
         news_dict = data.get("news", {})
         all_news = []
-        for source_key in ["bitcoin", "ethereum", "general"]:
+        for source_key in ["macro", "bitcoin", "ethereum", "general"]:
             source_news = news_dict.get(source_key, {}).get("items", [])
             all_news.extend(source_news[:3])  # Take top 3 from each source
         
