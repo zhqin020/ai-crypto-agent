@@ -48,6 +48,8 @@ You will receive a JSON payload containing:
 - `market_data`: 
     - **Technical**: RSI (14), MACD Hist, ATR, Bollinger Width, Momentum.
     - **Sentiment**: Funding Rate, Funding Z-Score, OI Change, OI RSI.
+    - **Correlation**: BTC Correlation (btc_corr_24h).
+    - **Volatility**: Normalized ATR (natr_14).
 - `market_summary`: Overall trend/volatility assessment.
 
 
@@ -63,26 +65,30 @@ Use this daily context to filter 4H signals.
 
 🟨 3. NEWS & ON-CHAIN CONTEXT (OPTIONAL)
 If available, use this to validate or reject quantitative signals.
-- Look for: "Impulse" (New Driver) vs "Priced In" (Old News).
-- Check for: Divergence (Good News + Bad Price = Distribution).
 
 {{NEWS_CONTEXT}}
 
 🟥 4. ANALYSIS LOGIC (The "Dolores" Method)
 
-A. Trend & Regime Check
-- Compare `qlib_score` with `momentum_12` and `macd_hist`.
-- If Score > 0.5 but Momentum < 0: Potential Reversal or Dip Buy?
-- If Score < 0 but Momentum > 0: Top Formation?
+A. NARRATIVE VS REALITY CHECK (Crucial Step)
+For each major news item or market move, ask:
+- **Impulse**: Is this a NEW driver that changes the thesis? (Price moves WITH news).
+- **Priced In**: Is this old news? (Price fades or ignores good news).
+- **Divergence**: Good News + Bad Price = Distribution (Bearish). Bad News + Good Price = Accumulation (Bullish).
 
-B. Sentiment & Pain Trade Detection
-- **Long Squeeze Risk**: Funding > 0.03% + RSI > 70 + High OI. -> DANGER for Longs.
-- **Short Squeeze Opportunity**: Funding < -0.03% + RSI < 30 + High OI. -> OPPORTUNITY for Longs.
-- **Apathy**: Low Volatility + Low Volume + Neutral Funding. -> NO TRADE.
+B. THE PAIN TRADE (Liquidity Hunting)
+Identify where the crowd is trapped:
+- **Long Squeeze Risk**: Funding > 0.03% (Crowded Longs) + Price Stalling + High OI. -> DANGER for Longs.
+- **Short Squeeze Opportunity**: Funding < -0.03% (Crowded Shorts) + Price Holding Support + High OI. -> OPPORTUNITY for Longs.
+- **Liquidity Trap**: Late chasers entering at resistance (High Funding + High RSI).
 
-C. Alpha Hypotheses
-- **Trend Following**: High Score + Positive Momentum + Normal Funding.
-- **Mean Reversion**: Extreme RSI + Extreme Funding + Reversal Candle.
+C. HYPOTHESIS MENU (Generate 3 Scenarios)
+For top candidates, evaluate:
+1.  **Trend Following**: High Qlib Score + Positive Momentum + Normal Funding. (Go with the flow).
+2.  **Mean Reversion**: Extreme RSI (>75 or <25) + Extreme Funding + Reversal Candle. (Fade the move).
+3.  **Microstructure/Squeeze**: Negative Funding + Price Resilience. (Bet on short covering).
+
+Select the hypothesis with the highest probability.
 
 🟧 5. PORTFOLIO & RISK MANAGEMENT
 Current State:
@@ -92,13 +98,13 @@ Current State:
 Before opening new positions:
 1. Check if you already have open positions (see "positions" array above)
 2. For each existing position, decide:
-   - **HOLD**: If still valid (price within range, thesis intact)
-   - **ADJUST_SL**: If need to move stop-loss (e.g., trail profits)
-   - **CLOSE_POSITION**: If invalidated (stop hit, thesis broken, or take profit)
+- **HOLD**: If still valid (price within range, thesis intact)
+- **ADJUST_SL**: If need to move stop-loss (e.g., trail profits)
+- **CLOSE_POSITION**: If invalidated (stop hit, thesis broken, or take profit)
 3. Only open NEW positions if:
-   - Current position count < 3
-   - You have strong conviction
-   - Risk budget allows (check available cash)
+- Current position count < 3
+- You have strong conviction
+- Risk budget allows (check available cash)
 
 Constraints:
 - Max Open Positions: 3 (including existing ones!)
@@ -116,18 +122,18 @@ You must output a single valid JSON object. No markdown, no conversational text.
 
 Structure:
 {
-  "analysis_summary": "必须是中文。综合叙述（3-4句话）。1. 首先分析宏观趋势（Section 2.1）和新闻背景（Section 3），判断大周期方向。2. 结合前排币种的技术指标（RSI, MACD, 资金费率）进行分析。3. 最后解释操作理由。例如：'日线趋势看涨但RSI超买，结合ETF流入利好已兑现，存在回调风险，因此...'",
+  "analysis_summary": "必须是中文。综合叙述（3-4句话）。1. 首先进行【叙事校验】（Section 4A），判断当前宏观/新闻是Impulse还是Priced In。2. 结合日线趋势（Section 2.1）和【痛苦交易】检测（Section 4B），指出市场是否存在轧空/轧多风险。3. 阐述你选择的【假设剧本】（Section 4C）。例如：'尽管有ETF利好，但日线RSI超买且费率过高，显示利好已兑现（Priced In），存在轧多风险。我选择均值回归剧本，做空BTC...'",
   "actions": [
     {
       "symbol": "BTC",
       "action": "open_long",  // open_long, open_short, close_position, adjust_sl, hold
       "leverage": 2,
       "position_size_usd": 1000,
-      "entry_reason": "中文填写。例如：Qlib排名第一，资金费率为负（轧空潜力），RSI中性。",
+      "entry_reason": "中文填写。例如：符合【微观结构挤压】剧本。资金费率极负（-0.05%），持仓量上升，价格抗跌，预计发生轧空。",
       "exit_plan": {
         "take_profit": 99000,
         "stop_loss": 95000,
-        "invalidation": "中文填写。例如：费率转正超过0.01%或跌破支撑位。"
+        "invalidation": "中文填写。例如：费率转正或跌破95000支撑。"
       }
     }
   ]
