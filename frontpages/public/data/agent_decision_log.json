@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "宏观上，市场处于极度恐惧状态（恐惧贪婪指数24），且过去48小时多头清算远超空头，显示抛压已部分释放，但整体趋势仍偏熊市。新闻方面，尽管有ETF流入和ETH估值偏低的利好，但BTC价格下跌和‘不可避免的5万美元崩盘’等负面标题占主导，利好可能已被消化或存在背离。技术面，所有币种RSI均低于30（ETH 27.56，BTC 26.23，BNB 28.89），处于超卖区域，MACD为负且动量指标为负，确认下跌趋势；资金费率方面，ETH和BTC为负（-0.0035%，-0.0045%），BNB和SOL为正（0.0052%，0.0028%），显示ETH/BTC有轧空潜力而BNB/SOL有轧多风险。操作上，现有ETH和BTC多头持仓仍有效（价格未触及止损，资金费率负值支持反弹），但市场波动中等且趋势偏空，不宜开新仓。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "持仓中：Qlib排名第一（得分0.5994），资金费率为负（-0.0035%），RSI超卖（27.56），存在轧空反弹机会。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3000,
+        "entry_reason": "持仓中：Qlib排名第二（得分0.3638），资金费率为负（-0.0045%），RSI超卖（26.23），与ETH联动有反弹潜力。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 12:57:10"
+  },
+  {
     "analysis_summary": "宏观层面，市场处于极端恐惧状态（恐惧贪婪指数24），且近期出现大量多头清算（3.56亿美元），表明抛压已部分释放，存在技术性反弹可能。新闻方面，尽管有ETF流入等利好，但BTC价格仍下跌至8.5万美元附近，显示利好可能已兑现或市场情绪疲软。技术指标上，ETH、BTC、BNB的RSI均低于30（超卖区域），MACD为负，资金费率普遍为负（ETH -0.0035%，BTC -0.0045%），结合Qlib模型排名（ETH第一，BTC第二），显示这些币种在超卖环境下相对强势，有短期反弹潜力。操作上，将利用现有仓位（ETH和BTC多头）博弈超卖反弹，同时关注BNB的正面资金费率风险。",
     "actions": [
       {
@@ -1108,35 +1138,5 @@
       }
     ],
     "timestamp": "2025-11-27 08:19:05"
-  },
-  {
-    "analysis_summary": "Market shows bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB lead with strong qlib scores and negative funding rates, indicating short squeeze potential. Existing BNB and SOL positions are profitable and aligned with theses; hold with current exit plans. No new positions opened due to max position limit of 3.",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 3800.0,
-        "entry_reason": "Qlib Rank #2, negative funding rate, RSI neutral, momentum positive.",
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 780,
-          "invalidation": "Funding rate exceeds 0.03% or RSI drops below 25"
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 3400.0,
-        "entry_reason": "Qlib Rank #4, low funding rate, RSI neutral, but momentum positive; thesis intact.",
-        "exit_plan": {
-          "take_profit": 140,
-          "stop_loss": 120,
-          "invalidation": "Funding rate flips positive > 0.01% or OI increases significantly"
-        }
-      }
-    ],
-    "timestamp": "2025-11-27 04:16:57"
   }
 ]
