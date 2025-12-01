@@ -235,8 +235,11 @@ def predict_and_export():
         "rsi_14", "macd_hist", "atr_14", "bb_width_20", # Technical
         "funding_rate", "funding_rate_zscore", # Sentiment
         "oi_change", "oi_rsi", # Sentiment
+        "funding_rate", "funding_rate_zscore", # Sentiment
+        "oi_change", "oi_rsi", # Sentiment
         "momentum_12", "ret",
-        "btc_corr_24h" # Correlation
+        "btc_corr_24h", # Correlation
+        "natr_14" # Normalized ATR
     ]
     
     # --- Suggestion C: Market Summary ---
