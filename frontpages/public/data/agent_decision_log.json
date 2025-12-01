@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "当前市场处于熊市趋势，波动性中等，杠杆情绪看跌，平均动量为负。新闻方面，美联储降息预期和以太坊估值偏低可能提供支撑，但美国劳动力市场疲软和ETF流出带来压力，恐惧与贪婪指数24.0显示极端恐惧，过去48小时多头清算远高于空头，暗示潜在反弹机会。前排币种中，ETH排名第一，RSI超卖（27.56），资金费率为负（-0.0035%），存在轧空潜力；BTC排名第二，RSI超卖（26.23），资金费率负值更深（-0.0045%），但动量仍为负；BNB排名第三，资金费率为正（0.0052%），可能面临轧多风险。整体市场结构偏向超卖反弹，但需谨慎管理风险。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "Qlib排名第一，得分0.5994，RSI超卖（27.56），资金费率为负（-0.0035%），存在轧空潜力，与现有多头头寸一致。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3000,
+        "entry_reason": "Qlib排名第二，得分0.3638，RSI超卖（26.23），资金费率为负（-0.0045%），轧空潜力强，与现有多头头寸一致。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 08:02:22"
+  },
+  {
     "analysis_summary": "当前市场处于熊市趋势，波动性中等，杠杆情绪看跌。新闻方面，美联储降息预期升温可能带来利好，但比特币ETF流出和与2022年熊市的高相关性显示风险仍存；以太坊估值模型表明其被低估，结合极端恐惧指数和近期大量多头清算，市场可能接近短期反弹。技术指标显示所有币种RSI均低于30，处于超卖状态，资金费率多为负值，尤其BTC和ETH的负费率较高，存在轧空潜力。Qlib模型排名ETH、BTC、BNB靠前，但动量均为负，表明可能为反转机会。鉴于市场极端恐惧和超卖，优先考虑低杠杆多头，但需控制风险。",
     "actions": [
       {
@@ -1083,10 +1113,5 @@
       }
     ],
     "timestamp": "2025-11-26 20:13:32"
-  },
-  {
-    "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB show strong Qlib scores and negative funding rates, indicating potential long opportunities. Existing BNB and SOL positions are profitable and still valid; no immediate exits needed. No new positions opened due to max position limit of 3 already reached.",
-    "actions": [],
-    "timestamp": "2025-11-26 16:14:50"
   }
 ]
