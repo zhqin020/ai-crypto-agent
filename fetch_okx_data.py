@@ -532,19 +532,40 @@ def main():
         print(f"Processing {symbol} ({coin_name})")
         print(f"{'='*60}")
         
-        # 1. Try OKX
-        df = fetch_okx_candles(symbol, bar="4H", days=730)
+        # 1. Fetch 4H Data (Primary for Qlib)
+        df_4h = fetch_okx_candles(symbol, bar="4H", days=730)
+        if not df_4h.empty:
+            # Save 4H
+            filename_4h = CSV_DIR / f"{symbol}_4h.csv"
+            df_4h.to_csv(filename_4h, index=False)
+            print(f"✅ Saved {symbol} 4H data to {filename_4h}")
+        else:
+            print(f"❌ Failed to fetch {symbol} 4H from OKX")
+            
+        # 2. Fetch 1D Data (Context for Agent)
+        df_1d = fetch_okx_candles(symbol, bar="1D", days=730)
+        if not df_1d.empty:
+            # Save 1D
+            filename_1d = CSV_DIR / f"{symbol}_1d.csv"
+            df_1d.to_csv(filename_1d, index=False)
+            print(f"✅ Saved {symbol} 1D data to {filename_1d}")
+        else:
+            print(f"⚠️ Failed to fetch {symbol} 1D from OKX (Non-critical)")
+
+        # Continue with Funding Rate logic (using 4H or just symbol)
+        # Note: Funding rate is usually independent of bar size for storage, 
+        # but we need it for the main dataset.
         
-        # 2. Fallback to Binance
+        # If 4H failed, try fallback (logic below expects df to be the primary 4H df)
+        df = df_4h
         if df.empty:
-            print(f"⚠️ OKX failed for {symbol}, trying Binance fallback...")
+            # Fallback logic (Binance/CCXT/YF) - assumes they return 4H
+            # ... (existing fallback logic)
+            
+            # Try Binance
+            print(f"🔄 Trying Binance for {symbol}...")
             df = fetch_binance_candles(symbol, bar="4H", days=730)
             
-            
-        # 3. Fallback to CCXT
-        if df.empty:
-            print(f"⚠️ Binance failed for {symbol}, trying CCXT fallback...")
-            df = fetch_ccxt_candles(symbol, bar="4H", days=730)
 
         # 4. Fallback to yfinance
         if df.empty:

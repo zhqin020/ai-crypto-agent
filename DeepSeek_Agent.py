@@ -50,7 +50,16 @@ You will receive a JSON payload containing:
     - **Sentiment**: Funding Rate, Funding Z-Score, OI Change, OI RSI.
 - `market_summary`: Overall trend/volatility assessment.
 
+
 {{QLIB_JSON_PAYLOAD}}
+
+🟦 2.1 MACRO TREND (1D TIMEFRAME)
+Use this daily context to filter 4H signals.
+- **Trend**: Price vs SMA50 (Bullish if Price > SMA50).
+- **Momentum**: Daily RSI (Overbought > 70, Oversold < 30).
+- **Structure**: Recent Highs/Lows.
+
+{{DAILY_CONTEXT}}
 
 🟨 3. NEWS & ON-CHAIN CONTEXT (OPTIONAL)
 If available, use this to validate or reject quantitative signals.
@@ -193,6 +202,49 @@ def get_news_context():
     except Exception as e:
         return f"Error reading news data: {e}"
 
+def get_daily_context_summary():
+    """
+    Read 1D CSVs and generate a summary string for the agent.
+    """
+    csv_dir = BASE_DIR / "csv_data"
+    summary = ""
+    
+    # List of coins to check (hardcoded or derived)
+    coins = ["BTC", "ETH", "SOL", "BNB", "DOGE"]
+    
+    for symbol in coins:
+        file_path = csv_dir / f"{symbol}_1d.csv"
+        if not file_path.exists():
+            continue
+            
+        try:
+            df = pd.read_csv(file_path)
+            if df.empty or len(df) < 50:
+                continue
+                
+            # Calculate Indicators
+            close = df["close"].iloc[-1]
+            sma50 = df["close"].rolling(50).mean().iloc[-1]
+            
+            # RSI 14
+            delta = df["close"].diff()
+            gain = (delta.where(delta > 0, 0)).rolling(14).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
+            rs = gain / loss
+            rsi = 100 - (100 / (1 + rs)).iloc[-1]
+            
+            trend = "BULLISH" if close > sma50 else "BEARISH"
+            
+            summary += f"- **{symbol}**: Trend={trend} (Price ${close:.2f} vs SMA50 ${sma50:.2f}), RSI={rsi:.1f}\n"
+            
+        except Exception as e:
+            print(f"⚠️ Error processing 1D data for {symbol}: {e}")
+            
+    if not summary:
+        return "No daily data available."
+        
+    return summary
+
 def run_agent():
     print("🤖 Activating Agent Dolores...")
     
@@ -211,6 +263,11 @@ def run_agent():
     
     final_prompt = SYSTEM_PROMPT.replace("{{CURRENT_TIMESTAMP}}", current_time)
     final_prompt = final_prompt.replace("{{QLIB_JSON_PAYLOAD}}", qlib_payload)
+    
+    # Add Daily Context
+    daily_context = get_daily_context_summary()
+    final_prompt = final_prompt.replace("{{DAILY_CONTEXT}}", daily_context)
+    
     final_prompt = final_prompt.replace("{{PORTFOLIO_STATE_JSON}}", portfolio_state)
     final_prompt = final_prompt.replace("{{NEWS_CONTEXT}}", news_context)
     
