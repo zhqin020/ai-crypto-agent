@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "宏观新闻显示市场处于极端恐惧（恐惧贪婪指数24），BTC面临关键周可能下跌，但过去48小时多头已大幅清算（5.47亿 vs 0.77亿空头），暗示抛压缓解。技术面整体熊市（平均动量-0.0674），所有币种RSI均低于30（超卖），ETH、BTC资金费率为负（-0.0035%/-0.0045%），存在轧空潜力，而BNB、SOL费率正但不高。Qlib模型排名ETH第一（0.5994分），结合负费率与超卖RSI，支持现有ETH多头持仓；BTC类似但排名第二。BNB正费率（0.0052%）在熊市中可能承压，避免开新仓。当前持仓2个（ETH、BTC多头），未达3个上限，但市场波动中等且持仓刚开，优先持有观察。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 4000.0,
+        "entry_reason": "Qlib排名第一（0.5994分），资金费率为负（-0.0035%），RSI超卖（27.56），存在轧空反弹潜力。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 3000.0,
+        "entry_reason": "Qlib排名第二（0.3638分），资金费率为负（-0.0045%），RSI超卖（26.23），配合宏观清算后潜在反弹。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 16:02:18"
+  },
+  {
     "analysis_summary": "宏观背景显示市场处于极端恐惧（恐惧贪婪指数24），过去48小时多头大量清算（4.06亿美元），存在技术性反弹潜力。前排币种ETH、BTC、BNB的Qlib评分领先，但技术指标全面超卖（RSI均低于30，MACD为负），资金费率多为负值（ETH -0.0035%，BTC -0.0045%），显示空头情绪浓厚，存在轧空机会。然而，整体趋势仍为熊市（市场总结为bearish），新闻面偏空（BTC可能再跌50%），需谨慎操作。",
     "actions": [
       {
@@ -1158,10 +1188,5 @@
       }
     ],
     "timestamp": "2025-11-27 16:14:28"
-  },
-  {
-    "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB show strong Qlib scores and negative funding rates, indicating potential short squeeze opportunities. Existing BNB and SOL positions are profitable and still valid; no adjustments needed. No new positions opened to maintain risk control and avoid exceeding position limits.",
-    "actions": [],
-    "timestamp": "2025-11-27 12:20:30"
   }
 ]
