@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "宏观层面，市场处于极端恐惧状态（恐惧贪婪指数24），且近期出现大量多头清算（3.56亿美元），表明抛压已部分释放，存在技术性反弹可能。新闻方面，尽管有ETF流入等利好，但BTC价格仍下跌至8.5万美元附近，显示利好可能已兑现或市场情绪疲软。技术指标上，ETH、BTC、BNB的RSI均低于30（超卖区域），MACD为负，资金费率普遍为负（ETH -0.0035%，BTC -0.0045%），结合Qlib模型排名（ETH第一，BTC第二），显示这些币种在超卖环境下相对强势，有短期反弹潜力。操作上，将利用现有仓位（ETH和BTC多头）博弈超卖反弹，同时关注BNB的正面资金费率风险。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "Qlib排名第一（得分0.5994），资金费率为负（-0.0035%），RSI超卖（27.56），存在轧空反弹机会。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3000,
+        "entry_reason": "Qlib排名第二（得分0.3638），资金费率深度为负（-0.0045%），RSI超卖（26.23），配合市场极端恐惧，有反弹基础。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 12:32:49"
+  },
+  {
     "analysis_summary": "当前市场处于熊市环境，波动性中等，杠杆情绪看跌，恐惧贪婪指数24显示极端恐惧。新闻方面，尽管有ETF流入1亿美元的利好，但BTC价格仍跌至8.5万美元，分析师警告可能跌至5万美元，显示利好可能已兑现或市场情绪悲观。技术指标上，ETH、BTC、BNB的RSI均低于30（超卖），MACD为负，资金费率多为负值（ETH -0.0035%，BTC -0.0045%），结合近期大量多头清算（3.56亿美元），存在短期轧空反弹机会。Qlib模型预测ETH相对强度最高（得分0.5994），但整体动量仍为负，需谨慎操作。",
     "actions": [
       {
@@ -1108,10 +1138,5 @@
       }
     ],
     "timestamp": "2025-11-27 04:16:57"
-  },
-  {
-    "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB lead with strong qlib scores and negative funding rates, indicating potential short squeeze opportunities. Existing BNB and SOL positions are profitable and still valid; no adjustments needed. No new positions opened to stay within 3-position limit and manage risk.",
-    "actions": [],
-    "timestamp": "2025-11-27 00:45:45"
   }
 ]
