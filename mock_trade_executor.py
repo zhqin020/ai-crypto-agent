@@ -129,11 +129,28 @@ def compute_nav(portfolio, market_map):
 
 
 def append_trade_log(record: dict):
-    """Append trade record to CSV"""
+    """Append trade record to CSV with deduplication"""
     df_new = pd.DataFrame([record])
 
     if TRADE_LOG_PATH.exists():
         df_old = pd.read_csv(TRADE_LOG_PATH)
+        
+        # Check for duplicates
+        # We check if the last record for this symbol/action matches
+        last_match = df_old[
+            (df_old["symbol"] == record["symbol"]) & 
+            (df_old["action"] == record["action"])
+        ]
+        
+        if not last_match.empty:
+            last_row = last_match.iloc[-1]
+            # If timestamp is very close (e.g. within 1 minute) OR if price/qty match exactly
+            # Since timestamp might differ slightly on re-run, check price/qty
+            if (float(last_row["price"]) == float(record["price"]) and 
+                float(last_row["qty"]) == float(record["qty"])):
+                print(f"⚠️ Duplicate trade detected for {record['symbol']} {record['action']}. Skipping log.")
+                return
+
         df_all = pd.concat([df_old, df_new], ignore_index=True)
     else:
         df_all = df_new
@@ -390,9 +407,11 @@ def apply_actions():
                     "price": current_price,
                     "notional": notional_exit,
                     "margin": margin,
+                    "leverage": pos.get("leverage", 1.0),
                     "fee": fee,
                     "realized_pnl": pnl - fee,
-                    "nav_after": None
+                    "nav_after": None,
+                    "reason": "agent_decision"
                 }
                 append_trade_log(trade_rec)
                 print(f"🔁 CLOSE {pos['side'].upper()} {symbol} | PnL: ${pnl:.2f} | Fee: ${fee:.2f} | Net: ${pnl-fee:.2f}")
