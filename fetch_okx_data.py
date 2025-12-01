@@ -191,42 +191,62 @@ def fetch_funding_rate(symbol: str, days: int = 730) -> pd.DataFrame:
 
 def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730) -> pd.DataFrame:
     """
-    Fetch open interest history
-    API: GET /api/v5/rubik/stat/contracts/open-interest-history?instId=BTC-USDT-SWAP&period=4H
+    Fetch open interest history (Manual OKX API)
+    Note: OKX only supports 5m, 1h, 1d. We fetch 1h and resample to 4H.
     """
     swap_symbol = symbol.replace("-USDT", "-USDT-SWAP")
-    print(f"Fetching open interest for {swap_symbol}...")
+    print(f"Fetching open interest for {swap_symbol} (1H -> 4H)...")
     
     end_dt = datetime.now(timezone.utc)
-    start_dt = end_dt - timedelta(days=days + 5)
+    start_dt = end_dt - timedelta(days=days)
+    start_ts_ms = int(start_dt.timestamp() * 1000)
     
     all_records = []
     end_ts = None
     
-    for _ in range(50):
-        params = {"instId": swap_symbol, "period": bar, "limit": "100"}
+    # Fetch 1H data
+    # Max 500 requests to be safe (500 * 100 hours = 50000 hours ~ 5.7 years)
+    for i in range(500):
+        params = {"instId": swap_symbol, "period": "1H", "limit": "100"}
         if end_ts:
             params["end"] = end_ts
             
-        payload = okx_get("/api/v5/rubik/stat/contracts/open-interest-history", params)
-        rows = payload.get("data", [])
+        # Use existing okx_get function
+        try:
+            payload = okx_get("/api/v5/rubik/stat/contracts/open-interest-history", params)
+        except Exception as e:
+            print(f"    Error fetching OI: {e}")
+            break
+            
+        if isinstance(payload, list):
+            rows = payload
+        elif isinstance(payload, dict):
+            rows = payload.get("data", [])
+        else:
+            print(f"    Unexpected payload type: {type(payload)}")
+            break
         
         if not rows:
             break
             
         for row in rows:
-            # Response is list of dicts: {'ts': '...', 'oi': '...', 'oiCcy': '...'}
+            # Response: {'ts': '...', 'oi': '...', 'oiCcy': '...'}
             try:
                 ts = int(row.get('ts', 0))
-                oi = float(row.get('oi', 0))
+                oi = float(row.get('oi', 0)) # Usually in contracts or coins? 
+                                             # OKX: oi is in contracts (usually). 
+                                             # But we want USD value if possible? 
+                                             # API doc says: oi: Open interest in contracts.
+                                             # oiCcy: Open interest in currency (e.g. BTC).
+                                             # We probably want USD value? 
+                                             # But wait, previous logic used 'oi'. Let's stick to 'oi' for consistency or check if 'volUsd' exists?
+                                             # Actually, let's use 'oi' (contracts) as a proxy for activity.
             except (ValueError, AttributeError):
-                # Fallback
-                ts = int(row[0])
-                oi = float(row[1])
+                continue
                 
             dt = datetime.fromtimestamp(ts / 1000, tz=timezone.utc)
             
-            if dt < start_dt:
+            if ts < start_ts_ms:
                 break
                 
             all_records.append({
@@ -235,17 +255,21 @@ def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730) -> pd.Dat
             })
             
         if rows:
-            try:
-                last_ts = int(rows[-1].get('ts', 0))
-                end_ts = str(last_ts)
-            except:
-                last_ts = int(rows[-1][0])
-                end_ts = str(last_ts)
+            last_row = rows[-1]
+            if isinstance(last_row, dict):
+                last_ts = int(last_row.get('ts', 0))
+            elif isinstance(last_row, list):
+                last_ts = int(last_row[0])
+            else:
+                last_ts = 0
                 
-            if datetime.fromtimestamp(last_ts/1000, tz=timezone.utc) < start_dt:
+            end_ts = str(last_ts)
+            
+            if last_ts < start_ts_ms:
                 break
         else:
             break
+            
         time.sleep(0.1)
         
     if not all_records:
@@ -253,8 +277,13 @@ def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730) -> pd.Dat
         
     df = pd.DataFrame(all_records)
     df = df.sort_values("datetime").reset_index(drop=True)
-    print(f"  ✅ Fetched {len(df)} open interest records")
-    return df
+    
+    # Resample to 4H
+    df.set_index('datetime', inplace=True)
+    df_4h = df.resample('4H').last().dropna().reset_index()
+    
+    print(f"  ✅ Fetched {len(df)} 1H records, resampled to {len(df_4h)} 4H records")
+    return df_4h
 import sys
 
 
@@ -601,10 +630,12 @@ def main():
             fr_df = pd.DataFrame()
 
         try:
-            # oi_df = fetch_open_interest(symbol, bar="4H", days=730)
-            print("⚠️ Skipping Open Interest fetch to prevent hang")
-            oi_df = pd.DataFrame()
+            oi_df = fetch_open_interest(symbol, bar="4H", days=730)
+            # print("⚠️ Skipping Open Interest fetch to prevent hang")
+            # oi_df = pd.DataFrame()
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             print(f"⚠️ Failed to fetch Open Interest: {e}")
             oi_df = pd.DataFrame()
         
