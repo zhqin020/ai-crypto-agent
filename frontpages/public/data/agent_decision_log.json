@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "宏观背景显示市场处于极端恐惧（恐惧贪婪指数24），过去48小时多头大量清算（4.06亿美元），存在技术性反弹潜力。前排币种ETH、BTC、BNB的Qlib评分领先，但技术指标全面超卖（RSI均低于30，MACD为负），资金费率多为负值（ETH -0.0035%，BTC -0.0045%），显示空头情绪浓厚，存在轧空机会。然而，整体趋势仍为熊市（市场总结为bearish），新闻面偏空（BTC可能再跌50%），需谨慎操作。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "Qlib排名第一（评分0.5994），资金费率负值（-0.0035%）且Z-score为负（-1.8536%），显示轧空潜力，RSI超卖（27.56），符合均值回归逻辑。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3000,
+        "entry_reason": "Qlib排名第二（评分0.3638），资金费率深度负值（-0.0045%）且Z-score极负（-152.3356%），轧空信号强烈，RSI超卖（26.23），与市场清算背景吻合。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 15:11:42"
+  },
+  {
     "analysis_summary": "1. 宏观新闻显示市场情绪极度恐惧（恐惧贪婪指数24），且BTC面临抛售压力（新闻标题称可能再跌50%），但48小时内多头已大量清算（4.07亿美元），短期存在技术性反弹可能。2. 前排币种（ETH、BTC、BNB）技术指标均显示超卖（RSI<30，MACD为负），资金费率普遍为负（ETH -0.0035%，BTC -0.0045%），存在轧空潜力，与Qlib相对强度排名（ETH第一）一致。3. 当前持仓（ETH和BTC多头）符合看反弹逻辑，但市场整体趋势仍偏熊，需严格控制风险。",
     "actions": [
       {
@@ -1133,10 +1163,5 @@
     "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB show strong Qlib scores and negative funding rates, indicating potential short squeeze opportunities. Existing BNB and SOL positions are profitable and still valid; no adjustments needed. No new positions opened to maintain risk control and avoid exceeding position limits.",
     "actions": [],
     "timestamp": "2025-11-27 12:20:30"
-  },
-  {
-    "analysis_summary": "Market is bullish with medium volatility and bearish leverage sentiment. BTC and BNB lead with strong qlib scores and negative funding rates, indicating short squeeze potential. Existing BNB and SOL positions are profitable and still valid; no immediate exits needed. No new positions opened due to max position limit of 3 already reached.",
-    "actions": [],
-    "timestamp": "2025-11-27 09:32:52"
   }
 ]
