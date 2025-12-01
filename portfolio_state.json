@@ -1,6 +1,6 @@
 {
-  "nav": 10561.37,
-  "cash": 7100.321900194569,
+  "nav": 10559.37,
+  "cash": 6098.321900194569,
   "positions": [
     {
       "symbol": "ETH",
@@ -35,7 +35,24 @@
         "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
       },
       "opened_at": "2025-12-01 04:38:43"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 14858.84101040119,
+      "entry_price": 0.1346,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.1346,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.145,
+        "stop_loss": 0.128,
+        "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
+      },
+      "opened_at": "2025-12-01 16:58:06"
     }
   ],
-  "last_update": "2025-12-01T23:24:03.628549"
+  "last_update": "2025-12-01T16:58:06.907453"
 }
