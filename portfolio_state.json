@@ -1,6 +1,41 @@
 {
-  "nav": 10607.32,
-  "cash": 10607.321900194569,
-  "positions": [],
-  "last_update": "2025-12-01T12:31:37.364425"
+  "nav": 10600.32,
+  "cash": 7100.321900194569,
+  "positions": [
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 1.4220351455986235,
+      "entry_price": 2812.87,
+      "leverage": 2.0,
+      "margin": 2000.0,
+      "notional": 4000.0,
+      "current_price": 2812.87,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 3000,
+        "stop_loss": 2700,
+        "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+      },
+      "opened_at": "2025-12-01 04:38:43"
+    },
+    {
+      "symbol": "BTC",
+      "side": "long",
+      "quantity": 0.03498366845744178,
+      "entry_price": 85754.3,
+      "leverage": 2.0,
+      "margin": 1500.0,
+      "notional": 3000.0,
+      "current_price": 85754.3,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 90000,
+        "stop_loss": 84000,
+        "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+      },
+      "opened_at": "2025-12-01 04:38:43"
+    }
+  ],
+  "last_update": "2025-12-01T04:38:43.102778"
 }

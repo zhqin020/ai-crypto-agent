@@ -1,5 +1,65 @@
 [
   {
+    "analysis_summary": "当前市场处于熊市趋势，波动性中等，杠杆情绪看跌。新闻方面，美联储降息预期升温可能带来利好，但比特币ETF流出和与2022年熊市的高相关性显示风险仍存；以太坊估值模型表明其被低估，结合极端恐惧指数和近期大量多头清算，市场可能接近短期反弹。技术指标显示所有币种RSI均低于30，处于超卖状态，资金费率多为负值，尤其BTC和ETH的负费率较高，存在轧空潜力。Qlib模型排名ETH、BTC、BNB靠前，但动量均为负，表明可能为反转机会。鉴于市场极端恐惧和超卖，优先考虑低杠杆多头，但需控制风险。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": "Qlib排名第一，得分0.5994，资金费率负值-0.0035%且Z-score为-1.8536%，显示轧空潜力；RSI 27.56超卖，可能反弹。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1500,
+        "entry_reason": "Qlib排名第二，得分0.3638，资金费率负值-0.0045%且Z-score极低-152.3356%，轧空机会大；RSI 26.23超卖，结合新闻降息预期可能推动反弹。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 04:38:42"
+  },
+  {
+    "analysis_summary": "当前市场处于熊市趋势，波动性中等，杠杆情绪看跌。新闻方面，美联储降息预期升温可能带来利好，但比特币ETF流出和与2022年熊市的高相关性显示风险仍存；以太坊估值模型表明其被低估，但整体市场恐惧指数为24.0，处于极度恐惧状态，暗示潜在反弹机会。技术指标显示，ETH、BTC和BNB的RSI均低于30，处于超卖区域，资金费率多为负值（如ETH和BTC），存在轧空潜力，而Qlib模型将ETH排名第一，支持其相对强势。然而，现有持仓中ETH和DOGE均为多头，需优先评估其有效性。基于此，市场可能迎来短期反弹，但需谨慎管理风险。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 2000.0,
+        "entry_reason": "现有持仓：Qlib排名第一，资金费率为负（轧空潜力），RSI超卖，支持反弹预期。",
+        "exit_plan": {
+          "take_profit": 3200,
+          "stop_loss": 2950,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2950，表明轧空失效或趋势反转。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 2000.0,
+        "entry_reason": "现有持仓：资金费率为负，RSI超卖，存在轧空机会，但Qlib排名较低，需监控。",
+        "exit_plan": {
+          "take_profit": 0.155,
+          "stop_loss": 0.145,
+          "invalidation": "资金费率转正超过0.01%或价格跌破0.145，表明趋势反转。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-01 04:30:26"
+  },
+  {
     "analysis_summary": "当前市场处于中性趋势和低波动率环境，杠杆情绪中性。新闻方面，美联储降息预期升温可能带来利好，但比特币ETF流出和极端恐惧指数显示市场情绪谨慎。ETH在Qlib排名第一，技术指标显示RSI中性偏强，资金费率为负存在轧空潜力，但MACD为负显示短期动能不足。DOGE排名第二，技术指标中性，资金费率接近中性。BTC排名第三，RSI略高但资金费率接近中性。整体市场缺乏明确方向性驱动，现有持仓ETH和DOGE的轧空逻辑依然有效，但需警惕低波动率下的假突破风险。",
     "actions": [
       {
@@ -1028,40 +1088,5 @@
     "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB show strong Qlib scores and negative funding rates, indicating potential long opportunities. Existing BNB and SOL positions are profitable and still valid; no immediate exits needed. No new positions opened due to max position limit of 3 already reached.",
     "actions": [],
     "timestamp": "2025-11-26 16:14:50"
-  },
-  {
-    "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB lead with strong qlib scores and negative funding rates, indicating potential short squeeze opportunities. ETH is neutral, while SOL and DOGE show weakness. Existing positions in BNB and SOL are still valid; BNB's qlib score remains high with negative funding, and SOL's low score suggests caution but no immediate exit signal. No new positions opened due to max position limit of 3 already reached.",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 3800.0,
-        "entry_reason": "Qlib Rank #2, negative funding rate, RSI neutral, momentum positive.",
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 780,
-          "invalidation": "Funding rate exceeds 0.03% or RSI drops below 25"
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 3400.0,
-        "entry_reason": "Low qlib score but momentum positive, funding rate slightly positive, RSI neutral.",
-        "exit_plan": {
-          "take_profit": 140,
-          "stop_loss": 120,
-          "invalidation": "Funding rate flips positive > 0.01% or OI increases significantly"
-        }
-      }
-    ],
-    "timestamp": "2025-11-26 12:21:40"
-  },
-  {
-    "analysis_summary": "Market is bullish with medium volatility and bearish leverage sentiment. BTC and BNB rank highest with strong qlib scores, negative funding rates suggesting short squeeze potential, and neutral RSI. Existing BNB and SOL positions are still valid (prices near entry, no invalidation triggers hit). No new positions opened due to max position limit of 3 already reached.",
-    "actions": [],
-    "timestamp": "2025-11-26 18:01:54"
   }
 ]
