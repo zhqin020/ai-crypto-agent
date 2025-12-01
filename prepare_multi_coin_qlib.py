@@ -72,6 +72,9 @@ def prepare_qlib_data():
             # Sentiment
             'funding_rate', 'funding_rate_zscore',
             'open_interest', 'oi_change', 'oi_rsi',
+            # New Advanced Features
+            'btc_corr_24h', 'natr_14',
+            'buy_stars', 'sell_stars',
             # Targets
             'future_4h_ret', 'future_24h_ret'
         ]

@@ -91,6 +91,63 @@ def add_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
         # OI RSI (is money flowing in too fast?)
         df['oi_rsi'] = compute_rsi(df['open_interest'], 14)
     
+    # ----------------------------------------------------
+    # 4. Advanced Features (Optimized for Qlib)
+    # ----------------------------------------------------
+    
+    # A. Normalized ATR (NATR)
+    # Rationale: Allows comparing volatility across coins with different price levels
+    df['natr_14'] = df['atr_14'] / df['close']
+
+    # B. Custom Signal Stars (Ported from custom_signal_v2_backtest.py)
+    # 1. Price Percentile (20) - already calculated as price_position_20
+    # df['price_percentile_20'] = df['price_position_20'] 
+    
+    # 2. Volume Ratio (20) - already calculated as rel_volume_20
+    # df['volume_ratio_ma_20'] = df['rel_volume_20']
+    
+    # 3. DMI Indicators (+DI, -DI, ADX)
+    # Calculate TR, +DM, -DM first
+    high = df['high']
+    low = df['low']
+    close = df['close']
+    
+    tr1 = high - low
+    tr2 = (high - close.shift(1)).abs()
+    tr3 = (low - close.shift(1)).abs()
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    
+    up_move = high.diff()
+    down_move = -low.diff()
+    plus_dm = np.where((up_move > down_move) & (up_move > 0), up_move, 0.0)
+    minus_dm = np.where((down_move > up_move) & (down_move > 0), down_move, 0.0)
+    
+    # Smooth (Wilder's method approx with ewm alpha=1/14)
+    atr_smooth = tr.ewm(alpha=1/14, adjust=False).mean()
+    plus_dm_smooth = pd.Series(plus_dm, index=df.index).ewm(alpha=1/14, adjust=False).mean()
+    minus_dm_smooth = pd.Series(minus_dm, index=df.index).ewm(alpha=1/14, adjust=False).mean()
+    
+    plus_di = 100 * plus_dm_smooth / atr_smooth
+    minus_di = 100 * minus_dm_smooth / atr_smooth
+    dx = 100 * (plus_di - minus_di).abs() / (plus_di + minus_di)
+    adx = dx.ewm(alpha=1/14, adjust=False).mean()
+    
+    # 4. Star Calculation
+    # Buy Stars: RSI < 30 + Low Price (Pct < 0.1) & High Vol (Ratio > 2) + ADX Down (Trend weakening or Reversal)
+    # Note: Simplified logic for feature generation
+    low_high_mask = ((df['price_position_20'] < 0.10) & (df['rel_volume_20'] > 2.0)).astype(int)
+    rsi_oversold = (df['rsi_14'] < 30).astype(int)
+    adx_down = ((minus_di > plus_di) & (adx > 40)).astype(int) # Strong downtrend
+    
+    df['buy_stars'] = rsi_oversold + low_high_mask + adx_down
+    
+    # Sell Stars: RSI > 70 + High Price (Pct > 0.9) & High Vol + ADX Up
+    high_high_mask = ((df['price_position_20'] > 0.90) & (df['rel_volume_20'] > 2.0)).astype(int)
+    rsi_overbought = (df['rsi_14'] > 70).astype(int)
+    adx_up = ((plus_di > minus_di) & (adx > 40)).astype(int) # Strong uptrend
+    
+    df['sell_stars'] = rsi_overbought + high_high_mask + adx_up
+    
     return df
 
 def process_coin(coin: str):
@@ -100,7 +157,7 @@ def process_coin(coin: str):
     input_path = CSV_DIR / f"{coin}_4h.csv"
     if not input_path.exists():
         print(f"   ⚠️ File not found: {input_path}")
-        return
+        return None
     
     # Load data
     df = pd.read_csv(input_path)
@@ -124,13 +181,60 @@ def process_coin(coin: str):
     print(f"   Features: {len(df.columns)} columns")
     print(f"   Sample RSI: {df['rsi_14'].iloc[-1]:.2f}")
     print(f"   Sample MACD: {df['macd_hist'].iloc[-1]:.4f}")
+    
+    return df[['date', 'ret']]
 
 def main():
     print("🚀 Multi-Coin Signal Generator")
     print(f"Processing {len(COINS)} coins: {', '.join(COINS)}\n")
     
+    # Store returns for correlation calculation
+    returns_map = {}
+    
     for coin in COINS:
-        process_coin(coin)
+        df_ret = process_coin(coin)
+        if df_ret is not None:
+            returns_map[coin] = df_ret.set_index('date')['ret']
+            
+    # C. BTC Correlation (Rolling 24H)
+    # 24H = 6 bars of 4H
+    if 'BTC' in returns_map:
+        btc_ret = returns_map['BTC']
+        print("\n🔗 Calculating BTC Correlations...")
+        
+        for coin in COINS:
+            if coin == 'BTC': 
+                continue
+                
+            # Load existing signal file
+            file_path = SIGNALS_DIR / f"{coin}_4h_signals.csv"
+            if not file_path.exists():
+                continue
+                
+            df = pd.read_csv(file_path)
+            df['date'] = pd.to_datetime(df['date'])
+            
+            # Merge with BTC returns
+            # Note: Ensure alignment
+            df = df.merge(btc_ret.rename('btc_ret'), on='date', how='left')
+            
+            # Calculate Rolling Correlation (Window=24H=6 bars, or longer like 7 days=42 bars)
+            # Using 42 bars (1 week) for stable correlation
+            df['btc_corr_24h'] = df['ret'].rolling(42).corr(df['btc_ret'])
+            
+            # Fill NaN
+            df['btc_corr_24h'] = df['btc_corr_24h'].fillna(0)
+            
+            # Save back
+            df.to_csv(file_path, index=False)
+            print(f"   Updated {coin} with BTC correlation")
+            
+        # Also add btc_corr_24h = 1.0 for BTC itself for consistency
+        btc_path = SIGNALS_DIR / "BTC_4h_signals.csv"
+        if btc_path.exists():
+            df_btc = pd.read_csv(btc_path)
+            df_btc['btc_corr_24h'] = 1.0
+            df_btc.to_csv(btc_path, index=False)
     
     print(f"\n✅ All done! Signals saved to {SIGNALS_DIR}/")
 
