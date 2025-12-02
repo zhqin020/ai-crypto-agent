@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 23.0），且近期空头被大量轧空（48小时空头清算3.51亿美元），显示坏消息可能已部分消化（Priced In），但日线趋势仍为熊市（所有主要币种价格低于SMA50）。2. 【痛苦交易】检测：ETH和BTC资金费率Z-score极高（>160%），显示多头拥挤，存在轧多风险；DOGE资金费率负值（Z-score -171%），显示空头拥挤，存在轧空机会。3. 我选择【微观结构/轧空】剧本，基于DOGE的极端负资金费率（-0.0057%）和价格抗跌（RSI 22.34超卖），同时管理现有ETH多头风险（资金费率过高）。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "adjust_sl",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "现有ETH多头持仓，但资金费率Z-score高达164.75%，显示多头过度拥挤，轧多风险上升。调整止损以锁定部分利润并降低风险。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2770,
+          "invalidation": "价格跌破2770支撑位或资金费率转正超过0.01%。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": "现有DOGE多头持仓符合【微观结构/轧空】剧本：资金费率极负（-0.0057%，Z-score -171.06%），空头拥挤，价格在超卖区域（RSI 22.34）抗跌，预计有轧空反弹机会。",
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.128,
+          "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-02 20:16:43"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：当前新闻（如德州比特币储备、AI云服务）为宏观利好，但市场处于极端恐惧（指数23），且日线趋势全盘熊市（价格低于SMA50），显示利好已被消化（Priced In），价格未响应。2. 【痛苦交易】检测：BTC和ETH资金费率Z-score极高（>160%），显示多头拥挤，存在轧多风险；DOGE资金费率负值（Z-score -171%），但价格疲软，短期轧空动力不足。3. 我选择【均值回归】剧本：市场整体超卖（RSI均低于30），但拥挤多头（高费率）压制反弹，优先管理现有仓位，避免开新仓追空或抄底。",
     "actions": [
       {
@@ -1304,47 +1334,5 @@
     "analysis_summary": "当前市场宏观背景无新闻数据，无法判断外部驱动因素。根据Qlib模型，BTC、BNB、ETH排名前三，技术指标显示RSI均低于50，处于中性偏弱区域，MACD柱状图为正但动量温和，整体市场趋势看涨但波动中等。资金费率普遍为负，尤其BTC和ETH的Z-score极低，存在轧空潜力，但杠杆情绪看跌，需谨慎操作。现有持仓已满3个，均为多头，且未触发止损或止盈，因此维持持有，不开新仓。",
     "actions": [],
     "timestamp": "2025-11-27 20:38:19"
-  },
-  {
-    "analysis_summary": "当前市场宏观背景无新闻数据，无法判断外部驱动因素。技术面显示整体趋势为看涨但波动中等，杠杆情绪看跌。前排币种中，BTC和BNB的Qlib评分最高，但RSI均处于中性偏低区域（48.21和43.41），资金费率为负值（-0.0014%和0.0054%），表明存在轧空潜力，但动量一般。ETH评分第三，技术指标类似。现有持仓已覆盖BTC和BNB，且持仓数量已达上限（3个），因此不新增开仓，以避免超限风险。",
-    "actions": [
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": "现有持仓：Qlib排名第一，资金费率为负，RSI中性，趋势看涨。",
-        "exit_plan": {
-          "take_profit": 92000,
-          "stop_loss": 85000,
-          "invalidation": "资金费率转正超过0.01%或价格跌破85000，表明趋势反转。"
-        }
-      },
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": "现有持仓：Qlib排名第一，资金费率为负，RSI中性，趋势看涨。",
-        "exit_plan": {
-          "take_profit": 92000,
-          "stop_loss": 85000,
-          "invalidation": "资金费率转正超过0.01%或价格跌破85000，表明趋势反转。"
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": "现有持仓：Qlib排名第二，资金费率略正但Z-Score为负，RSI偏低，存在反弹可能。",
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 820,
-          "invalidation": "资金费率持续上升超过0.01%或价格跌破820，表示动能丧失。"
-        }
-      }
-    ],
-    "timestamp": "2025-11-27 20:35:15"
   }
 ]
