@@ -1,5 +1,47 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 23），且过去48小时多头清算远超空头（$4.13亿 vs $1.42亿），显示恐慌性抛售可能已发生，但新闻面平淡（如比特币缺乏买盘强度），这属于旧叙事（Priced In），价格未进一步暴跌暗示潜在反弹机会。2. 结合【痛苦交易】检测：ETH和BTC资金费率正且Z-score极高（>160%），存在轧多风险；DOGE资金费率负且Z-score极负（-171%），显示空头拥挤，有轧空机会。3. 我选择【微观结构挤压】剧本，利用DOGE的极端负费率做多，同时管理现有仓位风险，因整体市场仍偏熊但超卖。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000,
+        "entry_reason": "现有仓位：Qlib评分最高（0.6075），但资金费率正且Z-score极高（164.75%），轧多风险上升，价格接近支撑位，暂持有观察。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2700,
+          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
+        }
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3000,
+        "entry_reason": "现有仓位：Qlib评分中等（0.4776），资金费率正且Z-score极高（192.73%），轧多风险高，但价格在支撑附近，暂持有。",
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 84000,
+          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": "现有仓位：Qlib评分第二高（0.5697），资金费率负且Z-score极负（-171.06%），空头拥挤，符合轧空剧本，价格稳定，继续持有。",
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.128,
+          "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-02 00:17:04"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 24.0），且过去48小时多头清算远超空头（$5.67亿 vs $1.12亿），显示利空情绪已充分释放，属于'坏消息+价格企稳'的潜在积累信号（Divergence）。2. 日线趋势未提供，但4H数据显示所有币种RSI均低于30（超卖），资金费率分化：BTC/ETH为正（拥挤多头），DOGE/SOL为负（拥挤空头）。结合清算数据，存在轧空DOGE/SOL的【痛苦交易】机会。3. 我选择【微观结构挤压】剧本，做多DOGE（资金费率-0.0057%极负、排名第2、价格抗跌），并持有现有仓位（ETH/BTC/DOGE均未触发止损）。",
     "actions": [],
     "timestamp": "2025-12-01 20:17:07"
@@ -1194,23 +1236,5 @@
       }
     ],
     "timestamp": "2025-11-27 20:03:03"
-  },
-  {
-    "analysis_summary": "Market is in a bullish trend with medium volatility and bearish leverage sentiment. BTC and BNB lead with strong qlib scores and negative funding rates, indicating potential short squeeze opportunities. Existing BNB long position is profitable and still valid. No new positions needed as risk budget and position count constraints are met.",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 3800.0,
-        "entry_reason": "Holding existing long position: Qlib Rank #2, negative funding rate, and bullish momentum.",
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 840,
-          "invalidation": "Funding rate increases above 0.01% or price breaks below 840, indicating loss of bullish momentum."
-        }
-      }
-    ],
-    "timestamp": "2025-11-27 18:05:40"
   }
 ]
