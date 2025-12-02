@@ -95,7 +95,8 @@ def prepare_qlib_data():
     
     if not all_dfs:
         print("❌ No data loaded!")
-        return
+        import sys
+        sys.exit(1)
     
     # Combine all coins
     combined = pd.concat(all_dfs, ignore_index=True)

@@ -236,6 +236,11 @@ def main():
             df_btc['btc_corr_24h'] = 1.0
             df_btc.to_csv(btc_path, index=False)
     
+    if not returns_map:
+        print("❌ No coins processed! Exiting with error.")
+        import sys
+        sys.exit(1)
+
     print(f"\n✅ All done! Signals saved to {SIGNALS_DIR}/")
 
 if __name__ == "__main__":
