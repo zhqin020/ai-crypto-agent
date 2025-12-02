@@ -565,7 +565,7 @@ def main():
         df_4h = fetch_okx_candles(symbol, bar="4H", days=730)
         if not df_4h.empty:
             # Save 4H
-            filename_4h = CSV_DIR / f"{symbol}_4h.csv"
+            filename_4h = CSV_DIR / f"{coin_name}_4h.csv"
             df_4h.to_csv(filename_4h, index=False)
             print(f"✅ Saved {symbol} 4H data to {filename_4h}")
         else:
@@ -575,7 +575,7 @@ def main():
         df_1d = fetch_okx_candles(symbol, bar="1D", days=730)
         if not df_1d.empty:
             # Save 1D
-            filename_1d = CSV_DIR / f"{symbol}_1d.csv"
+            filename_1d = CSV_DIR / f"{coin_name}_1d.csv"
             df_1d.to_csv(filename_1d, index=False)
             print(f"✅ Saved {symbol} 1D data to {filename_1d}")
         else:
