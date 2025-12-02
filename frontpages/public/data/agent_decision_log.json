@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】：当前市场处于极端恐惧状态（恐惧贪婪指数23），且宏观新闻多为负面（如SoftBank出售Nvidia持仓），但比特币估值指标预测2026年有96%的恢复概率，显示利空可能已部分消化（Priced In），市场情绪与基本面存在分歧。2. 结合日线趋势，所有主要币种均处于熊市（价格低于SMA50），但4H数据中ETH、DOGE、BTC的Qlib评分相对较高（排名前三），且资金费率显示ETH和BTC为正（存在轧多风险），DOGE为负（存在轧空机会）。3. 我选择【均值回归】剧本，基于超卖RSI（ETH 27.25、DOGE 22.34、BTC 26.08）和负动量，在控制风险下小幅做多相对强势的ETH和DOGE，同时监控高正费率带来的回调风险。",
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000.0,
+        "entry_reason": "符合【均值回归】剧本。Qlib评分最高（0.6075），RSI超卖（27.25），但资金费率正且Z-score极高（164.75%），显示轧多风险，需谨慎持有。",
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2750,
+          "invalidation": "价格跌破2750支撑位或资金费率转正超过0.01%。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": "符合【微观结构挤压】剧本。Qlib评分第二（0.5697），RSI严重超卖（22.34），资金费率负（-0.0057%），Z-score极负（-171.06%），存在轧空机会。",
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.128,
+          "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-02 12:15:57"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：当前市场处于极端恐惧（Fear & Greed Index 23.0），且宏观新闻（如Grayscale预测比特币2026年新高）与价格走势（日线趋势全为熊市）出现明显背离，显示利好可能已被消化（Priced In）。2. 结合日线趋势（所有币种价格低于SMA50）和【痛苦交易】检测，ETH和BTC的资金费率Z-score极高（164.75%和192.73%），表明多头头寸拥挤，存在轧多风险；而DOGE资金费率负值（-0.0057%）且Z-score极负（-171.06%），显示空头拥挤，有轧空机会。3. 我选择【微观结构/挤压】剧本，利用DOGE的空头拥挤进行做多，同时监控现有ETH和BTC多头头寸的风险。",
     "actions": [
       {
@@ -1291,23 +1321,5 @@
       }
     ],
     "timestamp": "2025-11-27 20:28:28"
-  },
-  {
-    "analysis_summary": "当前市场整体趋势为看涨，但杠杆情绪看跌，平均资金费率为负，显示市场存在轧空潜力。BTC、BNB和ETH的Qlib评分最高，技术指标如RSI均处于中性区间，资金费率为负，支持多头策略。然而，现有BTC多头头寸已开，需优先管理，避免过度持仓。",
-    "actions": [
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": "现有头寸：Qlib排名第一，资金费率为负，RSI中性，趋势看涨。",
-        "exit_plan": {
-          "take_profit": 92000,
-          "stop_loss": 85000,
-          "invalidation": "资金费率转正超过0.01%或价格跌破85000，表明趋势反转。"
-        }
-      }
-    ],
-    "timestamp": "2025-11-27 20:25:16"
   }
 ]
