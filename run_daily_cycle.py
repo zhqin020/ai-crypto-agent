@@ -88,7 +88,8 @@ def check_data_freshness():
                 log(f"❌ Stale data in {filename}: Last {last_date}, Age {age}")
                 stale_count += 1
             else:
-                log(f"✅ Fresh data in {filename}: Last {last_date}")
+                last_close = df['close'].iloc[-1]
+                log(f"✅ Fresh data in {filename}: Last {last_date} | Close: {last_close}")
                 fresh_count += 1
                 
         except Exception as e:
