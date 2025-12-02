@@ -568,6 +568,7 @@ def main():
             filename_4h = CSV_DIR / f"{coin_name}_4h.csv"
             df_4h.to_csv(filename_4h, index=False)
             print(f"✅ Saved {symbol} 4H data to {filename_4h}")
+            print(f"   Last 3 rows:\n{df_4h.tail(3)[['date', 'close', 'volume']]}")
         else:
             print(f"❌ Failed to fetch {symbol} 4H from OKX")
             

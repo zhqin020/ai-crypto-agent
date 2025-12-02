@@ -49,6 +49,60 @@ def run_script(script_name, description):
         log(f"❌ Exception running {script_name}: {e}")
         return False
 
+def check_data_freshness():
+    """Verify that CSV data is fresh (within 12 hours)"""
+    log("🔍 Verifying data freshness...")
+    csv_dir = BASE_DIR / "csv_data"
+    fresh_count = 0
+    stale_count = 0
+    
+    # Check key coins
+    key_coins = ["BTC_4h.csv", "ETH_4h.csv", "DOGE_4h.csv"]
+    
+    for filename in key_coins:
+        path = csv_dir / filename
+        if not path.exists():
+            log(f"❌ Missing data file: {filename}")
+            stale_count += 1
+            continue
+            
+        try:
+            # Read last few lines to get date
+            import pandas as pd
+            df = pd.read_csv(path)
+            if 'date' not in df.columns:
+                log(f"❌ No date column in {filename}")
+                stale_count += 1
+                continue
+                
+            last_date_str = df['date'].max()
+            # Handle timezone if present
+            last_date = pd.to_datetime(last_date_str)
+            if last_date.tzinfo is None:
+                last_date = last_date.tz_localize('UTC')
+            
+            now = datetime.now(last_date.tzinfo)
+            age = now - last_date
+            
+            if age.total_seconds() > 12 * 3600:
+                log(f"❌ Stale data in {filename}: Last {last_date}, Age {age}")
+                stale_count += 1
+            else:
+                log(f"✅ Fresh data in {filename}: Last {last_date}")
+                fresh_count += 1
+                
+        except Exception as e:
+            log(f"❌ Error checking {filename}: {e}")
+            stale_count += 1
+            
+    if stale_count > 0:
+        log(f"⛔ Data freshness check failed! {stale_count} stale/missing files.")
+        return False
+        
+    log("✅ All key data files are fresh.")
+    return True
+
+
 def main():
     log("="*50)
     log("🤖 Starting New Trading Cycle")
@@ -57,6 +111,11 @@ def main():
     # 1. Fetch Market Data (OKX OHLCV + Sentiment)
     if not run_script("fetch_okx_data.py", "Fetch Market Data"):
         log("⛔ Stopping cycle due to data fetch failure.")
+        sys.exit(1)
+
+    # 1.5 Verify Data Freshness (Strict Check)
+    if not check_data_freshness():
+        log("⛔ Stopping cycle due to stale data.")
         sys.exit(1)
 
     # 2. Generate Technical Signals
