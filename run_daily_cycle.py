@@ -85,7 +85,7 @@ def main():
         "--qlib_dir", str(BASE_DIR / "qlib_data/bin_multi_coin"),
         "--symbol_field_name", "instrument",
         "--date_field_name", "datetime",
-        "--include_fields", "open,high,low,close,volume,funding_rate,oi_change,funding_rate_zscore,oi_rsi,rsi_14,macd_hist,atr_14,bb_width_20,momentum_12,ret,future_4h_ret,future_24h_ret"
+        "--include_fields", "open,high,low,close,volume,funding_rate,oi_change,funding_rate_zscore,oi_rsi,rsi_14,macd_hist,atr_14,bb_width_20,momentum_12,ret,future_4h_ret,future_24h_ret,rel_volume_20,price_position_20,natr_14,buy_stars,sell_stars,btc_corr_24h"
     ]
     
     try:
