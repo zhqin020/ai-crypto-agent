@@ -1,18 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ProfitChart } from './components/ProfitChart';
 import { PositionsTab } from './components/PositionsTab';
 import { HistoryTab } from './components/HistoryTab';
-import { AgentLogTab } from './components/AgentLogTab';
-import { TrendingUp, Wallet, History, Brain } from 'lucide-react';
+import { ModelDecisionTab } from './components/ModelDecisionTab';
+import { TrendingUp, Wallet, History, Brain, Clock } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'positions' | 'history' | 'agent'>('positions');
+  const [activeTab, setActiveTab] = useState<'positions' | 'history' | 'decision'>('positions');
+  const [runningTime, setRunningTime] = useState({ days: 0, hours: 0 });
+
+  // 设置策略启动时间（示例：2024年11月15日）
+  const startTime = new Date('2024-11-15T00:00:00').getTime();
+
+  useEffect(() => {
+    const updateRunningTime = () => {
+      const now = Date.now();
+      const diff = now - startTime;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      setRunningTime({ days, hours });
+    };
+
+    updateRunningTime();
+    const interval = setInterval(updateRunningTime, 60000); // 每分钟更新一次
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#1a1d24] text-white p-4">
-      <div className="mx-auto" style={{ width: '95%' }}>
+    <div className="h-screen bg-[#1a1d24] text-white p-3">
+      <div className="h-full flex flex-col">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4 flex-shrink-0">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1 className="flex items-baseline gap-3 text-5xl">
@@ -20,65 +39,79 @@ export default function App() {
                 <span className="text-lime-400">Quant</span>
                 <span className="text-white">Dashboard</span>
               </h1>
-              <div className="flex items-center gap-2 mt-2">
-                <p className="text-gray-400">结合qlib+deepseek 的量化交易策略</p>
+              <div className="flex items-center gap-3 mt-3">
+                <Clock className="w-5 h-5 text-gray-400" />
+                <span className="text-gray-400 text-base">
+                  4小时线为基准的AI量化策略，已成功运行
+                  <span className="text-lime-400 font-['DIN_Alternate',sans-serif] mx-1.5">
+                    {runningTime.days}
+                  </span>
+                  天
+                  <span className="text-lime-400 font-['DIN_Alternate',sans-serif] mx-1.5">
+                    {runningTime.hours}
+                  </span>
+                  小时
+                </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Main Grid - 固定高度 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
           {/* Left: Profit Chart */}
-          <div className="bg-[#2a2d35] rounded-xl border border-gray-700 p-6 shadow-2xl">
-            <h2 className="text-lime-400 mb-4 flex items-center gap-2">
+          <div className="bg-[#2a2d35] rounded-xl border border-gray-700 p-6 shadow-2xl flex flex-col h-full">
+            <h2 className="text-lime-400 mb-4 flex items-center gap-2 flex-shrink-0">
               <TrendingUp className="w-5 h-5" />
               收益曲线
             </h2>
-            <ProfitChart />
+            <div className="flex-1 overflow-hidden">
+              <ProfitChart />
+            </div>
           </div>
 
           {/* Right: Tabs */}
-          <div className="bg-[#2a2d35] rounded-xl border border-gray-700 shadow-2xl">
+          <div className="bg-[#2a2d35] rounded-xl border border-gray-700 shadow-2xl flex flex-col h-full overflow-hidden">
             {/* Tab Headers */}
-            <div className="flex border-b border-gray-700">
+            <div className="flex border-b border-gray-700 flex-shrink-0">
               <button
                 onClick={() => setActiveTab('positions')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'positions'
-                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
-                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
-                  }`}
+                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${
+                  activeTab === 'positions'
+                    ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                }`}
               >
                 <Wallet className="w-4 h-4" />
                 当前持仓
               </button>
               <button
                 onClick={() => setActiveTab('history')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'history'
-                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
-                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
-                  }`}
+                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${
+                  activeTab === 'history'
+                    ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                }`}
               >
                 <History className="w-4 h-4" />
                 历史记录
               </button>
               <button
-                onClick={() => setActiveTab('agent')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'agent'
-                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
-                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
-                  }`}
+                onClick={() => setActiveTab('decision')}
+                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${
+                  activeTab === 'decision'
+                    ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                }`}
               >
                 <Brain className="w-4 h-4" />
                 模型决策
               </button>
             </div>
 
-            {/* Tab Content */}
-            <div className="p-6">
-              {activeTab === 'positions' && <PositionsTab />}
-              {activeTab === 'history' && <HistoryTab />}
-              {activeTab === 'agent' && <AgentLogTab />}
+            {/* Tab Content - 固定高度，内容可滚动 */}
+            <div className="p-6 flex-1 overflow-hidden">
+              {activeTab === 'positions' ? <PositionsTab /> : activeTab === 'history' ? <HistoryTab /> : <ModelDecisionTab />}
             </div>
           </div>
         </div>

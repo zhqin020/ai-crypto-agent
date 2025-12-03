@@ -33,9 +33,6 @@ export function HistoryTab() {
             const text = await response.text();
             const lines = text.trim().split('\n');
             const parsedHistory: HistoryRecord[] = [];
-
-            // Track open positions to match with close records
-            // Key: symbol, Value: { entryTime, entryPrice, qty, notional, margin, leverage }
             const openPositions: Record<string, { entryTime: string, entryPrice: number, qty: number, notional: number, margin: number, leverage: number }> = {};
 
             for (let i = 1; i < lines.length; i++) {
@@ -43,10 +40,6 @@ export function HistoryTab() {
               if (!line) continue;
 
               const fields = line.split(',');
-              // Old format: time,symbol,action,side,qty,price,notional,margin,fee,realized_pnl,nav_after,reason
-              // New format: time,symbol,action,side,qty,price,notional,margin,leverage,fee,realized_pnl,nav_after,reason
-              const hasLeverage = fields.length >= 13; // New format has 13+ fields
-
               const time = fields[0];
               const symbol = fields[1];
               const action = fields[2];
@@ -55,13 +48,8 @@ export function HistoryTab() {
               const price = fields[5];
               const notional = fields[6];
               const margin = fields[7];
-
-              // Correct mapping based on CSV header:
-              // time,symbol,action,side,qty,price,notional,margin,fee,realized_pnl,nav_after,reason,leverage
               const fee = fields[8];
               const realized_pnl = fields[9];
-              // fields[10] is nav_after
-              // fields[11] is reason
               const leverage = fields.length > 12 ? fields[12] : null;
 
               if (action === 'open_long' || action === 'open_short') {
@@ -80,19 +68,15 @@ export function HistoryTab() {
                 const feeVal = parseFloat(fee);
                 const rawPnl = pnlVal + feeVal;
 
-                // Try to find matching open record
                 const openInfo = openPositions[symbol];
-
                 let entryPrice = 0;
                 let entryTime = 'Unknown';
 
                 if (openInfo) {
                   entryPrice = openInfo.entryPrice;
                   entryTime = openInfo.entryTime;
-                  // Optional: Verify quantity matches or handle partial closes (assuming full close for now)
-                  delete openPositions[symbol]; // Remove after closing
+                  delete openPositions[symbol];
                 } else {
-                  // Fallback calculation if open record missing in this log file (e.g. rotated log)
                   if (side === 'long') {
                     entryPrice = exitPrice - (rawPnl / quantity);
                   } else {
@@ -101,8 +85,6 @@ export function HistoryTab() {
                 }
 
                 const pnlPercent = (rawPnl / (parseFloat(margin) || (entryPrice * quantity / 2))) * 100;
-
-                // Use leverage from open position if available, otherwise calculate from close position
                 const leverageVal = openInfo?.leverage || (leverage ? parseFloat(leverage) : (parseFloat(notional) / parseFloat(margin)));
                 const notionalVal = openInfo?.notional || parseFloat(notional);
 
@@ -122,7 +104,6 @@ export function HistoryTab() {
                 });
               }
             }
-            // Sort by time desc
             parsedHistory.sort((a, b) => new Date(b.exitTime).getTime() - new Date(a.exitTime).getTime());
             setHistory(parsedHistory);
           } else {
@@ -137,9 +118,7 @@ export function HistoryTab() {
       }
 
       const response = await fetch('http://localhost:5001/api/history');
-      if (!response.ok) {
-        throw new Error('Failed to fetch history');
-      }
+      if (!response.ok) throw new Error('Failed to fetch history');
       const data = await response.json();
       setHistory(data);
       setError(null);
@@ -153,7 +132,7 @@ export function HistoryTab() {
 
   useEffect(() => {
     fetchHistory();
-    const interval = setInterval(fetchHistory, 30000); // Poll every 30s
+    const interval = setInterval(fetchHistory, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -170,9 +149,9 @@ export function HistoryTab() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col">
       {/* Summary Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
+      <div className="grid grid-cols-3 gap-3 mb-4 flex-shrink-0">
         <div className="bg-[#1f2229] rounded-lg p-3 border border-gray-700/50">
           <div className="text-gray-400 text-sm mb-1">总盈亏</div>
           <div className={`font-['DIN_Alternate',sans-serif] ${totalPnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
@@ -189,7 +168,7 @@ export function HistoryTab() {
       </div>
 
       {/* History List */}
-      <div className="space-y-2 overflow-y-auto pr-2" style={{ maxHeight: 'calc(100vh - 250px)' }}>
+      <div className="space-y-2 overflow-y-auto pr-2 flex-1">
         {history.length === 0 ? (
           <div className="text-gray-500 text-center py-8">暂无历史记录</div>
         ) : (
@@ -234,7 +213,7 @@ export function HistoryTab() {
                 </div>
                 <div>
                   <span className="text-gray-500">数量: </span>
-                  <span className="text-white font-['DIN_Alternate',sans-serif]">{record.amount.toFixed(4)}</span>
+                  <span className="text-white font-['DIN_Alternate',sans-serif]">{Math.abs(record.amount).toFixed(4)}</span>
                 </div>
                 <div>
                   <span className="text-gray-500">杠杆: </span>

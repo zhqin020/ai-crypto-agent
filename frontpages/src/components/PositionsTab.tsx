@@ -12,6 +12,7 @@ interface Position {
   amount: number;
   pnl: number;
   pnlPercent: number;
+  type: 'long' | 'short';
 }
 
 interface PortfolioState {
@@ -42,18 +43,29 @@ export function PositionsTab() {
   const [positions, setPositions] = useState<Position[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [portfolioState, setPortfolioState] = useState<{ nav: number, cash: number } | null>(null);
 
   const fetchPositions = async () => {
     try {
       setLoading(true);
 
       let data: Position[] = [];
+      let state: PortfolioState | null = null;
 
       if (import.meta.env.MODE === 'production') {
         // Fetch from static file in production
         const response = await fetch('/data/portfolio_state.json');
         if (!response.ok) throw new Error('Failed to fetch data');
-        const state: PortfolioState = await response.json();
+        state = await response.json();
+      } else {
+        // Fetch from API in development
+        const response = await fetch('http://localhost:5001/api/positions');
+        if (!response.ok) throw new Error('Failed to fetch positions');
+        state = await response.json();
+      }
+
+      if (state) {
+        setPortfolioState({ nav: state.nav, cash: state.cash });
 
         // Transform raw state to Position interface
         data = (state.positions || []).map(pos => {
@@ -70,8 +82,6 @@ export function PositionsTab() {
             pnlPercent = ((currentPrice - entryPrice) / entryPrice) * 100;
           } else {
             // For short: (Entry - Current) / Entry * 100
-            // Or: pnl / (entry * abs(qty)) * 100?
-            // Let's use the standard short return formula: (Entry - Current) / Entry
             pnlPercent = ((entryPrice - currentPrice) / entryPrice) * 100;
           }
 
@@ -84,21 +94,16 @@ export function PositionsTab() {
             takeProfit: pos.exit_plan.take_profit,
             amount: quantity,
             pnl,
-            pnlPercent
+            pnlPercent,
+            type: pos.side as 'long' | 'short'
           };
         });
-      } else {
-        // Fetch from API in development
-        const response = await fetch('http://localhost:5001/api/positions');
-        if (!response.ok) throw new Error('Failed to fetch positions');
-        data = await response.json();
       }
 
       setPositions(data);
       setError(null);
     } catch (err) {
       console.error(err);
-      // Don't show error in UI immediately if it's just a poll failure, keep old data if available
       if (positions.length === 0) {
         setError('无法连接到数据源');
       }
@@ -109,12 +114,12 @@ export function PositionsTab() {
 
   useEffect(() => {
     fetchPositions();
-    // Poll every 10 seconds
     const interval = setInterval(fetchPositions, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const totalPnl = positions.reduce((sum, pos) => sum + pos.pnl, 0);
+  const availableCapital = portfolioState ? portfolioState.cash : 0;
 
   if (loading && positions.length === 0) {
     return <div className="text-gray-400 p-4">加载中...</div>;
@@ -130,30 +135,26 @@ export function PositionsTab() {
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col">
       {/* Summary */}
-      <div className="bg-[#1f2229] rounded-lg p-4 mb-4 border border-gray-700/50 flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <div>
-            <div className="text-gray-400 text-sm">持仓盈亏</div>
-            <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] text-xl ${totalPnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
-              {totalPnl >= 0 ? <TrendingUp className="w-5 h-5" /> : <TrendingDown className="w-5 h-5" />}
-              {totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}
-            </div>
-          </div>
-          <div className="h-8 w-px bg-gray-700 mx-2"></div>
-          <div>
-            <div className="text-gray-400 text-sm">持仓数量</div>
-            <div className="text-white font-['DIN_Alternate',sans-serif] text-xl">{positions.length}</div>
+      <div className="grid grid-cols-2 gap-3 mb-4 flex-shrink-0">
+        <div className="bg-[#1f2229] rounded-lg p-3 border border-gray-700/50">
+          <div className="text-gray-400 text-sm mb-1">持仓盈亏</div>
+          <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalPnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+            {totalPnl >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+            {totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}
           </div>
         </div>
-        <button onClick={fetchPositions} className="p-2 hover:bg-gray-700 rounded-full transition-colors text-gray-400 hover:text-white">
-          <RefreshCw className="w-4 h-4" />
-        </button>
+        <div className="bg-[#1f2229] rounded-lg p-3 border border-gray-700/50">
+          <div className="text-gray-400 text-sm mb-1">剩余资金</div>
+          <div className="text-white font-['DIN_Alternate',sans-serif]">
+            ${availableCapital.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </div>
+        </div>
       </div>
 
       {/* Positions List */}
-      <div className="space-y-3 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 250px)' }}>
+      <div className="space-y-3 overflow-y-auto pr-2 flex-1">
         {positions.length === 0 ? (
           <div className="text-gray-500 text-center py-8">暂无持仓</div>
         ) : (
@@ -164,20 +165,25 @@ export function PositionsTab() {
             >
               {/* Header */}
               <div className="flex justify-between items-start mb-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lime-400 text-lg font-bold">{position.symbol}</span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lime-400">{position.symbol}</span>
                     <span className="text-gray-500 text-sm">{position.name}</span>
                   </div>
-                  <div className="text-gray-400 text-sm mt-1 font-['DIN_Alternate',sans-serif]">
-                    持仓: {position.amount} {position.symbol}
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-400 text-sm">持仓:</span>
+                    <span className="text-white text-sm font-['DIN_Alternate',sans-serif]">
+                      {position.amount} {position.symbol}
+                    </span>
                   </div>
                 </div>
-                <div className={`px-2 py-1 rounded text-sm font-['DIN_Alternate',sans-serif] ${position.pnl >= 0
-                  ? 'bg-lime-500/20 text-lime-400'
-                  : 'bg-red-500/20 text-red-400'
-                  }`}>
-                  {position.pnl >= 0 ? '+' : ''}{position.pnlPercent.toFixed(2)}%
+                <div className="flex flex-col items-end gap-1">
+                  <div className={`px-2 py-1 rounded text-sm font-['DIN_Alternate',sans-serif] ${position.type === 'short'
+                      ? 'bg-orange-500/20 text-orange-400'
+                      : 'bg-lime-500/20 text-lime-400'
+                    }`}>
+                    {position.type === 'short' ? '做空' : '做多'}
+                  </div>
                 </div>
               </div>
 
@@ -193,14 +199,14 @@ export function PositionsTab() {
                 </div>
                 <div>
                   <div className="text-gray-500 mb-1 flex items-center gap-1">
-                    <ArrowDownCircle className="w-3 h-3 text-red-400" />
+                    <ArrowDownCircle className="w-3 h-3" />
                     止损价
                   </div>
                   <div className="text-red-400 font-['DIN_Alternate',sans-serif]">${position.stopLoss.toLocaleString()}</div>
                 </div>
                 <div>
                   <div className="text-gray-500 mb-1 flex items-center gap-1">
-                    <ArrowUpCircle className="w-3 h-3 text-lime-400" />
+                    <ArrowUpCircle className="w-3 h-3" />
                     止盈价
                   </div>
                   <div className="text-lime-400 font-['DIN_Alternate',sans-serif]">${position.takeProfit.toLocaleString()}</div>
@@ -211,9 +217,17 @@ export function PositionsTab() {
               <div className="mt-3 pt-3 border-t border-gray-700/50">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-500 text-sm">盈亏</span>
-                  <span className={`font-['DIN_Alternate',sans-serif] text-lg ${position.pnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
-                    {position.pnl >= 0 ? '+' : ''}${position.pnl.toFixed(2)}
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className={`font-['DIN_Alternate',sans-serif] ${position.pnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+                      {position.pnl >= 0 ? '+' : ''}${position.pnl.toFixed(2)}
+                    </span>
+                    <span className={`px-2 py-0.5 rounded text-xs font-['DIN_Alternate',sans-serif] ${position.pnl >= 0
+                        ? 'bg-lime-500/20 text-lime-400'
+                        : 'bg-red-500/20 text-red-400'
+                      }`}>
+                      {position.pnl >= 0 ? '+' : ''}{position.pnlPercent.toFixed(2)}%
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
