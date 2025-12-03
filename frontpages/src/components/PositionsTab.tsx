@@ -62,11 +62,16 @@ export function PositionsTab() {
           const quantity = pos.quantity;
           let pnl, pnlPercent;
 
+          // Unified PnL formula since quantity is signed (+ for long, - for short)
+          pnl = (currentPrice - entryPrice) * quantity;
+
+          // PnL Percent
           if (pos.side === 'long') {
-            pnl = (currentPrice - entryPrice) * quantity;
             pnlPercent = ((currentPrice - entryPrice) / entryPrice) * 100;
           } else {
-            pnl = (entryPrice - currentPrice) * quantity;
+            // For short: (Entry - Current) / Entry * 100
+            // Or: pnl / (entry * abs(qty)) * 100?
+            // Let's use the standard short return formula: (Entry - Current) / Entry
             pnlPercent = ((entryPrice - currentPrice) / entryPrice) * 100;
           }
 
