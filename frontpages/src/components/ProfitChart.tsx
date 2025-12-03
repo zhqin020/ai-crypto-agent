@@ -75,6 +75,7 @@ export function ProfitChart() {
         if (response.ok) {
           const json = await response.json();
           records = json.map((item: any) => {
+            if (!item.timestamp) return null;
             const dateObj = new Date(item.timestamp.replace(' ', 'T') + 'Z');
             const dateStr = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${dateObj.getHours()}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
             return {
@@ -82,7 +83,7 @@ export function ProfitChart() {
               value: Math.round(item.nav),
               profit: Math.round(item.nav - 10000)
             };
-          });
+          }).filter((item: any) => item !== null);
         }
       }
 

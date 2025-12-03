@@ -88,10 +88,10 @@ export function PositionsTab() {
           return {
             symbol: pos.symbol,
             name: COIN_NAMES[pos.symbol] || pos.symbol,
-            entryPrice,
-            currentPrice,
-            stopLoss: pos.exit_plan.stop_loss,
-            takeProfit: pos.exit_plan.take_profit,
+            entryPrice: entryPrice || 0,
+            currentPrice: currentPrice || 0,
+            stopLoss: pos.exit_plan?.stop_loss || 0,
+            takeProfit: pos.exit_plan?.take_profit || 0,
             amount: quantity,
             pnl,
             pnlPercent,
@@ -118,8 +118,8 @@ export function PositionsTab() {
     return () => clearInterval(interval);
   }, []);
 
-  const totalPnl = positions.reduce((sum, pos) => sum + pos.pnl, 0);
-  const availableCapital = portfolioState ? portfolioState.cash : 0;
+  const totalPnl = positions.reduce((sum, pos) => sum + (pos.pnl || 0), 0);
+  const availableCapital = portfolioState?.cash || 0;
 
   if (loading && positions.length === 0) {
     return <div className="text-gray-400 p-4">加载中...</div>;
@@ -142,7 +142,7 @@ export function PositionsTab() {
           <div className="text-gray-400 text-sm mb-1">持仓盈亏</div>
           <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalPnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
             {totalPnl >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
-            {totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}
+            {totalPnl >= 0 ? '+' : ''}{totalPnl.toFixed(2)}
           </div>
         </div>
         <div className="bg-[#1f2229] rounded-lg p-3 border border-gray-700/50">
@@ -158,80 +158,89 @@ export function PositionsTab() {
         {positions.length === 0 ? (
           <div className="text-gray-500 text-center py-8">暂无持仓</div>
         ) : (
-          positions.map((position) => (
-            <div
-              key={position.symbol}
-              className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50 hover:border-lime-500/50 transition-all"
-            >
-              {/* Header */}
-              <div className="flex justify-between items-start mb-3">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-lime-400">{position.symbol}</span>
-                    <span className="text-gray-500 text-sm">{position.name}</span>
+          positions.map((position) => {
+            const entryPrice = position.entryPrice || 0;
+            const currentPrice = position.currentPrice || 0;
+            const stopLoss = position.stopLoss || 0;
+            const takeProfit = position.takeProfit || 0;
+            const pnl = position.pnl || 0;
+            const pnlPercent = position.pnlPercent || 0;
+
+            return (
+              <div
+                key={position.symbol}
+                className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50 hover:border-lime-500/50 transition-all"
+              >
+                {/* Header */}
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-lime-400">{position.symbol}</span>
+                      <span className="text-gray-500 text-sm">{position.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-400 text-sm">持仓:</span>
+                      <span className="text-white text-sm font-['DIN_Alternate',sans-serif]">
+                        {position.amount} {position.symbol}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400 text-sm">持仓:</span>
-                    <span className="text-white text-sm font-['DIN_Alternate',sans-serif]">
-                      {position.amount} {position.symbol}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className={`px-2 py-1 rounded text-sm font-['DIN_Alternate',sans-serif] ${position.type === 'short'
+                  <div className="flex flex-col items-end gap-1">
+                    <div className={`px-2 py-1 rounded text-sm font-['DIN_Alternate',sans-serif] ${position.type === 'short'
                       ? 'bg-orange-500/20 text-orange-400'
                       : 'bg-lime-500/20 text-lime-400'
-                    }`}>
-                    {position.type === 'short' ? '做空' : '做多'}
+                      }`}>
+                      {position.type === 'short' ? '做空' : '做多'}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Price Info */}
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div>
-                  <div className="text-gray-500 mb-1">开仓价</div>
-                  <div className="text-white font-['DIN_Alternate',sans-serif]">${position.entryPrice.toLocaleString()}</div>
-                </div>
-                <div>
-                  <div className="text-gray-500 mb-1">当前价</div>
-                  <div className="text-white font-['DIN_Alternate',sans-serif]">${position.currentPrice.toLocaleString()}</div>
-                </div>
-                <div>
-                  <div className="text-gray-500 mb-1 flex items-center gap-1">
-                    <ArrowDownCircle className="w-3 h-3" />
-                    止损价
+                {/* Price Info */}
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <div className="text-gray-500 mb-1">开仓价</div>
+                    <div className="text-white font-['DIN_Alternate',sans-serif]">${entryPrice.toLocaleString()}</div>
                   </div>
-                  <div className="text-red-400 font-['DIN_Alternate',sans-serif]">${position.stopLoss.toLocaleString()}</div>
-                </div>
-                <div>
-                  <div className="text-gray-500 mb-1 flex items-center gap-1">
-                    <ArrowUpCircle className="w-3 h-3" />
-                    止盈价
+                  <div>
+                    <div className="text-gray-500 mb-1">当前价</div>
+                    <div className="text-white font-['DIN_Alternate',sans-serif]">${currentPrice.toLocaleString()}</div>
                   </div>
-                  <div className="text-lime-400 font-['DIN_Alternate',sans-serif]">${position.takeProfit.toLocaleString()}</div>
+                  <div>
+                    <div className="text-gray-500 mb-1 flex items-center gap-1">
+                      <ArrowDownCircle className="w-3 h-3" />
+                      止损价
+                    </div>
+                    <div className="text-red-400 font-['DIN_Alternate',sans-serif]">${stopLoss.toLocaleString()}</div>
+                  </div>
+                  <div>
+                    <div className="text-gray-500 mb-1 flex items-center gap-1">
+                      <ArrowUpCircle className="w-3 h-3" />
+                      止盈价
+                    </div>
+                    <div className="text-lime-400 font-['DIN_Alternate',sans-serif]">${takeProfit.toLocaleString()}</div>
+                  </div>
                 </div>
-              </div>
 
-              {/* PnL */}
-              <div className="mt-3 pt-3 border-t border-gray-700/50">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 text-sm">盈亏</span>
-                  <div className="flex items-center gap-3">
-                    <span className={`font-['DIN_Alternate',sans-serif] ${position.pnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
-                      {position.pnl >= 0 ? '+' : ''}${position.pnl.toFixed(2)}
-                    </span>
-                    <span className={`px-2 py-0.5 rounded text-xs font-['DIN_Alternate',sans-serif] ${position.pnl >= 0
+                {/* PnL */}
+                <div className="mt-3 pt-3 border-t border-gray-700/50">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500 text-sm">盈亏</span>
+                    <div className="flex items-center gap-3">
+                      <span className={`font-['DIN_Alternate',sans-serif] ${pnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+                        {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
+                      </span>
+                      <span className={`px-2 py-0.5 rounded text-xs font-['DIN_Alternate',sans-serif] ${pnl >= 0
                         ? 'bg-lime-500/20 text-lime-400'
                         : 'bg-red-500/20 text-red-400'
-                      }`}>
-                      {position.pnl >= 0 ? '+' : ''}{position.pnlPercent.toFixed(2)}%
-                    </span>
+                        }`}>
+                        {pnl >= 0 ? '+' : ''}{pnlPercent.toFixed(2)}%
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

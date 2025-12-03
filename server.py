@@ -129,6 +129,25 @@ def get_summary():
         "pnlPercent": round((total_pnl / initial_nav) * 100, 2)
     })
 
+@app.route('/api/nav-history', methods=['GET'])
+def get_nav_history():
+    NAV_HISTORY_PATH = BASE_DIR / "nav_history.csv"
+    if not NAV_HISTORY_PATH.exists():
+        return jsonify([])
+
+    try:
+        history = []
+        with open(NAV_HISTORY_PATH, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                history.append({
+                    "timestamp": row["timestamp"],
+                    "nav": float(row["nav"])
+                })
+        return jsonify(history)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     print("🚀 Starting CryptoQuant API Server on port 5001...")
     app.run(host='0.0.0.0', port=5001, debug=True)

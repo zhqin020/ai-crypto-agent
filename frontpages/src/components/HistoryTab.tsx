@@ -84,22 +84,22 @@ export function HistoryTab() {
                   }
                 }
 
-                const pnlPercent = (rawPnl / (parseFloat(margin) || (entryPrice * quantity / 2))) * 100;
-                const leverageVal = openInfo?.leverage || (leverage ? parseFloat(leverage) : (parseFloat(notional) / parseFloat(margin)));
-                const notionalVal = openInfo?.notional || parseFloat(notional);
+                const pnlPercent = (rawPnl / (parseFloat(margin) || (entryPrice * quantity / 2) || 1)) * 100;
+                const leverageVal = openInfo?.leverage || (leverage ? parseFloat(leverage) : ((parseFloat(notional) || 0) / (parseFloat(margin) || 1)));
+                const notionalVal = openInfo?.notional || parseFloat(notional) || 0;
 
                 parsedHistory.push({
                   id: `${time}-${symbol}-${Math.random()}`,
                   symbol: symbol,
                   type: side as 'long' | 'short',
-                  entryPrice: entryPrice,
-                  exitPrice: exitPrice,
-                  amount: quantity,
-                  pnl: pnlVal,
-                  pnlPercent: pnlPercent,
-                  entryTime: entryTime,
+                  entryPrice: entryPrice || 0,
+                  exitPrice: exitPrice || 0,
+                  amount: quantity || 0,
+                  pnl: pnlVal || 0,
+                  pnlPercent: pnlPercent || 0,
+                  entryTime: entryTime || 'Unknown',
                   exitTime: time,
-                  leverage: leverageVal,
+                  leverage: leverageVal || 1,
                   notional: notionalVal
                 });
               }
