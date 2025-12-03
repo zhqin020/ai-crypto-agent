@@ -26,23 +26,21 @@ def run_script(script_name, description):
     
     try:
         # Run script as a subprocess to ensure clean state
+        # Run script as a subprocess to ensure clean state
+        # Stream output directly to avoid buffer overflow/deadlocks with large logs
         result = subprocess.run(
             [sys.executable, script_name],
             cwd=BASE_DIR,
-            capture_output=True,
-            text=True
+            check=False
         )
         
         duration = time.time() - start_time
         
         if result.returncode == 0:
             log(f"✅ Completed: {description} in {duration:.2f}s")
-            # Log stdout to debug data flow
-            log(f"Output:\n{result.stdout}")
             return True
         else:
             log(f"❌ Failed: {description}")
-            log(f"Error Output:\n{result.stderr}")
             return False
             
     except Exception as e:
