@@ -1,5 +1,65 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】当前无重大新闻，市场走势主要由技术面和资金费率驱动，属于内部博弈（Priced In）。2. 日线趋势显示所有主要币种均处于熊市（价格低于SMA50），但4小时级别RSI普遍在60-66区间，显示短期超买压力。资金费率Z值显示BNB（146%）、DOGE（168%）和SOL（109%）存在轧多风险（过度看涨），而BTC（99%）和ETH（60%）相对中性。3. 我选择【均值回归】剧本，利用高资金费率Z值和短期超买信号，对BNB和DOGE进行做空操作，同时平掉现有BNB空仓以锁定利润并重新部署。",
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "close_position",
+        "leverage": 2,
+        "position_size_usd": 2148.74,
+        "entry_reason": "平仓现有BNB空仓。价格已从入场价900.0小幅上涨至904.3，但资金费率Z值高达146.02%，显示轧多风险加剧，需锁定利润并重新评估。",
+        "exit_plan": {
+          "take_profit": 904.3,
+          "stop_loss": 904.3,
+          "invalidation": "已平仓，无需无效条件。"
+        }
+      },
+      {
+        "symbol": "BNB",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": "符合【均值回归】剧本。资金费率Z值146.02%极高（轧多风险），RSI 65.67接近超买，日线趋势熊市，预计价格回调。",
+        "exit_plan": {
+          "take_profit": 880.0,
+          "stop_loss": 920.0,
+          "invalidation": "资金费率Z值回落至50%以下或价格突破920.0阻力位。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 800,
+        "entry_reason": "符合【均值回归】剧本。资金费率Z值168.24%极端高（轧多风险），RSI 60.6显示短期超买，日线趋势熊市且动量减弱（ret -0.17%）。",
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.155,
+          "invalidation": "资金费率Z值回落至50%以下或价格突破0.155阻力位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-03 13:37:51"
+  },
+  {
+    "analysis_summary": "1. 【叙事校验】当前无重大新闻，市场由量化模型驱动，利好（如ETF预期）已充分定价（Priced In），日线趋势普遍熊市（价格低于SMA50）。2. 【痛苦交易检测】BNB和DOGE资金费率Z值极高（>140%），显示多头拥挤，存在轧多风险；整体杠杆情绪中性，但高波动性加剧风险。3. 【假设剧本】我选择均值回归剧本，基于高资金费率Z值和日线熊市背景，做空BNB以捕捉潜在回调。",
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 1074.37,
+        "entry_reason": "符合【均值回归】剧本。资金费率Z值极高（146.02%），显示多头过度拥挤，日线趋势熊市（价格低于SMA50），RSI 64.41接近超买，预计发生轧多回调。",
+        "exit_plan": {
+          "take_profit": 880.0,
+          "stop_loss": 920.0,
+          "invalidation": "资金费率Z值回落至50%以下或价格突破920.0阻力位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-03 13:07:59"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】当前无重大新闻，市场走势主要由技术面和资金费率驱动，属于旧有趋势的延续（Priced In）。2. 日线趋势显示所有主要币种均处于熊市（价格低于SMA50），但4小时级别RSI普遍在60-65区间，显示短期超买，结合BNB和DOGE的资金费率Z-score极高（>140%），存在轧多风险。3. 我选择【均值回归】剧本，因为高资金费率（BNB 0.0100%，DOGE 0.0100%）和短期超买（RSI >60）表明多头拥挤，价格可能回调，但需注意整体熊市背景下的反弹风险。",
     "actions": [
       {
@@ -1325,64 +1385,5 @@
       }
     ],
     "timestamp": "2025-11-29 04:02:43"
-  },
-  {
-    "analysis_summary": "当前市场整体趋势为看涨，波动性中等，但杠杆情绪看跌，平均资金费率为负，显示存在轧空潜力。ETH和DOGE在Qlib评分中排名前二，技术指标如RSI和MACD显示中性偏强，资金费率负值支持多头机会；而BTC虽排名第三，但RSI较高且资金费率极负，需警惕回调风险。现有持仓（BNB、ETH、DOGE）均未触及止损或止盈，且持仓数量已达上限3个，因此不新增开仓，优先管理现有头寸。",
-    "actions": [],
-    "timestamp": "2025-11-29 00:02:38"
-  },
-  {
-    "analysis_summary": "当前市场整体呈现看涨趋势，但杠杆情绪偏空，平均资金费率为负，显示空头头寸较多，存在轧空潜力。ETH和DOGE在Qlib模型中排名前二，得分较高，技术指标如RSI和MACD显示中性偏强，资金费率负值支持多头策略。BTC虽排名第三，但RSI较高且资金费率极负，需警惕回调风险。基于此，优先考虑ETH和DOGE的多头机会，同时管理现有头寸风险。",
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "Qlib排名第一，得分0.5712，资金费率为负（-0.0019%），RSI中性（63.51），MACD为正，显示轧空潜力和趋势延续。",
-        "exit_plan": {
-          "take_profit": 3200,
-          "stop_loss": 2950,
-          "invalidation": "资金费率转正超过0.01%或价格跌破2950，表明轧空失效或趋势反转。"
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "Qlib排名第四，得分较低（0.0146），但资金费率极负（-0.0116%），RSI中性（63.63），当前头寸有盈利，需观察后续动能。",
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 820,
-          "invalidation": "资金费率持续上升超过0.01%或价格跌破820，表示动能丧失。"
-        }
-      },
-      {
-        "symbol": "BTC",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 4000,
-        "entry_reason": "Qlib排名第三，得分0.3266，但RSI较高（68.16），资金费率极负（-0.0048%），显示超买风险，且现有头寸已接近止盈，建议获利了结。",
-        "exit_plan": {
-          "take_profit": 92000,
-          "stop_loss": 85000,
-          "invalidation": "资金费率转正超过0.01%或价格跌破85000，表明趋势反转。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": "Qlib排名第二，得分0.55，资金费率略正（0.0078%），RSI中性（55.26），动量正，结合市场看涨趋势，适合多头入场。",
-        "exit_plan": {
-          "take_profit": 0.165,
-          "stop_loss": 0.145,
-          "invalidation": "资金费率转负超过0.01%或价格跌破0.145，表明趋势反转或轧多风险。"
-        }
-      }
-    ],
-    "timestamp": "2025-11-28 20:03:25"
   }
 ]

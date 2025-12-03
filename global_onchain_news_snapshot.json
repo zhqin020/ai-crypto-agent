@@ -1,10 +1,10 @@
 {
-  "generated_at": "2025-12-03T13:01:20.517655+00:00",
+  "generated_at": "2025-12-03T13:37:25.885799+00:00",
   "defillama": {
     "ethereum": {
       "chain": "Ethereum",
       "bridge_overview_raw": {
-        "error": "HTTPSConnectionPool(host='api.llama.fi', port=443): Max retries exceeded with url: /overview/bridges?chains=Ethereum&excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10f74c4a0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='api.llama.fi', port=443): Max retries exceeded with url: /overview/bridges?chains=Ethereum&excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10eb5af00>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "https://api.llama.fi/overview/bridges",
         "params": {
           "chains": "Ethereum",
@@ -18,7 +18,7 @@
         "errors": [
           {
             "url": "https://bridges.llama.fi/bridges",
-            "detail": "HTTPSConnectionPool(host='bridges.llama.fi', port=443): Max retries exceeded with url: /bridges (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76270>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='bridges.llama.fi', port=443): Max retries exceeded with url: /bridges (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a660>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           }
         ],
         "summary": null
@@ -30,33 +30,33 @@
           {
             "url": "https://stablecoins.llama.fi/stablecoincharts/Ethereum",
             "params": null,
-            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoincharts/Ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76750>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoincharts/Ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004ab40>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           },
           {
             "url": "https://stablecoins.llama.fi/stablecoincharts/ethereum",
             "params": null,
-            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoincharts/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76b10>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoincharts/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004af00>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           },
           {
             "url": "https://stablecoins.llama.fi/historicalChain/ethereum",
             "params": null,
-            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /historicalChain/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76d20>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /historicalChain/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004b110>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           },
           {
             "url": "https://stablecoins.llama.fi/chain/ethereum",
             "params": null,
-            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /chain/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76f90>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /chain/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004b380>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           },
           {
             "url": "https://stablecoins.llama.fi/stablecoins",
             "params": {
               "includeChains": "true"
             },
-            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoins?includeChains=true (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe770b0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoins?includeChains=true (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004b4a0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           }
         ],
         "chains_snapshot": {
-          "error": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoinchains (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe770e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='stablecoins.llama.fi', port=443): Max retries exceeded with url: /stablecoinchains (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10ffde4e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://stablecoins.llama.fi/stablecoinchains",
           "params": null
         }
@@ -70,7 +70,7 @@
     "bitcoin": {
       "chain": "Bitcoin",
       "bridge_overview_raw": {
-        "error": "HTTPSConnectionPool(host='api.llama.fi', port=443): Max retries exceeded with url: /overview/bridges?chains=Bitcoin&excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe760c0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='api.llama.fi', port=443): Max retries exceeded with url: /overview/bridges?chains=Bitcoin&excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a3f0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "https://api.llama.fi/overview/bridges",
         "params": {
           "chains": "Bitcoin",
@@ -84,7 +84,7 @@
         "errors": [
           {
             "url": "https://bridges.llama.fi/bridges",
-            "detail": "HTTPSConnectionPool(host='bridges.llama.fi', port=443): Max retries exceeded with url: /bridges (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe763c0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+            "detail": "HTTPSConnectionPool(host='bridges.llama.fi', port=443): Max retries exceeded with url: /bridges (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a7b0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
           }
         ],
         "summary": null
@@ -105,7 +105,7 @@
     "ethereum": {
       "chain": "ethereum",
       "stats": {
-        "error": "HTTPSConnectionPool(host='api.blockchair.com', port=443): Max retries exceeded with url: /ethereum/stats (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77680>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='api.blockchair.com', port=443): Max retries exceeded with url: /ethereum/stats (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004ba70>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "https://api.blockchair.com/ethereum/stats",
         "params": null
       },
@@ -119,7 +119,7 @@
     "bitcoin": {
       "chain": "bitcoin",
       "stats": {
-        "error": "HTTPSConnectionPool(host='api.blockchair.com', port=443): Max retries exceeded with url: /bitcoin/stats (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77920>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='api.blockchair.com', port=443): Max retries exceeded with url: /bitcoin/stats (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004bd10>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "https://api.blockchair.com/bitcoin/stats",
         "params": null
       },
@@ -133,12 +133,12 @@
   },
   "btc_mempool": {
     "overview": {
-      "error": "HTTPSConnectionPool(host='mempool.space', port=443): Max retries exceeded with url: /api/mempool (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77e90>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+      "error": "HTTPSConnectionPool(host='mempool.space', port=443): Max retries exceeded with url: /api/mempool (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103182c0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
       "url": "https://mempool.space/api/mempool",
       "params": null
     },
     "recommended_fees": {
-      "error": "HTTPSConnectionPool(host='mempool.space', port=443): Max retries exceeded with url: /api/v1/fees/recommended (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb00e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+      "error": "HTTPSConnectionPool(host='mempool.space', port=443): Max retries exceeded with url: /api/v1/fees/recommended (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103184d0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
       "url": "https://mempool.space/api/v1/fees/recommended",
       "params": null
     },
@@ -153,11 +153,11 @@
       "items": [],
       "errors": [
         {
-          "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/bitcoin/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77dd0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/bitcoin/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004bf80>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://www.coindesk.com/tag/bitcoin/rss/"
         },
         {
-          "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/bitcoin (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe773b0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/bitcoin (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004b950>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://cointelegraph.com/rss/tag/bitcoin"
         }
       ],
@@ -167,11 +167,11 @@
       "items": [],
       "errors": [
         {
-          "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/ethereum/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76360>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/ethereum/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004ac00>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://www.coindesk.com/tag/ethereum/rss/"
         },
         {
-          "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe767b0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a990>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://cointelegraph.com/rss/tag/ethereum"
         }
       ],
@@ -181,15 +181,15 @@
       "items": [],
       "errors": [
         {
-          "error": "HTTPSConnectionPool(host='decrypt.co', port=443): Max retries exceeded with url: /feed (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76ff0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='decrypt.co', port=443): Max retries exceeded with url: /feed (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x110318b30>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://decrypt.co/feed"
         },
         {
-          "error": "HTTPSConnectionPool(host='news.bitcoin.com', port=443): Max retries exceeded with url: /feed/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb0380>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='news.bitcoin.com', port=443): Max retries exceeded with url: /feed/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103185c0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://news.bitcoin.com/feed/"
         },
         {
-          "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb02f0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103186e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "cryptocompare",
           "params": {
             "categories": "BTC,ETH",
@@ -204,18 +204,18 @@
       "items": [],
       "errors": [
         {
-          "error": "HTTPSConnectionPool(host='www.cnbc.com', port=443): Max retries exceeded with url: /id/100003114/device/rss/rss.html (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb0dd0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='www.cnbc.com', port=443): Max retries exceeded with url: /id/100003114/device/rss/rss.html (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103191c0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
-          "error": "HTTPSConnectionPool(host='finance.yahoo.com', port=443): Max retries exceeded with url: /news/rssindex (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76090>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='finance.yahoo.com', port=443): Max retries exceeded with url: /news/rssindex (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a450>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://finance.yahoo.com/news/rssindex"
         }
       ],
       "note": "所有新闻源均拉取失败，可能需要代理或额外认证。"
     },
     "cryptocompare": {
-      "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb02f0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+      "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103186e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
       "url": "cryptocompare",
       "params": {
         "categories": "BTC,ETH",
@@ -227,7 +227,7 @@
   "fear_greed": {
     "source": "https://api.alternative.me/fng/",
     "raw": {
-      "error": "HTTPSConnectionPool(host='api.alternative.me', port=443): Max retries exceeded with url: /fng/?limit=15 (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb0fe0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+      "error": "HTTPSConnectionPool(host='api.alternative.me', port=443): Max retries exceeded with url: /fng/?limit=15 (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103193d0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
       "url": "https://api.alternative.me/fng/",
       "params": {
         "limit": "15"
@@ -237,15 +237,15 @@
     "series": []
   },
   "blockchair_overview": {
-    "error": "HTTPSConnectionPool(host='api.blockchair.com', port=443): Max retries exceeded with url: /ethereum/stats (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb16d0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+    "error": "HTTPSConnectionPool(host='api.blockchair.com', port=443): Max retries exceeded with url: /ethereum/stats (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x110319ac0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
   },
   "bridge_summary_24h": {
-    "error": "HTTPSConnectionPool(host='bridges.llama.fi', port=443): Max retries exceeded with url: /bridges (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76840>: Failed to establish a new connection: [Errno 61] Connection refused')))"
+    "error": "HTTPSConnectionPool(host='bridges.llama.fi', port=443): Max retries exceeded with url: /bridges (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004aab0>: Failed to establish a new connection: [Errno 61] Connection refused')))"
   },
   "derivatives": {
     "okx": {
       "eth_open_interest_volume": {
-        "error": "HTTPSConnectionPool(host='www.okx.com', port=443): Max retries exceeded with url: /api/v5/rubik/stat/contracts/open-interest-volume?ccy=ETH&instType=SWAP&period=1D&limit=120 (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77e30>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='www.okx.com', port=443): Max retries exceeded with url: /api/v5/rubik/stat/contracts/open-interest-volume?ccy=ETH&instType=SWAP&period=1D&limit=120 (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x110318050>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "https://www.okx.com/api/v5/rubik/stat/contracts/open-interest-volume",
         "params": {
           "ccy": "ETH",
@@ -255,7 +255,7 @@
         }
       },
       "eth_liquidations": {
-        "error": "HTTPSConnectionPool(host='www.okx.com', port=443): Max retries exceeded with url: /api/v5/public/liquidation-orders?instType=SWAP&uly=ETH-USDT&state=filled&limit=100 (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77e30>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='www.okx.com', port=443): Max retries exceeded with url: /api/v5/public/liquidation-orders?instType=SWAP&uly=ETH-USDT&state=filled&limit=100 (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a960>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "https://www.okx.com/api/v5/public/liquidation-orders",
         "params": {
           "instType": "SWAP",
@@ -296,7 +296,7 @@
       "ethereum": null,
       "bitcoin": {
         "recommended": {
-          "error": "HTTPSConnectionPool(host='mempool.space', port=443): Max retries exceeded with url: /api/v1/fees/recommended (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb00e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+          "error": "HTTPSConnectionPool(host='mempool.space', port=443): Max retries exceeded with url: /api/v1/fees/recommended (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103184d0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
           "url": "https://mempool.space/api/v1/fees/recommended",
           "params": null
         },
@@ -309,11 +309,11 @@
         "items": [],
         "errors": [
           {
-            "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/bitcoin/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe77dd0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/bitcoin/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004bf80>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://www.coindesk.com/tag/bitcoin/rss/"
           },
           {
-            "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/bitcoin (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe773b0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/bitcoin (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004b950>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://cointelegraph.com/rss/tag/bitcoin"
           }
         ],
@@ -323,11 +323,11 @@
         "items": [],
         "errors": [
           {
-            "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/ethereum/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76360>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='www.coindesk.com', port=443): Max retries exceeded with url: /tag/ethereum/rss/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004ac00>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://www.coindesk.com/tag/ethereum/rss/"
           },
           {
-            "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe767b0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='cointelegraph.com', port=443): Max retries exceeded with url: /rss/tag/ethereum (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a990>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://cointelegraph.com/rss/tag/ethereum"
           }
         ],
@@ -337,15 +337,15 @@
         "items": [],
         "errors": [
           {
-            "error": "HTTPSConnectionPool(host='decrypt.co', port=443): Max retries exceeded with url: /feed (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76ff0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='decrypt.co', port=443): Max retries exceeded with url: /feed (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x110318b30>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://decrypt.co/feed"
           },
           {
-            "error": "HTTPSConnectionPool(host='news.bitcoin.com', port=443): Max retries exceeded with url: /feed/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb0380>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='news.bitcoin.com', port=443): Max retries exceeded with url: /feed/ (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103185c0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://news.bitcoin.com/feed/"
           },
           {
-            "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb02f0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103186e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "cryptocompare",
             "params": {
               "categories": "BTC,ETH",
@@ -360,18 +360,18 @@
         "items": [],
         "errors": [
           {
-            "error": "HTTPSConnectionPool(host='www.cnbc.com', port=443): Max retries exceeded with url: /id/100003114/device/rss/rss.html (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb0dd0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='www.cnbc.com', port=443): Max retries exceeded with url: /id/100003114/device/rss/rss.html (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103191c0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
           },
           {
-            "error": "HTTPSConnectionPool(host='finance.yahoo.com', port=443): Max retries exceeded with url: /news/rssindex (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fe76090>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+            "error": "HTTPSConnectionPool(host='finance.yahoo.com', port=443): Max retries exceeded with url: /news/rssindex (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x11004a450>: Failed to establish a new connection: [Errno 61] Connection refused')))",
             "url": "https://finance.yahoo.com/news/rssindex"
           }
         ],
         "note": "所有新闻源均拉取失败，可能需要代理或额外认证。"
       },
       "cryptocompare": {
-        "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10feb02f0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
+        "error": "HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/news/?categories=BTC%2CETH&lang=EN&sortOrder=latest (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1103186e0>: Failed to establish a new connection: [Errno 61] Connection refused')))",
         "url": "cryptocompare",
         "params": {
           "categories": "BTC,ETH",
