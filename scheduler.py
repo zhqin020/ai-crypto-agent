@@ -112,6 +112,19 @@ def push_to_github():
             if os.path.exists(f):
                 shutil.copy(f, os.path.join(frontend_data_dir, f))
 
+        # 3.5 Copy Data Folders (csv_data, signals, qlib_data) for debugging
+        folders_to_sync = ["csv_data", "signals", "qlib_data"]
+        for folder in folders_to_sync:
+            src_folder = folder
+            dst_folder = os.path.join(temp_dir, folder)
+            
+            if os.path.exists(src_folder):
+                # Remove destination if exists to ensure clean copy
+                if os.path.exists(dst_folder):
+                    shutil.rmtree(dst_folder)
+                shutil.copytree(src_folder, dst_folder)
+                logger.info(f"Copied folder {folder}")
+
         # 4. Add, Commit, Push
         logger.info("Committing changes...")
         subprocess.run(["git", "add", "."], cwd=temp_dir, check=True)
