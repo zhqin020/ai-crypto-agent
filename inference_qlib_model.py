@@ -186,7 +186,14 @@ def predict_and_export():
         return
     latest_date = cal[-1]
     latest_str = str(latest_date)
-    print(f"📅 Latest available data: {latest_str}")
+    print(f"📅 Latest available data in Qlib Calendar: {latest_str}")
+    
+    # Debug: Check raw CSV latest date
+    if CSV_PATH.exists():
+        df_debug = pd.read_csv(CSV_PATH)
+        df_debug['datetime'] = pd.to_datetime(df_debug['datetime'])
+        print(f"🔍 CSV Latest Date: {df_debug['datetime'].max()}")
+        print(f"   CSV Tail:\n{df_debug[['datetime', 'instrument', 'close']].tail(5)}")
 
     # 2. Load Model & Predict
     model = load_model()

@@ -113,6 +113,10 @@ def prepare_qlib_data():
     combined = combined[combined['ma_60'] > 0]
     print(f"   After: {len(combined)} rows (removed warmup period)")
     
+    # Debug: Print tail of combined data
+    print(f"\n🔍 Combined Data Tail (Last 5 rows):")
+    print(combined[['datetime', 'instrument', 'close', 'future_24h_ret']].tail(10))
+    
     # Drop rows with NaN targets (CRITICAL: Do not fill them!)
     # combined = combined.dropna(subset=['future_4h_ret', 'future_24h_ret']) # Commented out to keep latest data for inference
     

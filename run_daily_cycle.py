@@ -37,8 +37,8 @@ def run_script(script_name, description):
         
         if result.returncode == 0:
             log(f"✅ Completed: {description} in {duration:.2f}s")
-            # Optional: Log stdout if needed, or just keep it clean
-            # log(f"Output:\n{result.stdout}")
+            # Log stdout to debug data flow
+            log(f"Output:\n{result.stdout}")
             return True
         else:
             log(f"❌ Failed: {description}")
