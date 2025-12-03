@@ -1,41 +1,24 @@
 {
-  "nav": 10516.26,
-  "cash": 8516.264554317648,
+  "nav": 10741.56,
+  "cash": 9667.186796547543,
   "positions": [
     {
-      "symbol": "DOGE",
-      "side": "long",
-      "quantity": 14858.84101040119,
-      "entry_price": 0.1346,
+      "symbol": "BNB",
+      "side": "short",
+      "quantity": -2.3874888888888885,
+      "entry_price": 900.0,
       "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 0.1346,
-      "unrealized_pnl": 0.0,
+      "margin": 1074.37,
+      "notional": 2148.74,
+      "current_price": 900.0,
+      "unrealized_pnl": -0.0,
       "exit_plan": {
-        "take_profit": 0.145,
-        "stop_loss": 0.128,
-        "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
+        "take_profit": 880.0,
+        "stop_loss": 920.0,
+        "invalidation": "资金费率Z值回落至50%以下或价格突破920.0阻力位。"
       },
-      "opened_at": "2025-12-01 16:58:06"
-    },
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 0.7162554166815887,
-      "entry_price": 2792.3,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 2792.3,
-      "unrealized_pnl": 0.0,
-      "exit_plan": {
-        "take_profit": 2900,
-        "stop_loss": 2700,
-        "invalidation": "价格跌破2700支撑或资金费率Z-score回落至正常水平。"
-      },
-      "opened_at": "2025-12-03 12:18:13"
+      "opened_at": "2025-12-03 13:08:20"
     }
   ],
-  "last_update": "2025-12-03T12:18:13.974101"
+  "last_update": "2025-12-03T21:08:20.963198"
 }
