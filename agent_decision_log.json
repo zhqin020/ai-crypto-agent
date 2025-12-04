@@ -1,5 +1,47 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】宏观新闻中，BlackRock CEO对比特币的软化立场（'资产恐惧'）是潜在利好，但市场处于恐惧指数26.0的悲观情绪中，且日线趋势普遍熊市（所有币种价格低于SMA50），显示利好尚未被充分定价（Impulse），但短期动能受制于整体下行结构。2. 结合【痛苦交易】检测，市场近期空头清算（$3.49亿）远多于多头（$1.23亿），表明空头已被挤压，但当前资金费率Z值普遍偏高（BNB 106.1%、DOGE 112.8%），显示多头拥挤，存在轧多风险。3. 我选择【均值回归】剧本，利用高资金费率和高RSI（ETH 74.18、SOL 68.16）的过热信号，在现有空头头寸基础上，针对最拥挤的币种进行对冲或加仓。",
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "close_position",
+        "leverage": 0,
+        "position_size_usd": 0,
+        "entry_reason": "现有DOGE空头头寸（开仓价0.1507）当前价格0.1522，已接近止损位0.155，且资金费率Z值高达112.8%显示极端多头拥挤，但价格仍在上涨（ret 0.1191%），为避免轧多风险，提前平仓。",
+        "exit_plan": {
+          "take_profit": 0,
+          "stop_loss": 0,
+          "invalidation": "已执行平仓操作。"
+        }
+      },
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 0,
+        "position_size_usd": 0,
+        "entry_reason": "现有BNB空头头寸（开仓价923.7）当前价格924.6，接近盈亏平衡，资金费率Z值106.1%仍高，但价格动量0.105%和RSI 67.85显示上涨压力，维持持有等待费率回落或价格回调至目标900。",
+        "exit_plan": {
+          "take_profit": 900,
+          "stop_loss": 950,
+          "invalidation": "资金费率Z值回落至50%以下或价格突破950阻力位。"
+        }
+      },
+      {
+        "symbol": "SOL",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": "符合【均值回归】剧本。SOL资金费率Z值98.2%偏高，RSI 68.16接近超买，日线趋势熊市（价格低于SMA50），且Qlib评分仅0.2947（排名第4），预计从当前高位144.81回调。",
+        "exit_plan": {
+          "take_profit": 140,
+          "stop_loss": 150,
+          "invalidation": "资金费率Z值回落至50%以下或价格突破150阻力位。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-04 04:16:50"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：BlackRock CEO软化加密货币立场等新闻显示机构态度改善，但市场反应平淡（BTC微跌），且恐惧贪婪指数26（恐惧）表明利好未充分消化，属于Divergence（坏消息+好价格=积累）。2. 结合日线趋势（所有币种均处于熊市）和【痛苦交易】检测：BNB、SOL、DOGE资金费率Z值>100%（极度拥挤多头），存在轧多风险；BTC资金费率Z值-14%（轻微拥挤空头），但价格疲软，轧空动力不足。3. 我选择【均值回归】剧本，针对拥挤多头（BNB、DOGE）进行做空，并持有现有空头仓位，同时平仓ETH多头以锁定利润并规避高风险。",
     "actions": [
       {
@@ -1441,35 +1483,5 @@
       }
     ],
     "timestamp": "2025-11-29 13:16:04"
-  },
-  {
-    "analysis_summary": "当前市场整体趋势为看涨，但杠杆情绪偏空，平均资金费率为负，显示存在轧空潜力。DOGE排名第一，技术指标中性偏强，资金费率略正但未达极端水平；ETH和BNB排名靠前，但资金费率均为负值，RSI略高但未超买。现有持仓中，ETH和DOGE多头头寸仍符合开仓逻辑，未触发止损或止盈，建议继续持有。由于已持有两个头寸，且无强烈新信号，暂不开新仓以控制风险。",
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": "Qlib排名第二，资金费率为负，存在轧空机会，RSI 63.51未超买。",
-        "exit_plan": {
-          "take_profit": 3200,
-          "stop_loss": 2950,
-          "invalidation": "资金费率转正超过0.01%或价格跌破2950，表明轧空失效或趋势反转。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": "Qlib排名第一，资金费率略正但未极端，RSI 55.26中性，动量稳定。",
-        "exit_plan": {
-          "take_profit": 0.165,
-          "stop_loss": 0.145,
-          "invalidation": "资金费率转负超过0.01%或价格跌破0.145，表明趋势反转或轧多风险。"
-        }
-      }
-    ],
-    "timestamp": "2025-11-29 13:12:48"
   }
 ]

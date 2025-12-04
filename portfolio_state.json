@@ -1,24 +1,7 @@
 {
-  "nav": 10756.96,
-  "cash": 8778.818692349902,
+  "nav": 10779.41,
+  "cash": 8766.847889430193,
   "positions": [
-    {
-      "symbol": "DOGE",
-      "side": "short",
-      "quantity": -13271.400132714001,
-      "entry_price": 0.1507,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 0.1522,
-      "unrealized_pnl": -19.91,
-      "exit_plan": {
-        "take_profit": 0.145,
-        "stop_loss": 0.155,
-        "invalidation": "资金费率Z值回落至50%以下或价格突破0.155阻力位。"
-      },
-      "opened_at": "2025-12-03 20:16:41"
-    },
     {
       "symbol": "BNB",
       "side": "short",
@@ -27,15 +10,32 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 924.6,
-      "unrealized_pnl": -1.95,
+      "current_price": 917.9,
+      "unrealized_pnl": 12.56,
       "exit_plan": {
         "take_profit": 900,
         "stop_loss": 950,
         "invalidation": "资金费率Z值回落至50%以下或价格突破950阻力位。"
       },
       "opened_at": "2025-12-04 00:16:44"
+    },
+    {
+      "symbol": "SOL",
+      "side": "short",
+      "quantity": -13.811200883916856,
+      "entry_price": 144.81,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 144.81,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 140,
+        "stop_loss": 150,
+        "invalidation": "资金费率Z值回落至50%以下或价格突破150阻力位。"
+      },
+      "opened_at": "2025-12-04 04:16:51"
     }
   ],
-  "last_update": "2025-12-04T01:47:21.074113"
+  "last_update": "2025-12-04T04:16:51.017784"
 }
