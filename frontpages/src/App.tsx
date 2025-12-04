@@ -9,22 +9,42 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'positions' | 'history' | 'decision'>('positions');
   const [runningTime, setRunningTime] = useState({ days: 0, hours: 0 });
 
-  const [startTime, setStartTime] = useState<number>(new Date('2024-11-15T00:00:00').getTime());
+  const [startTime, setStartTime] = useState<number>(new Date('2025-11-23T00:00:00').getTime());
 
   useEffect(() => {
     const fetchStartTime = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/summary');
-        if (response.ok) {
-          const data = await response.json();
-          if (data.startTime) {
-            // Ensure format is compatible with Date constructor (replace space with T)
-            // We do NOT append Z because the backend CSV likely stores local time (CST), 
-            // and we want to preserve that relative to the user's browser local time context 
-            // or simply treat it as the "wall clock" time of start.
-            const timeStr = data.startTime.replace(' ', 'T');
-            setStartTime(new Date(timeStr).getTime());
+        let startTimeStr: string | null = null;
+
+        if (import.meta.env.MODE === 'production') {
+          // In production, read from static CSV file
+          const response = await fetch('/data/nav_history.csv');
+          if (response.ok) {
+            const text = await response.text();
+            const lines = text.split('\n');
+            // Line 0 is header, Line 1 is the first data point
+            if (lines.length > 1) {
+              const firstLine = lines[1];
+              if (firstLine) {
+                startTimeStr = firstLine.split(',')[0];
+              }
+            }
           }
+        } else {
+          // In development, use the API
+          const response = await fetch('http://localhost:5001/api/summary');
+          if (response.ok) {
+            const data = await response.json();
+            if (data.startTime) {
+              startTimeStr = data.startTime;
+            }
+          }
+        }
+
+        if (startTimeStr) {
+          // Ensure format is compatible with Date constructor (replace space with T)
+          const timeStr = startTimeStr.replace(' ', 'T');
+          setStartTime(new Date(timeStr).getTime());
         }
       } catch (error) {
         console.error("Failed to fetch start time:", error);
