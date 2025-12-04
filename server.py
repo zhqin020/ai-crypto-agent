@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).parent
 PORTFOLIO_PATH = BASE_DIR / "portfolio_state.json"
 TRADE_LOG_PATH = BASE_DIR / "trade_log.csv"
 AGENT_LOG_PATH = BASE_DIR / "agent_decision_log.json"
+NAV_HISTORY_PATH = BASE_DIR / "nav_history.csv"
 
 # Map symbols to names (optional)
 COIN_NAMES = {
@@ -114,7 +115,7 @@ def get_history():
 def get_summary():
     # Return total NAV and PnL
     if not PORTFOLIO_PATH.exists():
-        return jsonify({"nav": 10000, "pnl": 0})
+        return jsonify({"nav": 10000, "pnl": 0, "startTime": "2024-11-15 00:00:00"})
         
     with open(PORTFOLIO_PATH, 'r') as f:
         state = json.load(f)
@@ -123,10 +124,26 @@ def get_summary():
     initial_nav = 10000 # Hardcoded for now
     total_pnl = nav - initial_nav
     
+    # Get start time from nav_history.csv
+    start_time_str = "2024-11-15 00:00:00"
+    if NAV_HISTORY_PATH.exists():
+        try:
+            with open(NAV_HISTORY_PATH, 'r') as f:
+                # Skip header
+                header = next(f, None)
+                if header:
+                    first_line = next(f, None)
+                    if first_line:
+                        # Format: timestamp,nav
+                        start_time_str = first_line.strip().split(',')[0]
+        except Exception as e:
+            print(f"Error reading start time: {e}")
+    
     return jsonify({
         "nav": round(nav, 2),
         "totalPnl": round(total_pnl, 2),
-        "pnlPercent": round((total_pnl / initial_nav) * 100, 2)
+        "pnlPercent": round((total_pnl / initial_nav) * 100, 2),
+        "startTime": start_time_str
     })
 
 @app.route('/api/nav-history', methods=['GET'])

@@ -9,8 +9,30 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'positions' | 'history' | 'decision'>('positions');
   const [runningTime, setRunningTime] = useState({ days: 0, hours: 0 });
 
-  // 设置策略启动时间（示例：2024年11月15日）
-  const startTime = new Date('2024-11-15T00:00:00').getTime();
+  const [startTime, setStartTime] = useState<number>(new Date('2024-11-15T00:00:00').getTime());
+
+  useEffect(() => {
+    const fetchStartTime = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/summary');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.startTime) {
+            // Ensure format is compatible with Date constructor (replace space with T)
+            // We do NOT append Z because the backend CSV likely stores local time (CST), 
+            // and we want to preserve that relative to the user's browser local time context 
+            // or simply treat it as the "wall clock" time of start.
+            const timeStr = data.startTime.replace(' ', 'T');
+            setStartTime(new Date(timeStr).getTime());
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch start time:", error);
+      }
+    };
+
+    fetchStartTime();
+  }, []);
 
   useEffect(() => {
     const updateRunningTime = () => {
@@ -25,7 +47,7 @@ export default function App() {
     const interval = setInterval(updateRunningTime, 60000); // 每分钟更新一次
 
     return () => clearInterval(interval);
-  }, []);
+  }, [startTime]);
 
   return (
     <div className="h-screen bg-[#1a1d24] text-white p-3">
@@ -76,33 +98,30 @@ export default function App() {
             <div className="flex border-b border-gray-700 flex-shrink-0">
               <button
                 onClick={() => setActiveTab('positions')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${
-                  activeTab === 'positions'
-                    ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
-                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
-                }`}
+                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'positions'
+                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                  }`}
               >
                 <Wallet className="w-4 h-4" />
                 当前持仓
               </button>
               <button
                 onClick={() => setActiveTab('history')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${
-                  activeTab === 'history'
-                    ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
-                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
-                }`}
+                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'history'
+                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                  }`}
               >
                 <History className="w-4 h-4" />
                 历史记录
               </button>
               <button
                 onClick={() => setActiveTab('decision')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${
-                  activeTab === 'decision'
-                    ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
-                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
-                }`}
+                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'decision'
+                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                  }`}
               >
                 <Brain className="w-4 h-4" />
                 模型决策
