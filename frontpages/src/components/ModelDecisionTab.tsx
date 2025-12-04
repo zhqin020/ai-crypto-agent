@@ -1,6 +1,5 @@
-/// <reference types="vite/client" />
 import { useState, useEffect } from 'react';
-import { Brain, AlertTriangle, CheckCircle, ArrowRight } from 'lucide-react';
+import { Brain, Activity } from 'lucide-react';
 
 interface AgentAction {
   symbol: string;
@@ -67,114 +66,135 @@ export function ModelDecisionTab() {
   if (decisions.length === 0) return <div className="text-gray-500 p-4">暂无决策记录</div>;
 
   return (
-    <div className="space-y-8 overflow-y-auto pr-2 h-full">
-      {decisions.map((decision, dIdx) => (
-        <div key={dIdx} className="relative pl-6 border-l border-gray-700/50 pb-8 last:pb-0 last:border-0">
-          {/* Timeline Dot */}
-          <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-lime-500/50 border border-lime-400"></div>
-
-          {/* Header: Timestamp */}
-          <div className="text-gray-400 text-xs font-['DIN_Alternate',sans-serif] mb-4 flex items-center gap-2">
-            {(() => {
-              if (!decision.timestamp) return 'Unknown Time';
-              try {
-                // Backend sends UTC time like "2025-11-27 20:13:52"
-                // Replace space with T and append Z to ensure UTC parsing
-                const utcTime = decision.timestamp.replace(' ', 'T') + 'Z';
-                const date = new Date(utcTime);
-                return date.toLocaleString('zh-CN', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit',
-                  timeZoneName: 'short',
-                  hour12: false
-                });
-              } catch (e) {
-                return decision.timestamp + ' (UTC)';
-              }
-            })()}
-            {dIdx === 0 && <span className="bg-lime-500/20 text-lime-400 px-1.5 py-0.5 rounded text-[10px]">LATEST</span>}
-          </div>
-
-          {/* Analysis Summary */}
-          <div className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50 mb-4">
-            <h3 className="text-lime-400 mb-3 flex items-center gap-2 font-bold text-sm uppercase tracking-wider">
-              <Brain className="w-4 h-4" />
-              市场分析
-            </h3>
-            <p className="text-gray-300 leading-relaxed text-sm">
-              {decision.analysis_summary}
-            </p>
-          </div>
-
-          {/* Actions */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold flex items-center gap-2 text-sm mb-4">
-              <CheckCircle className="w-4 h-4 text-lime-400" />
-              执行动作 ({decision.actions?.length || 0})
-            </h3>
-
-            {(!decision.actions || decision.actions.length === 0) ? (
-              <div className="text-gray-500 text-sm italic pl-1">本次无交易操作 (观望)</div>
-            ) : (
-              decision.actions.map((action, idx) => (
-                <div key={idx} className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50 hover:border-lime-500/30 transition-all">
-                  {/* Action Header */}
-                  <div className="flex justify-between items-start mb-3 pb-3 border-b border-gray-700/30">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold text-white">{action.symbol}</span>
-                      <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${action.action?.includes('long') ? 'bg-lime-500/20 text-lime-400' :
-                        action.action?.includes('short') ? 'bg-red-500/20 text-red-400' :
-                          'bg-gray-500/20 text-gray-400'
-                        }`}>
-                        {action.action?.replace('_', ' ') || 'UNKNOWN'}
-                      </span>
-                      {action.leverage && action.leverage > 1 && (
-                        <span className="text-xs text-orange-400 border border-orange-400/30 px-1.5 py-0.5 rounded font-['DIN_Alternate',sans-serif]">
-                          {action.leverage}x
-                        </span>
-                      )}
-                    </div>
-                    <div className="text-right">
-                      <div className="text-white font-['DIN_Alternate',sans-serif] text-base">
-                        {action.position_size_usd ? `$${action.position_size_usd.toLocaleString()}` : '-'}
-                      </div>
-                      <div className="text-[10px] text-gray-500 uppercase tracking-wider">Position Size</div>
-                    </div>
-                  </div>
-
-                  {/* Reason */}
-                  <div className="mb-3">
-                    <div className="text-sm text-gray-300 bg-black/20 p-3 rounded border border-gray-700/30 leading-relaxed">
-                      <div className="text-[10px] text-gray-500 mb-2 uppercase tracking-wider">决策逻辑</div>
-                      {action.entry_reason || '无详细理由'}
-                    </div>
-                  </div>
-
-                  {/* Exit Plan */}
-                  <div className="grid grid-cols-2 gap-3 text-xs bg-black/10 p-3 rounded border border-gray-700/20">
-                    {action.exit_plan?.take_profit && (
-                      <div className="flex items-center gap-2 text-lime-400/90">
-                        <ArrowRight className="w-3.5 h-3.5" />
-                        <span className="font-['DIN_Alternate',sans-serif]">TP: ${action.exit_plan.take_profit.toLocaleString()}</span>
-                      </div>
-                    )}
-                    {action.exit_plan?.stop_loss && (
-                      <div className="flex items-center gap-2 text-red-400/90">
-                        <AlertTriangle className="w-3.5 h-3.5" />
-                        <span className="font-['DIN_Alternate',sans-serif]">SL: ${action.exit_plan.stop_loss.toLocaleString()}</span>
-                      </div>
-                    )}
-                  </div>
+    <div className="h-full flex flex-col">
+      {/* Scrollable Content */}
+      <div className="space-y-8 overflow-y-auto pr-2 flex-1">
+        {decisions.map((decision, index) => (
+          <div key={index}>
+            {/* Timestamp Header */}
+            <div
+              className={`mb-4 ${index === 0
+                  ? 'bg-gradient-to-r from-lime-500/20 to-transparent border-l-4 border-lime-400'
+                  : 'bg-gradient-to-r from-gray-600/20 to-transparent border-l-4 border-gray-600'
+                } rounded-lg p-3.5 flex items-center justify-between`}
+            >
+              <div className="flex items-center gap-2">
+                {index === 0 && <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>}
+                <span className="text-gray-300 font-['DIN_Alternate',sans-serif] text-sm">
+                  {(() => {
+                    if (!decision.timestamp) return 'Unknown Time';
+                    try {
+                      // Backend sends UTC time like "2025-11-27 20:13:52"
+                      // Replace space with T and append Z to ensure UTC parsing
+                      const utcTime = decision.timestamp.replace(' ', 'T') + 'Z';
+                      const date = new Date(utcTime);
+                      return date.toLocaleString('zh-CN', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        timeZoneName: 'short',
+                        hour12: false
+                      });
+                    } catch (e) {
+                      return decision.timestamp + ' (UTC)';
+                    }
+                  })()}
+                </span>
+              </div>
+              {index === 0 && (
+                <div className="px-2 py-0.5 bg-lime-400/20 text-lime-400 text-xs rounded border border-lime-400/30">
+                  LATEST
                 </div>
-              ))
-            )}
+              )}
+            </div>
+
+            {/* Market Analysis */}
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-3">
+                <Brain className="w-5 h-5 text-lime-400" />
+                <h3 className="text-lime-400">市场分析</h3>
+              </div>
+              <div className="bg-[#1f2229] rounded-lg p-5 border border-gray-700/50">
+                <p className="text-gray-300 leading-relaxed text-sm">
+                  {decision.analysis_summary}
+                </p>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Activity className="w-5 h-5 text-lime-400" />
+                <h3 className="text-lime-400">执行动作 ({decision.actions?.length || 0})</h3>
+              </div>
+
+              <div className="space-y-4">
+                {(!decision.actions || decision.actions.length === 0) ? (
+                  <div className="text-gray-500 text-sm italic pl-1">本次无交易操作 (观望)</div>
+                ) : (
+                  decision.actions.map((action, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-[#1f2229] rounded-lg p-5 border border-gray-700/50 hover:border-lime-500/50 transition-all"
+                    >
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <div className="text-lime-400 font-bold text-lg">{action.symbol}</div>
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${action.action?.includes('long') ? 'bg-lime-500/20 text-lime-400' :
+                              action.action?.includes('short') ? 'bg-red-500/20 text-red-400' :
+                                'bg-gray-500/20 text-gray-400'
+                            }`}>
+                            {action.action?.replace('_', ' ') || 'UNKNOWN'}
+                          </span>
+                          {action.leverage && (
+                            <span className="px-2 py-0.5 bg-lime-500/20 text-lime-400 text-xs rounded font-['DIN_Alternate',sans-serif]">
+                              {action.leverage}x
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500 text-sm">仓位大小:</span>
+                          <span className="text-white text-sm font-['DIN_Alternate',sans-serif]">
+                            {action.position_size_usd ? `$${action.position_size_usd.toLocaleString()}` : '-'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Reasoning */}
+                      <div className="mb-4">
+                        <div className="text-gray-500 text-sm mb-2">决策逻辑</div>
+                        <p className="text-gray-300 leading-relaxed text-sm">
+                          {action.entry_reason || '无详细理由'}
+                        </p>
+                      </div>
+
+                      {/* TP & SL - 左右布局 */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <span className="text-gray-500 text-sm">止盈价: </span>
+                          <span className="text-lime-400 font-['DIN_Alternate',sans-serif]">
+                            {action.exit_plan?.take_profit ? `$${action.exit_plan.take_profit.toLocaleString()}` : '-'}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500 text-sm">止损价: </span>
+                          <span className="text-red-400 font-['DIN_Alternate',sans-serif]">
+                            {action.exit_plan?.stop_loss ? `$${action.exit_plan.stop_loss.toLocaleString()}` : '-'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
