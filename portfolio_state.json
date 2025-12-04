@@ -1,6 +1,6 @@
 {
-  "nav": 10737.86,
-  "cash": 8709.594442543463,
+  "nav": 10759.38,
+  "cash": 7707.594442543463,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,12 +10,12 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 3130.5,
-      "unrealized_pnl": 28.27,
+      "current_price": 3191.38,
+      "unrealized_pnl": 67.71,
       "exit_plan": {
         "take_profit": 3200,
-        "stop_loss": 3000,
-        "invalidation": "资金费率Z值升至80%以上或价格跌破3000支撑位。"
+        "stop_loss": 3100,
+        "invalidation": "价格跌破3100支撑位或资金费率Z值升至80%以上。"
       },
       "opened_at": "2025-12-03 16:17:13"
     },
@@ -27,15 +27,32 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.1507,
-      "unrealized_pnl": -0.0,
+      "current_price": 0.1519,
+      "unrealized_pnl": -15.93,
       "exit_plan": {
         "take_profit": 0.145,
         "stop_loss": 0.155,
         "invalidation": "资金费率Z值回落至50%以下或价格突破0.155阻力位。"
       },
       "opened_at": "2025-12-03 20:16:41"
+    },
+    {
+      "symbol": "BNB",
+      "side": "short",
+      "quantity": -2.1652051531882646,
+      "entry_price": 923.7,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 923.7,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 900,
+        "stop_loss": 950,
+        "invalidation": "资金费率Z值回落至50%以下或价格突破950阻力位。"
+      },
+      "opened_at": "2025-12-04 00:16:44"
     }
   ],
-  "last_update": "2025-12-03T20:16:41.178047"
+  "last_update": "2025-12-04T00:16:44.608186"
 }
