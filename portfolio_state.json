@@ -1,6 +1,41 @@
 {
-  "nav": 10880.71,
-  "cash": 10880.712875050776,
-  "positions": [],
-  "last_update": "2025-12-04T20:16:31.123706"
+  "nav": 10873.1,
+  "cash": 7064.846375050776,
+  "positions": [
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 4.8251441241685145,
+      "entry_price": 902.0,
+      "leverage": 2.0,
+      "margin": 2176.14,
+      "notional": 4352.28,
+      "current_price": 902.0,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 950.0,
+        "stop_loss": 875.0,
+        "invalidation": "价格跌破875.0支撑或资金费率Z-Score超过30%，显示轧多风险加剧。"
+      },
+      "opened_at": "2025-12-05 00:16:48"
+    },
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 1.0397194475588625,
+      "entry_price": 3139.52,
+      "leverage": 2.0,
+      "margin": 1632.11,
+      "notional": 3264.22,
+      "current_price": 3139.52,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 3300.0,
+        "stop_loss": 3050.0,
+        "invalidation": "价格跌破3050.0支撑或BTC相关性（0.9316）减弱导致联动下跌。"
+      },
+      "opened_at": "2025-12-05 00:16:48"
+    }
+  ],
+  "last_update": "2025-12-05T00:16:48.616913"
 }
