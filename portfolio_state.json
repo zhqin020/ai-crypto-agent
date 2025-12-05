@@ -1,58 +1,7 @@
 {
-  "nav": 10693.86,
-  "cash": 3042.357808964195,
+  "nav": 10748.76,
+  "cash": 7703.900851692411,
   "positions": [
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 4.8251441241685145,
-      "entry_price": 902.0,
-      "leverage": 2.0,
-      "margin": 2176.14,
-      "notional": 4352.28,
-      "current_price": 886.2,
-      "unrealized_pnl": -76.24,
-      "exit_plan": {
-        "take_profit": 950.0,
-        "stop_loss": 890.0,
-        "invalidation": "价格跌破890.0支撑或资金费率Z-Score转正，表明空头完全平仓，轧空剧本失效。"
-      },
-      "opened_at": "2025-12-05 00:16:48"
-    },
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 1.0397194475588625,
-      "entry_price": 3139.52,
-      "leverage": 2.0,
-      "margin": 1632.11,
-      "notional": 3264.22,
-      "current_price": 3091.38,
-      "unrealized_pnl": -50.05,
-      "exit_plan": {
-        "take_profit": 3300.0,
-        "stop_loss": 3080.0,
-        "invalidation": "价格跌破3080.0支撑或BTC相关性减弱导致联动下跌。"
-      },
-      "opened_at": "2025-12-05 00:16:48"
-    },
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 4.479283314669653,
-      "entry_price": 893.0,
-      "leverage": 2.0,
-      "margin": 2000.0,
-      "notional": 4000.0,
-      "current_price": 886.2,
-      "unrealized_pnl": -30.46,
-      "exit_plan": {
-        "take_profit": 950.0,
-        "stop_loss": 890.0,
-        "invalidation": "价格跌破890.0支撑或资金费率Z-Score转正，表明空头完全平仓，轧空剧本失效。"
-      },
-      "opened_at": "2025-12-05 12:16:29"
-    },
     {
       "symbol": "SOL",
       "side": "short",
@@ -61,15 +10,32 @@
       "leverage": 2.0,
       "margin": 2000.0,
       "notional": 4000.0,
-      "current_price": 133.74,
-      "unrealized_pnl": -0.0,
+      "current_price": 132.24,
+      "unrealized_pnl": 44.86,
       "exit_plan": {
         "take_profit": 128.0,
         "stop_loss": 138.0,
         "invalidation": "价格突破138.0阻力或资金费率Z-Score回落至50%以下，表明多头压力缓解，轧多剧本失效。"
       },
       "opened_at": "2025-12-05 16:17:42"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 14450.867052023123,
+      "entry_price": 0.1384,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.1384,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.145,
+        "stop_loss": 0.135,
+        "invalidation": "资金费率Z-Score转正或价格跌破0.135支撑，表明空头压力缓解或下跌趋势延续。"
+      },
+      "opened_at": "2025-12-05 20:16:49"
     }
   ],
-  "last_update": "2025-12-05T16:17:42.320560"
+  "last_update": "2025-12-05T20:16:49.511469"
 }
