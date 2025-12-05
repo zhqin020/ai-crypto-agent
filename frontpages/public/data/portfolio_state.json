@@ -1,6 +1,6 @@
 {
-  "nav": 10887.99,
-  "cash": 7050.357808964195,
+  "nav": 10797.42,
+  "cash": 5046.357808964195,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 2176.14,
       "notional": 4352.28,
-      "current_price": 901.5,
-      "unrealized_pnl": -2.41,
+      "current_price": 893.0,
+      "unrealized_pnl": -43.43,
       "exit_plan": {
         "take_profit": 950.0,
         "stop_loss": 875.0,
@@ -27,15 +27,32 @@
       "leverage": 2.0,
       "margin": 1632.11,
       "notional": 3264.22,
-      "current_price": 3170.1,
-      "unrealized_pnl": 31.79,
+      "current_price": 3126.28,
+      "unrealized_pnl": -13.77,
       "exit_plan": {
         "take_profit": 3300.0,
         "stop_loss": 3050.0,
         "invalidation": "价格跌破3050.0支撑或BTC相关性（0.9316）减弱导致联动下跌。"
       },
       "opened_at": "2025-12-05 00:16:48"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 4.479283314669653,
+      "entry_price": 893.0,
+      "leverage": 2.0,
+      "margin": 2000.0,
+      "notional": 4000.0,
+      "current_price": 893.0,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 950.0,
+        "stop_loss": 875.0,
+        "invalidation": "价格跌破875.0支撑或资金费率Z-Score回升至-30%以上，表明空头压力缓解，轧空剧本失效。"
+      },
+      "opened_at": "2025-12-05 12:16:29"
     }
   ],
-  "last_update": "2025-12-05T08:16:04.743204"
+  "last_update": "2025-12-05T12:16:29.079134"
 }
