@@ -1,6 +1,6 @@
 {
-  "nav": 10797.42,
-  "cash": 5046.357808964195,
+  "nav": 10693.86,
+  "cash": 3042.357808964195,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,12 +10,12 @@
       "leverage": 2.0,
       "margin": 2176.14,
       "notional": 4352.28,
-      "current_price": 893.0,
-      "unrealized_pnl": -43.43,
+      "current_price": 886.2,
+      "unrealized_pnl": -76.24,
       "exit_plan": {
         "take_profit": 950.0,
-        "stop_loss": 875.0,
-        "invalidation": "价格跌破875.0支撑或资金费率Z-Score超过30%，显示轧多风险加剧。"
+        "stop_loss": 890.0,
+        "invalidation": "价格跌破890.0支撑或资金费率Z-Score转正，表明空头完全平仓，轧空剧本失效。"
       },
       "opened_at": "2025-12-05 00:16:48"
     },
@@ -27,12 +27,12 @@
       "leverage": 2.0,
       "margin": 1632.11,
       "notional": 3264.22,
-      "current_price": 3126.28,
-      "unrealized_pnl": -13.77,
+      "current_price": 3091.38,
+      "unrealized_pnl": -50.05,
       "exit_plan": {
         "take_profit": 3300.0,
-        "stop_loss": 3050.0,
-        "invalidation": "价格跌破3050.0支撑或BTC相关性（0.9316）减弱导致联动下跌。"
+        "stop_loss": 3080.0,
+        "invalidation": "价格跌破3080.0支撑或BTC相关性减弱导致联动下跌。"
       },
       "opened_at": "2025-12-05 00:16:48"
     },
@@ -44,15 +44,32 @@
       "leverage": 2.0,
       "margin": 2000.0,
       "notional": 4000.0,
-      "current_price": 893.0,
-      "unrealized_pnl": 0.0,
+      "current_price": 886.2,
+      "unrealized_pnl": -30.46,
       "exit_plan": {
         "take_profit": 950.0,
-        "stop_loss": 875.0,
-        "invalidation": "价格跌破875.0支撑或资金费率Z-Score回升至-30%以上，表明空头压力缓解，轧空剧本失效。"
+        "stop_loss": 890.0,
+        "invalidation": "价格跌破890.0支撑或资金费率Z-Score转正，表明空头完全平仓，轧空剧本失效。"
       },
       "opened_at": "2025-12-05 12:16:29"
+    },
+    {
+      "symbol": "SOL",
+      "side": "short",
+      "quantity": -29.90877822640945,
+      "entry_price": 133.74,
+      "leverage": 2.0,
+      "margin": 2000.0,
+      "notional": 4000.0,
+      "current_price": 133.74,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 128.0,
+        "stop_loss": 138.0,
+        "invalidation": "价格突破138.0阻力或资金费率Z-Score回落至50%以下，表明多头压力缓解，轧多剧本失效。"
+      },
+      "opened_at": "2025-12-05 16:17:42"
     }
   ],
-  "last_update": "2025-12-05T12:16:29.079134"
+  "last_update": "2025-12-05T16:17:42.320560"
 }
