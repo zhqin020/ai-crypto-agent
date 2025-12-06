@@ -1,24 +1,7 @@
 {
-  "nav": 10748.76,
-  "cash": 7703.900851692411,
+  "nav": 10734.55,
+  "cash": 7718.654253815936,
   "positions": [
-    {
-      "symbol": "SOL",
-      "side": "short",
-      "quantity": -29.90877822640945,
-      "entry_price": 133.74,
-      "leverage": 2.0,
-      "margin": 2000.0,
-      "notional": 4000.0,
-      "current_price": 132.24,
-      "unrealized_pnl": 44.86,
-      "exit_plan": {
-        "take_profit": 128.0,
-        "stop_loss": 138.0,
-        "invalidation": "价格突破138.0阻力或资金费率Z-Score回落至50%以下，表明多头压力缓解，轧多剧本失效。"
-      },
-      "opened_at": "2025-12-05 16:17:42"
-    },
     {
       "symbol": "DOGE",
       "side": "long",
@@ -27,15 +10,32 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.1384,
-      "unrealized_pnl": 0.0,
+      "current_price": 0.1395,
+      "unrealized_pnl": 15.9,
       "exit_plan": {
         "take_profit": 0.145,
         "stop_loss": 0.135,
         "invalidation": "资金费率Z-Score转正或价格跌破0.135支撑，表明空头压力缓解或下跌趋势延续。"
       },
       "opened_at": "2025-12-05 20:16:49"
+    },
+    {
+      "symbol": "SOL",
+      "side": "long",
+      "quantity": 30.079711234772148,
+      "entry_price": 132.98,
+      "leverage": 2.0,
+      "margin": 2000.0,
+      "notional": 4000.0,
+      "current_price": 132.98,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 138.0,
+        "stop_loss": 128.0,
+        "invalidation": "资金费率Z-Score回升至-50%以上或价格跌破128.0支撑，表明空头压力缓解或下跌趋势延续。"
+      },
+      "opened_at": "2025-12-06 00:16:28"
     }
   ],
-  "last_update": "2025-12-05T20:16:49.511469"
+  "last_update": "2025-12-06T00:16:28.047476"
 }
