@@ -112,14 +112,17 @@ Before opening new positions:
 - Risk budget allows (check available cash)
 
 Constraints:
-- Max Open Positions: 3 (including existing ones!)
+- Max Open Positions: 3 (Strictly enforced).
 - Max Risk Per Trade: 2% of NAV (Stop Loss distance * Position Size).
-- Max Leverage: 3x.
+- Max Leverage: 5x (Normal), 1x (High Volatility).
 
 Hard Safety Rules (ALWAYS OBEY):
+- **3-Position Limit**: Never exceed 3 open positions.
+- **Dynamic Exposure**:
+    - **Bear Market (BTC < SMA50)**: Max Total Exposure = 50% NAV.
+    - **Bull Market (BTC > SMA50)**: Max Total Exposure = 100% NAV.
+- **Volatility Guard**: If Volatility is "High", FORCE Leverage = 1x.
 - If market is extremely volatile OR portfolio NAV drawdown > 20%, prefer "actions": [].
-- Never open new positions if there are already 3 open positions.
-- Never allocate more than 50% of NAV in total across all new actions in a single decision.
 
 🟫 6. OUTPUT FORMAT (JSON ONLY)
 You must output a single valid JSON object. No markdown, no conversational text.
@@ -293,6 +296,13 @@ def run_agent():
     with open(PAYLOAD_PATH, "r") as f:
         qlib_payload = f.read()
         
+    # Parse payload for validation context
+    try:
+        payload_json = json.loads(qlib_payload)
+        market_summary = payload_json.get("market_summary", {})
+    except:
+        market_summary = {}
+        
     # 2. Prepare Prompt
     portfolio_state = get_portfolio_state()
     news_context = get_news_context()
@@ -341,8 +351,8 @@ def run_agent():
         # Parse JSON
         decision = json.loads(content)
         
-        # Validate Decision
-        validate_decision(decision)
+        # Validate & Enforce Decision
+        decision = validate_and_enforce_decision(decision, market_summary, daily_context)
         
         print("\n💡 Dolores' Decision:")
         print(json.dumps(decision, indent=2, ensure_ascii=False))
@@ -407,53 +417,121 @@ def run_agent():
 
 ALLOWED_ACTIONS = {"open_long", "open_short", "close_position", "adjust_sl", "hold"}
 
-def validate_decision(decision):
+def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str):
     """
-    Sanity check for agent decisions.
-    Prints warnings instead of raising errors for now.
+    Strictly enforce risk management rules.
+    Modifies decision in-place.
+    """
+    actions = decision.get("actions", [])
+    if not actions:
+        return decision
+
+    # 1. Volatility Guard
+    # If volatility is high, force leverage to 1x
+    volatility = market_summary.get("volatility", "medium")
+    if volatility == "high":
+        print("⚠️ High Volatility Detected! Forcing Leverage = 1x")
+        for act in actions:
+            if act.get("action") in ["open_long", "open_short"]:
+                if float(act.get("leverage", 1)) > 1:
+                    act["leverage"] = 1
+                    print(f"  🔻 {act.get('symbol')} leverage reduced to 1x")
+
+    # 2. 3-Position Limit
+    existing_positions = portfolio.get("positions", [])
+    open_actions = [a for a in actions if a.get("action") in ["open_long", "open_short"]]
+    
+    # If existing + new > 3, remove excess new actions (last ones first)
+    while len(existing_positions) + len(open_actions) > 3:
+        removed = open_actions.pop()
+        print(f"⛔ 3-Position Limit Exceeded! Dropping action for {removed.get('symbol')}")
+        # Remove from original actions list
+        if removed in actions:
+            actions.remove(removed)
+            
+    # 3. Dynamic Exposure Cap
+    # Check BTC Trend from daily_context_str
+    is_bear_market = "BTC: Trend=BEARISH" in daily_context_str
+    max_exposure_ratio = 0.5 if is_bear_market else 1.0
+    
+    nav = float(portfolio.get("nav", 10000))
+    max_exposure = nav * max_exposure_ratio
+    
+    print(f"🛡️ Risk Mode: {'BEAR (Max 50%)' if is_bear_market else 'BULL (Max 100%)'} | Max Exposure: ${max_exposure:,.2f}")
+    
+    # Calculate current exposure (Margin * Leverage)
+    current_exposure = sum([float(p.get("margin", 0)) * float(p.get("leverage", 1)) for p in existing_positions])
+    
+    # Calculate new exposure
+    # We iterate a copy to modify the original list safely
+    for act in open_actions[:]:
+        size = float(act.get("position_size_usd", 0))
+        lev = float(act.get("leverage", 1))
+        exposure = size * lev
+        
+        if current_exposure + exposure > max_exposure:
+            # Calculate remaining available exposure
+            available = max_exposure - current_exposure
+            
+            if available <= 0:
+                print(f"⛔ Max Exposure Reached! Dropping {act.get('symbol')}")
+                if act in actions:
+                    actions.remove(act)
+                continue
+            
+            # Reduce size to fit
+            # New Exposure = New Size * Lev = Available
+            # New Size = Available / Lev
+            new_size = available / lev
+            
+            # If new size is too small (e.g. < $10), just drop it
+            if new_size < 10:
+                print(f"⛔ Insufficient room for {act.get('symbol')}. Dropping.")
+                if act in actions:
+                    actions.remove(act)
+                continue
+                
+            print(f"⚠️ Exposure Limit! Reducing {act.get('symbol')} size from ${size:.2f} to ${new_size:.2f}")
+            act["position_size_usd"] = round(new_size, 2)
+            current_exposure += available # Now full
+        else:
+            current_exposure += exposure
+            
+    decision["actions"] = actions
+    return decision
+
+def validate_and_enforce_decision(decision, market_summary, daily_context_str):
+    """
+    Sanity check AND strict enforcement.
     """
     actions = decision.get("actions", [])
     if not actions:
         print("⚠️ No actions generated.")
-        return
+        return decision
 
-    # Load portfolio state for NAV check
+    # Load portfolio state
     try:
         portfolio = json.loads(get_portfolio_state())
-        nav = float(portfolio.get("nav", 10000))
     except:
-        nav = 10000.0 # Fallback
+        portfolio = {"nav": 10000.0, "positions": []}
         
-    total_new_risk = 0.0
+    print("\n🔍 Validating & Enforcing Rules...")
     
-    print("\n🔍 Validating Decision...")
+    # Enforce Limits
+    decision = enforce_risk_limits(decision, portfolio, market_summary, daily_context_str)
     
+    # Final Sanity Print
+    actions = decision.get("actions", [])
     for i, act in enumerate(actions):
         symbol = act.get("symbol", "UNKNOWN")
         action_type = act.get("action")
-        
-        # 1. Check Action Type
-        if action_type not in ALLOWED_ACTIONS:
-            print(f"  ⚠️ [Action #{i+1} {symbol}] Invalid action: '{action_type}'")
-            
-        # 2. Check Size & Leverage
         size = float(act.get("position_size_usd", 0) or 0)
         lev = float(act.get("leverage", 1) or 1)
         
-        if size < 0:
-            print(f"  ⚠️ [Action #{i+1} {symbol}] Negative position size: ${size}")
-        
-        if lev > 3:
-            print(f"  ⚠️ [Action #{i+1} {symbol}] Leverage too high: {lev}x (Max 3x)")
-            
         if action_type in ["open_long", "open_short"]:
-            total_new_risk += size
-
-    # 3. Check Total Risk
-    if total_new_risk > nav * 0.5:
-        print(f"  ⚠️ Total new position size (${total_new_risk:,.2f}) exceeds 50% of NAV (${nav:,.2f})")
-    else:
-        print(f"  ✅ Validation passed. Total new exposure: ${total_new_risk:,.2f}")
+            print(f"  ✅ [Action #{i+1} {symbol}] {action_type} | Size: ${size} | Lev: {lev}x")
+            
+    return decision
 
 if __name__ == "__main__":
     run_agent()
