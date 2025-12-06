@@ -162,6 +162,102 @@ def append_trade_log(record: dict):
 # Core Execution Logic
 # ---------------------------
 
+def _check_sl_tp(portfolio, market_map):
+    """
+    Check and execute TP/SL for all positions.
+    Returns updated portfolio.
+    """
+    positions = portfolio.get("positions", [])
+    remaining_positions = []
+    
+    for pos in positions:
+        symbol = pos["symbol"]
+        market_data = market_map.get(symbol)
+        if not market_data:
+            remaining_positions.append(pos)
+            continue
+            
+        entry_price = float(pos["entry_price"])
+            
+        high = market_data["high"]
+        low = market_data["low"]
+        close = market_data["close"]
+        
+        exit_plan = pos.get("exit_plan", {})
+        tp = exit_plan.get("take_profit")
+        sl = exit_plan.get("stop_loss")
+        
+        triggered = False
+        exit_price = close
+        exit_reason = ""
+        
+        if pos["side"] == "long":
+            # Check SL first (conservative)
+            if sl and low <= sl:
+                triggered = True
+                exit_price = sl
+                if sl > entry_price:
+                    exit_reason = "trailing_stop"
+                else:
+                    exit_reason = "stop_loss"
+            elif tp and high >= tp:
+                triggered = True
+                exit_price = tp
+                exit_reason = "take_profit"
+        else: # Short
+            # Check SL first (conservative)
+            if sl and high >= sl:
+                triggered = True
+                exit_price = sl
+                if sl < entry_price:
+                    exit_reason = "trailing_stop"
+                else:
+                    exit_reason = "stop_loss"
+            elif tp and low <= tp:
+                triggered = True
+                exit_price = tp
+                exit_reason = "take_profit"
+                
+        if triggered:
+            qty = float(pos["quantity"])
+            entry_price = float(pos["entry_price"])
+            margin = float(pos.get("margin", 0.0))
+            
+            # PnL
+            pnl = (exit_price - entry_price) * qty
+            
+            # Fee
+            notional_exit = abs(qty) * exit_price
+            fee = notional_exit * FEE_RATE
+            
+            # Return to Cash
+            net_return = margin + pnl - fee
+            portfolio["cash"] += net_return
+            
+            timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            trade_rec = {
+                "time": timestamp,
+                "symbol": symbol,
+                "action": "close_position",
+                "side": pos["side"],
+                "qty": qty,
+                "price": exit_price,
+                "notional": notional_exit,
+                "margin": margin,
+                "leverage": pos.get("leverage", 1.0),
+                "fee": fee,
+                "realized_pnl": pnl - fee,
+                "nav_after": None,
+                "reason": exit_reason
+            }
+            append_trade_log(trade_rec)
+            print(f"⚡ {exit_reason.upper()} TRIGGERED for {symbol} | Price: {exit_price} | PnL: ${pnl:.2f}")
+        else:
+            remaining_positions.append(pos)
+            
+    portfolio["positions"] = remaining_positions
+    return portfolio
+
 def apply_actions():
     print("💸 Starting Mock Execution...")
     
@@ -198,99 +294,11 @@ def apply_actions():
     # ---------------------------
     # Check TP/SL Hits (Intra-period)
     # ---------------------------
-    positions = portfolio.get("positions", [])
-    remaining_positions = []
-    
-    for pos in positions:
-        symbol = pos["symbol"]
-        market_data = market_map.get(symbol)
-        if not market_data:
-            remaining_positions.append(pos)
-            continue
-            
-        entry_price = float(pos["entry_price"])
-            
-        high = market_data["high"]
-        low = market_data["low"]
-        close = market_data["close"]
-        
-        exit_plan = pos.get("exit_plan", {})
-        tp = exit_plan.get("take_profit")
-        sl = exit_plan.get("stop_loss")
-        
-        triggered = False
-        exit_price = close
-        exit_reason = ""
-        
-        if pos["side"] == "long":
-            # Check SL first (conservative)
-            if sl and low <= sl:
-                triggered = True
-                exit_price = sl
-                # If SL is above entry price, it's a trailing stop (profit protection)
-                if sl > entry_price:
-                    exit_reason = "trailing_stop"
-                else:
-                    exit_reason = "stop_loss"
-            elif tp and high >= tp:
-                triggered = True
-                exit_price = tp
-                exit_reason = "take_profit"
-        else: # Short
-            # Check SL first (conservative)
-            if sl and high >= sl:
-                triggered = True
-                exit_price = sl
-                # If SL is below entry price, it's a trailing stop (profit protection)
-                if sl < entry_price:
-                    exit_reason = "trailing_stop"
-                else:
-                    exit_reason = "stop_loss"
-            elif tp and low <= tp:
-                triggered = True
-                exit_price = tp
-                exit_reason = "take_profit"
-                
-        if triggered:
-            qty = float(pos["quantity"])
-            entry_price = float(pos["entry_price"])
-            margin = float(pos.get("margin", 0.0))
-            
-            # PnL
-            pnl = (exit_price - entry_price) * qty
-            
-            # Fee
-            notional_exit = abs(qty) * exit_price
-            fee = notional_exit * FEE_RATE
-            
-            # Return to Cash
-            net_return = margin + pnl - fee
-            portfolio["cash"] += net_return
-            
-            timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-            trade_rec = {
-                "time": timestamp,
-                "symbol": symbol,
-                "action": "close_position",
-                "side": pos["side"],
-                "qty": qty,
-                "price": exit_price,
-                "notional": notional_exit,
-                "margin": margin,
-                "leverage": pos.get("leverage", 1.0),  # Get leverage from position
-                "fee": fee,
-                "realized_pnl": pnl - fee,
-                "nav_after": None,
-                "reason": exit_reason
-            }
-            append_trade_log(trade_rec)
-            print(f"⚡ {exit_reason.upper()} TRIGGERED for {symbol} | Price: {exit_price} | PnL: ${pnl:.2f}")
-        else:
-            remaining_positions.append(pos)
-            
-    # Update positions list after TP/SL checks
-    portfolio["positions"] = remaining_positions
-    positions = remaining_positions # Update local var for next steps
+    # ---------------------------
+    # Check TP/SL Hits (Intra-period)
+    # ---------------------------
+    portfolio = _check_sl_tp(portfolio, market_map)
+    positions = portfolio.get("positions", []) # Update local var for next steps
 
     actions = decision.get("actions", [])
     print(f"📌 Market Time: {as_of}")
@@ -437,6 +445,10 @@ def apply_actions():
 
     # Update Positions & NAV
     portfolio["positions"] = positions
+    
+    # Post-Action Validation: Check SL/TP again for any new/updated positions
+    portfolio = _check_sl_tp(portfolio, market_map)
+    
     portfolio = compute_nav(portfolio, market_map)
 
     print(f"\n✅ Execution Complete")
