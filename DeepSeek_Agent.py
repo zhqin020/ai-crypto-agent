@@ -302,6 +302,19 @@ def run_agent():
         market_summary = payload_json.get("market_summary", {})
     except:
         market_summary = {}
+
+    # Load Fear & Greed Index for Validation
+    fear_index = 50 # Default Neutral
+    try:
+        snapshot_path = BASE_DIR / "global_onchain_news_snapshot.json"
+        if snapshot_path.exists():
+            with open(snapshot_path, "r") as f:
+                snap_data = json.load(f)
+                fng_val = snap_data.get("fear_greed", {}).get("latest", {}).get("value")
+                if fng_val is not None:
+                    fear_index = float(fng_val)
+    except Exception as e:
+        print(f"⚠️ Failed to load Fear Index: {e}")
         
     # 2. Prepare Prompt
     portfolio_state = get_portfolio_state()
@@ -352,7 +365,7 @@ def run_agent():
         decision = json.loads(content)
         
         # Validate & Enforce Decision
-        decision = validate_and_enforce_decision(decision, market_summary, daily_context)
+        decision = validate_and_enforce_decision(decision, market_summary, daily_context, fear_index)
         
         print("\n💡 Dolores' Decision:")
         print(json.dumps(decision, indent=2, ensure_ascii=False))
@@ -417,7 +430,7 @@ def run_agent():
 
 ALLOWED_ACTIONS = {"open_long", "open_short", "close_position", "adjust_sl", "hold"}
 
-def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str):
+def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, fear_index):
     """
     Strictly enforce risk management rules.
     Modifies decision in-place.
@@ -450,14 +463,25 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str):
             actions.remove(removed)
             
     # 3. Dynamic Exposure Cap
-    # Check BTC Trend from daily_context_str
-    is_bear_market = "BTC: Trend=BEARISH" in daily_context_str
-    max_exposure_ratio = 0.5 if is_bear_market else 1.0
+    # Check BTC Trend from daily_context_str AND Fear Index
+    btc_bullish_trend = "BTC: Trend=BULLISH" in daily_context_str
+    sentiment_ok = fear_index > 40 # Not in Extreme Fear
+    
+    # Strict Bull Mode: Must be Uptrend AND Not Panic
+    is_bull_mode = btc_bullish_trend and sentiment_ok
+    
+    max_exposure_ratio = 1.0 if is_bull_mode else 0.5
     
     nav = float(portfolio.get("nav", 10000))
     max_exposure = nav * max_exposure_ratio
     
-    print(f"🛡️ Risk Mode: {'BEAR (Max 50%)' if is_bear_market else 'BULL (Max 100%)'} | Max Exposure: ${max_exposure:,.2f}")
+    mode_str = "BULL (Max 100%)" if is_bull_mode else "BEAR/DEFENSIVE (Max 50%)"
+    reason_str = ""
+    if not is_bull_mode:
+        if not btc_bullish_trend: reason_str = "[Trend is Bearish]"
+        elif not sentiment_ok: reason_str = f"[Extreme Fear: {fear_index}]"
+    
+    print(f"🛡️ Risk Mode: {mode_str} {reason_str} | Max Exposure: ${max_exposure:,.2f}")
     
     # Calculate current exposure (Margin * Leverage)
     current_exposure = sum([float(p.get("margin", 0)) * float(p.get("leverage", 1)) for p in existing_positions])
@@ -500,7 +524,7 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str):
     decision["actions"] = actions
     return decision
 
-def validate_and_enforce_decision(decision, market_summary, daily_context_str):
+def validate_and_enforce_decision(decision, market_summary, daily_context_str, fear_index=50):
     """
     Sanity check AND strict enforcement.
     """
@@ -518,7 +542,7 @@ def validate_and_enforce_decision(decision, market_summary, daily_context_str):
     print("\n🔍 Validating & Enforcing Rules...")
     
     # Enforce Limits
-    decision = enforce_risk_limits(decision, portfolio, market_summary, daily_context_str)
+    decision = enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, fear_index)
     
     # Final Sanity Print
     actions = decision.get("actions", [])
