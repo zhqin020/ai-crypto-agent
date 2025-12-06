@@ -66,6 +66,11 @@ Use this daily context to filter 4H signals.
 🟨 3. NEWS & ON-CHAIN CONTEXT (OPTIONAL)
 If available, use this to validate or reject quantitative signals.
 
+**CRITICAL INSTRUCTION FOR ECONOMIC DATA:**
+The "Economic Calendar" provided below may only show Forecast/Previous values. You MUST cross-reference the "Latest News" section to find the **ACTUAL** released values.
+- Example: If Calendar says "CPI Forecast: 3.0%" and News says "US CPI hits 3.2%", then the ACTUAL value is 3.2% (Bearish/Hot).
+- Use these extracted actual values to determine the market impact.
+
 {{NEWS_CONTEXT}}
 
 🟥 4. ANALYSIS LOGIC (The "Dolores" Method)
@@ -175,16 +180,29 @@ def get_news_context():
         # 1. News - Collect from all available sources
         news_dict = data.get("news", {})
         all_news = []
+        
+        # Calendar (Economic Data) - High Priority
+        calendar_news = news_dict.get("calendar", {}).get("items", [])
+        calendar_str = ""
+        if calendar_news:
+            calendar_str = "Economic Calendar (This Week):\n"
+            for item in calendar_news[:5]:
+                calendar_str += f"- {item.get('title')} [{item.get('published')}]\n"
+        
+        # General News
         for source_key in ["macro", "bitcoin", "ethereum", "general"]:
             source_news = news_dict.get(source_key, {}).get("items", [])
             all_news.extend(source_news[:3])  # Take top 3 from each source
         
         news_str = "Latest News:\n"
         if all_news:
-            for item in all_news[:5]:  # Show max 5 total
+            for item in all_news[:8]:  # Show max 8 total general news
                 news_str += f"- {item.get('title')} ({item.get('published', 'N/A')})\n"
         else:
             news_str += "No recent news available.\n"
+            
+        # Combine Calendar + News
+        final_news_context = f"{calendar_str}\n{news_str}" if calendar_str else news_str
             
         # 2. Liquidations (Derivatives)
         derivs = data.get("derivatives", {}).get("okx", {})
@@ -203,7 +221,20 @@ def get_news_context():
         fng = data.get("fear_greed", {}).get("latest") or {}
         fng_str = f"\nFear & Greed Index: {fng.get('value')} ({fng.get('classification')})\n"
         
-        return news_str + liq_str + fng_str
+        # 4. Fed Rate Probability (Implied from ZQ=F)
+        fed_futures = data.get("fed_futures", {})
+        fed_rate_str = ""
+        if fed_futures and not fed_futures.get("error"):
+            rate = fed_futures.get("implied_rate")
+            change = fed_futures.get("change_5d_bps")
+            trend = fed_futures.get("trend", "Neutral")
+            
+            fed_rate_str = f"\nFed Rate Expectations (Market Implied):\n- Current Implied Rate: {rate}%\n"
+            if change is not None:
+                fed_rate_str += f"- 5-Day Change: {change:+.1f} bps\n"
+            fed_rate_str += f"- Trend: {trend}\n"
+        
+        return final_news_context + fed_rate_str + liq_str + fng_str
         
     except Exception as e:
         return f"Error reading news data: {e}"

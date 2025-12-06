@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional
 from xml.etree import ElementTree
 
 import requests
+import yfinance as yf
 
 HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "30"))
 DEFAULT_OUTPUT = Path("global_onchain_news_snapshot.json")
@@ -1291,6 +1292,49 @@ def fetch_eth_gas_etherscan(session: requests.Session, api_key: Optional[str]) -
     }
 
 
+def _fetch_forex_factory(session: requests.Session, url: str) -> Dict[str, Any]:
+    try:
+        resp = session.get(url, timeout=HTTP_TIMEOUT)
+        resp.raise_for_status()
+        # Parse XML manually since it's not standard RSS
+        root = ElementTree.fromstring(resp.content)
+        items = []
+        for event in root.findall("event"):
+            try:
+                title = event.find("title").text or ""
+                country = event.find("country").text or "Global"
+                date_str = event.find("date").text or ""
+                time_str = event.find("time").text or ""
+                impact = event.find("impact").text or "Low"
+                
+                # Filter out Low impact to reduce noise? User wants "Fed", "CPI" etc.
+                # Let's keep all and let keywords filter it.
+                
+                full_title = f"[{country}] {title} ({impact})"
+                link = event.find("url").text if event.find("url") is not None else url
+                
+                # Construct timestamp for sorting
+                # Format in XML: 12-06-2025
+                # We want YYYY-MM-DD for string sort
+                try:
+                    mm, dd, yyyy = date_str.split("-")
+                    sortable_date = f"{yyyy}-{mm}-{dd} {time_str}"
+                except:
+                    sortable_date = f"{date_str} {time_str}"
+
+                items.append({
+                    "title": full_title,
+                    "link": link,
+                    "published": sortable_date,
+                    "summary": f"Impact: {impact}, Forecast: {event.find('forecast').text}, Previous: {event.find('previous').text}"
+                })
+            except Exception:
+                continue
+                
+        return {"items": items}
+    except Exception as e:
+        return {"error": str(e), "url": url}
+
 def gather_news(session: requests.Session) -> Dict[str, Any]:
     feeds = {
         "bitcoin": [
@@ -1309,33 +1353,87 @@ def gather_news(session: requests.Session) -> Dict[str, Any]:
             "https://www.cnbc.com/id/100003114/device/rss/rss.html", # Top News (Fed, Economy)
             "https://finance.yahoo.com/news/rssindex", # Yahoo Finance Top
         ],
+        "calendar": [
+            "https://nfs.faireconomy.media/ff_calendar_thisweek.xml", # ForexFactory Calendar
+        ]
     }
+    
+    # Keywords to filter MACRO news (English) - Regex optimized
+    # 关键词：加密货币，比特币，以太坊，监管，美联储，加息，降息，关税，CPI, PCE
+    # 使用单词边界 \b 防止匹配到 unrelated words (e.g. "sec" in "secondary")
+    MACRO_KEYWORDS = [
+        r"\bcrypto", r"\bbitcoin", r"\bbtc\b", r"\bethereum", r"\beth\b", r"\bdoge", 
+        r"\bregulation", r"\bsec\b", r"\bgensler",
+        r"\bfed\b", r"\bfederal reserve", r"\bpowell", r"\bfomc", 
+        r"\brate", r"\binterest", r"\bhike", r"\bcut",
+        r"\binflation", r"\bcpi\b", r"\bpce\b", r"\bppi\b", 
+        r"\bjob", r"\bpayroll", r"\bunemployment",
+        r"\btariff", r"\btax", r"\beconomy", r"\bbank", r"\bdefi\b", r"\bstablecoin", 
+        r"\bliquidity", r"\btreasury"
+    ]
+    
+    # Compile regex for performance
+    import re
+    keyword_pattern = re.compile("|".join(MACRO_KEYWORDS), re.IGNORECASE)
+
     news: Dict[str, Any] = {}
     crypto_compare_cache = _fetch_cryptocompare_news(session, categories="BTC,ETH", lang="EN", limit=30)
+    
     for topic, urls in feeds.items():
         topic_items: List[Dict[str, Any]] = []
         errors: List[Dict[str, Any]] = []
+        
+        # Increase fetch limit for macro/calendar to catch more candidates before filtering
+        fetch_limit = 30 if topic in ["macro", "calendar"] else 5
+        
         for url in urls:
-            result = _fetch_rss_items(session, url, limit=5)
+            if "faireconomy.media" in url:
+                result = _fetch_forex_factory(session, url)
+            else:
+                result = _fetch_rss_items(session, url, limit=fetch_limit)
+                
             if "items" in result:
-                topic_items.extend(result["items"])
+                fetched_items = result["items"]
+                
+                # Apply filtering for macro AND calendar topics
+                if topic in ["macro", "calendar"]:
+                    filtered_items = []
+                    for item in fetched_items:
+                        text_to_check = (item.get("title", "") + " " + item.get("summary", "")).lower()
+                        if keyword_pattern.search(text_to_check):
+                            filtered_items.append(item)
+                    topic_items.extend(filtered_items)
+                else:
+                    topic_items.extend(fetched_items)
             else:
                 errors.append(result)
+                
         topic_items.sort(key=lambda x: x.get("published", ""), reverse=True)
+        
         if topic == "general" and "items" in crypto_compare_cache:
             topic_items.extend(crypto_compare_cache["items"])
+        
         topic_items.sort(key=lambda x: x.get("published", ""), reverse=True)
+        
         note = None
         if not topic_items and errors:
             note = "所有新闻源均拉取失败，可能需要代理或额外认证。"
+        elif topic in ["macro", "calendar"] and not topic_items:
+             note = "拉取成功但未匹配到相关关键词的新闻。"
+
         extra_errors: List[Dict[str, Any]] = []
         if topic == "general" and crypto_compare_cache.get("error"):
             extra_errors.append(crypto_compare_cache)
+            
+        # Set limit based on topic
+        final_limit = 5 if topic == "calendar" else 15
+            
         news[topic] = {
-            "items": topic_items[:10],
+            "items": topic_items[:final_limit], 
             "errors": errors + extra_errors,
             "note": note,
         }
+        
     if "items" in crypto_compare_cache and crypto_compare_cache["items"]:
         news["cryptocompare"] = crypto_compare_cache
     else:
@@ -1574,6 +1672,51 @@ def build_daily_report(
     }
 
 
+def fetch_fed_futures() -> Dict[str, Any]:
+    """
+    Fetch 30-Day Fed Fund Futures (ZQ=F) to estimate market-implied rate.
+    Returns implied rate and 5-day change trend.
+    """
+    try:
+        # ZQ=F is the continuous contract for 30-Day Fed Funds
+        ticker = yf.Ticker("ZQ=F")
+        hist = ticker.history(period="5d")
+        
+        if hist.empty:
+            return {"error": "No data found for ZQ=F"}
+            
+        # Get latest close
+        latest_price = hist["Close"].iloc[-1]
+        implied_rate = 100 - latest_price
+        
+        result = {
+            "price": round(latest_price, 3),
+            "implied_rate": round(implied_rate, 3),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "trend": "Neutral"
+        }
+        
+        # Calculate 5-day change if enough data
+        if len(hist) >= 2:
+            prev_price = hist["Close"].iloc[0] # 5 days ago (approx)
+            prev_rate = 100 - prev_price
+            change_bps = (implied_rate - prev_rate) * 100
+            
+            result["change_5d_bps"] = round(change_bps, 1)
+            
+            # Determine trend
+            if change_bps < -5:
+                result["trend"] = "Dovish (Rate expectations dropping)"
+            elif change_bps > 5:
+                result["trend"] = "Hawkish (Rate expectations rising)"
+            else:
+                result["trend"] = "Neutral (Stable expectations)"
+                
+        return result
+        
+    except Exception as e:
+        return {"error": str(e)}
+
 def aggregate_snapshot(session: requests.Session) -> Dict[str, Any]:
     timestamp = datetime.now(timezone.utc).isoformat()
     ethereum_flows = fetch_defillama_flows(session, "Ethereum")
@@ -1584,6 +1727,7 @@ def aggregate_snapshot(session: requests.Session) -> Dict[str, Any]:
     eth_gas = fetch_eth_gas_etherscan(session, os.environ.get("ETHERSCAN_API_KEY"))
     news = gather_news(session)
     fear_greed = fetch_fear_greed_index(session, limit=15)
+    fed_futures = fetch_fed_futures()
     blockchair_overview = fetch_blockchair_eth_overview(session)
     eth_open_interest = fetch_okx_open_interest_volume(session, ccy="ETH", inst_type="SWAP", period="1D", limit=120)
     eth_liquidations = fetch_okx_liquidation_summary(session, uly="ETH-USDT", inst_type="SWAP", hours=72)
@@ -1615,6 +1759,7 @@ def aggregate_snapshot(session: requests.Session) -> Dict[str, Any]:
         "eth_gas": eth_gas,
         "news": news,
         "fear_greed": fear_greed,
+        "fed_futures": fed_futures,
         "blockchair_overview": blockchair_overview,
         "bridge_summary_24h": bridge_simple,
         "derivatives": {
