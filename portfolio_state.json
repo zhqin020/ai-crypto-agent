@@ -1,6 +1,6 @@
 {
-  "nav": 10743.95,
-  "cash": 9047.953599905575,
+  "nav": 10783.37,
+  "cash": 8045.953599905575,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 894.7,
-      "unrealized_pnl": 10.34,
+      "current_price": 902.0,
+      "unrealized_pnl": 26.74,
       "exit_plan": {
         "take_profit": 950,
         "stop_loss": 880,
@@ -27,15 +27,32 @@
       "leverage": 2.0,
       "margin": 684.21,
       "notional": 1368.42,
-      "current_price": 131.98,
-      "unrealized_pnl": 1.45,
+      "current_price": 134.39,
+      "unrealized_pnl": 26.47,
       "exit_plan": {
         "take_profit": 145,
         "stop_loss": 125,
         "invalidation": "资金费率转正或价格跌破125支撑，表明空头压力增加或下跌趋势加速。"
       },
       "opened_at": "2025-12-07 08:16:49"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 14245.014245014245,
+      "entry_price": 0.1404,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.1404,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.155,
+        "stop_loss": 0.135,
+        "invalidation": "价格跌破0.135支撑或资金费率Z-score转负超过-2%，表明下跌趋势加速或空头压力增加。"
+      },
+      "opened_at": "2025-12-08 04:13:56"
     }
   ],
-  "last_update": "2025-12-08T00:17:00.007495"
+  "last_update": "2025-12-08T04:13:56.541183"
 }
