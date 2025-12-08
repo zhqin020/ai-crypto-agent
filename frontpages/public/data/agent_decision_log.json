@@ -1,5 +1,47 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】：当前市场处于极端恐惧（Fear & Greed Index 20），新闻面显示比特币因FOMC担忧跌破88K，但Fed利率预期已转向鸽派（-17.5 bps），表明利空可能已部分消化（Priced In）。2. 结合日线趋势（所有主要币种均处于熊市，价格低于SMA50）和【痛苦交易】检测，市场整体杠杆情绪看跌（leverage_sentiment: bearish），但SOL资金费率Z-score极负（-52.19%），显示空头拥挤，存在轧空风险。3. 我选择【微观结构/挤压】剧本，做多SOL，因其Qlib评分最高（0.5943），且负费率提供安全边际，同时管理现有仓位以控制风险。",
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "adjust_sl",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": "现有仓位。价格已上涨至904.3（高于入场价890.1），但日线趋势仍为熊市，且资金费率Z-score略负（-6.08%），需锁定部分利润并降低风险。",
+        "exit_plan": {
+          "take_profit": 950,
+          "stop_loss": 880,
+          "invalidation": "价格跌破880支撑或资金费率Z-score转正，表明上涨动力减弱或空头压力缓解。"
+        }
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1368.42,
+        "entry_reason": "现有仓位。Qlib评分最高（0.5943），资金费率Z-score极负（-52.19%）显示空头拥挤，价格抗跌（当前135.86高于入场131.84），轧空潜力仍存。",
+        "exit_plan": {
+          "take_profit": 145,
+          "stop_loss": 130,
+          "invalidation": "资金费率转正或价格跌破130支撑，表明空头压力缓解或下跌趋势加速。"
+        }
+      },
+      {
+        "symbol": "ETH",
+        "action": "close_position",
+        "leverage": 2,
+        "position_size_usd": 1993.16,
+        "entry_reason": "现有仓位。Qlib评分低（0.1521，排名4），日线趋势熊市，且资金费率Z-score为正（28.69%），显示多头拥挤，风险较高，优先平仓以释放资金。",
+        "exit_plan": {
+          "take_profit": 3200,
+          "stop_loss": 2950,
+          "invalidation": "资金费率转正或价格跌破2950支撑，表明空头压力缓解或下跌趋势加速。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-08 00:16:58"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：最新新闻显示美联储关注的通胀数据低于预期（2.8% vs 预期更高），且市场隐含利率预期下降（-14.5bps），表明鸽派情绪正在发酵，但比特币价格仍低于日线SMA50，显示宏观利好可能已部分定价（Priced In）。2. 结合日线趋势，所有主要币种均处于熊市（价格<SMA50），且恐惧贪婪指数为20（极度恐惧），市场整体偏弱。检测到【痛苦交易】风险：BTC资金费率为正（0.0022%），Z-score高达80.8%，显示多头拥挤，存在轧多风险；而ETH、DOGE、BNB、SOL资金费率均为负，尤其SOL费率极负（-0.0054%），Z-score为-105.1%，存在潜在轧空机会。3. 我选择【微观结构挤压】剧本，利用负费率币种的轧空潜力，在整体熊市中寻找相对强势的反弹机会。",
     "actions": [
       {
@@ -1537,23 +1579,5 @@
       }
     ],
     "timestamp": "2025-12-01 18:45:49"
-  },
-  {
-    "analysis_summary": "宏观层面，市场处于极端恐惧状态（恐惧贪婪指数24），且过去48小时多头清算远超空头，显示抛压已部分释放，存在技术性反弹可能。新闻方面，比特币面临矿工压力与关键周，但以太坊估值模型显示其被低估，形成背离。技术指标上，所有币种RSI均低于30（ETH 27.25，DOGE 22.34，BTC 26.08），处于超卖区域，MACD均为负值但Qlib模型预测ETH、DOGE、BTC相对强势。资金费率显示BTC和ETH为正（潜在轧多风险），DOGE为负（轧空机会）。综合来看，市场整体熊市但超卖，Qlib排名前三的币种（ETH、DOGE、BTC）有短期反弹潜力，但需控制风险。",
-    "actions": [
-      {
-        "symbol": "DOGE",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": "Qlib排名第二（得分0.5697），资金费率为负（-0.0057%），存在轧空潜力，RSI超卖（22.34），技术面有反弹需求。",
-        "exit_plan": {
-          "take_profit": 0.145,
-          "stop_loss": 0.128,
-          "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-01 16:58:06"
   }
 ]
