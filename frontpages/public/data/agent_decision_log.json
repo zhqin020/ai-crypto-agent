@@ -1,5 +1,47 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】当前宏观新闻显示，尽管有机构增持比特币（Strategy’s Bitcoin treasury swells）和以太坊鲸鱼做多（Ethereum ‘smart’ whales open $426M long bets）的积极消息，但市场整体情绪仍处于‘极度恐惧’（Fear & Greed Index: 20.0），且所有主要币种日线趋势均为熊市（价格低于SMA50），表明利好可能已被部分消化（Priced In），市场缺乏强劲上涨动力。2. 结合日线趋势和【痛苦交易】检测，SOL和DOGE的资金费率Z-score极高（分别达188.15%和198.03%），显示多头头寸拥挤，存在轧多风险；而市场整体杠杆情绪中性，波动率低，短期挤压风险可控。3. 我选择【趋势跟随】剧本，基于Qlib模型相对强度排名，优先持有现有强势头寸（SOL、DOGE），并考虑在风险预算内增加BNB头寸以分散风险，避免在熊市趋势下过度暴露。",
+    "actions": [
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1368.42,
+        "entry_reason": "符合【趋势跟随】剧本。Qlib评分最高（0.446），排名第一，相对强度强；日线趋势虽熊市，但4H级别动量（0.0249）和MACD（0.4529）为正，技术面支撑短期上涨。",
+        "exit_plan": {
+          "take_profit": 145,
+          "stop_loss": 130,
+          "invalidation": "价格跌破130支撑或资金费率Z-score转正超过150%，表明空头压力缓解或上涨动力减弱。"
+        }
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": "符合【趋势跟随】剧本。Qlib评分尚可（0.2911），排名第四，但动量（0.0232）和回报率（0.0702%）为正，短期表现强于大盘；资金费率Z-score极高（198.03%）提示轧多风险，但当前价格未破支撑，暂持观望。",
+        "exit_plan": {
+          "take_profit": 0.155,
+          "stop_loss": 0.135,
+          "invalidation": "价格跌破0.135支撑或资金费率Z-score转负超过-2%，表明下跌趋势加速或空头压力增加。"
+        }
+      },
+      {
+        "symbol": "BNB",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": "符合【趋势跟随】剧本。Qlib评分第二高（0.4196），排名第二，相对强度强；资金费率Z-score较低（31.18%），多头拥挤风险小；技术面RSI（50.78）中性，动量（0.0053）略正，适合在熊市趋势下作为分散持仓。",
+        "exit_plan": {
+          "take_profit": 950,
+          "stop_loss": 870,
+          "invalidation": "价格跌破870支撑或资金费率Z-score转正超过100%，表明上涨动力减弱或空头压力增加。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-08 16:17:44"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：最新新闻显示，尽管有'以太坊鲸鱼开立4.26亿美元多头头寸'的积极消息，但比特币价格因FOMC会议前的紧张情绪而跌破8.8万美元，且恐惧与贪婪指数处于20.0的'极度恐惧'状态，表明市场情绪偏负面，利好可能已被部分消化（Priced In）。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），但市场整体波动性较低，杠杆情绪中性，无极端轧空或轧多风险（资金费率均接近零，Z-score未超极端阈值）。3. 我选择【趋势跟随】剧本，基于Qlib模型预测的相对强度，优先配置排名靠前的SOL和DOGE，同时管理现有仓位风险。",
     "actions": [
       {
@@ -1526,47 +1568,5 @@
       }
     ],
     "timestamp": "2025-12-02 04:16:26"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 23），且过去48小时多头清算远超空头（$4.13亿 vs $1.42亿），显示恐慌性抛售可能已发生，但新闻面平淡（如比特币缺乏买盘强度），这属于旧叙事（Priced In），价格未进一步暴跌暗示潜在反弹机会。2. 结合【痛苦交易】检测：ETH和BTC资金费率正且Z-score极高（>160%），存在轧多风险；DOGE资金费率负且Z-score极负（-171%），显示空头拥挤，有轧空机会。3. 我选择【微观结构挤压】剧本，利用DOGE的极端负费率做多，同时管理现有仓位风险，因整体市场仍偏熊但超卖。",
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4000,
-        "entry_reason": "现有仓位：Qlib评分最高（0.6075），但资金费率正且Z-score极高（164.75%），轧多风险上升，价格接近支撑位，暂持有观察。",
-        "exit_plan": {
-          "take_profit": 3000,
-          "stop_loss": 2700,
-          "invalidation": "资金费率转正超过0.01%或价格跌破2700支撑位。"
-        }
-      },
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 3000,
-        "entry_reason": "现有仓位：Qlib评分中等（0.4776），资金费率正且Z-score极高（192.73%），轧多风险高，但价格在支撑附近，暂持有。",
-        "exit_plan": {
-          "take_profit": 90000,
-          "stop_loss": 84000,
-          "invalidation": "资金费率转正超过0.01%或价格跌破84000支撑位。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "现有仓位：Qlib评分第二高（0.5697），资金费率负且Z-score极负（-171.06%），空头拥挤，符合轧空剧本，价格稳定，继续持有。",
-        "exit_plan": {
-          "take_profit": 0.145,
-          "stop_loss": 0.128,
-          "invalidation": "资金费率转正超过0.01%或价格跌破0.128支撑位。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-02 00:17:04"
   }
 ]
