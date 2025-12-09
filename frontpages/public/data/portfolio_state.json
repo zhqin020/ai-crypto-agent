@@ -1,6 +1,6 @@
 {
-  "nav": 10820.97,
-  "cash": 9809.715894975187,
+  "nav": 10805.52,
+  "cash": 8806.715894975187,
   "positions": [
     {
       "symbol": "SOL",
@@ -10,15 +10,32 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 134.02,
-      "unrealized_pnl": 11.26,
+      "current_price": 133.19,
+      "unrealized_pnl": -1.2,
       "exit_plan": {
         "take_profit": 140,
         "stop_loss": 128,
         "invalidation": "资金费率转正超过-0.005%或价格跌破128支撑，表明空头压力缓解或下跌动能增强。"
       },
       "opened_at": "2025-12-09 00:16:42"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 21291.696238466997,
+      "entry_price": 0.1409,
+      "leverage": 3.0,
+      "margin": 1000.0,
+      "notional": 3000.0,
+      "current_price": 0.1409,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.148,
+        "stop_loss": 0.135,
+        "invalidation": "资金费率Z-score超过50%或价格跌破0.135支撑，表明轧多风险加剧或趋势失效。"
+      },
+      "opened_at": "2025-12-09 08:17:09"
     }
   ],
-  "last_update": "2025-12-09T04:13:27.583768"
+  "last_update": "2025-12-09T08:17:09.482896"
 }
