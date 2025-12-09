@@ -1,6 +1,6 @@
 {
-  "nav": 10820.2,
-  "cash": 9815.502615297119,
+  "nav": 10822.89,
+  "cash": 8813.502615297119,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,15 +10,32 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 896.7,
-      "unrealized_pnl": 4.69,
+      "current_price": 898.8,
+      "unrealized_pnl": 9.39,
       "exit_plan": {
         "take_profit": 950,
         "stop_loss": 870,
         "invalidation": "价格跌破870支撑或资金费率Z-score转正超过100%，表明上涨动力减弱或空头压力增加。"
       },
       "opened_at": "2025-12-08 16:17:45"
+    },
+    {
+      "symbol": "SOL",
+      "side": "long",
+      "quantity": 15.007128385983341,
+      "entry_price": 133.27,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 133.27,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 140,
+        "stop_loss": 128,
+        "invalidation": "资金费率转正超过-0.005%或价格跌破128支撑，表明空头压力缓解或下跌动能增强。"
+      },
+      "opened_at": "2025-12-09 00:16:42"
     }
   ],
-  "last_update": "2025-12-08T20:16:53.545996"
+  "last_update": "2025-12-09T00:16:42.879960"
 }
