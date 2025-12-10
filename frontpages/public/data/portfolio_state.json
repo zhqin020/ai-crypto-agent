@@ -1,6 +1,24 @@
 {
-  "nav": 11063.16,
-  "cash": 11063.155980000083,
-  "positions": [],
-  "last_update": "2025-12-09T20:16:47.849806"
+  "nav": 11058.73,
+  "cash": 8846.100720000082,
+  "positions": [
+    {
+      "symbol": "BTC",
+      "side": "long",
+      "quantity": 0.04775025869947807,
+      "entry_price": 92675.1,
+      "leverage": 2.0,
+      "margin": 2212.63,
+      "notional": 4425.26,
+      "current_price": 92675.1,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 95000,
+        "stop_loss": 91000,
+        "invalidation": "资金费率转正或价格跌破91000关键支撑（基于ATR 1300调整）。"
+      },
+      "opened_at": "2025-12-10 00:13:48"
+    }
+  ],
+  "last_update": "2025-12-10T00:13:48.035947"
 }
