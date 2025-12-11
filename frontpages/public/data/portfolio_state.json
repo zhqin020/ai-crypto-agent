@@ -1,6 +1,6 @@
 {
-  "nav": 10860.81,
-  "cash": 8080.152566176912,
+  "nav": 10861.1,
+  "cash": 8060.092526176912,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 2156.14,
       "notional": 4312.28,
-      "current_price": 877.3,
-      "unrealized_pnl": 50.73,
+      "current_price": 877.1,
+      "unrealized_pnl": 49.73,
       "exit_plan": {
         "take_profit": 920.0,
         "stop_loss": 840.0,
@@ -27,15 +27,35 @@
       "leverage": 2.0,
       "margin": 539.04,
       "notional": 1078.08,
-      "current_price": 134.82,
-      "unrealized_pnl": 34.75,
+      "current_price": 134.98,
+      "unrealized_pnl": 36.07,
       "exit_plan": {
         "take_profit": 138.0,
         "stop_loss": 125.0,
         "invalidation": "资金费率转正或价格跌破125支撑（前低区域）。"
       },
       "opened_at": "2025-12-11 08:17:15"
+    },
+    {
+      "symbol": "SOL",
+      "side": "long",
+      "quantity": 0.296636538746481,
+      "entry_price": 134.98,
+      "leverage": 2.0,
+      "margin": 20.02,
+      "notional": 40.04,
+      "current_price": 134.98,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 142.0,
+        "stop_loss": 128.0,
+        "invalidation": {
+          "zh": "资金费率转正或价格跌破128支撑（4H前低），或BTC大幅下跌带动整体市场走弱。",
+          "en": "Funding turns positive or price breaks below 128 support (4H previous low), or BTC drops sharply dragging the overall market down."
+        }
+      },
+      "opened_at": "2025-12-11 20:41:03"
     }
   ],
-  "last_update": "2025-12-11T20:17:43.906081"
+  "last_update": "2025-12-11T20:41:03.677204"
 }
