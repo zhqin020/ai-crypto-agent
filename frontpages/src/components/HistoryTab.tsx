@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 import { useState, useEffect } from 'react';
-import { TrendingUp, TrendingDown, Clock } from 'lucide-react';
+import { TrendingUp, TrendingDown, Clock, History } from 'lucide-react';
 
 interface HistoryRecord {
   id: string;
@@ -17,7 +17,7 @@ interface HistoryRecord {
   notional: number;
 }
 
-export function HistoryTab() {
+export function HistoryTab({ language }: { language: 'zh' | 'en' }) {
   const [history, setHistory] = useState<HistoryRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -140,96 +140,118 @@ export function HistoryTab() {
   const winCount = history.filter(r => r.pnl > 0).length;
   const winRate = history.length > 0 ? ((winCount / history.length) * 100).toFixed(1) : '0.0';
 
-  if (loading && history.length === 0) {
-    return <div className="text-gray-400 p-4">加载中...</div>;
-  }
-
-  if (error && history.length === 0) {
-    return <div className="text-red-400 p-4 text-center">{error}</div>;
-  }
+  const t = {
+    zh: {
+      totalPnl: '总盈亏',
+      winRate: '胜率',
+      tradeCount: '交易次数',
+      long: '做多',
+      short: '做空',
+      entryPrice: '开仓',
+      exitPrice: '平仓',
+      amount: '数量',
+      leverage: '杠杆',
+      pnl: '盈亏',
+    },
+    en: {
+      totalPnl: 'Total P&L',
+      winRate: 'Win Rate',
+      tradeCount: 'Trades',
+      long: 'Long',
+      short: 'Short',
+      entryPrice: 'Entry',
+      exitPrice: 'Exit',
+      amount: 'Amount',
+      leverage: 'Leverage',
+      pnl: 'P&L',
+    },
+  };
 
   return (
     <div className="h-full flex flex-col">
       {/* Summary Stats */}
       <div className="grid grid-cols-3 gap-3 mb-4 flex-shrink-0">
-        <div className="bg-dark-card rounded-lg p-3 border border-gray-700/50">
-          <div className="text-gray-400 text-sm mb-1">总盈亏</div>
-          <div className={`font-['DIN_Alternate',sans-serif] ${totalPnl >= 0 ? 'text-neon-green' : 'text-neon-rose'}`}>
+        <div className="bg-[#0a0e1a] rounded-lg p-4">
+          <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].totalPnl}</div>
+          <div className={`font-['DIN_Alternate',sans-serif] text-2xl ${totalPnl >= 0 ? 'text-teal-400' : 'text-rose-400'}`}>
             {totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(0)}
           </div>
         </div>
-        <div className="bg-dark-card rounded-lg p-3 border border-gray-700/50">
-          <div className="text-gray-400 text-sm mb-1">胜率</div>
-          <div className="text-neon-green font-['DIN_Alternate',sans-serif]">{winRate}%</div>
+        <div className="bg-[#0a0e1a] rounded-lg p-4">
+          <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].winRate}</div>
+          <div className="text-teal-400 font-['DIN_Alternate',sans-serif] text-2xl">{winRate}%</div>
         </div>
-        <div className="bg-dark-card rounded-lg p-3 border border-dark-card/80">
-          <div className="text-gray-400 text-sm mb-1">总交易数</div>
-          <div className="text-white font-['DIN_Alternate',sans-serif]">{history.length}</div>
+        <div className="bg-[#0a0e1a] rounded-lg p-4">
+          <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].tradeCount}</div>
+          <div className="text-white font-['DIN_Alternate',sans-serif] text-2xl">{history.length}</div>
         </div>
       </div>
 
       {/* History List */}
       <div className="space-y-2 overflow-y-auto pr-2 flex-1">
-        {history.length === 0 ? (
-          <div className="text-gray-500 text-center py-8">暂无历史记录</div>
-        ) : (
-          history.map((record) => (
-            <div
-              key={record.id}
-              className={`rounded-lg p-4 border transition-all bg-dark-card border-dark-card/80 hover:border-gray-600`}
-            >
-              <div className="flex justify-between items-start mb-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-neon-cyan font-bold">{record.symbol}</span>
-                  <span className={`px-2 py-0.5 rounded text-xs ${record.type === 'long'
-                    ? 'bg-neon-green/10 text-neon-green'
-                    : 'bg-neon-rose/10 text-neon-rose'
-                    }`}>
-                    {record.type === 'long' ? '做多' : '做空'}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1">
-                  {record.pnl >= 0 ? (
-                    <TrendingUp className="w-4 h-4 text-neon-green" />
-                  ) : (
-                    <TrendingDown className="w-4 h-4 text-neon-rose" />
-                  )}
-                  <span className={`font-['DIN_Alternate',sans-serif] ${record.pnl >= 0 ? 'text-neon-green' : 'text-neon-rose'}`}>
-                    {record.pnl >= 0 ? '+' : ''}{record.pnlPercent.toFixed(2)}%
-                  </span>
-                </div>
+        {history.map((record) => (
+          <div
+            key={record.id}
+            className={`bg-[#0a0e1a] rounded-lg overflow-hidden p-3 border-2 border-transparent transition-all ${record.pnl >= 0
+              ? 'hover:border-teal-500/30 hover:bg-teal-500/5'
+              : 'hover:border-rose-500/30 hover:bg-rose-500/5'
+              }`}
+          >
+            <div className="flex justify-between items-start mb-3">
+              <div className="flex items-center gap-3">
+                <span className="text-white font-['DIN_Alternate',sans-serif]">{record.symbol}</span>
+                <span className={`px-2 py-0.5 rounded text-xs ${record.type === 'long'
+                  ? 'bg-blue-500/20 text-blue-400'
+                  : 'bg-orange-500/20 text-orange-400'
+                  }`}>
+                  {record.type === 'long' ? t[language].long : t[language].short}
+                </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-sm mb-2">
-                <div>
-                  <span className="text-gray-500">开仓: </span>
-                  <span className="text-white font-['DIN_Alternate',sans-serif]">${record.entryPrice.toFixed(2)}</span>
-                </div>
-                <div>
-                  <span className="text-gray-500">平仓: </span>
-                  <span className="text-white font-['DIN_Alternate',sans-serif]">${record.exitPrice.toFixed(2)}</span>
-                </div>
-                <div>
-                  <span className="text-gray-500">数量: </span>
-                  <span className="text-white font-['DIN_Alternate',sans-serif]">{Math.abs(record.amount).toFixed(4)}</span>
-                </div>
-                <div>
-                  <span className="text-gray-500">杠杆: </span>
-                  <span className="text-neon-cyan font-['DIN_Alternate',sans-serif]">{record.leverage.toFixed(1)}x</span>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center text-xs">
-                <div className="flex items-center gap-1 text-gray-500">
-                  <Clock className="w-3 h-3" />
-                  {record.entryTime} - {record.exitTime}
-                </div>
-                <div className={`font-['DIN_Alternate',sans-serif] ${record.pnl >= 0 ? 'text-neon-green' : 'text-neon-rose'}`}>
+              {/* 盈亏 - 移到右上角 */}
+              <div className="flex items-center gap-2">
+                <span className={`font-['DIN_Alternate',sans-serif] text-lg ${record.pnl >= 0 ? 'text-teal-400' : 'text-rose-400'}`}>
                   {record.pnl >= 0 ? '+' : ''}${record.pnl.toFixed(2)}
-                </div>
+                </span>
+                <span className={`px-2 py-1 rounded font-['DIN_Alternate',sans-serif] ${record.pnl >= 0
+                  ? 'text-teal-400 bg-teal-400/10'
+                  : 'text-rose-400 bg-rose-400/10'
+                  }`}>
+                  {record.pnl >= 0 ? '+' : ''}{record.pnlPercent.toFixed(2)}%
+                </span>
               </div>
             </div>
-          ))
+
+            <div className="grid grid-cols-2 gap-3 text-sm mb-3">
+              <div>
+                <span className="text-gray-500 text-xs">{t[language].entryPrice}: </span>
+                <span className="text-white font-['DIN_Alternate',sans-serif]">${record.entryPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              </div>
+              <div>
+                <span className="text-gray-500 text-xs">{t[language].exitPrice}: </span>
+                <span className="text-white font-['DIN_Alternate',sans-serif]">${record.exitPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-sm mb-3">
+              <div>
+                <span className="text-gray-500 text-xs">{t[language].amount}: </span>
+                <span className="text-white font-['DIN_Alternate',sans-serif]">{record.amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 4 })}</span>
+              </div>
+              <div>
+                <span className="text-gray-500 text-xs">{t[language].leverage}: </span>
+                <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{record.leverage.toFixed(1)}x</span>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-[#1e2942] flex items-center gap-1 text-gray-500 text-xs">
+              <Clock className="w-3 h-3" />
+              {record.entryTime} - {record.exitTime}
+            </div>
+          </div>
+        ))}
+        {history.length === 0 && !loading && (
+          <div className="text-gray-500 text-center py-10">{language === 'zh' ? '暂无交易记录' : 'No trade history'}</div>
         )}
       </div>
     </div>

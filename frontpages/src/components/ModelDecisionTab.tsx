@@ -1,29 +1,40 @@
+/// <reference types="vite/client" />
 import { useState, useEffect } from 'react';
 import { Brain, Activity } from 'lucide-react';
+
+type BilingualText = string | { zh: string; en: string };
 
 interface AgentAction {
   symbol: string;
   action: string;
   leverage: number | null;
   position_size_usd: number | null;
-  entry_reason: string | null;
+  entry_reason: BilingualText | null;
   exit_plan: {
     take_profit?: number | null;
     stop_loss?: number | null;
-    invalidation?: string | null;
+    invalidation?: BilingualText | null;
   };
+  status?: string;
+  rejection_reason?: string;
 }
 
 interface AgentDecision {
-  analysis_summary: string;
+  analysis_summary: BilingualText;
   actions: AgentAction[];
   timestamp?: string;
 }
 
-export function ModelDecisionTab() {
+export function ModelDecisionTab({ language }: { language: 'zh' | 'en' }) {
   const [decisions, setDecisions] = useState<AgentDecision[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const getText = (content: BilingualText | null | undefined, lang: 'zh' | 'en') => {
+    if (!content) return '';
+    if (typeof content === 'string') return content;
+    return content[lang] || content['zh'] || '';
+  };
 
   useEffect(() => {
     const fetchLog = async () => {
@@ -36,12 +47,11 @@ export function ModelDecisionTab() {
           if (!response.ok) throw new Error('Failed to fetch agent log');
           data = await response.json();
         } else {
-          const response = await fetch('http://localhost:5001/api/agent-decision');
+          const response = await fetch('/api/agent-decision');
           if (!response.ok) throw new Error('Failed to fetch agent log');
           data = await response.json();
         }
 
-        // Normalize to array
         if (Array.isArray(data)) {
           setDecisions(data);
         } else if (data) {
@@ -59,67 +69,94 @@ export function ModelDecisionTab() {
     };
 
     fetchLog();
+    const interval = setInterval(fetchLog, 10000);
+    return () => clearInterval(interval);
   }, []);
 
-  if (loading) return <div className="text-gray-400 p-4">加载模型思考中...</div>;
-  if (error) return <div className="text-red-400 p-4">{error}</div>;
-  if (decisions.length === 0) return <div className="text-gray-500 p-4">暂无决策记录</div>;
+  const t = {
+    zh: {
+      marketAnalysis: '📊 市场分析',
+      actions: '⚡ 执行动作',
+      positionLabel: '仓位',
+      entryReason: '入场原因',
+      takeProfit: '止盈',
+      stopLoss: '止损',
+      reasoning: '决策逻辑',
+      noActions: '暂无新操作 (维持现状)',
+      latest: '最新',
+      unknownTime: '未知时间',
+      noDecisions: '暂无决策记录',
+      unknown: '未知',
+      rejected: '❌ 已拒绝 (Rejected)',
+      rejectionReason: '拒绝原因 (Rejection Reason)',
+      invalidation: '失效条件',
+    },
+    en: {
+      latest: 'LATEST',
+      marketAnalysis: '📊 Market Analysis',
+      actions: '⚡ Actions',
+      positionLabel: 'Size',
+      entryReason: 'Entry Reason',
+      takeProfit: 'Take Profit',
+      stopLoss: 'Stop Loss',
+      reasoning: 'Reasoning',
+      noActions: 'No new actions taken (Hold)',
+      unknownTime: 'Unknown Time',
+      noDecisions: 'No decisions found',
+      unknown: 'UNKNOWN',
+      rejected: '❌ Rejected',
+      rejectionReason: 'Rejection Reason',
+      invalidation: 'Invalidation',
+    },
+  };
+
+  if (loading && decisions.length === 0) {
+    return (
+      <div className="h-full flex items-center justify-center text-gray-500">
+        <div className="flex flex-col items-center gap-2">
+          <Activity className="w-8 h-8 animate-pulse text-teal-400" />
+          <div className="text-xs font-['DIN_Alternate',sans-serif]">{language === 'zh' ? '加载中...' : 'Loading...'}</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && decisions.length === 0) {
+    return <div className="h-full flex items-center justify-center text-rose-500 text-sm">{error}</div>;
+  }
+
+  if (decisions.length === 0) return <div className="text-gray-500 p-4">{t[language].noDecisions}</div>;
 
   return (
     <div className="h-full flex flex-col">
-      {/* Scrollable Content */}
       <div className="space-y-8 overflow-y-auto pr-2 flex-1">
         {decisions.map((decision, index) => (
           <div key={index}>
             {/* Timestamp Header */}
-            <div
-              className={`mb-4 ${index === 0
-                ? 'bg-gradient-to-r from-neon-cyan/20 to-transparent border-l-4 border-neon-cyan'
-                : 'bg-gradient-to-r from-gray-600/20 to-transparent border-l-4 border-gray-600'
-                } rounded-lg p-3.5 flex items-center justify-between`}
-            >
+            <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                {index === 0 && <div className="w-2 h-2 bg-neon-cyan rounded-full animate-pulse"></div>}
-                <span className="text-gray-300 font-['DIN_Alternate',sans-serif] text-sm">
-                  {(() => {
-                    if (!decision.timestamp) return 'Unknown Time';
-                    try {
-                      // Backend sends UTC time like "2025-11-27 20:13:52"
-                      // Replace space with T and append Z to ensure UTC parsing
-                      const utcTime = decision.timestamp.replace(' ', 'T') + 'Z';
-                      const date = new Date(utcTime);
-                      return date.toLocaleString('zh-CN', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        timeZoneName: 'short',
-                        hour12: false
-                      });
-                    } catch (e) {
-                      return decision.timestamp + ' (UTC)';
-                    }
-                  })()}
+                {index === 0 && (
+                  <div className="px-2 py-0.5 bg-orange-500/20 text-orange-400 text-xs rounded border border-orange-500/30 uppercase tracking-wider animate-pulse">
+                    {t[language].latest}
+                  </div>
+                )}
+                {index !== 0 && (
+                  <div className="w-1 h-4 bg-gray-500 rounded-full"></div>
+                )}
+                <span className={`font-['DIN_Alternate',sans-serif] text-sm ${index === 0 ? 'text-orange-400' : 'text-gray-300'}`}>
+                  {decision.timestamp || t[language].unknownTime}
                 </span>
               </div>
-              {index === 0 && (
-                <div className="px-2 py-0.5 bg-neon-cyan/10 text-neon-cyan text-xs rounded border border-neon-cyan/30">
-                  LATEST
-                </div>
-              )}
             </div>
 
             {/* Market Analysis */}
             <div className="mb-5">
               <div className="flex items-center gap-2 mb-3">
-                <Brain className="w-5 h-5 text-neon-cyan" />
-                <h3 className="text-neon-cyan">市场分析</h3>
+                <h3 className="text-white">{t[language].marketAnalysis}</h3>
               </div>
-              <div className="bg-dark-card border border-dark-card/80 rounded-lg p-5">
-                <p className="text-gray-300 leading-relaxed text-sm">
-                  {decision.analysis_summary}
+              <div className="bg-[#0a0e1a] rounded-lg p-5 border border-[#1e2942]">
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  {getText(decision.analysis_summary, language)}
                 </p>
               </div>
             </div>
@@ -127,37 +164,51 @@ export function ModelDecisionTab() {
             {/* Actions */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <Activity className="w-5 h-5 text-neon-cyan" />
-                <h3 className="text-neon-cyan">执行动作 ({decision.actions?.length || 0})</h3>
+                <h3 className="text-white">{t[language].actions} ({decision.actions?.length || 0})</h3>
               </div>
 
               <div className="space-y-4">
                 {(!decision.actions || decision.actions.length === 0) ? (
-                  <div className="text-gray-500 text-sm italic pl-1">本次无交易操作 (观望)</div>
+                  <div className="text-gray-500 text-sm italic pl-5">{t[language].noActions}</div>
                 ) : (
                   decision.actions.map((action, idx) => (
                     <div
                       key={idx}
-                      className="bg-dark-card border border-dark-card/80 rounded-lg p-5 hover:border-neon-cyan/50 transition-all"
+                      className={`relative rounded-lg p-5 border transition-all hover:border-opacity-60 ${action.status === 'rejected'
+                        ? 'bg-red-900/10 border-red-500/50'
+                        : 'bg-[#0a0e1a] border-[#1e2942]'
+                        }`}
                     >
                       {/* Header */}
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <div className="text-neon-cyan font-bold text-lg">{action.symbol}</div>
-                          <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${action.action?.includes('long') ? 'bg-neon-green/10 text-neon-green' :
-                            action.action?.includes('short') ? 'bg-neon-rose/10 text-neon-rose' :
-                              'bg-gray-500/20 text-gray-400'
-                            }`}>
-                            {action.action?.replace('_', ' ') || 'UNKNOWN'}
+                          <span className="font-bold text-lg text-white font-['DIN_Alternate',sans-serif]">
+                            {action.symbol}
                           </span>
-                          {action.leverage && (
-                            <span className="px-2 py-0.5 bg-neon-cyan/10 text-neon-cyan text-xs rounded font-['DIN_Alternate',sans-serif]">
-                              {action.leverage}x
+                          {action.status === 'rejected' ? (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">
+                              {t[language].rejected}
                             </span>
+                          ) : (
+                            <>
+                              <span className={`text-xs font-bold px-2 py-0.5 rounded uppercase border ${action.action.toUpperCase().includes('LONG')
+                                ? 'bg-teal-500/20 text-teal-400 border-teal-500/30'
+                                : action.action.toUpperCase().includes('SHORT')
+                                  ? 'bg-rose-500/20 text-rose-400 border-rose-500/30'
+                                  : 'bg-[#151b2e] text-gray-300 border-[#1e2942]'
+                                }`}>
+                                {action.action.toUpperCase()}
+                              </span>
+                              {action.leverage && (
+                                <span className="text-xs font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 font-['DIN_Alternate',sans-serif]">
+                                  {action.leverage}x
+                                </span>
+                              )}
+                            </>
                           )}
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-gray-500 text-sm">仓位大小:</span>
+                          <span className="text-gray-500 text-sm">{t[language].positionLabel}:</span>
                           <span className="text-white text-sm font-['DIN_Alternate',sans-serif]">
                             {action.position_size_usd ? `$${action.position_size_usd.toLocaleString()}` : '-'}
                           </span>
@@ -166,32 +217,47 @@ export function ModelDecisionTab() {
 
                       {/* Reasoning */}
                       <div className="mb-4">
-                        <div className="text-gray-500 text-sm mb-2">决策逻辑</div>
-                        <p className="text-gray-300 leading-relaxed text-sm">
-                          {action.entry_reason || '无详细理由'}
+                        <div className="text-gray-500 text-xs mb-2">{t[language].reasoning}</div>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                          {getText(action.entry_reason, language) || '-'}
                         </p>
                       </div>
 
-                      {/* TP & SL - 左右布局 */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <span className="text-gray-500 text-sm">止盈价: </span>
-                          <span className="text-neon-green font-['DIN_Alternate',sans-serif]">
+                      {/* TP & SL */}
+                      <div className="grid grid-cols-2 gap-3 border-t border-gray-800/50 pt-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500 text-xs">{t[language].takeProfit}: </span>
+                          <span className="text-teal-400 font-bold font-['DIN_Alternate',sans-serif] text-base">
                             {action.exit_plan?.take_profit ? `$${action.exit_plan.take_profit.toLocaleString()}` : '-'}
                           </span>
                         </div>
-                        <div>
-                          <span className="text-gray-500 text-sm">止损价: </span>
-                          <span className="text-neon-rose font-['DIN_Alternate',sans-serif]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500 text-xs">{t[language].stopLoss}: </span>
+                          <span className="text-rose-400 font-bold font-['DIN_Alternate',sans-serif] text-base">
                             {action.exit_plan?.stop_loss ? `$${action.exit_plan.stop_loss.toLocaleString()}` : '-'}
                           </span>
                         </div>
                       </div>
+
+                      {/* Rejection Reason */}
+                      {action.status === 'rejected' && action.rejection_reason && (
+                        <div className="mt-3 pt-3 border-t border-red-500/30">
+                          <div className="text-red-400 text-xs mb-1 font-bold">{t[language].rejectionReason}:</div>
+                          <p className="text-red-300/80 text-sm leading-tight">
+                            {action.rejection_reason}
+                          </p>
+                        </div>
+                      )}
+
+
                     </div>
                   ))
                 )}
               </div>
             </div>
+
+            {/* Divider for multiple decisions if we were showing them, basically just spacing */}
+            {index < decisions.length - 1 && <div className="h-8"></div>}
           </div>
         ))}
       </div>

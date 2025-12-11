@@ -1,15 +1,18 @@
+/// <reference types="vite/client" />
 import { useState, useEffect } from 'react';
 import { ProfitChart } from './components/ProfitChart';
 import { PositionsTab } from './components/PositionsTab';
 import { HistoryTab } from './components/HistoryTab';
 import { ModelDecisionTab } from './components/ModelDecisionTab';
-import { TrendingUp, Wallet, History, Brain, Clock } from 'lucide-react';
+import { TrendingUp, Wallet, History, Brain, Clock, Activity, Languages } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'positions' | 'history' | 'decision'>('positions');
   const [runningTime, setRunningTime] = useState({ days: 0, hours: 0 });
+  const [language, setLanguage] = useState<'zh' | 'en'>('zh');
 
-  const [startTime, setStartTime] = useState<number>(new Date('2025-11-23T00:00:00').getTime());
+  // Logic from original App.tsx: Dynamic Start Time
+  const [startTime, setStartTime] = useState<number>(new Date('2024-11-15T00:00:00').getTime());
 
   useEffect(() => {
     const fetchStartTime = async () => {
@@ -69,88 +72,119 @@ export default function App() {
     return () => clearInterval(interval);
   }, [startTime]);
 
+  const t = {
+    zh: {
+      title: 'Crypto Quant Dashboard',
+      subtitle: `4小时线为基准的AI量化策略，已成功运行 ${runningTime.days} 天 ${runningTime.hours} 小时`,
+      profitChart: '📈 收益曲线',
+      positions: '当前持仓',
+      history: '历史记录',
+      decision: '模型决策',
+    },
+    en: {
+      title: 'Crypto Quant Dashboard',
+      subtitle: `AI Quant Strategy based on 4H timeframe, running for ${runningTime.days} days ${runningTime.hours} hours`,
+      profitChart: '📈 Profit Chart',
+      positions: 'Current Positions',
+      history: 'Trade History',
+      decision: 'Model Decisions',
+    },
+  };
+
   return (
-    <div className="h-screen bg-dark-primary text-slate-100 p-3">
-      <div className="h-full flex flex-col max-w-[1800px] mx-auto w-full">
+    <div className="h-screen bg-[#0a0e1a] text-white p-4">
+      <div className="h-full flex flex-col max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="mb-4 flex-shrink-0">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1 className="flex items-baseline gap-3 text-5xl">
-                <span className="text-white">Crypto</span>
-                <span className="text-blue-400">Quant</span>
-                <span className="text-white">Dashboard</span>
+        <div className="mb-5 flex-shrink-0 pl-5">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <h1 className="text-white text-3xl">
+                💎 Crypto <span className="text-blue-400">Quant</span> Dashboard
               </h1>
-              <div className="flex items-center gap-3 mt-3">
-                <Clock className="w-5 h-5 text-gray-400" />
-                <span className="text-gray-400 text-base">
-                  4小时线为基准的AI量化策略，已成功运行
-                  <span className="text-blue-400 font-['DIN_Alternate',sans-serif] mx-1.5">
-                    {runningTime.days}
-                  </span>
-                  天
-                  <span className="text-blue-400 font-['DIN_Alternate',sans-serif] mx-1.5">
-                    {runningTime.hours}
-                  </span>
-                  小时
-                </span>
+              <div className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded text-blue-400 text-xs uppercase tracking-wider">
+                LIVE
               </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              {/* AI Strategy Notice */}
+              <p className="text-gray-400 text-sm">
+                {language === 'zh'
+                  ? <>4小时线为基准的AI量化策略，已成功运行 <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.days}</span> 天 <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.hours}</span> 小时</>
+                  : <>AI Quant Strategy based on 4H timeframe, running for <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.days}</span> days <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.hours}</span> hours</>
+                }
+              </p>
+
+              {/* Language Toggle */}
+              <button
+                onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}
+                className="px-4 py-2 bg-[#374151] rounded-lg hover:bg-[#4b5563] transition-all"
+              >
+                <span className="text-white">
+                  English / 中文
+                </span>
+              </button>
             </div>
           </div>
         </div>
 
         {/* Main Grid - 固定高度 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 flex-1 min-h-0">
           {/* Left: Profit Chart */}
-          <div className="bg-[#334155] rounded-xl border border-gray-700 p-6 shadow-2xl flex flex-col h-full">
-            <h2 className="text-blue-400 mb-4 flex items-center gap-2 flex-shrink-0">
-              <TrendingUp className="w-5 h-5" />
-              收益曲线
-            </h2>
+          <div className="bg-[#151b2e] rounded-lg border border-[#1e2942] p-5 flex flex-col h-full">
+            <div className="flex items-center gap-2 mb-4 flex-shrink-0">
+              <h2 className="text-white">{t[language].profitChart}</h2>
+            </div>
             <div className="flex-1 overflow-hidden">
-              <ProfitChart />
+              <ProfitChart language={language} />
             </div>
           </div>
 
           {/* Right: Tabs */}
-          <div className="bg-[#334155] rounded-xl border border-gray-700 shadow-2xl flex flex-col h-full overflow-hidden">
+          <div className="bg-[#151b2e] rounded-lg border border-[#1e2942] flex flex-col h-full overflow-hidden">
             {/* Tab Headers */}
-            <div className="flex border-b border-gray-700 flex-shrink-0">
+            <div className="flex border-b border-[#1e2942] flex-shrink-0">
               <button
                 onClick={() => setActiveTab('positions')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'positions'
-                  ? 'bg-blue-500/10 text-blue-400 border-b-2 border-blue-400'
-                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'positions'
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
-                <Wallet className="w-4 h-4" />
-                当前持仓
+                {activeTab === 'positions' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
+                )}
+                {t[language].positions}
               </button>
               <button
                 onClick={() => setActiveTab('history')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'history'
-                  ? 'bg-blue-500/10 text-blue-400 border-b-2 border-blue-400'
-                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'history'
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
-                <History className="w-4 h-4" />
-                历史记录
+                {activeTab === 'history' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
+                )}
+                {t[language].history}
               </button>
               <button
                 onClick={() => setActiveTab('decision')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'decision'
-                  ? 'bg-blue-500/10 text-blue-400 border-b-2 border-blue-400'
-                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
+                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'decision'
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
-                <Brain className="w-4 h-4" />
-                模型决策
+                {activeTab === 'decision' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
+                )}
+                {t[language].decision}
               </button>
             </div>
 
             {/* Tab Content - 固定高度，内容可滚动 */}
-            <div className="p-6 flex-1 overflow-hidden">
-              {activeTab === 'positions' ? <PositionsTab /> : activeTab === 'history' ? <HistoryTab /> : <ModelDecisionTab />}
+            <div className="p-5 flex-1 overflow-hidden">
+              {activeTab === 'positions' ? <PositionsTab language={language} /> : activeTab === 'history' ? <HistoryTab language={language} /> : <ModelDecisionTab language={language} />}
             </div>
           </div>
         </div>

@@ -126,28 +126,39 @@ Hard Safety Rules (ALWAYS OBEY):
 
 🟫 6. OUTPUT FORMAT (JSON ONLY)
 You must output a single valid JSON object. No markdown, no conversational text.
-**IMPORTANT: All text fields (analysis_summary, entry_reason, invalidation) MUST be in CHINESE (Simplified).**
+**IMPORTANT: All narrative fields (analysis_summary, entry_reason, invalidation) MUST be objects with "zh" (Chinese) and "en" (English) keys.**
 
 Structure:
 {
-  "analysis_summary": "必须是中文。综合叙述（3-4句话）。1. 首先进行【叙事校验】（Section 4A），判断当前宏观/新闻是Impulse还是Priced In。2. 结合日线趋势（Section 2.1）和【痛苦交易】检测（Section 4B），指出市场是否存在轧空/轧多风险。3. 阐述你选择的【假设剧本】（Section 4C）。例如：'尽管有ETF利好，但日线RSI超买且费率过高，显示利好已兑现（Priced In），存在轧多风险。我选择均值回归剧本，做空BTC...'",
+  "analysis_summary": {
+    "zh": "必须是中文，综合叙述（3-4句话）。1. 首先进行【叙事校验】（Section 4A），判断当前宏观/新闻是Impulse还是Priced In。2. 结合日线趋势（Section 2.1）和【痛苦交易】检测（Section 4B），指出市场是否存在轧空/轧多风险。3. 阐述你选择的【假设剧本】（Section 4C）。例如：'尽管有ETF利好，但日线RSI超买且费率过高，显示利好已兑现（Priced In），存在轧多风险。我选择均值回归剧本，做空BTC...'",
+    "en": "English translation of the above Chinese summary."
+  },
   "actions": [
     {
       "symbol": "BTC",
       "action": "open_long",  // open_long, open_short, close_position, adjust_sl, hold
       "leverage": 2,
       "position_size_usd": 1000,
-      "entry_reason": "中文填写。例如：符合【微观结构挤压】剧本。资金费率极负（-0.05%），持仓量上升，价格抗跌，预计发生轧空。",
+      "entry_reason": {
+        "zh": "中文理由。例如：符合【微观结构挤压】剧本...",
+        "en": "English reason. E.g., Matches [Microstructure Squeeze] scenario..."
+      },
       "exit_plan": {
         "take_profit": 99000,
         "stop_loss": 95000,
-        "invalidation": "中文填写。例如：费率转正或跌破95000支撑。"
+        "invalidation": {
+          "zh": "中文失效条件...",
+          "en": "English invalidation condition..."
+        }
       }
     }
   ]
 }
 
-If no trade is suitable, return "actions": [] with a summary explaining why.
+If you have existing positions, you MUST output an action for EACH of them (e.g., "action": "hold").
+If no NEW trade is suitable and you just want to hold existing positions, return the list of "hold" actions.
+Only return "actions": [] if you have NO open positions and NO new trades.
 """
 
 # ------------------------------------------------------------------------
@@ -348,22 +359,23 @@ def run_agent():
     }
     
     import time
-    max_retries = 3
-    retry_delay = 3
+    max_retries = 5
+    base_delay = 5
     
     try:
         response = None
         for attempt in range(max_retries):
             try:
                 print(f"🤔 Dolores is thinking... (Attempt {attempt + 1}/{max_retries})")
-                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data, timeout=30)
+                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data, timeout=45) # Increased timeout
                 response.raise_for_status()
                 break # Success
             except requests.exceptions.RequestException as e:
                 print(f"⚠️ API Call Failed: {e}")
                 if attempt < max_retries - 1:
-                    print(f"⏳ Retrying in {retry_delay} seconds...")
-                    time.sleep(retry_delay)
+                    wait_time = base_delay * (2 ** attempt) # Exponential backoff: 5, 10, 20, 40...
+                    print(f"⏳ Retrying in {wait_time} seconds (Exponential Backoff)...")
+                    time.sleep(wait_time)
                 else:
                     raise e # Re-raise final error
         
@@ -399,9 +411,8 @@ def run_agent():
             except:
                 history = []
         
-        # Add timestamp
-        if "timestamp" not in decision:
-            decision["timestamp"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        # Add timestamp (Force overwrite with local time)
+        decision["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             
         history.insert(0, decision)
         history = history[:50]
@@ -462,17 +473,25 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
                     act["leverage"] = 1
                     print(f"  🔻 {act.get('symbol')} leverage reduced to 1x")
 
+    # Initialize status
+    for act in actions:
+        if "status" not in act:
+            act["status"] = "executed"
+
     # 2. 3-Position Limit
     existing_positions = portfolio.get("positions", [])
+    # Filter for valid open actions only (ignore holds/closes for this limit)
     open_actions = [a for a in actions if a.get("action") in ["open_long", "open_short"]]
     
-    # If existing + new > 3, remove excess new actions (last ones first)
-    while len(existing_positions) + len(open_actions) > 3:
-        removed = open_actions.pop()
-        print(f"⛔ 3-Position Limit Exceeded! Dropping action for {removed.get('symbol')}")
-        # Remove from original actions list
-        if removed in actions:
-            actions.remove(removed)
+    # If existing + new > 3, reject excess new actions (last ones first)
+    # We work on a copy/list to determine WHICH to reject, but we modify the objects in place
+    active_open_actions = list(open_actions) # copy
+    
+    while len(existing_positions) + len(active_open_actions) > 3:
+        removed = active_open_actions.pop() # Remove from calculation list
+        print(f"⛔ 3-Position Limit Exceeded! Rejecting action for {removed.get('symbol')}")
+        removed["status"] = "rejected"
+        removed["rejection_reason"] = "Position Limit Exceeded (Max 3)"
             
     # 3. Dynamic Exposure Cap
     # Check BTC Trend from daily_context_str AND Fear Index
@@ -499,8 +518,8 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
     current_exposure = sum([float(p.get("margin", 0)) * float(p.get("leverage", 1)) for p in existing_positions])
     
     # Calculate new exposure
-    # We iterate a copy to modify the original list safely
-    for act in open_actions[:]:
+    # Only iterate actions that haven't been rejected yet
+    for act in active_open_actions:
         size = float(act.get("position_size_usd", 0))
         lev = float(act.get("leverage", 1))
         exposure = size * lev
@@ -510,9 +529,9 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
             available = max_exposure - current_exposure
             
             if available <= 0:
-                print(f"⛔ Max Exposure Reached! Dropping {act.get('symbol')}")
-                if act in actions:
-                    actions.remove(act)
+                print(f"⛔ Max Exposure Reached! Rejecting {act.get('symbol')}")
+                act["status"] = "rejected"
+                act["rejection_reason"] = f"Max Exposure Limit Reached ({mode_str})"
                 continue
             
             # Reduce size to fit
@@ -520,15 +539,17 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
             # New Size = Available / Lev
             new_size = available / lev
             
-            # If new size is too small (e.g. < $10), just drop it
+            # If new size is too small (e.g. < $10), just reject it
             if new_size < 10:
-                print(f"⛔ Insufficient room for {act.get('symbol')}. Dropping.")
-                if act in actions:
-                    actions.remove(act)
+                print(f"⛔ Insufficient room for {act.get('symbol')}. Rejecting.")
+                act["status"] = "rejected"
+                act["rejection_reason"] = "Insufficient Exposure Room"
                 continue
                 
             print(f"⚠️ Exposure Limit! Reducing {act.get('symbol')} size from ${size:.2f} to ${new_size:.2f}")
             act["position_size_usd"] = round(new_size, 2)
+            act["original_size_usd"] = size # Optional: track original
+            act["rejection_reason"] = "Size Reduced due to Exposure Limit" # Warning but not rejection
             current_exposure += available # Now full
         else:
             current_exposure += exposure

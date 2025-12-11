@@ -1,6 +1,6 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, ReferenceLine, Dot } from 'recharts';
-import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface NavRecord {
   date: string;
@@ -8,10 +8,9 @@ interface NavRecord {
   profit: number;
 }
 
-// 闪烁的圆点组件
 const AnimatedDot = (props: any) => {
   const { cx, cy, isProfit } = props;
-  const color = isProfit ? '#34d399' : '#fb7185';
+  const color = isProfit ? '#2dd4bf' : '#fb7185';
 
   return (
     <g>
@@ -38,7 +37,7 @@ const AnimatedDot = (props: any) => {
   );
 };
 
-export function ProfitChart() {
+export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
   const [data, setData] = useState<NavRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -53,7 +52,6 @@ export function ProfitChart() {
         if (response.ok) {
           const text = await response.text();
           const lines = text.trim().split('\n');
-          // Skip header
           for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (!line) continue;
@@ -70,10 +68,11 @@ export function ProfitChart() {
           }
         }
       } else {
-        // Dev mode fallback or API
-        const response = await fetch('http://localhost:5001/api/nav-history'); // Assuming API exists or fallback to static
+        const response = await fetch('http://localhost:5001/api/nav-history');
         if (response.ok) {
           const json = await response.json();
+          // Assuming API returns similar structure or array of { timestamp, nav }
+          // If simpler, adapt here.
           records = json.map((item: any) => {
             if (!item.timestamp) return null;
             const dateObj = new Date(item.timestamp.replace(' ', 'T') + 'Z');
@@ -87,7 +86,6 @@ export function ProfitChart() {
         }
       }
 
-      // If no data, provide at least one point
       if (records.length === 0) {
         records.push({ date: 'Start', value: 10000, profit: 0 });
       }
@@ -106,23 +104,19 @@ export function ProfitChart() {
     return () => clearInterval(interval);
   }, []);
 
-  // 滚动到最右边
   useEffect(() => {
     if (scrollContainerRef.current && data.length > 0) {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
   }, [data]);
 
-  if (loading && data.length === 0) return <div className="text-gray-400 p-4">加载图表中...</div>;
-
   const currentValue = data.length > 0 ? data[data.length - 1].value : 10000;
   const totalProfit = currentValue - 10000;
   const profitPercentage = ((totalProfit / 10000) * 100).toFixed(2);
   const isProfit = currentValue >= 10000;
-  const chartColor = isProfit ? 'var(--neon-green)' : 'var(--neon-rose)';
+  const chartColor = isProfit ? '#2dd4bf' : '#fb7185';
 
-  // 计算Y轴的范围
-  const minValue = Math.min(...data.map(d => d.value), 9000); // Ensure some buffer
+  const minValue = Math.min(...data.map(d => d.value), 9000);
   const maxValue = Math.max(...data.map(d => d.value), 11000);
   const padding = (maxValue - minValue) * 0.1;
   const yMin = Math.floor(minValue - padding);
@@ -130,48 +124,58 @@ export function ProfitChart() {
   const yRange = yMax - yMin;
   const baseline10kPosition = ((yMax - 10000) / yRange) * 100;
 
-  // 获取当前日期时间
   const now = new Date();
   const currentDateTime = `${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
 
+  const t = {
+    zh: {
+      initialCapital: '初始资金',
+      currentValue: '当前净值',
+      totalProfit: '总收益',
+      netWorth: '净值',
+    },
+    en: {
+      initialCapital: 'Initial Capital',
+      currentValue: 'Current Value',
+      totalProfit: 'Total Profit',
+      netWorth: 'Net Worth',
+    },
+  };
+
+  if (loading && data.length === 0) return <div className="text-gray-400 p-4">Loading chart...</div>;
+
   return (
     <div className="h-full flex flex-col">
-      {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-4 flex-shrink-0">
-        <div className="bg-[#1e293b] rounded-lg p-4 border border-gray-700/50">
-          <div className="text-gray-400 text-sm mb-1">初始资金</div>
-          <div className="text-white font-['DIN_Alternate',sans-serif]">$10,000</div>
+        <div className="bg-[#0a0e1a] rounded-lg p-4">
+          <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].initialCapital}</div>
+          <div className="text-white font-['DIN_Alternate',sans-serif] text-xl">$10,000</div>
         </div>
-        <div className="bg-dark-card rounded-lg p-4 border border-dark-card/80">
-          <div className="text-gray-400 text-sm mb-1">当前净值</div>
-          <div className="text-white font-['DIN_Alternate',sans-serif]">${currentValue.toLocaleString()}</div>
+        <div className="bg-[#0a0e1a] rounded-lg p-4">
+          <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].currentValue}</div>
+          <div className="text-white font-['DIN_Alternate',sans-serif] text-xl">${currentValue.toLocaleString()}</div>
         </div>
-        <div className={`bg-dark-card rounded-lg p-4 border ${totalProfit >= 0 ? 'border-neon-green/30' : 'border-neon-rose/30'}`}>
-          <div className="text-gray-400 text-sm mb-1">总收益</div>
-          <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalProfit >= 0 ? 'text-neon-green' : 'text-neon-rose'}`}>
-            {totalProfit >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+        <div className={`bg-[#0a0e1a] rounded-lg p-4 relative`}>
+          <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].totalProfit}</div>
+          <div className={`flex items-center gap-2 font-['DIN_Alternate',sans-serif] text-xl ${totalProfit >= 0 ? 'text-teal-400' : 'text-rose-400'}`}>
+            {totalProfit >= 0 ? <TrendingUp className="w-5 h-5" /> : <TrendingDown className="w-5 h-4" />}
             {totalProfit >= 0 ? '+' : ''}{profitPercentage}%
           </div>
         </div>
       </div>
 
-      {/* Chart - Y轴固定，图表可滚动 */}
-      <div className="flex-1 flex min-h-0 relative">
-        {/* 固定的Y轴标签层 - 悬浮在图表上方 */}
+      <div className="flex-1 flex min-h-0 relative" style={{ minHeight: '300px' }}>
         <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ height: 'calc(100% - 24px)' }}>
           <div className="relative h-full" style={{ paddingTop: '10px' }}>
-            {/* 背景遮罩 */}
-            <div className="absolute inset-0 bg-[#334155]"></div>
-            {/* Y轴分隔线 */}
-            <div className="absolute top-0 right-0 bottom-0 w-px bg-gray-600"></div>
-            {/* 标签 */}
+            <div className="absolute inset-0 bg-[#151b2e] opacity-90"></div>
+            <div className="absolute top-0 right-0 bottom-0 w-px bg-[#1e2942]"></div>
             <div className="relative h-full flex flex-col">
-              <div className="text-gray-400 font-['DIN_Alternate',sans-serif] text-sm text-right pr-3">
+              <div className="text-gray-500 font-['DIN_Alternate',sans-serif] text-xs text-right pr-3">
                 ${(Math.round(yMax) / 1000).toFixed(1)}k
               </div>
               <div className="flex-1 relative">
                 <div
-                  className="absolute text-gray-400 font-['DIN_Alternate',sans-serif] text-sm text-right pr-3 leading-none"
+                  className="absolute text-gray-500 font-['DIN_Alternate',sans-serif] text-xs text-right pr-3 leading-none"
                   style={{
                     top: `${baseline10kPosition}%`,
                     right: 0,
@@ -185,63 +189,70 @@ export function ProfitChart() {
           </div>
         </div>
 
-        {/* 固定的基准线层 - 悬浮在图表上方，延伸到右侧 */}
         <div className="absolute left-20 right-0 top-0 z-[5] pointer-events-none" style={{ height: 'calc(100% - 24px)', paddingTop: '10px' }}>
           <div className="relative h-full">
             <div
               className="absolute left-0 right-0 border-t border-dashed"
               style={{
                 top: `${baseline10kPosition}%`,
-                borderColor: 'rgba(239, 68, 68, 0.3)',
+                borderColor: 'rgba(96, 165, 250, 0.3)',
                 borderWidth: '1px'
               }}
             ></div>
           </div>
         </div>
 
-        {/* 可滚动的图表区域 */}
         <div
           ref={scrollContainerRef}
           className="flex-1 overflow-x-auto min-h-0 h-full"
         >
-          <div style={{ width: `${Math.max(data.length * 50, 800)}px`, height: '100%', minHeight: '300px' }}>
+          <div style={{ width: `${Math.max(1200, data.length * 60)}px`, height: '100%', minHeight: '300px' }}>
             <ResponsiveContainer width="100%" height="100%" minHeight={300}>
               <AreaChart data={data} margin={{ top: 10, right: 30, left: 80, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#34d399" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#2dd4bf" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#2dd4bf" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="colorLoss" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#fb7185" stopOpacity={0.4} />
                     <stop offset="95%" stopColor="#fb7185" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" vertical={false} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#1e2942"
+                  opacity={0.5}
+                />
                 <XAxis
                   dataKey="date"
-                  stroke="#4b5563"
-                  tick={{ fill: '#6b7280', fontSize: 12 }}
+                  stroke="#6b7280"
+                  tick={{ fill: '#6b7280', fontFamily: 'DIN Alternate, sans-serif', fontSize: 11 }}
                   tickLine={false}
-                  axisLine={false}
+                  axisLine={{ stroke: '#1e2942', strokeWidth: 1 }}
+                  interval="preserveStartEnd"
+                  tickFormatter={(value, index) => {
+                    if (value === data[data.length - 1].date) return currentDateTime;
+                    return value;
+                  }}
                 />
                 <YAxis
-                  stroke="#4b5563"
-                  tick={{ fill: '#6b7280', fontSize: 12 }}
-                  tickLine={false}
+                  stroke="transparent"
+                  tick={false}
                   axisLine={false}
-                  domain={[minValue, maxValue]}
-                  tickFormatter={(value) => `$${value}`}
+                  tickLine={false}
+                  domain={[yMin, yMax]}
+                  width={0}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'var(--bg-dark-card)',
+                    backgroundColor: '#0a0e1a',
                     border: `1px solid ${chartColor}`,
                     borderRadius: '8px',
                     color: '#fff',
                     fontFamily: 'DIN Alternate, sans-serif'
                   }}
-                  formatter={(value: number) => [`$${value.toLocaleString()}`, '净值']}
+                  formatter={(value: number) => [`$${value.toLocaleString()}`, t[language].netWorth]}
                   wrapperStyle={{ zIndex: 1000 }}
                 />
                 <Area
@@ -252,7 +263,6 @@ export function ProfitChart() {
                   fill={isProfit ? 'url(#colorProfit)' : 'url(#colorLoss)'}
                   dot={(props) => {
                     const { index } = props;
-                    // 只在最后一个点显示闪烁动画
                     if (index === data.length - 1) {
                       return <AnimatedDot {...props} isProfit={isProfit} />;
                     }

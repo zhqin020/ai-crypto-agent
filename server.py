@@ -78,7 +78,9 @@ def get_positions():
                 "takeProfit": pos["exit_plan"]["take_profit"],
                 "amount": round(quantity, 4),
                 "pnl": round(pnl, 2),
-                "pnlPercent": round(pnl_percent, 2)
+                "pnlPercent": round(pnl_percent, 2),
+                "type": pos["side"],
+                "leverage": pos.get("leverage", 1)
             })
             
         return jsonify(positions)
@@ -174,6 +176,21 @@ def get_history():
         return jsonify(history)
     except Exception as e:
         print(f"Error parsing history: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/portfolio', methods=['GET'])
+def get_portfolio():
+    if not PORTFOLIO_PATH.exists():
+        return jsonify({"nav": 0, "cash": 0})
+        
+    try:
+        with open(PORTFOLIO_PATH, 'r') as f:
+            state = json.load(f)
+        return jsonify({
+            "total_value": state.get("nav", 0),
+            "cash": state.get("cash", 0)
+        })
+    except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/summary', methods=['GET'])
