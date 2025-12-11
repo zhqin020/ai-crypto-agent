@@ -162,7 +162,8 @@ export function HistoryTab() {
           <div className="text-gray-400 text-sm mb-1">胜率</div>
           <div className="text-neon-green font-['DIN_Alternate',sans-serif]">{winRate}%</div>
         </div>
-        <div className="bg-dark-card rounded-lg p-3 border border-gray-700/50">
+        <div className="bg-dark-card rounded-lg p-3 border border-dark-card/80">
+          <div className="text-gray-400 text-sm mb-1">总交易数</div>
           <div className="text-white font-['DIN_Alternate',sans-serif]">{history.length}</div>
         </div>
       </div>
