@@ -411,8 +411,11 @@ def run_agent():
             except:
                 history = []
         
-        # Add timestamp (Force overwrite with local time)
-        decision["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Add timestamp (Force overwrite with local time UTC+8)
+        import datetime as dt
+        utc_now = dt.datetime.utcnow()
+        beijing_time = utc_now + dt.timedelta(hours=8)
+        decision["timestamp"] = beijing_time.strftime("%Y-%m-%d %H:%M:%S")
             
         history.insert(0, decision)
         history = history[:50]
@@ -539,11 +542,11 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
             # New Size = Available / Lev
             new_size = available / lev
             
-            # If new size is too small (e.g. < $10), just reject it
-            if new_size < 10:
-                print(f"⛔ Insufficient room for {act.get('symbol')}. Rejecting.")
+            # If new size is too small (e.g. < $200), just reject it
+            if new_size < 200:
+                print(f"⛔ Insufficient room for {act.get('symbol')} (${new_size:.2f} < $200). Rejecting.")
                 act["status"] = "rejected"
-                act["rejection_reason"] = "Insufficient Exposure Room"
+                act["rejection_reason"] = f"Insufficient Exposure Room (Available ${new_size:.2f} < Min $200)"
                 continue
                 
             print(f"⚠️ Exposure Limit! Reducing {act.get('symbol')} size from ${size:.2f} to ${new_size:.2f}")
