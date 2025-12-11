@@ -1,5 +1,10 @@
 [
   {
+    "analysis_summary": "模型调用失败: 503 Server Error: Service Unavailable for url: https://api.deepseek.com/chat/completions",
+    "actions": [],
+    "timestamp": "2025-12-11 12:13:11"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：美联储降息已于昨日落地，最新新闻显示市场正在消化这一利好，但恐惧与贪婪指数仍处29（恐惧），表明利好可能已部分兑现（Priced In），而非新的驱动（Impulse）。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），且市场整体杠杆情绪看跌（平均资金费率-0.0072%）。【痛苦交易】检测显示，所有币种资金费率均为负值（BNB -0.0084%、SOL -0.0127%、DOGE -0.0072%、BTC -0.0058%、ETH -0.0017%），Z-Score均极负（如DOGE -264.47%），表明市场存在拥挤的做空仓位，但价格未大幅下跌，存在潜在的轧空风险。3. 我选择【微观结构/挤压】剧本，基于负资金费率下的价格韧性，预期空头回补可能推动反弹，优先关注Qlib评分最高的BNB和SOL。",
     "actions": [
       {
@@ -1429,35 +1434,5 @@
       }
     ],
     "timestamp": "2025-12-04 00:16:43"
-  },
-  {
-    "analysis_summary": "1. 首先进行【叙事校验】：新闻中虽有比特币可能反弹至10.7万美元的利好，但市场整体处于恐惧状态（Fear & Greed Index 28），且日线趋势均为熊市（所有币种价格低于SMA50），显示利好可能尚未完全兑现，但宏观情绪谨慎。2. 结合日线趋势和【痛苦交易】检测：BNB和DOGE的资金费率Z值极高（>100%），表明多头拥挤，存在轧多风险；而BTC和ETH的费率接近中性或略负，轧空风险较低。3. 我选择【均值回归】剧本，针对高费率币种进行做空，同时利用Qlib相对强度信号调整现有仓位。",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "现有空头仓位已接近止盈（当前价900.9 vs 目标880），且BNB资金费率Z值高达117.6%，显示轧多风险高，但Qlib评分最高（0.6111）表明相对强势，为锁定利润并避免反转风险，选择平仓。",
-        "exit_plan": {
-          "take_profit": 880,
-          "stop_loss": 910,
-          "invalidation": "价格突破910阻力位或资金费率Z值回落至50%以下。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "open_short",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": "符合【均值回归】剧本。DOGE资金费率Z值极高（134.5%），显示极度拥挤的多头，且Qlib评分最低（0.1203），相对弱势，日线趋势熊市，存在轧多机会。",
-        "exit_plan": {
-          "take_profit": 0.145,
-          "stop_loss": 0.155,
-          "invalidation": "资金费率Z值回落至50%以下或价格突破0.155阻力位。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-03 20:16:40"
   }
 ]
