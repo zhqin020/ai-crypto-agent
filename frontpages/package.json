@@ -64,6 +64,6 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "vite build"
+            "build": "mkdir -p public/data && cp ../agent_decision_log.json ../portfolio_state.json ../nav_history.csv ../trade_log.csv public/data/ 2>/dev/null || : && vite build"
       }
 }
