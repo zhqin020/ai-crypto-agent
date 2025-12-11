@@ -92,23 +92,88 @@ def get_history():
 
     try:
         history = []
+        open_positions = {} # Key: symbol, Value: {entry_time, entry_price, qty, margin, notional, leverage}
+
         with open(TRADE_LOG_PATH, 'r') as f:
             reader = csv.DictReader(f)
-            for row in reader:
-                # Only include closed trades or relevant actions
-                # Assuming trade_log has: timestamp, symbol, action, price, quantity, fee
-                # We need to reconstruct "trades" from log actions, which is complex.
-                # For now, let's just return raw log or try to parse 'close_position' events?
-                # A better way is if mock_trade_executor saved a 'closed_trades.json'.
-                # But let's look at trade_log.csv structure first.
-                pass
+            # Sort by time just in case, though usually appended in order
+            rows = list(reader)
+            
+            for row in rows:
+                action = row.get('action')
+                symbol = row.get('symbol')
+                time = row.get('time')
+                price = float(row.get('price', 0))
+                qty = float(row.get('qty', 0))
+                notional = float(row.get('notional', 0) or 0)
+                margin = float(row.get('margin', 0) or 0)
+                leverage_val = row.get('leverage')
                 
-        # Since parsing CSV log to reconstruct trades is hard without state,
-        # let's just return a mock history or empty for now, 
-        # OR better: update mock_trade_executor to save closed trades to a JSON!
-        
-        return jsonify([]) 
+                if action in ['open_long', 'open_short']:
+                    # Calculate leverage if not present
+                    if not leverage_val and margin > 0:
+                        calc_leverage = notional / margin
+                    else:
+                        calc_leverage = float(leverage_val) if leverage_val else 1.0
+
+                    open_positions[symbol] = {
+                        'entry_time': time,
+                        'entry_price': price,
+                        'qty': qty,
+                        'margin': margin,
+                        'notional': notional,
+                        'leverage': calc_leverage
+                    }
+                
+                elif action == 'close_position':
+                    # Parse realized PnL and fee
+                    realized_pnl = float(row.get('realized_pnl', 0))
+                    fee = float(row.get('fee', 0))
+                    # Raw PnL usually includes fee in some logs, but let's stick to simple logic matching frontend
+                    # Frontend logic: rawPnl = realized_pnl + fee (if fee is negative impact? usually fee is positive cost)
+                    # Let's just use realized_pnl as the net profit for display
+                    
+                    open_info = open_positions.pop(symbol, None)
+                    
+                    entry_price = 0
+                    entry_time = 'Unknown'
+                    leverage = 1.0
+                    
+                    if open_info:
+                        entry_price = open_info['entry_price']
+                        entry_time = open_info['entry_time']
+                        leverage = open_info['leverage']
+                    else:
+                        # Estimate entry from PnL if open record missing
+                        # This is an approximation
+                        pass
+
+                    pnl_percent = 0
+                    if margin > 0:
+                        pnl_percent = (realized_pnl / margin) * 100
+                    elif open_info and open_info['margin'] > 0:
+                         pnl_percent = (realized_pnl / open_info['margin']) * 100
+                    
+                    history.append({
+                        "id": f"{time}-{symbol}",
+                        "symbol": symbol,
+                        "type": row.get('side', 'long'),
+                        "entryPrice": entry_price,
+                        "exitPrice": price,
+                        "amount": qty,
+                        "pnl": realized_pnl,
+                        "pnlPercent": pnl_percent,
+                        "entryTime": entry_time,
+                        "exitTime": time,
+                        "leverage": leverage,
+                        "notional": notional
+                    })
+
+        # Return history sorted by exit time descending (newest first)
+        history.sort(key=lambda x: x['exitTime'], reverse=True)
+        return jsonify(history)
     except Exception as e:
+        print(f"Error parsing history: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/summary', methods=['GET'])

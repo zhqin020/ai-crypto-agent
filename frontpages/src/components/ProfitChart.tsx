@@ -11,7 +11,7 @@ interface NavRecord {
 // 闪烁的圆点组件
 const AnimatedDot = (props: any) => {
   const { cx, cy, isProfit } = props;
-  const color = isProfit ? '#a3e635' : '#ef4444';
+  const color = isProfit ? '#34d399' : '#fb7185';
 
   return (
     <g>
@@ -119,7 +119,7 @@ export function ProfitChart() {
   const totalProfit = currentValue - 10000;
   const profitPercentage = ((totalProfit / 10000) * 100).toFixed(2);
   const isProfit = currentValue >= 10000;
-  const chartColor = isProfit ? '#a3e635' : '#ef4444';
+  const chartColor = isProfit ? 'var(--neon-green)' : 'var(--neon-rose)';
 
   // 计算Y轴的范围
   const minValue = Math.min(...data.map(d => d.value), 9000); // Ensure some buffer
@@ -138,17 +138,17 @@ export function ProfitChart() {
     <div className="h-full flex flex-col">
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-4 flex-shrink-0">
-        <div className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50">
+        <div className="bg-[#1e293b] rounded-lg p-4 border border-gray-700/50">
           <div className="text-gray-400 text-sm mb-1">初始资金</div>
           <div className="text-white font-['DIN_Alternate',sans-serif]">$10,000</div>
         </div>
-        <div className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50">
+        <div className="bg-dark-card rounded-lg p-4 border border-dark-card/80">
           <div className="text-gray-400 text-sm mb-1">当前净值</div>
           <div className="text-white font-['DIN_Alternate',sans-serif]">${currentValue.toLocaleString()}</div>
         </div>
-        <div className={`bg-[#1f2229] rounded-lg p-4 border ${totalProfit >= 0 ? 'border-lime-500/30' : 'border-red-500/30'}`}>
+        <div className={`bg-dark-card rounded-lg p-4 border ${totalProfit >= 0 ? 'border-neon-green/30' : 'border-neon-rose/30'}`}>
           <div className="text-gray-400 text-sm mb-1">总收益</div>
-          <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalProfit >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+          <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalProfit >= 0 ? 'text-neon-green' : 'text-neon-rose'}`}>
             {totalProfit >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
             {totalProfit >= 0 ? '+' : ''}{profitPercentage}%
           </div>
@@ -161,7 +161,7 @@ export function ProfitChart() {
         <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ height: 'calc(100% - 24px)' }}>
           <div className="relative h-full" style={{ paddingTop: '10px' }}>
             {/* 背景遮罩 */}
-            <div className="absolute inset-0 bg-[#2a2d35]"></div>
+            <div className="absolute inset-0 bg-[#334155]"></div>
             {/* Y轴分隔线 */}
             <div className="absolute top-0 right-0 bottom-0 w-px bg-gray-600"></div>
             {/* 标签 */}
@@ -209,37 +209,33 @@ export function ProfitChart() {
               <AreaChart data={data} margin={{ top: 10, right: 30, left: 80, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#a3e635" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#a3e635" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#34d399" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="colorLoss" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#ef4444" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#fb7185" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#fb7185" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  stroke="#374151"
-                />
+                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" vertical={false} />
                 <XAxis
                   dataKey="date"
-                  stroke="#6b7280"
-                  tick={{ fill: '#9ca3af', fontFamily: 'DIN Alternate, sans-serif', fontSize: 12 }}
+                  stroke="#4b5563"
+                  tick={{ fill: '#6b7280', fontSize: 12 }}
                   tickLine={false}
-                  axisLine={{ stroke: '#6b7280', strokeWidth: 1 }}
-                  interval="preserveStartEnd"
+                  axisLine={false}
                 />
                 <YAxis
-                  stroke="transparent"
-                  tick={false}
-                  axisLine={false}
+                  stroke="#4b5563"
+                  tick={{ fill: '#6b7280', fontSize: 12 }}
                   tickLine={false}
-                  domain={[yMin, yMax]}
-                  width={0}
+                  axisLine={false}
+                  domain={[minValue, maxValue]}
+                  tickFormatter={(value) => `$${value}`}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1f2229',
+                    backgroundColor: 'var(--bg-dark-card)',
                     border: `1px solid ${chartColor}`,
                     borderRadius: '8px',
                     color: '#fff',

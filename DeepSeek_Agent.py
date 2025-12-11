@@ -331,7 +331,7 @@ def run_agent():
     final_prompt = final_prompt.replace("{{PORTFOLIO_STATE_JSON}}", portfolio_state)
     final_prompt = final_prompt.replace("{{NEWS_CONTEXT}}", news_context)
     
-    # 3. Call DeepSeek API
+    # 3. Call DeepSeek API with Retry Logic
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
@@ -343,19 +343,34 @@ def run_agent():
             {"role": "system", "content": final_prompt},
             {"role": "user", "content": "Analyze the market and generate trading actions based on the latest data."}
         ],
-        "temperature": 0.1,  # Low temp for strict JSON output
-        "response_format": {"type": "json_object"}  # 🔥 Force JSON output
+        "temperature": 0.1,
+        "response_format": {"type": "json_object"}
     }
     
+    import time
+    max_retries = 3
+    retry_delay = 3
+    
     try:
-        print("🤔 Dolores is thinking...")
-        response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data)
-        response.raise_for_status()
+        response = None
+        for attempt in range(max_retries):
+            try:
+                print(f"🤔 Dolores is thinking... (Attempt {attempt + 1}/{max_retries})")
+                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data, timeout=30)
+                response.raise_for_status()
+                break # Success
+            except requests.exceptions.RequestException as e:
+                print(f"⚠️ API Call Failed: {e}")
+                if attempt < max_retries - 1:
+                    print(f"⏳ Retrying in {retry_delay} seconds...")
+                    time.sleep(retry_delay)
+                else:
+                    raise e # Re-raise final error
         
         result = response.json()
         content = result['choices'][0]['message']['content']
         
-        # Clean output (remove markdown code blocks if present)
+        # Clean output
         if "```json" in content:
             content = content.split("```json")[1].split("```")[0].strip()
         elif "```" in content:
@@ -364,43 +379,40 @@ def run_agent():
         # Parse JSON
         decision = json.loads(content)
         
-        # Validate & Enforce Decision
+        # Validate & Enforce
         decision = validate_and_enforce_decision(decision, market_summary, daily_context, fear_index)
         
         print("\n💡 Dolores' Decision:")
         print(json.dumps(decision, indent=2, ensure_ascii=False))
         
-        # Save decision log (Append mode)
+        # Save decision log
         log_path = BASE_DIR / "agent_decision_log.json"
         history = []
         if log_path.exists():
             try:
                 with open(log_path, "r") as f:
-                    content = json.load(f)
-                    if isinstance(content, list):
-                        history = content
+                    content_json = json.load(f)
+                    if isinstance(content_json, list):
+                        history = content_json
                     else:
-                        history = [content]
+                        history = [content_json]
             except:
                 history = []
         
-        # Add timestamp if missing
+        # Add timestamp
         if "timestamp" not in decision:
             decision["timestamp"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
             
-        # Prepend new decision (newest first)
         history.insert(0, decision)
-        
-        # Keep last 50 records to avoid huge file
         history = history[:50]
         
         with open(log_path, "w") as f:
             json.dump(history, f, indent=2, ensure_ascii=False)
             
     except Exception as e:
-        print(f"❌ Error calling DeepSeek: {e}")
-        if 'response' in locals():
-            print(response.text)
+        print(f"❌ Error calling DeepSeek after retries: {e}")
+        if response:
+            print(f"Response text: {response.text}")
             
         # Write error to log so frontend shows something
         error_decision = {

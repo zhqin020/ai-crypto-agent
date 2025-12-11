@@ -70,26 +70,26 @@ export default function App() {
   }, [startTime]);
 
   return (
-    <div className="h-screen bg-[#1a1d24] text-white p-3">
-      <div className="h-full flex flex-col">
+    <div className="h-screen bg-dark-primary text-slate-100 p-3">
+      <div className="h-full flex flex-col max-w-[1800px] mx-auto w-full">
         {/* Header */}
         <div className="mb-4 flex-shrink-0">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1 className="flex items-baseline gap-3 text-5xl">
                 <span className="text-white">Crypto</span>
-                <span className="text-lime-400">Quant</span>
+                <span className="text-blue-400">Quant</span>
                 <span className="text-white">Dashboard</span>
               </h1>
               <div className="flex items-center gap-3 mt-3">
                 <Clock className="w-5 h-5 text-gray-400" />
                 <span className="text-gray-400 text-base">
                   4小时线为基准的AI量化策略，已成功运行
-                  <span className="text-lime-400 font-['DIN_Alternate',sans-serif] mx-1.5">
+                  <span className="text-blue-400 font-['DIN_Alternate',sans-serif] mx-1.5">
                     {runningTime.days}
                   </span>
                   天
-                  <span className="text-lime-400 font-['DIN_Alternate',sans-serif] mx-1.5">
+                  <span className="text-blue-400 font-['DIN_Alternate',sans-serif] mx-1.5">
                     {runningTime.hours}
                   </span>
                   小时
@@ -102,8 +102,8 @@ export default function App() {
         {/* Main Grid - 固定高度 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
           {/* Left: Profit Chart */}
-          <div className="bg-[#2a2d35] rounded-xl border border-gray-700 p-6 shadow-2xl flex flex-col h-full">
-            <h2 className="text-lime-400 mb-4 flex items-center gap-2 flex-shrink-0">
+          <div className="bg-[#334155] rounded-xl border border-gray-700 p-6 shadow-2xl flex flex-col h-full">
+            <h2 className="text-blue-400 mb-4 flex items-center gap-2 flex-shrink-0">
               <TrendingUp className="w-5 h-5" />
               收益曲线
             </h2>
@@ -113,13 +113,13 @@ export default function App() {
           </div>
 
           {/* Right: Tabs */}
-          <div className="bg-[#2a2d35] rounded-xl border border-gray-700 shadow-2xl flex flex-col h-full overflow-hidden">
+          <div className="bg-[#334155] rounded-xl border border-gray-700 shadow-2xl flex flex-col h-full overflow-hidden">
             {/* Tab Headers */}
             <div className="flex border-b border-gray-700 flex-shrink-0">
               <button
                 onClick={() => setActiveTab('positions')}
                 className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'positions'
-                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                  ? 'bg-blue-500/10 text-blue-400 border-b-2 border-blue-400'
                   : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
                   }`}
               >
@@ -129,7 +129,7 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('history')}
                 className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'history'
-                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                  ? 'bg-blue-500/10 text-blue-400 border-b-2 border-blue-400'
                   : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
                   }`}
               >
@@ -139,7 +139,7 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('decision')}
                 className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 transition-all ${activeTab === 'decision'
-                  ? 'bg-lime-500/10 text-lime-400 border-b-2 border-lime-400'
+                  ? 'bg-blue-500/10 text-blue-400 border-b-2 border-blue-400'
                   : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
                   }`}
               >

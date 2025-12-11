@@ -138,14 +138,14 @@ export function PositionsTab() {
     <div className="h-full flex flex-col">
       {/* Summary */}
       <div className="grid grid-cols-2 gap-3 mb-4 flex-shrink-0">
-        <div className="bg-[#1f2229] rounded-lg p-3 border border-gray-700/50">
+        <div className="bg-[#1e293b] rounded-lg p-3 border border-gray-700/50">
           <div className="text-gray-400 text-sm mb-1">持仓盈亏</div>
-          <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalPnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+          <div className={`flex items-center gap-1 font-['DIN_Alternate',sans-serif] ${totalPnl >= 0 ? 'text-blue-400' : 'text-red-400'}`}>
             {totalPnl >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
             {totalPnl >= 0 ? '+' : ''}{totalPnl.toFixed(2)}
           </div>
         </div>
-        <div className="bg-[#1f2229] rounded-lg p-3 border border-gray-700/50">
+        <div className="bg-[#1e293b] rounded-lg p-3 border border-gray-700/50">
           <div className="text-gray-400 text-sm mb-1">剩余资金</div>
           <div className="text-white font-['DIN_Alternate',sans-serif]">
             ${availableCapital.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -169,26 +169,24 @@ export function PositionsTab() {
             return (
               <div
                 key={position.symbol}
-                className="bg-[#1f2229] rounded-lg p-4 border border-gray-700/50 hover:border-lime-500/50 transition-all"
+                className="bg-dark-card border border-dark-card/80 rounded-xl p-4 hover:border-gray-600 transition-all"
               >
                 {/* Header */}
                 <div className="flex justify-between items-start mb-3">
-                  <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <div className="text-neon-cyan font-bold text-lg">{position.symbol}</div>
+                    <span className="text-gray-500 text-sm">{position.name}</span>
+                  </div>
+                  <div className="flex flex-col items-end gap-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-lime-400">{position.symbol}</span>
-                      <span className="text-gray-500 text-sm">{position.name}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
                       <span className="text-gray-400 text-sm">持仓:</span>
                       <span className="text-white text-sm font-['DIN_Alternate',sans-serif]">
                         {position.amount} {position.symbol}
                       </span>
                     </div>
-                  </div>
-                  <div className="flex flex-col items-end gap-1">
                     <div className={`px-2 py-1 rounded text-sm font-['DIN_Alternate',sans-serif] ${position.type === 'short'
-                      ? 'bg-orange-500/20 text-orange-400'
-                      : 'bg-lime-500/20 text-lime-400'
+                      ? 'bg-neon-rose/10 text-neon-rose'
+                      : 'bg-neon-green/10 text-neon-green'
                       }`}>
                       {position.type === 'short' ? '做空' : '做多'}
                     </div>
@@ -199,7 +197,7 @@ export function PositionsTab() {
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <div className="text-gray-500 mb-1">开仓价</div>
-                    <div className="text-white font-['DIN_Alternate',sans-serif]">${entryPrice.toLocaleString()}</div>
+                    <div className="text-neon-cyan font-['DIN_Alternate',sans-serif]">{position.entryPrice ? `$${position.entryPrice.toFixed(2)}` : '-'}</div>
                   </div>
                   <div>
                     <div className="text-gray-500 mb-1">当前价</div>
@@ -217,7 +215,7 @@ export function PositionsTab() {
                       <ArrowUpCircle className="w-3 h-3" />
                       止盈价
                     </div>
-                    <div className="text-lime-400 font-['DIN_Alternate',sans-serif]">${takeProfit.toLocaleString()}</div>
+                    <div className="text-neon-cyan font-['DIN_Alternate',sans-serif]">${takeProfit.toLocaleString()}</div>
                   </div>
                 </div>
 
@@ -226,12 +224,12 @@ export function PositionsTab() {
                   <div className="flex justify-between items-center">
                     <span className="text-gray-500 text-sm">盈亏</span>
                     <div className="flex items-center gap-3">
-                      <span className={`font-['DIN_Alternate',sans-serif] ${pnl >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+                      <span className={`font-['DIN_Alternate',sans-serif] ${pnl >= 0 ? 'text-neon-green' : 'text-neon-rose'}`}>
                         {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
                       </span>
                       <span className={`px-2 py-0.5 rounded text-xs font-['DIN_Alternate',sans-serif] ${pnl >= 0
-                        ? 'bg-lime-500/20 text-lime-400'
-                        : 'bg-red-500/20 text-red-400'
+                        ? 'bg-neon-green/10 text-neon-green'
+                        : 'bg-neon-rose/10 text-neon-rose'
                         }`}>
                         {pnl >= 0 ? '+' : ''}{pnlPercent.toFixed(2)}%
                       </span>

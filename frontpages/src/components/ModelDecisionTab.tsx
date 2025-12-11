@@ -74,12 +74,12 @@ export function ModelDecisionTab() {
             {/* Timestamp Header */}
             <div
               className={`mb-4 ${index === 0
-                  ? 'bg-gradient-to-r from-lime-500/20 to-transparent border-l-4 border-lime-400'
-                  : 'bg-gradient-to-r from-gray-600/20 to-transparent border-l-4 border-gray-600'
+                ? 'bg-gradient-to-r from-neon-cyan/20 to-transparent border-l-4 border-neon-cyan'
+                : 'bg-gradient-to-r from-gray-600/20 to-transparent border-l-4 border-gray-600'
                 } rounded-lg p-3.5 flex items-center justify-between`}
             >
               <div className="flex items-center gap-2">
-                {index === 0 && <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>}
+                {index === 0 && <div className="w-2 h-2 bg-neon-cyan rounded-full animate-pulse"></div>}
                 <span className="text-gray-300 font-['DIN_Alternate',sans-serif] text-sm">
                   {(() => {
                     if (!decision.timestamp) return 'Unknown Time';
@@ -105,7 +105,7 @@ export function ModelDecisionTab() {
                 </span>
               </div>
               {index === 0 && (
-                <div className="px-2 py-0.5 bg-lime-400/20 text-lime-400 text-xs rounded border border-lime-400/30">
+                <div className="px-2 py-0.5 bg-neon-cyan/10 text-neon-cyan text-xs rounded border border-neon-cyan/30">
                   LATEST
                 </div>
               )}
@@ -114,10 +114,10 @@ export function ModelDecisionTab() {
             {/* Market Analysis */}
             <div className="mb-5">
               <div className="flex items-center gap-2 mb-3">
-                <Brain className="w-5 h-5 text-lime-400" />
-                <h3 className="text-lime-400">市场分析</h3>
+                <Brain className="w-5 h-5 text-neon-cyan" />
+                <h3 className="text-neon-cyan">市场分析</h3>
               </div>
-              <div className="bg-[#1f2229] rounded-lg p-5 border border-gray-700/50">
+              <div className="bg-dark-card border border-dark-card/80 rounded-lg p-5">
                 <p className="text-gray-300 leading-relaxed text-sm">
                   {decision.analysis_summary}
                 </p>
@@ -127,8 +127,8 @@ export function ModelDecisionTab() {
             {/* Actions */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <Activity className="w-5 h-5 text-lime-400" />
-                <h3 className="text-lime-400">执行动作 ({decision.actions?.length || 0})</h3>
+                <Activity className="w-5 h-5 text-neon-cyan" />
+                <h3 className="text-neon-cyan">执行动作 ({decision.actions?.length || 0})</h3>
               </div>
 
               <div className="space-y-4">
@@ -138,20 +138,20 @@ export function ModelDecisionTab() {
                   decision.actions.map((action, idx) => (
                     <div
                       key={idx}
-                      className="bg-[#1f2229] rounded-lg p-5 border border-gray-700/50 hover:border-lime-500/50 transition-all"
+                      className="bg-dark-card border border-dark-card/80 rounded-lg p-5 hover:border-neon-cyan/50 transition-all"
                     >
                       {/* Header */}
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
-                          <div className="text-lime-400 font-bold text-lg">{action.symbol}</div>
-                          <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${action.action?.includes('long') ? 'bg-lime-500/20 text-lime-400' :
-                              action.action?.includes('short') ? 'bg-red-500/20 text-red-400' :
-                                'bg-gray-500/20 text-gray-400'
+                          <div className="text-neon-cyan font-bold text-lg">{action.symbol}</div>
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${action.action?.includes('long') ? 'bg-neon-green/10 text-neon-green' :
+                            action.action?.includes('short') ? 'bg-neon-rose/10 text-neon-rose' :
+                              'bg-gray-500/20 text-gray-400'
                             }`}>
                             {action.action?.replace('_', ' ') || 'UNKNOWN'}
                           </span>
                           {action.leverage && (
-                            <span className="px-2 py-0.5 bg-lime-500/20 text-lime-400 text-xs rounded font-['DIN_Alternate',sans-serif]">
+                            <span className="px-2 py-0.5 bg-neon-cyan/10 text-neon-cyan text-xs rounded font-['DIN_Alternate',sans-serif]">
                               {action.leverage}x
                             </span>
                           )}
@@ -176,13 +176,13 @@ export function ModelDecisionTab() {
                       <div className="grid grid-cols-2 gap-3">
                         <div>
                           <span className="text-gray-500 text-sm">止盈价: </span>
-                          <span className="text-lime-400 font-['DIN_Alternate',sans-serif]">
+                          <span className="text-neon-green font-['DIN_Alternate',sans-serif]">
                             {action.exit_plan?.take_profit ? `$${action.exit_plan.take_profit.toLocaleString()}` : '-'}
                           </span>
                         </div>
                         <div>
                           <span className="text-gray-500 text-sm">止损价: </span>
-                          <span className="text-red-400 font-['DIN_Alternate',sans-serif]">
+                          <span className="text-neon-rose font-['DIN_Alternate',sans-serif]">
                             {action.exit_plan?.stop_loss ? `$${action.exit_plan.stop_loss.toLocaleString()}` : '-'}
                           </span>
                         </div>
