@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】：美联储降息消息（周三）已部分兑现（Priced In），市场反应平淡，BTC价格未突破日线阻力，显示利好效应减弱。2. 结合日线趋势，除ETH外（价格略高于SMA50），其他主要币种（BTC、SOL、BNB、DOGE）均处于熊市结构（价格低于SMA50），整体市场偏弱。3. 【痛苦交易】检测：BNB资金费率Z-score高达119.5%（极度正费率），存在轧多风险；BTC资金费率Z-score为-54.7%（负费率），但价格疲软，短期轧空动力不足。4. 我选择【均值回归】剧本，基于Qlib相对强度排名，做多排名靠前且技术面稳健的币种（如SOL、ETH），同时规避高费率风险（如BNB）。",
+    "actions": [
+      {
+        "symbol": "SOL",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 2203.61,
+        "entry_reason": "符合【趋势跟随】剧本。Qlib排名第一（得分0.3357），日线RSI中性（44.7），资金费率微负（-0.0019%），无轧多风险。4H技术面：RSI 49.89（中性），MACD转正，动量向上，相对强度突出。",
+        "exit_plan": {
+          "take_profit": 142.0,
+          "stop_loss": 130.0,
+          "invalidation": "价格跌破130.0支撑或资金费率转正超过0.03%。"
+        }
+      },
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 550.9,
+        "entry_reason": "符合【趋势跟随】剧本。Qlib排名第二（得分0.2876），日线趋势唯一看涨（价格高于SMA50），RSI 61.4（偏强但未超买）。4H技术面：RSI 63.21，MACD强势，动量0.063，资金费率正常（0.0039%）。",
+        "exit_plan": {
+          "take_profit": 3450.0,
+          "stop_loss": 3250.0,
+          "invalidation": "价格跌破3250.0或日线趋势转熊（跌破SMA50）。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-11 00:17:07"
+  },
+  {
     "analysis_summary": "1. 【叙事校验】：美联储第三次降息已落地（新闻显示‘Divided Fed approves third rate cut’），但市场反应平淡（BTC价格仍在93k，未突破100k阻力），且恐惧贪婪指数为26（恐惧），表明降息利好可能已部分兑现（Priced In），市场情绪仍谨慎。2. 结合日线趋势：BTC、SOL、BNB、DOGE均处于熊市（价格低于SMA50），仅ETH为牛市（价格高于SMA50），整体市场结构偏弱。检测【痛苦交易】：ETH资金费率正（0.0042%）且Z-score高（48.44%），显示多头拥挤，存在轧多风险；BNB资金费率极负（-0.0123%）且Z-score极低（-191.70%），显示空头拥挤，但日线趋势熊市，需谨慎。3. 我选择【均值回归】剧本：ETH的4H RSI超买（72.93），结合拥挤多头和日线牛市但4H过热，适合做空；同时，现有ETH空头仓位（入场价3328.35）仍有效（当前价3390.81接近止损3400），需调整止损以锁定利润。",
     "actions": [
       {
@@ -1441,47 +1471,5 @@
       }
     ],
     "timestamp": "2025-12-03 15:34:01"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】当前无重大新闻，市场走势主要由技术面和资金费率驱动，属于内部博弈（Priced In）。2. 日线趋势显示所有主要币种均处于熊市（价格低于SMA50），但4小时级别RSI普遍在60-66区间，显示短期超买压力。资金费率Z值显示BNB（146%）、DOGE（168%）和SOL（109%）存在轧多风险（过度看涨），而BTC（99%）和ETH（60%）相对中性。3. 我选择【均值回归】剧本，利用高资金费率Z值和短期超买信号，对BNB和DOGE进行做空操作，同时平掉现有BNB空仓以锁定利润并重新部署。",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 2148.74,
-        "entry_reason": "平仓现有BNB空仓。价格已从入场价900.0小幅上涨至904.3，但资金费率Z值高达146.02%，显示轧多风险加剧，需锁定利润并重新评估。",
-        "exit_plan": {
-          "take_profit": 904.3,
-          "stop_loss": 904.3,
-          "invalidation": "已平仓，无需无效条件。"
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "open_short",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": "符合【均值回归】剧本。资金费率Z值146.02%极高（轧多风险），RSI 65.67接近超买，日线趋势熊市，预计价格回调。",
-        "exit_plan": {
-          "take_profit": 880.0,
-          "stop_loss": 920.0,
-          "invalidation": "资金费率Z值回落至50%以下或价格突破920.0阻力位。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "open_short",
-        "leverage": 2,
-        "position_size_usd": 800,
-        "entry_reason": "符合【均值回归】剧本。资金费率Z值168.24%极端高（轧多风险），RSI 60.6显示短期超买，日线趋势熊市且动量减弱（ret -0.17%）。",
-        "exit_plan": {
-          "take_profit": 0.145,
-          "stop_loss": 0.155,
-          "invalidation": "资金费率Z值回落至50%以下或价格突破0.155阻力位。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-03 13:37:51"
   }
 ]
