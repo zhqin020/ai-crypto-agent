@@ -55,7 +55,7 @@ export function PositionsTab({ language }: { language: 'zh' | 'en' }) {
 
       if (import.meta.env.MODE === 'production') {
         // Production: Fetch static JSON file
-        const response = await fetch('/data/portfolio_state.json');
+        const response = await fetch(`/data/portfolio_state.json?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch data');
         state = await response.json();
 

@@ -43,7 +43,7 @@ export function ModelDecisionTab({ language }: { language: 'zh' | 'en' }) {
         let data: AgentDecision | AgentDecision[];
 
         if (import.meta.env.MODE === 'production') {
-          const response = await fetch('/data/agent_decision_log.json');
+          const response = await fetch(`/data/agent_decision_log.json?t=${Date.now()}`);
           if (!response.ok) throw new Error('Failed to fetch agent log');
           data = await response.json();
         } else {

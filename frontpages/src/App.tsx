@@ -21,7 +21,7 @@ export default function App() {
 
         if (import.meta.env.MODE === 'production') {
           // In production, read from static CSV file
-          const response = await fetch('/data/nav_history.csv');
+          const response = await fetch(`/data/nav_history.csv?t=${Date.now()}`);
           if (response.ok) {
             const text = await response.text();
             const lines = text.split('\n');
@@ -147,8 +147,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('positions')}
                 className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'positions'
-                    ? 'text-blue-400 bg-blue-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 {activeTab === 'positions' && (
@@ -159,8 +159,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('history')}
                 className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'history'
-                    ? 'text-blue-400 bg-blue-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 {activeTab === 'history' && (
@@ -171,8 +171,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('decision')}
                 className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'decision'
-                    ? 'text-blue-400 bg-blue-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 {activeTab === 'decision' && (
