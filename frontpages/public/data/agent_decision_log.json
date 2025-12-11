@@ -1,5 +1,35 @@
 [
   {
+    "analysis_summary": "1. 【叙事校验】：美联储昨日已降息，新闻显示市场预期进一步转鸽（隐含利率下降15.2基点），但价格反应平淡（BTC日线仍处熊市），表明鸽派预期已部分兑现（Priced In），缺乏新的上涨催化剂。2. 日线趋势全盘熊市（所有币种价格低于SMA50），且恐惧贪婪指数29（Fear），市场情绪悲观。资金费率全为负值（DOGE -0.0072%，SOL -0.0127%等），显示空头拥挤，存在【轧空风险】，但价格未显强势反弹，需谨慎。3. 我选择【微观结构/挤压】剧本，优先关注资金费率最负且Qlib评分高的币种（如DOGE、SOL），但鉴于整体熊市和波动率中等，将严格控制仓位和杠杆。",
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4312.28,
+        "entry_reason": "现有持仓。Qlib评分0.2014（排名第3），资金费率负（-0.0084%），存在轧空潜力，且价格接近入场价，止损未触发。",
+        "exit_plan": {
+          "take_profit": 920.0,
+          "stop_loss": 840.0,
+          "invalidation": "资金费率转正或价格跌破840支撑（日线新低）。"
+        }
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1078.08,
+        "entry_reason": "现有持仓。Qlib评分0.324（排名第2），资金费率负（-0.0127%），轧空机会仍存，价格略高于入场价，止损未触发。",
+        "exit_plan": {
+          "take_profit": 138.0,
+          "stop_loss": 125.0,
+          "invalidation": "资金费率转正或价格跌破125支撑（前低区域）。"
+        }
+      }
+    ],
+    "timestamp": "2025-12-11 14:24:20"
+  },
+  {
     "analysis_summary": "模型调用失败: 503 Server Error: Service Unavailable for url: https://api.deepseek.com/chat/completions",
     "actions": [],
     "timestamp": "2025-12-11 12:13:11"
@@ -1404,35 +1434,5 @@
       }
     ],
     "timestamp": "2025-12-04 01:47:19"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】BlackRock CEO对比特币的软化立场是旧闻（Priced In），市场已消化；高波动性和恐惧指数26.0显示避险情绪，但空头清算远超多头（$303M vs $129M），表明近期已发生轧空，可能面临回调风险。2. 日线趋势普遍看跌（所有币种价格低于SMA50），但4H数据中ETH、BNB、SOL的RSI偏高（>65），结合BNB和DOGE的资金费率Z值极高（>110%），存在轧多风险。3. 我选择【均值回归】剧本，针对高RSI和高资金费率的币种进行做空，同时管理现有仓位以控制风险。",
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "adjust_sl",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "现有ETH多头仓位（入场价3086.87），当前价格3130.5，已盈利。但4H RSI达73.07（超买），资金费率Z值53.05%（偏高），日线趋势看跌，为锁定利润并防范轧多风险，调整止损。",
-        "exit_plan": {
-          "take_profit": 3200,
-          "stop_loss": 3100,
-          "invalidation": "价格跌破3100支撑位或资金费率Z值升至80%以上。"
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "open_short",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": "符合【均值回归】剧本。4H RSI 70.56（超买），资金费率Z值111.64%（极高，显示拥挤多头），日线趋势看跌（价格低于SMA50），预计发生轧多回调。",
-        "exit_plan": {
-          "take_profit": 900,
-          "stop_loss": 950,
-          "invalidation": "资金费率Z值回落至50%以下或价格突破950阻力位。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-04 00:16:43"
   }
 ]
