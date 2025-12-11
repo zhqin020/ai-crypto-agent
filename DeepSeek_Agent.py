@@ -542,11 +542,11 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
             # New Size = Available / Lev
             new_size = available / lev
             
-            # If new size is too small (e.g. < $200), just reject it
-            if new_size < 200:
-                print(f"⛔ Insufficient room for {act.get('symbol')} (${new_size:.2f} < $200). Rejecting.")
+            # If new size is too small (e.g. < $10), just reject it
+            if new_size < 10:
+                print(f"⛔ Insufficient room for {act.get('symbol')}. Rejecting.")
                 act["status"] = "rejected"
-                act["rejection_reason"] = f"Insufficient Exposure Room (Available ${new_size:.2f} < Min $200)"
+                act["rejection_reason"] = "Insufficient Exposure Room"
                 continue
                 
             print(f"⚠️ Exposure Limit! Reducing {act.get('symbol')} size from ${size:.2f} to ${new_size:.2f}")
