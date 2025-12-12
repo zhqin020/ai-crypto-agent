@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】宏观新闻显示美联储降息预期增强（隐含利率下降14.7基点），但市场已部分消化（恐惧贪婪指数29，处于恐惧区），且BTC反弹在94K受阻，显示利好可能已兑现（Priced In）。2. 日线趋势均为熊市（所有币种价格低于SMA50），【痛苦交易】检测显示资金费率普遍为正（BNB、BTC、SOL费率较高），存在轧多风险，但未达极端水平（<0.03%）。3. 我选择【趋势跟随】剧本，基于Qlib相对强度排名，在熊市环境中聚焦强势币种（ETH、BNB），并严格管理风险。",
+      "en": "1. 【Narrative Check】 Macro news shows increased Fed rate cut expectations (implied rate down 14.7 bps), but the market has partially priced this in (Fear & Greed Index at 29, in Fear zone), and BTC rallies failed at $94K, indicating good news may be already priced in. 2. Daily trends are all bearish (all coins below SMA50). 【Pain Trade】 detection shows funding rates are generally positive (BNB, BTC, SOL have higher rates), posing long squeeze risks, but not at extreme levels (<0.03%). 3. I choose the 【Trend Following】 scenario, focusing on stronger coins (ETH, BNB) based on Qlib relative strength rankings in a bearish environment, with strict risk management."
+    },
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4312.28,
+        "entry_reason": {
+          "zh": "符合【趋势跟随】剧本：Qlib排名第2（得分0.3473），相对强势；日线趋势熊市但4H RSI中性（52.53），资金费率较高（0.0100%）但未超阈值，持仓仍有效。",
+          "en": "Matches 【Trend Following】 scenario: Qlib rank 2 (score 0.3473), relatively strong; daily trend bearish but 4H RSI neutral (52.53), funding rate high (0.0100%) but below threshold, position remains valid."
+        },
+        "exit_plan": {
+          "take_profit": 920.0,
+          "stop_loss": 840.0,
+          "invalidation": {
+            "zh": "资金费率转正或价格跌破840支撑（日线新低）。",
+            "en": "Funding turns positive or price breaks below 840 support (daily new low)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1078.08,
+        "entry_reason": {
+          "zh": "符合【趋势跟随】剧本：Qlib排名第4（得分0.1649），相对较弱但持仓盈利；日线趋势熊市，4H RSI中性（53.77），资金费率较高（0.0093%）但未超阈值，持仓仍有效。",
+          "en": "Matches 【Trend Following】 scenario: Qlib rank 4 (score 0.1649), relatively weak but position is profitable; daily trend bearish, 4H RSI neutral (53.77), funding rate high (0.0093%) but below threshold, position remains valid."
+        },
+        "exit_plan": {
+          "take_profit": 138.0,
+          "stop_loss": 125.0,
+          "invalidation": {
+            "zh": "资金费率转正或价格跌破125支撑（前低区域）。",
+            "en": "Funding turns positive or price breaks below 125 support (previous low area)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 40.04,
+        "entry_reason": {
+          "zh": "符合【趋势跟随】剧本：小型持仓，Qlib排名第4（得分0.1649），相对较弱但持仓盈利；日线趋势熊市，4H RSI中性（53.77），资金费率较高（0.0093%）但未超阈值，持仓仍有效。",
+          "en": "Matches 【Trend Following】 scenario: Small position, Qlib rank 4 (score 0.1649), relatively weak but position is profitable; daily trend bearish, 4H RSI neutral (53.77), funding rate high (0.0093%) but below threshold, position remains valid."
+        },
+        "exit_plan": {
+          "take_profit": 142.0,
+          "stop_loss": 128.0,
+          "invalidation": {
+            "zh": "资金费率转正或价格跌破128支撑（4H前低），或BTC大幅下跌带动整体市场走弱。",
+            "en": "Funding turns positive or price breaks below 128 support (4H previous low), or BTC drops sharply dragging the overall market down."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-12 12:16:53"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】宏观层面，美联储官员讲话和就业数据讨论显示鸽派预期（利率预期下降），但市场已部分消化（Fear & Greed指数29，处于恐惧区域），且新闻'Bitcoin rallies fail at $94K despite Fed policy shift'表明利好未能推动价格突破，属于'Priced In'（利好已兑现）。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），整体趋势偏空；【痛苦交易】检测显示，BNB、BTC、SOL的资金费率Z-score均超过100%（分别为129.28%、185.20%、144.30%），表明多头拥挤，存在轧多风险，但当前资金费率绝对值较低（<0.02%），风险可控。3. 我选择【趋势跟随】剧本，基于Qlib模型相对强度排名（BNB > BTC > ETH），在熊市环境中聚焦强势币种，但严格控制风险（降低杠杆、小仓位）。",
       "en": "1. 【Narrative Check】Macro-wise, Fed speeches and jobs data discussions show dovish expectations (rate expectations falling), but the market has partially priced this in (Fear & Greed Index at 29, in fear zone), and news 'Bitcoin rallies fail at $94K despite Fed policy shift' indicates good news failed to push price breaks, fitting 'Priced In'. 2. Combined with daily trends, all major coins (BTC, ETH, SOL, BNB, DOGE) are in bear markets (price below SMA50), with overall bias bearish; 【Pain Trade】 detection shows BNB, BTC, SOL have funding rate Z-scores over 100% (129.28%, 185.20%, 144.30% respectively), indicating crowded longs and long squeeze risk, but current funding rates are low in absolute terms (<0.02%), so risk is manageable. 3. I choose the 【Trend Following】 scenario, based on Qlib model relative strength ranking (BNB > BTC > ETH), focusing on stronger coins in a bear market, but with strict risk control (lower leverage, small position size)."
     },
@@ -1429,47 +1495,5 @@
       }
     ],
     "timestamp": "2025-12-05 12:16:28"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：当前市场新闻（如以太坊跑赢比特币）与价格走势（ETH相对强势）一致，属于Impulse驱动，但整体市场情绪仍处恐惧（Fear & Greed Index 28），且日线趋势普遍熊市（所有币种价格低于SMA50），利好可能有限。2. 【痛苦交易】检测：ETH资金费率Z-Score极负（-91.98%），显示空头拥挤，存在轧空风险；BTC资金费率Z-Score为正（75.87%），多头略拥挤，但未达极端水平。3. 我选择【微观结构挤压】剧本，利用ETH的极端负费率进行轧空交易，同时持有现有BNB和ETH多头仓位，因它们Qlib评分高且技术面稳健。",
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 3264.22,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率Z-Score极负（-91.98%），显示空头过度拥挤，价格在3170附近抗跌，预计将发生轧空反弹。Qlib评分最高（0.5784），技术面RSI（62.61）和动量（0.0316）积极。",
-        "exit_plan": {
-          "take_profit": 3300.0,
-          "stop_loss": 3050.0,
-          "invalidation": "价格跌破3050.0支撑或资金费率Z-Score回升至-20%以上，显示轧空动力减弱。"
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4352.28,
-        "entry_reason": "Qlib评分第二高（0.4817），技术面RSI（57.67）中性偏强，资金费率Z-Score负值（-48.00%）显示空头略占优，但未达极端，适合趋势跟随。",
-        "exit_plan": {
-          "take_profit": 950.0,
-          "stop_loss": 875.0,
-          "invalidation": "价格跌破875.0支撑或资金费率Z-Score超过30%，显示轧多风险加剧。"
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 2000.0,
-        "entry_reason": "Qlib评分最低（-0.2276），技术面疲软（动量-0.024，RSI 49.37中性），资金费率Z-Score极负（-103.90%）但价格未显示反弹迹象，不符合挤压剧本，风险较高。",
-        "exit_plan": {
-          "take_profit": 145.0,
-          "stop_loss": 135.0,
-          "invalidation": "资金费率Z-Score回升至-20%以上或价格跌破135.0支撑。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-05 08:16:04"
   }
 ]
