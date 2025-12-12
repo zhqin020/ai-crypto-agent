@@ -311,6 +311,11 @@ def apply_actions():
         leverage = float(act.get("leverage", 1.0) or 1.0)
         size_usd = float(act.get("position_size_usd", 0.0) or 0.0)
         exit_plan = act.get("exit_plan", {})
+        
+        # FIX: Skip rejected actions
+        if act.get("status") == "rejected":
+            print(f"⛔ Skipping Rejected Action for {symbol}: {act.get('rejection_reason', 'Unknown Reason')}")
+            continue
 
         if not symbol or not action_type:
             continue
@@ -347,25 +352,56 @@ def apply_actions():
             # Deduct Cash
             portfolio["cash"] -= cost
 
-            pos = {
-                "symbol": symbol,
-                "side": side,
-                "quantity": qty,
-                "entry_price": current_price,
-                "leverage": leverage,
-                "margin": size_usd,
-                "notional": notional,
-                "current_price": current_price,
-                "unrealized_pnl": -fee, # Start with loss due to fee
-                "exit_plan": exit_plan,
-                "opened_at": timestamp
-            }
-            positions.append(pos)
+            # Check for existing position to MERGE
+            existing_pos = next((p for p in positions if p["symbol"] == symbol and p["side"] == side), None)
+            
+            if existing_pos:
+                # MERGE LOGIC
+                old_qty = float(existing_pos["quantity"])
+                old_entry = float(existing_pos["entry_price"])
+                old_margin = float(existing_pos.get("margin", 0))
+                old_notional = float(existing_pos.get("notional", old_qty * old_entry))
+                
+                new_qty = old_qty + qty
+                # Weighted Average Entry Price
+                # (Old Unlevered Cost + New Unlevered Cost) / Total Qty ? 
+                # Actually just (Old Notional + New Notional) / Total Qty is safer if leveraged?
+                # Standard: (OldQty * OldEntry + NewQty * NewPrice) / (OldQty + NewQty)
+                new_entry = ((old_qty * old_entry) + (qty * current_price)) / new_qty
+                
+                existing_pos["quantity"] = new_qty
+                existing_pos["entry_price"] = new_entry
+                existing_pos["margin"] = old_margin + size_usd
+                existing_pos["notional"] = old_notional + notional
+                existing_pos["current_price"] = current_price
+                existing_pos["exit_plan"] = exit_plan # Update with latest plan
+                
+                # We don't change 'opened_at' to keep original track, or maybe update it? Let's keep original.
+                
+                print(f"✅ MERGE {side.upper()} {symbol} | New Avg Price: {new_entry:.4f} | Total Size: ${existing_pos['margin']:.2f}")
+                
+            else:
+                # NEW POSITION
+                pos = {
+                    "symbol": symbol,
+                    "side": side,
+                    "quantity": qty,
+                    "entry_price": current_price,
+                    "leverage": leverage,
+                    "margin": size_usd,
+                    "notional": notional,
+                    "current_price": current_price,
+                    "unrealized_pnl": -fee, # Start with loss due to fee
+                    "exit_plan": exit_plan,
+                    "opened_at": timestamp
+                }
+                positions.append(pos)
+                print(f"✅ OPEN {side.upper()} {symbol} | Size: ${size_usd} | Price: {current_price} | Fee: ${fee:.2f}")
 
             trade_rec = {
                 "time": timestamp,
                 "symbol": symbol,
-                "action": action_type,
+                "action": action_type if not existing_pos else f"{action_type}_merge", # Mark merge in log
                 "side": side,
                 "qty": qty,
                 "price": current_price,
@@ -375,10 +411,9 @@ def apply_actions():
                 "fee": fee,
                 "realized_pnl": -fee,
                 "nav_after": None,
-                "reason": ""
+                "reason": "merge" if existing_pos else "new"
             }
             append_trade_log(trade_rec)
-            print(f"✅ OPEN {side.upper()} {symbol} | Size: ${size_usd} | Price: {current_price} | Fee: ${fee:.2f}")
 
         # -------------------
         # CLOSE POSITION

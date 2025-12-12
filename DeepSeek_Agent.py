@@ -461,18 +461,42 @@ def enforce_risk_limits(decision, portfolio, market_summary, daily_context_str, 
 
     # 2. 3-Position Limit
     existing_positions = portfolio.get("positions", [])
+    existing_symbols = {p["symbol"] for p in existing_positions}
+    
     # Filter for valid open actions only (ignore holds/closes for this limit)
     open_actions = [a for a in actions if a.get("action") in ["open_long", "open_short"]]
     
-    # If existing + new > 3, reject excess new actions (last ones first)
     # We work on a copy/list to determine WHICH to reject, but we modify the objects in place
     active_open_actions = list(open_actions) # copy
     
-    while len(existing_positions) + len(active_open_actions) > 3:
-        removed = active_open_actions.pop() # Remove from calculation list
-        print(f"⛔ 3-Position Limit Exceeded! Rejecting action for {removed.get('symbol')}")
-        removed["status"] = "rejected"
-        removed["rejection_reason"] = "Position Limit Exceeded (Max 3)"
+    # Sort actions so we process new symbols last (easier to reject new ones if full)
+    # But wait, we want to prioritize existing symbols? No, usually first-come first-served or based on score.
+    # Let's just process linearly.
+    
+    # Calculate projected symbol set
+    projected_symbols = existing_symbols.copy()
+    
+    valid_actions = []
+    
+    for act in active_open_actions:
+        sym = act.get("symbol")
+        
+        # If symbol already in projected set, it's a "Merge Order" (Add to position)
+        # This is ALWAYS allowed regarding the *count* limit (assuming exposure allows)
+        if sym in projected_symbols:
+            valid_actions.append(act)
+        else:
+            # New Symbol
+            if len(projected_symbols) < 3:
+                projected_symbols.add(sym)
+                valid_actions.append(act)
+            else:
+                print(f"⛔ 3-Position Limit Exceeded! Rejecting new symbol {sym}")
+                act["status"] = "rejected"
+                act["rejection_reason"] = "Position Limit Exceeded (Max 3 Unique Symbols)"
+                
+    # Update active_open_actions to only be the valid ones for the NEXT check (Exposure)
+    active_open_actions = [a for a in valid_actions if a.get("status") != "rejected"]
             
     # 3. Dynamic Exposure Cap
     # Check BTC Trend from daily_context_str AND Fear Index
