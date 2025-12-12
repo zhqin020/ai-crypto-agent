@@ -134,8 +134,7 @@ export function PositionsTab({ language }: { language: 'zh' | 'en' }) {
 
   useEffect(() => {
     fetchPositions();
-    const interval = setInterval(fetchPositions, 10000);
-    return () => clearInterval(interval);
+    // 只在页面加载时获取一次数据，不自动刷新
   }, []);
 
   const totalPnl = positions.reduce((sum, pos) => sum + (pos.pnl || 0), 0);
