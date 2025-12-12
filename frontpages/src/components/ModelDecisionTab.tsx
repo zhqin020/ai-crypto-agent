@@ -69,7 +69,7 @@ export function ModelDecisionTab({ language }: { language: 'zh' | 'en' }) {
     };
 
     fetchLog();
-    const interval = setInterval(fetchLog, 10000);
+    const interval = setInterval(fetchLog, 300000); // 5分钟刷新一次
     return () => clearInterval(interval);
   }, []);
 
