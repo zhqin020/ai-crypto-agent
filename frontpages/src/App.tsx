@@ -11,7 +11,7 @@ export default function App() {
   const [language, setLanguage] = useState<'zh' | 'en'>('zh');
 
   // 策略实际启动时间（从第一笔交易记录获取）
-  const startTime = new Date('2024-11-23T06:58:38').getTime();
+  const startTime = new Date('2025-11-23T06:58:38').getTime();
 
   useEffect(() => {
     const updateRunningTime = () => {
@@ -103,8 +103,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('positions')}
                 className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'positions'
-                    ? 'text-blue-400 bg-blue-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 {activeTab === 'positions' && (
@@ -115,8 +115,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('history')}
                 className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'history'
-                    ? 'text-blue-400 bg-blue-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 {activeTab === 'history' && (
@@ -127,8 +127,8 @@ export default function App() {
               <button
                 onClick={() => setActiveTab('decision')}
                 className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'decision'
-                    ? 'text-blue-400 bg-blue-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 {activeTab === 'decision' && (
