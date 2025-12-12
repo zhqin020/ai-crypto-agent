@@ -4,22 +4,28 @@ Integrates Qlib Multi-Coin Model, Market Data, and LLM Reasoning.
 """
 import os
 import json
-import requests
 from pathlib import Path
 from dotenv import load_dotenv
 import pandas as pd
-from datetime import datetime, timezone
+from datetime import datetime
+from openai import OpenAI  # NEW IMPORT
 
 # Load environment variables
 load_dotenv()
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 BASE_URL = "https://api.deepseek.com"
 
+# Initialize Client
+client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=BASE_URL)
+
 # Paths
 BASE_DIR = Path(__file__).resolve().parent
 QLIB_DATA_DIR = BASE_DIR / "qlib_data"
 PAYLOAD_PATH = QLIB_DATA_DIR / "deepseek_payload.json"
 PORTFOLIO_PATH = BASE_DIR / "portfolio_state.json" # Mock portfolio for now
+
+# ... [omitted constants validation] ...
+
 
 # ------------------------------------------------------------------------
 # 1. System Prompt (Optimized)
@@ -342,60 +348,23 @@ def run_agent():
     final_prompt = final_prompt.replace("{{PORTFOLIO_STATE_JSON}}", portfolio_state)
     final_prompt = final_prompt.replace("{{NEWS_CONTEXT}}", news_context)
     
-    # 3. Call DeepSeek API with Retry Logic
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
-    }
-    
-    data = {
-        "model": "deepseek-chat",
-        "messages": [
-            {"role": "system", "content": final_prompt},
-            {"role": "user", "content": "Analyze the market and generate trading actions based on the latest data."}
-        ],
-        "temperature": 0.1,
-        "response_format": {"type": "json_object"}
-    }
-    
-    import time
-    max_retries = 5
-    base_delay = 5
-    
+    # 3. Call DeepSeek API with OpenAI SDK
     try:
-        response = None
-        for attempt in range(max_retries):
-            try:
-                print(f"🤔 Dolores is thinking... (Attempt {attempt + 1}/{max_retries})")
-                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data, timeout=120) # Increased timeout to 120s
-                response.raise_for_status()
-                break # Success
-            except requests.exceptions.ReadTimeout:
-                print(f"⚠️ API ReadTimeout: The model took too long (>120s) to respond. (Attempt {attempt + 1})")
-                if attempt < max_retries - 1:
-                    wait_time = base_delay * (2 ** attempt)
-                    print(f"⏳ Retrying in {wait_time} seconds...")
-                    time.sleep(wait_time)
-                else:
-                    raise  # Re-raise validation error
-            except requests.exceptions.RequestException as e:
-                print(f"⚠️ API Call Failed: {e}")
-                if attempt < max_retries - 1:
-                    wait_time = base_delay * (2 ** attempt) # Exponential backoff: 5, 10, 20, 40...
-                    print(f"⏳ Retrying in {wait_time} seconds (Exponential Backoff)...")
-                    time.sleep(wait_time)
-                else:
-                    raise e # Re-raise final error
+        print(f"🤔 Dolores is thinking... (Timeout: 120s)")
         
-        result = response.json()
-        content = result['choices'][0]['message']['content']
+        response = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[
+                {"role": "system", "content": final_prompt},
+                {"role": "user", "content": "Analyze the market and generate trading actions based on the latest data."}
+            ],
+            temperature=0.1,
+            response_format={"type": "json_object"},
+            timeout=120
+        )
         
-        # Clean output
-        if "```json" in content:
-            content = content.split("```json")[1].split("```")[0].strip()
-        elif "```" in content:
-            content = content.split("```")[1].split("```")[0].strip()
-            
+        content = response.choices[0].message.content
+        
         # Parse JSON
         decision = json.loads(content)
         
@@ -407,6 +376,8 @@ def run_agent():
         
         # Save decision log
         log_path = BASE_DIR / "agent_decision_log.json"
+        
+        # Load History
         history = []
         if log_path.exists():
             try:
@@ -432,9 +403,7 @@ def run_agent():
             json.dump(history, f, indent=2, ensure_ascii=False)
             
     except Exception as e:
-        print(f"❌ Error calling DeepSeek after retries: {e}")
-        if response:
-            print(f"Response text: {response.text}")
+        print(f"❌ Error calling DeepSeek (OpenAI SDK): {e}")
             
         # Write error to log so frontend shows something
         error_decision = {
@@ -444,6 +413,7 @@ def run_agent():
         }
         
         log_path = BASE_DIR / "agent_decision_log.json"
+        
         history = []
         if log_path.exists():
             try:
