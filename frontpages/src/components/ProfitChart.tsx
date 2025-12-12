@@ -1,17 +1,43 @@
-import { useRef, useEffect, useState } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, ReferenceLine, Dot } from 'recharts';
+import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
-interface NavRecord {
-  date: string;
-  value: number;
-  profit: number;
-}
+// 生成模拟收益数据 - 更曲折的曲线，更多数据点
+const generateProfitData = () => {
+  const data = [];
+  let value = 10000;
+  const days = 90; // 增加到90天，让图表可以滚动
+  
+  for (let i = 0; i < days; i++) {
+    // 增加波动幅度，让曲线更曲折
+    const volatility = 400;
+    const trend = 0.45; // 调整趋势，让盈利和亏损都有可能
+    const change = (Math.random() - trend) * volatility;
+    value += change;
+    
+    // 确保不会低于初始资金的50%（风控底线）
+    value = Math.max(value, 5000);
+    
+    data.push({
+      date: (i + 1) + '日',
+      value: Math.round(value),
+      profit: Math.round(value - 10000),
+    });
+  }
+  
+  return data;
+};
 
+const data = generateProfitData();
+const currentValue = data[data.length - 1].value;
+const totalProfit = currentValue - 10000;
+const profitPercentage = ((totalProfit / 10000) * 100).toFixed(2);
+
+// 闪烁的圆点组件
 const AnimatedDot = (props: any) => {
   const { cx, cy, isProfit } = props;
-  const color = isProfit ? '#2dd4bf' : '#fb7185';
-
+  const color = isProfit ? '#2dd4bf' : '#fb7185'; // teal-400: #2dd4bf, rose-400: #fb7185
+  
   return (
     <g>
       <circle cx={cx} cy={cy} r={6} fill={color} opacity={0.3}>
@@ -37,96 +63,35 @@ const AnimatedDot = (props: any) => {
   );
 };
 
-export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
-  const [data, setData] = useState<NavRecord[]>([]);
-  const [loading, setLoading] = useState(true);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const fetchNavHistory = async () => {
-    try {
-      setLoading(true);
-      let records: NavRecord[] = [];
-
-      if (import.meta.env.MODE === 'production') {
-        const response = await fetch('/data/nav_history.csv');
-        if (response.ok) {
-          const text = await response.text();
-          const lines = text.trim().split('\n');
-          for (let i = 1; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (!line) continue;
-            const [timestamp, navStr] = line.split(',');
-            const nav = parseFloat(navStr);
-            const dateObj = new Date(timestamp.replace(' ', 'T') + 'Z');
-            const dateStr = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${dateObj.getHours()}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
-
-            records.push({
-              date: dateStr,
-              value: Math.round(nav),
-              profit: Math.round(nav - 10000)
-            });
-          }
-        }
-      } else {
-        const response = await fetch('http://localhost:5001/api/nav-history');
-        if (response.ok) {
-          const json = await response.json();
-          // Assuming API returns similar structure or array of { timestamp, nav }
-          // If simpler, adapt here.
-          records = json.map((item: any) => {
-            if (!item.timestamp) return null;
-            const dateObj = new Date(item.timestamp.replace(' ', 'T') + 'Z');
-            const dateStr = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${dateObj.getHours()}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
-            return {
-              date: dateStr,
-              value: Math.round(item.nav),
-              profit: Math.round(item.nav - 10000)
-            };
-          }).filter((item: any) => item !== null);
-        }
-      }
-
-      if (records.length === 0) {
-        records.push({ date: 'Start', value: 10000, profit: 0 });
-      }
-
-      setData(records);
-    } catch (e) {
-      console.error("Failed to load NAV history", e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchNavHistory();
-    const interval = setInterval(fetchNavHistory, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (scrollContainerRef.current && data.length > 0) {
-      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
-    }
-  }, [data]);
-
-  const currentValue = data.length > 0 ? data[data.length - 1].value : 10000;
-  const totalProfit = currentValue - 10000;
-  const profitPercentage = ((totalProfit / 10000) * 100).toFixed(2);
-  const isProfit = currentValue >= 10000;
-  const chartColor = isProfit ? '#2dd4bf' : '#fb7185';
-
-  const minValue = Math.min(...data.map(d => d.value), 9000);
-  const maxValue = Math.max(...data.map(d => d.value), 11000);
-  const padding = (maxValue - minValue) * 0.1;
-  const yMin = Math.floor(minValue - padding);
-  const yMax = Math.ceil(maxValue + padding);
+export function ProfitChart({ language }: { language: 'zh' | 'en' }) {
+  // 计算Y轴的范围
+  const minValue = Math.min(...data.map(d => d.value));
+  const maxValue = Math.max(...data.map(d => d.value));
+  const padding = (maxValue - minValue) * 0.1; // 10%的上下边距
+  
+  // 计算Y轴domain和10k位置的百分比
+  const yMin = Math.max(minValue - padding, 4000); // Y轴下限，至少留出一些空间
+  const yMax = maxValue + padding;
   const yRange = yMax - yMin;
-  const baseline10kPosition = ((yMax - 10000) / yRange) * 100;
-
+  const baseline10kPosition = ((yMax - 10000) / yRange) * 100; // 10k在Y轴上的百分比位置
+  
+  // 获取当前日期时间
   const now = new Date();
   const currentDateTime = `${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
-
+  
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // 判断是否盈利
+  const isProfit = currentValue >= 10000;
+  const chartColor = isProfit ? '#2dd4bf' : '#fb7185'; // teal-400: #2dd4bf, rose-400: #fb7185
+  
+  // 滚动到最右边
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, []);
+  
   const t = {
     zh: {
       initialCapital: '初始资金',
@@ -141,11 +106,10 @@ export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
       netWorth: 'Net Worth',
     },
   };
-
-  if (loading && data.length === 0) return <div className="text-gray-400 p-4">Loading chart...</div>;
-
+  
   return (
     <div className="h-full flex flex-col">
+      {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-4 flex-shrink-0">
         <div className="bg-[#0a0e1a] rounded-lg p-4">
           <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].initialCapital}</div>
@@ -158,26 +122,31 @@ export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
         <div className={`bg-[#0a0e1a] rounded-lg p-4 relative`}>
           <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider">{t[language].totalProfit}</div>
           <div className={`flex items-center gap-2 font-['DIN_Alternate',sans-serif] text-xl ${totalProfit >= 0 ? 'text-teal-400' : 'text-rose-400'}`}>
-            {totalProfit >= 0 ? <TrendingUp className="w-5 h-5" /> : <TrendingDown className="w-5 h-4" />}
+            {totalProfit >= 0 ? <TrendingUp className="w-5 h-5" /> : <TrendingDown className="w-5 h-5" />}
             {totalProfit >= 0 ? '+' : ''}{profitPercentage}%
           </div>
         </div>
       </div>
 
-      <div className="flex-1 flex min-h-0 relative" style={{ minHeight: '300px' }}>
-        <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ height: 'calc(100% - 24px)' }}>
-          <div className="relative h-full" style={{ paddingTop: '10px' }}>
-            <div className="absolute inset-0 bg-[#151b2e] opacity-90"></div>
+      {/* Chart - Y轴固定，图表可滚动 */}
+      <div className="flex-1 flex relative min-h-0">
+        {/* 固定的Y轴标签层 - 悬浮在图表上方 */}
+        <div className="absolute left-0 top-0 bottom-6 w-20 z-10 pointer-events-none">
+          <div className="relative h-full pt-2">
+            {/* 背景遮罩 */}
+            <div className="absolute inset-0 bg-[#151b2e]"></div>
+            {/* Y轴分隔线 */}
             <div className="absolute top-0 right-0 bottom-0 w-px bg-[#1e2942]"></div>
+            {/* 标签 */}
             <div className="relative h-full flex flex-col">
               <div className="text-gray-500 font-['DIN_Alternate',sans-serif] text-xs text-right pr-3">
                 ${(Math.round(yMax) / 1000).toFixed(1)}k
               </div>
               <div className="flex-1 relative">
-                <div
-                  className="absolute text-gray-500 font-['DIN_Alternate',sans-serif] text-xs text-right pr-3 leading-none"
-                  style={{
-                    top: `${baseline10kPosition}%`,
+                <div 
+                  className="absolute text-gray-500 font-['DIN_Alternate',sans-serif] text-xs text-right pr-3 leading-none" 
+                  style={{ 
+                    top: `${baseline10kPosition}%`, 
                     right: 0,
                     transform: 'translateY(-50%)'
                   }}
@@ -188,12 +157,13 @@ export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
             </div>
           </div>
         </div>
-
-        <div className="absolute left-20 right-0 top-0 z-[5] pointer-events-none" style={{ height: 'calc(100% - 24px)', paddingTop: '10px' }}>
-          <div className="relative h-full">
-            <div
+        
+        {/* 固定的基准线层 - 悬浮在图表上方，延伸到右侧 */}
+        <div className="absolute left-20 right-0 top-0 bottom-6 z-[5] pointer-events-none">
+          <div className="relative h-full pt-2">
+            <div 
               className="absolute left-0 right-0 border-t border-dashed"
-              style={{
+              style={{ 
                 top: `${baseline10kPosition}%`,
                 borderColor: 'rgba(96, 165, 250, 0.3)',
                 borderWidth: '1px'
@@ -201,31 +171,32 @@ export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
             ></div>
           </div>
         </div>
-
-        <div
+        
+        {/* 可滚动的图表区域 */}
+        <div 
           ref={scrollContainerRef}
-          className="flex-1 overflow-x-auto min-h-0 h-full"
+          className="flex-1 overflow-x-auto h-full" 
         >
-          <div style={{ width: `${Math.max(1200, data.length * 60)}px`, height: '100%', minHeight: '300px' }}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={300}>
+          <div style={{ width: '1880px', height: '100%', minHeight: '300px' }}>
+            <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data} margin={{ top: 10, right: 30, left: 80, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#2dd4bf" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#2dd4bf" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#2dd4bf" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#2dd4bf" stopOpacity={0}/>
                   </linearGradient>
                   <linearGradient id="colorLoss" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#fb7185" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#fb7185" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#fb7185" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#fb7185" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid
-                  strokeDasharray="3 3"
+                <CartesianGrid 
+                  strokeDasharray="3 3" 
                   stroke="#1e2942"
                   opacity={0.5}
                 />
-                <XAxis
-                  dataKey="date"
+                <XAxis 
+                  dataKey="date" 
                   stroke="#6b7280"
                   tick={{ fill: '#6b7280', fontFamily: 'DIN Alternate, sans-serif', fontSize: 11 }}
                   tickLine={false}
@@ -233,10 +204,10 @@ export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
                   interval="preserveStartEnd"
                   tickFormatter={(value, index) => {
                     if (value === data[data.length - 1].date) return currentDateTime;
-                    return value;
+                    return '';
                   }}
                 />
-                <YAxis
+                <YAxis 
                   stroke="transparent"
                   tick={false}
                   axisLine={false}
@@ -263,6 +234,7 @@ export function ProfitChart({ language = 'zh' }: { language?: 'zh' | 'en' }) {
                   fill={isProfit ? 'url(#colorProfit)' : 'url(#colorLoss)'}
                   dot={(props) => {
                     const { index } = props;
+                    // 只在最后一个点显示闪烁动画
                     if (index === data.length - 1) {
                       return <AnimatedDot {...props} isProfit={isProfit} />;
                     }

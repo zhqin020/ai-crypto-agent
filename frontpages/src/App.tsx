@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 import { useState, useEffect } from 'react';
 import { ProfitChart } from './components/ProfitChart';
 import { PositionsTab } from './components/PositionsTab';
@@ -11,51 +10,8 @@ export default function App() {
   const [runningTime, setRunningTime] = useState({ days: 0, hours: 0 });
   const [language, setLanguage] = useState<'zh' | 'en'>('zh');
 
-  // Logic from original App.tsx: Dynamic Start Time
-  const [startTime, setStartTime] = useState<number>(new Date('2024-11-15T00:00:00').getTime());
-
-  useEffect(() => {
-    const fetchStartTime = async () => {
-      try {
-        let startTimeStr: string | null = null;
-
-        if (import.meta.env.MODE === 'production') {
-          // In production, read from static CSV file
-          const response = await fetch(`/data/nav_history.csv?t=${Date.now()}`);
-          if (response.ok) {
-            const text = await response.text();
-            const lines = text.split('\n');
-            // Line 0 is header, Line 1 is the first data point
-            if (lines.length > 1) {
-              const firstLine = lines[1];
-              if (firstLine) {
-                startTimeStr = firstLine.split(',')[0];
-              }
-            }
-          }
-        } else {
-          // In development, use the API
-          const response = await fetch('http://localhost:5001/api/summary');
-          if (response.ok) {
-            const data = await response.json();
-            if (data.startTime) {
-              startTimeStr = data.startTime;
-            }
-          }
-        }
-
-        if (startTimeStr) {
-          // Ensure format is compatible with Date constructor (replace space with T)
-          const timeStr = startTimeStr.replace(' ', 'T');
-          setStartTime(new Date(timeStr).getTime());
-        }
-      } catch (error) {
-        console.error("Failed to fetch start time:", error);
-      }
-    };
-
-    fetchStartTime();
-  }, []);
+  // 设置策略启动时间（示例：2024年11月15日）
+  const startTime = new Date('2024-11-15T00:00:00').getTime();
 
   useEffect(() => {
     const updateRunningTime = () => {
@@ -70,7 +26,7 @@ export default function App() {
     const interval = setInterval(updateRunningTime, 60000); // 每分钟更新一次
 
     return () => clearInterval(interval);
-  }, [startTime]);
+  }, []);
 
   const t = {
     zh: {
@@ -105,16 +61,16 @@ export default function App() {
                 LIVE
               </div>
             </div>
-
+            
             <div className="flex items-center gap-4">
               {/* AI Strategy Notice */}
               <p className="text-gray-400 text-sm">
-                {language === 'zh'
+                {language === 'zh' 
                   ? <>4小时线为基准的AI量化策略，已成功运行 <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.days}</span> 天 <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.hours}</span> 小时</>
                   : <>AI Quant Strategy based on 4H timeframe, running for <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.days}</span> days <span className="text-blue-400 font-['DIN_Alternate',sans-serif]">{runningTime.hours}</span> hours</>
                 }
               </p>
-
+              
               {/* Language Toggle */}
               <button
                 onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}
@@ -135,7 +91,7 @@ export default function App() {
             <div className="flex items-center gap-2 mb-4 flex-shrink-0">
               <h2 className="text-white">{t[language].profitChart}</h2>
             </div>
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 min-h-0">
               <ProfitChart language={language} />
             </div>
           </div>
@@ -146,10 +102,11 @@ export default function App() {
             <div className="flex border-b border-[#1e2942] flex-shrink-0">
               <button
                 onClick={() => setActiveTab('positions')}
-                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'positions'
-                  ? 'text-blue-400 bg-blue-500/10'
-                  : 'text-gray-500 hover:text-gray-300'
-                  }`}
+                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${
+                  activeTab === 'positions'
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
               >
                 {activeTab === 'positions' && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
@@ -158,10 +115,11 @@ export default function App() {
               </button>
               <button
                 onClick={() => setActiveTab('history')}
-                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'history'
-                  ? 'text-blue-400 bg-blue-500/10'
-                  : 'text-gray-500 hover:text-gray-300'
-                  }`}
+                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${
+                  activeTab === 'history'
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
               >
                 {activeTab === 'history' && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
@@ -170,10 +128,11 @@ export default function App() {
               </button>
               <button
                 onClick={() => setActiveTab('decision')}
-                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${activeTab === 'decision'
-                  ? 'text-blue-400 bg-blue-500/10'
-                  : 'text-gray-500 hover:text-gray-300'
-                  }`}
+                className={`flex-1 flex items-center justify-center px-6 py-4 transition-all relative font-bold ${
+                  activeTab === 'decision'
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
               >
                 {activeTab === 'decision' && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
