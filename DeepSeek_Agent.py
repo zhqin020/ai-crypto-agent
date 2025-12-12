@@ -367,9 +367,17 @@ def run_agent():
         for attempt in range(max_retries):
             try:
                 print(f"🤔 Dolores is thinking... (Attempt {attempt + 1}/{max_retries})")
-                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data, timeout=45) # Increased timeout
+                response = requests.post(f"{BASE_URL}/chat/completions", headers=headers, json=data, timeout=120) # Increased timeout to 120s
                 response.raise_for_status()
                 break # Success
+            except requests.exceptions.ReadTimeout:
+                print(f"⚠️ API ReadTimeout: The model took too long (>120s) to respond. (Attempt {attempt + 1})")
+                if attempt < max_retries - 1:
+                    wait_time = base_delay * (2 ** attempt)
+                    print(f"⏳ Retrying in {wait_time} seconds...")
+                    time.sleep(wait_time)
+                else:
+                    raise  # Re-raise validation error
             except requests.exceptions.RequestException as e:
                 print(f"⚠️ API Call Failed: {e}")
                 if attempt < max_retries - 1:
