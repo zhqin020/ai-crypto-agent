@@ -1,5 +1,10 @@
 [
   {
+    "analysis_summary": "模型调用失败: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.",
+    "actions": [],
+    "timestamp": "2025-12-12 00:18:24"
+  },
+  {
     "analysis_summary": {
       "zh": "1. 【叙事校验】Fed降息预期已部分兑现（市场隐含利率下降14.7基点），但BTC反弹在94K受阻，显示利好已Priced In。新闻显示市场情绪谨慎（恐惧指数29），长期清算已发生（362M vs 158M），可能为反弹创造条件。2. 日线趋势全盘熊市（所有币种低于SMA50），但【痛苦交易】检测显示BNB、SOL、DOGE资金费率极度负值（-0.0050%至-0.0081%），存在轧空机会，尤其SOL费率Z-Score -93.2%显示空头拥挤。3. 我选择【微观结构挤压】剧本，利用负费率+价格韧性做多，同时管理现有仓位风险。",
       "en": "1. 【Narrative Check】Fed rate cut expectations are partially priced in (market-implied rate down 14.7 bps), but BTC rally fails at 94K, indicating good news is Priced In. News shows cautious sentiment (Fear & Greed 29), long liquidations have occurred (362M vs 158M), potentially setting up a bounce. 2. Daily trend is fully bearish (all coins below SMA50), but 【Pain Trade】 detection shows BNB, SOL, DOGE have extremely negative funding rates (-0.0050% to -0.0081%), indicating short squeeze opportunities, especially SOL with funding Z-Score -93.2% showing crowded shorts. 3. I select the 【Microstructure Squeeze】 scenario, going long on negative funding + price resilience, while managing risk in existing positions."
@@ -1418,35 +1423,5 @@
       }
     ],
     "timestamp": "2025-12-05 04:15:56"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】当前新闻中虽有ETH跑赢BTC的报道，但市场整体处于恐惧状态（恐惧贪婪指数28），且日线趋势均为熊市（价格低于SMA50），显示宏观情绪偏弱，利好可能已部分兑现（Priced In）。2. 结合【痛苦交易】检测，BNB和DOGE的资金费率较高（0.0061%和0.0070%），存在轧多风险，而BTC和SOL的资金费率极负（-0.0010%和0.0002%），但Z-Score显示未达极端水平，短期挤压信号不强。3. 我选择【趋势跟随】剧本，基于Qlib模型排名（BNB>ETH>DOGE），在低杠杆下做多相对强势币种，同时严格控制风险，避免在熊市趋势中过度暴露。",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 2176.14,
-        "entry_reason": "符合【趋势跟随】剧本。Qlib评分最高（0.3787），排名第一，技术指标RSI（58.03）和动量（0.0158）健康，资金费率（0.0061%）虽略高但Z-Score（12.37%）未达极端，在熊市趋势中相对强势。",
-        "exit_plan": {
-          "take_profit": 950.0,
-          "stop_loss": 875.0,
-          "invalidation": "价格跌破875.0支撑或资金费率Z-Score超过30%，显示轧多风险加剧。"
-        }
-      },
-      {
-        "symbol": "ETH",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1632.11,
-        "entry_reason": "符合【趋势跟随】剧本。Qlib评分第二（0.2887），技术指标RSI（60.21）和MACD（6.3973）偏强，资金费率（0.0005%）中性，新闻提及ETH跑赢BTC可能提供短期动能。",
-        "exit_plan": {
-          "take_profit": 3300.0,
-          "stop_loss": 3050.0,
-          "invalidation": "价格跌破3050.0支撑或BTC相关性（0.9316）减弱导致联动下跌。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-05 00:16:48"
   }
 ]
