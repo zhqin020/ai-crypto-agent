@@ -1,6 +1,55 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 23.0），但近期多头清算远超空头（$3.33亿 vs $0.70亿），显示悲观情绪可能已过度反应（Priced In）。新闻面混杂（Fed降息预期升温 vs Vanguard看空BTC），但价格未创新低，暗示潜在积累（Divergence）。2. 日线趋势全为熊市（所有币种价格低于SMA50），但【痛苦交易】检测显示：ETH、SOL、DOGE、BTC的Funding Rate Z-Score均低于-100%（极端负值），表明空头拥挤，存在轧空风险。3. 我选择【微观结构/轧空】剧本：利用极端负资金费率+价格韧性，做多最拥挤的空头标的（ETH），同时持有现有BNB多头（技术面相对健康）。",
+      "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 23.0), but recent long liquidations far exceed shorts ($333M vs $70M), indicating pessimism may be overdone (Priced In). News is mixed (Fed rate cut expectations rising vs Vanguard bearish on BTC), but prices haven't made new lows, suggesting potential accumulation (Divergence). 2. Daily trends are all bearish (all coins below SMA50), but 【Pain Trade】 detection shows: ETH, SOL, DOGE, BTC have Funding Rate Z-Scores below -100% (extreme negative), indicating crowded shorts and squeeze risk. 3. I choose the 【Microstructure/Squeeze】 scenario: exploit extreme negative funding + price resilience by longing the most crowded short (ETH), while holding existing BNB long (relatively healthy technically)."
+    },
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4312.28,
+        "entry_reason": {
+          "zh": "现有持仓：BNB多头（入场价867.1）。理由：Qlib评分第二（0.2646），技术面相对健康（RSI 51.2中性，MACD正，动量0.0236为正），资金费率接近中性（0.0006%），无拥挤风险。日线虽熊市但价格在支撑位上方，持仓理由仍成立。",
+          "en": "Existing position: BNB long (entry 867.1). Reason: Qlib score second (0.2646), relatively healthy technically (RSI 51.2 neutral, MACD positive, momentum 0.0236 positive), funding rate near neutral (0.0006%), no crowding risk. Daily trend bearish but price above support, thesis intact."
+        },
+        "exit_plan": {
+          "take_profit": 920.0,
+          "stop_loss": 840.0,
+          "invalidation": {
+            "zh": "资金费率转正（>0.01%）或价格跌破840支撑（日线新低）。",
+            "en": "Funding rate turns positive (>0.01%) or price breaks below 840 support (daily new low)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 554.97,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：ETH是Qlib评分最高（0.3908），但资金费率Z-Score极负（-167.9%），显示空头极度拥挤。价格在3090附近盘整，未随负面情绪下跌，存在轧空潜力。日线虽熊市，但4H RSI 39.54接近超卖，提供边际安全。",
+          "en": "Matches 【Microstructure Squeeze】 scenario: ETH has highest Qlib score (0.3908) but extreme negative funding Z-Score (-167.9%), indicating heavily crowded shorts. Price consolidating near 3090, not falling with negative sentiment, squeeze potential. Daily trend bearish but 4H RSI 39.54 near oversold, providing marginal safety."
+        },
+        "exit_plan": {
+          "take_profit": 3250,
+          "stop_loss": 3000,
+          "invalidation": {
+            "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破3000关键心理支撑。",
+            "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 3000 key psychological support."
+          }
+        },
+        "status": "executed",
+        "original_size_usd": 2000.0,
+        "rejection_reason": "Size Reduced due to Exposure Limit"
+      }
+    ],
+    "timestamp": "2025-12-13 12:17:25"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 23），且美联储降息预期升温（隐含利率下降9.7基点），但宏观新闻多为旧闻（如特朗普AI行政令、Vanguard分析师评论），已被市场消化（Priced In）。2. 日线趋势全为熊市（所有币种价格低于SMA50），结合资金费率普遍为负（ETH -0.0072%，SOL -0.0085%），显示空头拥挤，存在【轧空风险】（Pain Trade）。3. 我选择【微观结构挤压】剧本，利用负资金费率+价格韧性，做多Qlib评分最高的ETH和BNB，同时平仓表现不佳的SOL以控制风险。",
       "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 23), and Fed rate cut expectations are rising (implied rate down 9.7 bps), but macro news is mostly old (e.g., Trump AI executive order, Vanguard analyst comments), already priced in. 2. Daily trends are all bearish (all coins below SMA50), combined with negative funding rates (ETH -0.0072%, SOL -0.0085%), indicating crowded shorts and 【short squeeze risk】 (Pain Trade). 3. I choose the 【Microstructure Squeeze】 scenario, leveraging negative funding + price resilience to long top Qlib-scored ETH and BNB, while closing underperforming SOL to manage risk."
     },
@@ -1574,47 +1623,5 @@
       }
     ],
     "timestamp": "2025-12-06 04:16:52"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：当前市场处于极端恐惧（Fear & Greed Index 23.0），且过去48小时多头清算远超空头，显示恐慌性抛售可能已发生，但新闻面缺乏直接加密货币催化剂，属于旧叙事（Priced In）。2. 结合日线趋势（所有主要币种均处于熊市）和【痛苦交易】检测：SOL和DOGE的资金费率Z-Score极负（-126.97%和-249.17%），表明空头头寸拥挤，存在轧空风险；而BTC资金费率略正但Z-Score为负，多头压力相对较小。3. 我选择【微观结构/挤压】剧本，利用极端负费率下的价格韧性，在SOL和DOGE上做多，博弈空头平仓带来的反弹。",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 4000,
-        "entry_reason": "关闭现有空头头寸。原【轧多】剧本（基于负费率Z-Score）已失效，因当前数据显示资金费率Z-Score极负（-126.97%），表明空头拥挤而非多头，与做空逻辑矛盾。价格接近支撑且RSI超卖（38.88），存在反弹风险。",
-        "exit_plan": {
-          "take_profit": 132.24,
-          "stop_loss": 132.24,
-          "invalidation": "立即平仓，因市场结构变化（空头拥挤取代多头拥挤）。"
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率Z-Score极负（-126.97%），显示空头头寸过度拥挤，价格在132附近展现韧性（低波动），Qlib评分最高（0.6089），预计空头平仓将推动反弹。",
-        "exit_plan": {
-          "take_profit": 138.0,
-          "stop_loss": 128.0,
-          "invalidation": "资金费率Z-Score回升至-50%以上或价格跌破128.0支撑，表明空头压力缓解或下跌趋势延续。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "维持现有多头头寸。符合【微观结构挤压】剧本：资金费率Z-Score极负（-249.17%），空头拥挤严重，价格在0.1384附近持稳，Qlib评分较高（0.3462），原做多逻辑依然有效。",
-        "exit_plan": {
-          "take_profit": 0.145,
-          "stop_loss": 0.135,
-          "invalidation": "资金费率Z-Score转正或价格跌破0.135支撑，表明空头压力缓解或下跌趋势延续。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-06 00:16:27"
   }
 ]
