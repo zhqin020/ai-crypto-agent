@@ -1,6 +1,6 @@
 {
-  "nav": 10915.81,
-  "cash": 10327.242776464102,
+  "nav": 10918.35,
+  "cash": 9325.242776464102,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 554.97,
       "notional": 1109.94,
-      "current_price": 3106.49,
-      "unrealized_pnl": 5.93,
+      "current_price": 3119.25,
+      "unrealized_pnl": 10.51,
       "exit_plan": {
         "take_profit": 3250,
         "stop_loss": 3000,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 27.71,
       "notional": 55.42,
-      "current_price": 0.1388,
-      "unrealized_pnl": -0.04,
+      "current_price": 0.1387,
+      "unrealized_pnl": -0.08,
       "exit_plan": {
         "take_profit": 0.145,
         "stop_loss": 0.134,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2025-12-13 20:17:26"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 2.232142857142857,
+      "entry_price": 896.0,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 896.0,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 940,
+        "stop_loss": 870,
+        "invalidation": {
+          "zh": "资金费率Z-Score跌破50%（多头压力缓解）或价格跌破870（基于ATR 10.66设置，约-3%止损）。",
+          "en": "Funding rate Z-Score falls below 50% (long pressure eases) or price breaks below 870 (based on ATR 10.66, ~-3% stop loss)."
+        }
+      },
+      "opened_at": "2025-12-14 04:17:18"
     }
   ],
-  "last_update": "2025-12-14T00:17:18.141285"
+  "last_update": "2025-12-14T04:17:18.065341"
 }
