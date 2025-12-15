@@ -1,6 +1,6 @@
 {
-  "nav": 10908.68,
-  "cash": 9321.077286044478,
+  "nav": 10918.26,
+  "cash": 9836.429964615907,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,14 +10,14 @@
       "leverage": 2.0,
       "margin": 554.97,
       "notional": 1109.94,
-      "current_price": 3111.99,
-      "unrealized_pnl": 7.9,
+      "current_price": 3125.92,
+      "unrealized_pnl": 12.91,
       "exit_plan": {
         "take_profit": 3250,
-        "stop_loss": 3000,
+        "stop_loss": 3050,
         "invalidation": {
-          "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破3000关键心理支撑。",
-          "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 3000 key psychological support."
+          "zh": "价格跌破3050（基于ATR $50.94调整，原止损3000上移）或资金费率Z-Score回落至100%以下（多头压力缓解）。",
+          "en": "Price breaks below 3050 (adjusted from original 3000 based on ATR $50.94) or funding rate Z-Score drops below 100% (long pressure eases)."
         }
       },
       "opened_at": "2025-12-13 04:17:26"
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 500.0,
       "notional": 1000.0,
-      "current_price": 131.51,
-      "unrealized_pnl": 8.36,
+      "current_price": 132.24,
+      "unrealized_pnl": 13.95,
       "exit_plan": {
         "take_profit": 140,
         "stop_loss": 125,
@@ -41,27 +41,7 @@
         }
       },
       "opened_at": "2025-12-14 20:17:44"
-    },
-    {
-      "symbol": "DOGE",
-      "side": "long",
-      "quantity": 7440.476190476191,
-      "entry_price": 0.1344,
-      "leverage": 2.0,
-      "margin": 500.0,
-      "notional": 1000.0,
-      "current_price": 0.1366,
-      "unrealized_pnl": 16.37,
-      "exit_plan": {
-        "take_profit": 0.145,
-        "stop_loss": 0.13,
-        "invalidation": {
-          "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破0.13（基于ATR $0.0022和整数支撑）。",
-          "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 0.13 (based on ATR $0.0022 and round-number support)."
-        }
-      },
-      "opened_at": "2025-12-15 00:14:21"
     }
   ],
-  "last_update": "2025-12-15T04:17:11.122181"
+  "last_update": "2025-12-15T08:17:16.031150"
 }
