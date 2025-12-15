@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】最新新闻多为旧闻（如特朗普Fed主席言论、油价与BTC流动性等），无重大新驱动，市场已消化；CPI等关键数据尚未发布，当前为数据前静默期，属Priced In状态。2. 日线趋势全为熊市（BTC < SMA50），结合恐惧贪婪指数16（极度恐惧）和普遍负资金费率，市场情绪悲观，存在轧空机会（负费率显示空头拥挤）。3. 我选择【微观结构挤压】剧本，利用负资金费率（如DOGE -0.0057%）和价格韧性，做多相对强势币种，博弈空头回补。",
+      "en": "1. 【Narrative Check】Latest news is mostly old (e.g., Trump Fed chair comments, oil-BTC liquidity), no major new drivers; key data like CPI not yet released, current period is pre-data silence, indicating Priced In. 2. Daily trends are all bearish (BTC < SMA50), combined with Fear & Greed Index 16 (Extreme Fear) and widespread negative funding rates, market sentiment is pessimistic, presenting short squeeze opportunities (negative rates show crowded shorts). 3. I select the 【Microstructure Squeeze】scenario, leveraging negative funding rates (e.g., DOGE -0.0057%) and price resilience to long relatively strong coins, betting on short covering."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1109.94,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：资金费率Z-Score为8.4068%（略正但不高），价格接近支撑（3000），Qlib评分第二（0.4458），日线趋势熊市但4H结构中性，持有等待反弹。",
+          "en": "Matches 【Microstructure Squeeze】scenario: Funding rate Z-Score is 8.4068% (slightly positive but not high), price near support (3000), Qlib score second (0.4458), daily trend bearish but 4H structure neutral, holding for rebound."
+        },
+        "exit_plan": {
+          "take_profit": 3250,
+          "stop_loss": 3000,
+          "invalidation": {
+            "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破3000关键心理支撑。",
+            "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 3000 key psychological support."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：资金费率Z-Score为-114.2714%（极度负值，空头拥挤），价格在支撑附近（125），Qlib评分第四（0.3897），持有博弈空头回补。",
+          "en": "Matches 【Microstructure Squeeze】scenario: Funding rate Z-Score is -114.2714% (extremely negative, crowded shorts), price near support (125), Qlib score fourth (0.3897), holding for short covering."
+        },
+        "exit_plan": {
+          "take_profit": 140,
+          "stop_loss": 125,
+          "invalidation": {
+            "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破125（基于ATR和关键支撑）。",
+            "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 125 (based on ATR and key support)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：资金费率Z-Score为-149.7070%（极度负值，空头高度拥挤），Qlib评分第一（0.494），相对强势，价格在0.1344支撑附近，持有博弈轧空。",
+          "en": "Matches 【Microstructure Squeeze】scenario: Funding rate Z-Score is -149.7070% (extremely negative, highly crowded shorts), Qlib score top (0.494), relatively strong, price near support at 0.1344, holding for short squeeze."
+        },
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.13,
+          "invalidation": {
+            "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破0.13（基于ATR $0.0022和整数支撑）。",
+            "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 0.13 (based on ATR $0.0022 and round-number support)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-15 12:17:10"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】当前市场处于极端恐惧（Fear & Greed Index 16.0），且过去48小时多头清算远超空头（$1.15亿 vs $0.49亿），显示近期抛压已释放，但宏观新闻缺乏即时催化剂（如CPI实际值），利好可能已部分消化（Priced In）。2. 日线趋势全盘看跌（所有币种价格低于SMA50），但4H级别出现超卖反弹迹象（ETH、SOL、DOGE RSI<40，资金费率均为负值），存在【痛苦交易】中的空头挤压机会（Crowded Shorts）。3. 我选择【微观结构/挤压】剧本，基于Qlib相对强度排名（ETH>SOL>DOGE）和负资金费率（空头拥挤），在超卖区域布局反弹，但严格控制风险（因整体趋势仍熊市）。",
       "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 16.0), with long liquidations significantly exceeding shorts over 48h ($115M vs $49M), indicating recent selling pressure has been flushed, but macro news lacks immediate catalysts (e.g., CPI actuals), suggesting positives may be partially priced in. 2. Daily trends are bearish across all coins (price below SMA50), but 4H shows oversold bounce signals (ETH, SOL, DOGE RSI<40, all funding rates negative), presenting a 【Pain Trade】short squeeze opportunity (Crowded Shorts). 3. I select the 【Microstructure/Squeeze】scenario, leveraging Qlib relative strength ranking (ETH>SOL>DOGE) and negative funding rates (crowded shorts) to position for a bounce in oversold areas, with strict risk control (as overall trend remains bearish)."
     },
@@ -1968,10 +2034,5 @@
       }
     ],
     "timestamp": "2025-12-07 20:16:26"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】当前市场无明显新宏观驱动，新闻多为旧闻（如FOMC担忧、贸易战）且价格已部分反映，属于Priced In状态。恐惧贪婪指数20（极度恐惧）和近期多头清算占优，暗示情绪悲观但可能过度。2. 日线趋势全为熊市（价格低于SMA50），但4H数据中SOL、DOGE、ETH的RSI（36.74、35.35、42.58）已接近或处于超卖区域，且资金费率普遍为负（SOL -0.0054%，DOGE -0.0011%，ETH -0.0010%），显示空头拥挤，存在【轧空机会】。3. 我选择【微观结构挤压】剧本，基于Qlib评分（SOL 0.6575最高）和负费率，做多SOL以博弈空头回补反弹。",
-    "actions": [],
-    "timestamp": "2025-12-07 16:16:56"
   }
 ]
