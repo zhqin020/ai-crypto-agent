@@ -1,6 +1,6 @@
 {
-  "nav": 10877.86,
-  "cash": 9822.077286044478,
+  "nav": 10860.17,
+  "cash": 9321.077286044478,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 554.97,
       "notional": 1109.94,
-      "current_price": 3092.24,
-      "unrealized_pnl": 0.81,
+      "current_price": 3063.3,
+      "unrealized_pnl": -9.59,
       "exit_plan": {
         "take_profit": 3250,
         "stop_loss": 3000,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 500.0,
       "notional": 1000.0,
-      "current_price": 130.42,
-      "unrealized_pnl": 0.0,
+      "current_price": 129.6,
+      "unrealized_pnl": -6.29,
       "exit_plan": {
         "take_profit": 140,
         "stop_loss": 125,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2025-12-14 20:17:44"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 7440.476190476191,
+      "entry_price": 0.1344,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 0.1344,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.145,
+        "stop_loss": 0.13,
+        "invalidation": {
+          "zh": "资金费率Z-Score回升至-50%以上（空头压力缓解）或价格跌破0.13（基于ATR $0.0022和整数支撑）。",
+          "en": "Funding rate Z-Score recovers above -50% (short pressure eases) or price breaks below 0.13 (based on ATR $0.0022 and round-number support)."
+        }
+      },
+      "opened_at": "2025-12-15 00:14:21"
     }
   ],
-  "last_update": "2025-12-14T20:17:44.375236"
+  "last_update": "2025-12-15T00:14:21.276114"
 }
