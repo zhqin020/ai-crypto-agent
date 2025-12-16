@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 11.0），比特币巨鲸以13年来最快速度增持，但价格仍下跌30%，显示坏消息可能已部分消化（Priced In），存在潜在反弹机会。2. 日线趋势全为熊市（价格低于SMA50），但4H数据显示SOL、ETH、BTC的RSI均低于40（超卖），且SOL资金费率Z-Score为-4.4%（极度负值），存在【轧空机会】（痛苦交易检测）。3. 我选择【微观结构挤压】剧本，做多SOL，因其Qlib评分最高（0.5718）、负资金费率显示空头拥挤，且价格在支撑位附近企稳。",
+      "en": "1. 【Narrative Check】：The market is in extreme fear (Fear & Greed Index 11.0), Bitcoin sharks are accumulating at the fastest pace in 13 years, but price is still down 30%, indicating bad news may be partially priced in, with potential bounce opportunities. 2. Daily trends are all bearish (price below SMA50), but 4H data shows RSI below 40 (oversold) for SOL, ETH, BTC, and SOL funding rate Z-Score is -4.4% (extremely negative), suggesting a 【short squeeze opportunity】 (pain trade detection). 3. I select the 【Microstructure Squeeze】 scenario, going long SOL due to its highest Qlib score (0.5718), negative funding rate indicating crowded shorts, and price stabilizing near support."
+    },
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "持有现有仓位：价格接近止损位0.125但未跌破，资金费率Z-Score为-90.2%（极度负值），存在轧空潜力，且Qlib评分低（0.101）但未触发失效条件。",
+          "en": "Hold existing position: Price is near stop-loss at 0.125 but not broken, funding rate Z-Score is -90.2% (extremely negative), indicating squeeze potential, and Qlib score is low (0.101) but invalidation not triggered."
+        },
+        "exit_plan": {
+          "take_profit": 0.145,
+          "stop_loss": 0.125,
+          "invalidation": {
+            "zh": "价格跌破0.125（基于ATR和近期低点）或资金费率Z-Score升至75%以上（显示多头过热）。",
+            "en": "Price breaks below 0.125 (based on ATR and recent lows) or funding rate Z-Score rises above 75% (indicating overheated longs)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "持有现有仓位：价格在止损位85000上方，资金费率Z-Score为7.35%（中性），日线RSI 34.6超卖，但Qlib评分低（0.1958），等待反弹或止损触发。",
+          "en": "Hold existing position: Price is above stop-loss at 85000, funding rate Z-Score is 7.35% (neutral), daily RSI 34.6 oversold, but Qlib score is low (0.1958), awaiting bounce or stop-loss trigger."
+        },
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 85000,
+          "invalidation": {
+            "zh": "价格跌破85000（基于ATR和关键支撑）或资金费率Z-Score升至70%以上（显示多头过热），则平仓。",
+            "en": "Close position if price breaks below 85000 (based on ATR and key support) or funding rate Z-Score rises above 70% (indicating overheated longs)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1411.58,
+        "entry_reason": {
+          "zh": "持有现有仓位：价格在止损位124上方，资金费率Z-Score为-4.4%（极度负值），Qlib评分最高（0.5718），符合【微观结构挤压】剧本，等待轧空反弹。",
+          "en": "Hold existing position: Price is above stop-loss at 124, funding rate Z-Score is -4.4% (extremely negative), Qlib score highest (0.5718), matching 【Microstructure Squeeze】 scenario, awaiting short squeeze bounce."
+        },
+        "exit_plan": {
+          "take_profit": 135,
+          "stop_loss": 124,
+          "invalidation": {
+            "zh": "价格跌破124（基于ATR 2.8769和近期低点）或资金费率Z-Score升至50%以上（显示空头压力缓解）。",
+            "en": "Price breaks below 124 (based on ATR 2.8769 and recent lows) or funding rate Z-Score rises above 50% (indicating reduced short pressure)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-16 16:17:19"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 11.0），新闻显示比特币因美联储主席更替和AI泡沫担忧而抛售，但长期清算（$458M）已发生，且Grayscale预测6个月内新高，显示坏消息可能已部分消化（Priced In）。2. 日线趋势全为熊市（价格低于SMA50），但RSI普遍超卖（BTC 29.0，DOGE 29.76），存在技术性反弹机会；【痛苦交易】检测显示SOL和DOGE资金费率Z-Score极负（-186.33%和-160.72%），表明空头拥挤，有轧空风险。3. 我选择【微观结构挤压】剧本，利用超卖条件和负资金费率做多SOL和DOGE，同时持有现有仓位等待反弹。",
       "en": "1. 【Narrative Check】：Market is in extreme fear (Fear & Greed Index 11.0), with news showing Bitcoin sell-off due to Fed chair switch and AI bubble fears, but long liquidations ($458M) have occurred and Grayscale predicts new ATH within 6 months, indicating bad news may be partially priced in. 2. Daily trends are all bearish (price below SMA50), but RSI is oversold (BTC 29.0, DOGE 29.76), suggesting technical bounce potential; 【Pain Trade】 detection shows SOL and DOGE have extremely negative funding rate Z-Scores (-186.33% and -160.72%), indicating crowded shorts and squeeze risk. 3. I choose the 【Microstructure Squeeze】 scenario, going long on SOL and DOGE using oversold conditions and negative funding rates, while holding existing positions for a rebound."
     },
@@ -2148,47 +2214,5 @@
       }
     ],
     "timestamp": "2025-12-09 00:16:41"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：最新新闻显示比特币ETF资金流入和BlackRock申请以太坊质押ETF等利好，但市场反应平淡（BTC价格在90K附近徘徊），且恐惧贪婪指数为20（极度恐惧），表明利好可能已部分兑现（Priced In），市场情绪仍偏谨慎。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），整体趋势偏弱，但资金费率普遍为正（SOL和DOGE的Z-score超过150%），显示多头拥挤，存在轧多风险。3. 我选择【均值回归】剧本，因为SOL和DOGE的Qlib评分虽高，但资金费率Z-score极端偏高（SOL 163.86%，DOGE 178.28%），且日线趋势熊市，短期上涨可能受限，适合减仓或观望。",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 1368.42,
-        "entry_reason": "原开仓理由为Qlib评分高和趋势跟随，但当前资金费率Z-score达163.86%（极端偏高），日线趋势熊市，存在轧多风险，触发均值回归剧本。",
-        "exit_plan": {
-          "take_profit": 145,
-          "stop_loss": 130,
-          "invalidation": "价格跌破130支撑或资金费率Z-score转正超过150%，表明空头压力缓解或上涨动力减弱。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 2000.0,
-        "entry_reason": "原开仓理由为Qlib评分高和趋势跟随，但当前资金费率Z-score达178.28%（极端偏高），日线趋势熊市，存在轧多风险，触发均值回归剧本。",
-        "exit_plan": {
-          "take_profit": 0.155,
-          "stop_loss": 0.135,
-          "invalidation": "价格跌破0.135支撑或资金费率Z-score转负超过-2%，表明下跌趋势加速或空头压力增加。"
-        }
-      },
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000.0,
-        "entry_reason": "BNB资金费率Z-score较低（30.74%），无极端拥挤风险，且Qlib评分虽低但日线RSI中性（58.4），价格接近入场价，暂无明显反转信号，选择持有观察。",
-        "exit_plan": {
-          "take_profit": 950,
-          "stop_loss": 870,
-          "invalidation": "价格跌破870支撑或资金费率Z-score转正超过100%，表明上涨动力减弱或空头压力增加。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-08 20:16:52"
   }
 ]
