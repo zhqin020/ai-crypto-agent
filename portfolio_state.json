@@ -1,6 +1,6 @@
 {
-  "nav": 10874.66,
-  "cash": 8134.331107790509,
+  "nav": 10858.51,
+  "cash": 8852.23623623604,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.1307,
-      "unrealized_pnl": -6.1,
+      "current_price": 0.1301,
+      "unrealized_pnl": -15.26,
       "exit_plan": {
         "take_profit": 0.145,
         "stop_loss": 0.125,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 87026.0,
-      "unrealized_pnl": 21.31,
+      "current_price": 87035.5,
+      "unrealized_pnl": 21.53,
       "exit_plan": {
         "take_profit": 90000,
         "stop_loss": 85000,
@@ -41,27 +41,7 @@
         }
       },
       "opened_at": "2025-12-15 20:17:34"
-    },
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 0.49351301298075784,
-      "entry_price": 2948.21,
-      "leverage": 2.0,
-      "margin": 727.49,
-      "notional": 1454.98,
-      "current_price": 2943.4,
-      "unrealized_pnl": -2.37,
-      "exit_plan": {
-        "take_profit": 3100,
-        "stop_loss": 2850,
-        "invalidation": {
-          "zh": "价格跌破2850（基于ATR 57和近期低点）或资金费率Z-Score转正至10%以上（显示空头压力缓解）。",
-          "en": "Price breaks below 2850 (based on ATR 57 and recent lows) or funding rate Z-Score turns positive above 10% (indicating short pressure easing)."
-        }
-      },
-      "opened_at": "2025-12-17 04:16:55"
     }
   ],
-  "last_update": "2025-12-17T08:16:12.066202"
+  "last_update": "2025-12-17T12:17:35.460913"
 }
