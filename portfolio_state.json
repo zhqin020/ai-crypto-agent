@@ -1,6 +1,6 @@
 {
-  "nav": 10783.6,
-  "cash": 9104.032196072194,
+  "nav": 10807.59,
+  "cash": 8798.725899427034,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 86845.3,
-      "unrealized_pnl": 17.12,
+      "current_price": 87296.5,
+      "unrealized_pnl": 27.6,
       "exit_plan": {
         "take_profit": 90000,
         "stop_loss": 85000,
@@ -23,25 +23,25 @@
       "opened_at": "2025-12-15 20:17:34"
     },
     {
-      "symbol": "SOL",
+      "symbol": "ETH",
       "side": "long",
-      "quantity": 11.245161290322581,
-      "entry_price": 127.1,
+      "quantity": 0.6864404111912864,
+      "entry_price": 2859.01,
       "leverage": 2.0,
-      "margin": 714.63,
-      "notional": 1429.26,
-      "current_price": 122.46,
-      "unrealized_pnl": -52.18,
+      "margin": 981.27,
+      "notional": 1962.54,
+      "current_price": 2859.01,
+      "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 140,
-        "stop_loss": 120,
+        "take_profit": 3000,
+        "stop_loss": 2750,
         "invalidation": {
-          "zh": "价格跌破120（基于ATR和近期低点）或资金费率Z-Score升至75%以上（显示多头过热），则平仓。",
-          "en": "Close position if price breaks below 120 (based on ATR and recent lows) or funding rate Z-Score rises above 75% (indicating overheated longs)."
+          "zh": "价格跌破2750（基于ATR和支撑）或资金费率Z-Score升至50%以上（显示空头压力缓解），则平仓。",
+          "en": "Close position if price breaks below 2750 (based on ATR and support) or funding rate Z-Score rises above 50% (indicating short pressure easing)."
         }
       },
-      "opened_at": "2025-12-17 16:18:27"
+      "opened_at": "2025-12-18 12:17:32"
     }
   ],
-  "last_update": "2025-12-18T08:17:54.779181"
+  "last_update": "2025-12-18T12:17:32.838191"
 }
