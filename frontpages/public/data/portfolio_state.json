@@ -1,27 +1,7 @@
 {
-  "nav": 10902.51,
-  "cash": 8076.654639427034,
+  "nav": 10677.35,
+  "cash": 9729.886017174533,
   "positions": [
-    {
-      "symbol": "BTC",
-      "side": "long",
-      "quantity": 0.023226537712929287,
-      "entry_price": 86108.4,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 88429.7,
-      "unrealized_pnl": 53.92,
-      "exit_plan": {
-        "take_profit": 90000,
-        "stop_loss": 85000,
-        "invalidation": {
-          "zh": "价格跌破85000（基于ATR和关键支撑）或资金费率Z-Score升至70%以上（显示多头过热），则平仓。",
-          "en": "Close position if price breaks below 85000 (based on ATR and key support) or funding rate Z-Score rises above 70% (indicating overheated longs)."
-        }
-      },
-      "opened_at": "2025-12-15 20:17:34"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 2.0,
       "margin": 981.27,
       "notional": 1962.54,
-      "current_price": 2961.04,
-      "unrealized_pnl": 70.04,
+      "current_price": 2809.76,
+      "unrealized_pnl": -33.81,
       "exit_plan": {
         "take_profit": 3000,
         "stop_loss": 2750,
@@ -41,27 +21,7 @@
         }
       },
       "opened_at": "2025-12-18 12:17:32"
-    },
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 1.7012039660056657,
-      "entry_price": 847.2,
-      "leverage": 2.0,
-      "margin": 720.63,
-      "notional": 1441.26,
-      "current_price": 847.2,
-      "unrealized_pnl": 0.0,
-      "exit_plan": {
-        "take_profit": 900,
-        "stop_loss": 800,
-        "invalidation": {
-          "zh": "价格跌破800（基于ATR和支撑）或资金费率Z-Score升至-50%以上（显示空头压力缓解），则平仓。",
-          "en": "Close position if price breaks below 800 (based on ATR and support) or funding rate Z-Score rises above -50% (indicating short pressure easing)."
-        }
-      },
-      "opened_at": "2025-12-18 16:18:34"
     }
   ],
-  "last_update": "2025-12-18T16:18:34.876488"
+  "last_update": "2025-12-18T20:18:46.492944"
 }

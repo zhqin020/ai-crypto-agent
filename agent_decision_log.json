@@ -1,6 +1,112 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：今日美国CPI数据实际值显示通胀受控（利好），但市场反应平淡，BTC未能突破9万美元，ETH ETF流出5.53亿美元，显示利好可能已部分兑现（Priced In），市场情绪仍处极端恐惧（指数17）。2. 结合日线趋势，所有主要币种均处于熊市（价格低于SMA50），RSI普遍超卖（SOL 29.8，DOGE 27.2），存在短期反弹潜力；【痛苦交易】检测显示，BTC、ETH、SOL的Funding Rate Z-Score均偏高（>37%），但未达极端水平（<70%），轧多风险有限，而BNB Funding为负（-0.0046%），有轻微轧空机会。3. 我选择【均值回归】剧本，基于超卖RSI和Qlib相对强度，做多排名靠前的SOL和DOGE，同时平仓表现较弱的BNB以释放资金。",
+      "en": "1. 【Narrative Check】：Today's US CPI actual data shows controlled inflation (bullish), but market reaction is muted with BTC failing to break $90K and ETH ETF outflows of $553M, indicating the good news may be partially priced in; market sentiment remains in extreme fear (index 17). 2. Combined with daily trends, all major coins are in bear markets (price below SMA50), with oversold RSI (SOL 29.8, DOGE 27.2), suggesting short-term rebound potential; 【Pain Trade】 detection shows BTC, ETH, SOL have elevated Funding Rate Z-Scores (>37%) but not extreme (<70%), limiting long squeeze risk, while BNB has negative funding (-0.0046%), offering slight short squeeze opportunity. 3. I choose the 【Mean Reversion】 scenario, going long on top-ranked SOL and DOGE based on oversold RSI and Qlib relative strength, while closing the weaker BNB position to free up capital."
+    },
+    "actions": [
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "现有BTC多头仓位（开仓价86108.4）当前盈利53.92美元，价格88429.7高于止损85000，且资金费率Z-Score 170.2%未触发失效条件（<70%），日线趋势熊市但4H结构稳定，持有等待目标90000。",
+          "en": "Existing BTC long position (entry 86108.4) has current profit of $53.92, price 88429.7 above stop-loss 85000, and funding rate Z-Score 170.2% does not trigger invalidation (<70%); daily trend is bearish but 4H structure is stable, holding for target 90000."
+        },
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 85000,
+          "invalidation": {
+            "zh": "价格跌破85000（基于ATR和关键支撑）或资金费率Z-Score升至70%以上（显示多头过热），则平仓。",
+            "en": "Close position if price breaks below 85000 (based on ATR and key support) or funding rate Z-Score rises above 70% (indicating overheated longs)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1962.54,
+        "entry_reason": {
+          "zh": "现有ETH多头仓位（开仓价2859.01）当前盈利70.04美元，价格2961.04高于止损2750，资金费率Z-Score 136.2%未触发失效条件（<50%），Qlib排名第三但日线超卖，持有等待目标3000。",
+          "en": "Existing ETH long position (entry 2859.01) has current profit of $70.04, price 2961.04 above stop-loss 2750, funding rate Z-Score 136.2% does not trigger invalidation (<50%); Qlib rank 3 but daily oversold, holding for target 3000."
+        },
+        "exit_plan": {
+          "take_profit": 3000,
+          "stop_loss": 2750,
+          "invalidation": {
+            "zh": "价格跌破2750（基于ATR和支撑）或资金费率Z-Score升至50%以上（显示空头压力缓解），则平仓。",
+            "en": "Close position if price breaks below 2750 (based on ATR and support) or funding rate Z-Score rises above 50% (indicating short pressure easing)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "close_position",
+        "leverage": 2,
+        "position_size_usd": 1441.26,
+        "entry_reason": {
+          "zh": "平仓BNB多头仓位以释放资金，因Qlib排名最低（5/5），得分0.1071弱于其他币种，且资金费率负值（-0.0046%）显示空头压力，但价格未突破，优先将资金分配给更强标的。",
+          "en": "Close BNB long position to free up capital, as it has the lowest Qlib rank (5/5) with score 0.1071 weaker than others, and negative funding (-0.0046%) indicates short pressure but no price breakout; prioritizing capital allocation to stronger assets."
+        },
+        "exit_plan": {
+          "take_profit": 900,
+          "stop_loss": 800,
+          "invalidation": {
+            "zh": "价格跌破800（基于ATR和支撑）或资金费率Z-Score升至-50%以上（显示空头压力缓解），则平仓。",
+            "en": "Close position if price breaks below 800 (based on ATR and support) or funding rate Z-Score rises above -50% (indicating short pressure easing)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本：SOL Qlib排名第一（得分0.5093），日线RSI超卖（29.8），4H RSI 35.09接近超卖，资金费率Z-Score 37.2%未过热，存在反弹潜力；风险预算允许（平仓BNB后现金充足），且总敞口低于熊市上限（50% NAV）。",
+          "en": "Matches 【Mean Reversion】 scenario: SOL has top Qlib rank (score 0.5093), daily RSI oversold (29.8), 4H RSI 35.09 near oversold, funding rate Z-Score 37.2% not overheated, suggesting rebound potential; risk budget allows (sufficient cash after closing BNB), and total exposure below bear market cap (50% NAV)."
+        },
+        "exit_plan": {
+          "take_profit": 130,
+          "stop_loss": 110,
+          "invalidation": {
+            "zh": "价格跌破110（基于ATR 3.46和关键支撑）或资金费率Z-Score升至70%以上（显示多头过热），则平仓。",
+            "en": "Close position if price breaks below 110 (based on ATR 3.46 and key support) or funding rate Z-Score rises above 70% (indicating overheated longs)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Position Limit Exceeded (Max 3 Unique Symbols)"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本：DOGE Qlib排名第二（得分0.3638），日线RSI超卖（27.2），4H RSI 31.97超卖，资金费率Z-Score 78.6%较高但未达极端，短期反弹概率大；与SOL分散风险，总敞口控制在熊市上限内。",
+          "en": "Matches 【Mean Reversion】 scenario: DOGE has second Qlib rank (score 0.3638), daily RSI oversold (27.2), 4H RSI 31.97 oversold, funding rate Z-Score 78.6% elevated but not extreme, high probability of short-term rebound; diversifies risk with SOL, total exposure controlled within bear market cap."
+        },
+        "exit_plan": {
+          "take_profit": 0.135,
+          "stop_loss": 0.115,
+          "invalidation": {
+            "zh": "价格跌破0.115（基于ATR 0.0033和关键支撑）或资金费率Z-Score升至90%以上（显示多头过热），则平仓。",
+            "en": "Close position if price breaks below 0.115 (based on ATR 0.0033 and key support) or funding rate Z-Score rises above 90% (indicating overheated longs)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Position Limit Exceeded (Max 3 Unique Symbols)"
+      }
+    ],
+    "timestamp": "2025-12-19 04:18:45"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：美国CPI数据（2.7%）低于预期，显示通胀降温，但市场已提前反应（Priced In），新闻发布后价格未大幅上涨，表明利好兑现。2. 结合日线趋势（所有币种均处于熊市，价格低于SMA50）和【痛苦交易】检测：BTC资金费率Z-Score高达196.36%，显示多头过热，存在轧多风险；BNB资金费率为负且Z-Score为-83.48%，显示空头拥挤，有轧空机会。3. 我选择【均值回归】剧本，基于Qlib评分和拥挤度，做多BNB（空头挤压）并持有现有仓位，同时监控BTC的多头风险。",
       "en": "1. 【Narrative Check】：US CPI data (2.7%) came in lower than expected, indicating cooling inflation, but the market had already priced this in (Priced In), with no significant price surge post-news, suggesting the good news is already reflected. 2. Combined with daily trends (all coins are in a bear market, price below SMA50) and 【Pain Trade】 detection: BTC funding rate Z-Score is extremely high at 196.36%, indicating overheated longs and a risk of long squeeze; BNB funding rate is negative with Z-Score at -83.48%, showing crowded shorts and a short squeeze opportunity. 3. I choose the 【Mean Reversion】 scenario, based on Qlib scores and crowding, going long on BNB (short squeeze) while holding existing positions, and monitoring BTC's long risk."
     },
@@ -2845,35 +2951,5 @@
       }
     ],
     "timestamp": "2025-12-11 10:00:48"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：美联储降息消息（12月10日）已公布，属于Priced In，市场反应平淡（BTC/ETH日线仍处熊市）。最新新闻无突发宏观冲击，市场焦点转向消化利率决议。2. 结合日线趋势（所有币种价格低于SMA50，整体熊市）和【痛苦交易】检测：资金费率普遍极负（BNB -0.0084%，SOL -0.0127%，DOGE -0.0072%），显示空头拥挤，但价格未创新低，存在轧空风险。多头清算近期较高（$4.62亿 vs 空头$2.28亿），可能已释放抛压。3. 我选择【微观结构/挤压】剧本：利用极端负费率+价格韧性，预期空头平仓推动反弹。",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 2156.14,
-        "entry_reason": "符合【微观结构挤压】剧本。Qlib评分最高（0.4516，排名第1），资金费率极负（-0.0084%，Z-Score -130.25%），显示空头过度拥挤。价格在866-867区间持稳，RSI超卖（38.03），结合负动量（-0.0225）可能反转。风险预算：2% NAV止损（$215.61），ATR（13.95）提供缓冲。",
-        "exit_plan": {
-          "take_profit": 920.0,
-          "stop_loss": 840.0,
-          "invalidation": "资金费率转正或价格跌破840支撑（日线新低）。"
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 539.04,
-        "entry_reason": "符合【微观结构挤压】剧本。Qlib评分第二（0.4101），资金费率极负（-0.0127%，Z-Score -203.57%），空头拥挤度最高。价格在130.5-131.1区间震荡，RSI（41.59）接近超卖，负动量（-0.0177）可能衰竭。与BTC高相关性（0.9061）提供同步反弹机会。风险预算：2% NAV止损（$194.05）。",
-        "exit_plan": {
-          "take_profit": 138.0,
-          "stop_loss": 125.0,
-          "invalidation": "资金费率转正或价格跌破125支撑（前低区域）。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-11 08:17:14"
   }
 ]
