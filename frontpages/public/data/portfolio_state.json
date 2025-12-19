@@ -1,6 +1,6 @@
 {
-  "nav": 10677.35,
-  "cash": 9729.886017174533,
+  "nav": 10688.6,
+  "cash": 8727.886017174533,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 981.27,
       "notional": 1962.54,
-      "current_price": 2809.76,
-      "unrealized_pnl": -33.81,
+      "current_price": 2829.07,
+      "unrealized_pnl": -20.55,
       "exit_plan": {
         "take_profit": 3000,
         "stop_loss": 2750,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2025-12-18 12:17:32"
+    },
+    {
+      "symbol": "SOL",
+      "side": "long",
+      "quantity": 16.71541997492687,
+      "entry_price": 119.65,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 119.65,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 130,
+        "stop_loss": 115,
+        "invalidation": {
+          "zh": "价格跌破115（基于ATR 3.37和支撑）或资金费率Z-Score升至-50%以上（显示空头压力显著缓解），则平仓。",
+          "en": "Close position if price breaks below 115 (based on ATR 3.37 and support) or funding rate Z-Score rises above -50% (indicating significant easing of short pressure)."
+        }
+      },
+      "opened_at": "2025-12-19 00:14:23"
     }
   ],
-  "last_update": "2025-12-18T20:18:46.492944"
+  "last_update": "2025-12-19T00:14:23.486603"
 }
