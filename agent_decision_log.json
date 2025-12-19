@@ -1,6 +1,74 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：最新新闻显示美联储利率预期下降（鸽派），但市场已处于极端恐惧（Fear & Greed Index 16.0），且CPI数据已发布（昨日），当前新闻多为事后分析，无明显新驱动，利好可能已部分兑现（Priced In）。2. 日线趋势均为熊市（所有币种价格低于SMA50），但4H数据显示ETH、DOGE、BNB有相对强势（Qlib评分高），且市场整体资金费率中性（平均0.0071%），无明显轧空/轧多风险，但BTC、BNB、SOL资金费率Z-Score偏高（>85%），显示局部多头拥挤。3. 我选择【趋势跟随】剧本，基于Qlib相对强度，在熊市背景下轻仓做多最强币种（ETH），并持有现有仓位，同时管理风险（总敞口<50% NAV）。",
+      "en": "1. 【Narrative Check】: Latest news shows Fed rate expectations falling (dovish), but the market is in extreme fear (Fear & Greed Index 16.0), and CPI data was already released (yesterday). Current news is mostly post-analysis with no clear new impulse; positives may be partially priced in. 2. Daily trends are all bearish (all coins below SMA50), but 4H data shows ETH, DOGE, BNB have relative strength (high Qlib scores), and overall funding is neutral (avg 0.0071%) with no clear squeeze risks. However, BTC, BNB, SOL have high funding Z-Scores (>85%), indicating localized long crowding. 3. I choose the 【Trend Following】 scenario, based on Qlib relative strength, to lightly long the strongest coin (ETH) in a bearish context, hold existing positions, and manage risk (total exposure <50% NAV)."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 3395.52,
+        "entry_reason": {
+          "zh": "现有仓位：基于昨日Qlib评分高（排名1）和动量正（0.0523）开仓，当前价格2975.3高于入场价2899.05，盈利中，且Qlib评分仍最高（0.583），日线虽熊市但4H结构稳健，资金费率Z-Score负（-25.93%）无轧多风险，符合【趋势跟随】剧本。",
+          "en": "Existing position: Opened yesterday based on high Qlib score (rank 1) and positive momentum (0.0523). Current price 2975.3 is above entry 2899.05, profitable, and Qlib score remains highest (0.583). Daily trend is bearish but 4H structure is solid, funding Z-Score negative (-25.93%) with no long squeeze risk, matching 【Trend Following】 scenario."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2850,
+          "invalidation": {
+            "zh": "价格跌破2850（基于ATR 69.00和支撑）或资金费率Z-Score升至20%以上（显示空头压力缓解），则平仓。",
+            "en": "Close position if price breaks below 2850 (based on ATR 69.00 and support) or funding rate Z-Score rises above 20% (indicating short pressure easing)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "现有仓位：基于昨日开仓，当前价格126.23高于入场价119.65，盈利中，但Qlib评分低（0.1519，排名5），资金费率Z-Score高（85.07%）显示多头拥挤，日线熊市，考虑减仓但暂持有等待反弹。",
+          "en": "Existing position: Opened yesterday, current price 126.23 is above entry 119.65, profitable, but Qlib score is low (0.1519, rank 5), funding Z-Score high (85.07%) indicating long crowding, daily trend bearish. Considering reducing but holding for now to await bounce."
+        },
+        "exit_plan": {
+          "take_profit": 130,
+          "stop_loss": 115,
+          "invalidation": {
+            "zh": "价格跌破115（基于ATR 3.32和支撑）或资金费率Z-Score升至-50%以上（显示空头压力显著缓解），则平仓。",
+            "en": "Close position if price breaks below 115 (based on ATR 3.32 and support) or funding rate Z-Score rises above -50% (indicating significant easing of short pressure)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 28.99,
+        "entry_reason": {
+          "zh": "新开仓位：符合【趋势跟随】剧本，ETH Qlib评分最高（0.583，排名1），动量正（0.0523），资金费率Z-Score负（-25.93%）无轧多风险，4H RSI中性（53.73），在熊市下相对强势。风险预算允许（现金8009.94，总敞口<50% NAV），且未超3仓位限制。",
+          "en": "New position: Matches 【Trend Following】 scenario. ETH has highest Qlib score (0.583, rank 1), positive momentum (0.0523), funding Z-Score negative (-25.93%) with no long squeeze risk, 4H RSI neutral (53.73), showing relative strength in bear market. Risk budget allows (cash 8009.94, total exposure <50% NAV), and under 3-position limit."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2850,
+          "invalidation": {
+            "zh": "价格跌破2850（基于ATR 69.00和支撑）或资金费率Z-Score升至20%以上（显示空头压力缓解），则平仓。",
+            "en": "Close position if price breaks below 2850 (based on ATR 69.00 and support) or funding rate Z-Score rises above 20% (indicating short pressure easing)."
+          }
+        },
+        "status": "executed",
+        "original_size_usd": 1000.0,
+        "rejection_reason": "Size Reduced due to Exposure Limit"
+      }
+    ],
+    "timestamp": "2025-12-20 04:18:15"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：昨日CPI数据公布后（实际值未在新闻中明确，但提及'cool CPI print'），ETH曾短暂上涨，但随后出现$553M ETF流出，显示利好可能已部分兑现（Priced In）。当前市场处于'极端恐惧'（指数16.0），且Fed利率预期下降（鸽派），但日线趋势均为熊市（所有币种价格低于SMA50），表明宏观压力持续。2. 【痛苦交易检测】：BTC和BNB资金费率Z-Score极高（>115%），显示多头拥挤，存在轧多风险；ETH资金费率Z-Score为负（-32.16%），显示空头拥挤，但价格相对坚挺，存在轧空机会。3. 【假设剧本】：我选择【微观结构挤压】剧本，利用ETH的负资金费率（空头拥挤）和价格韧性做多，同时【均值回归】剧本适用于BTC/BNB（高资金费率+价格停滞），但鉴于日线熊市，我优先处理现有仓位并控制风险。",
       "en": "1. 【Narrative Check】: After yesterday's CPI data release (actual value not specified in news, but 'cool CPI print' mentioned), ETH briefly rose but then saw $553M ETF outflows, indicating the positive news may be partially priced in. The market is in 'Extreme Fear' (index 16.0) with dovish Fed rate expectations, but daily trends are bearish (all coins below SMA50), suggesting ongoing macro pressure. 2. 【Pain Trade Detection】: BTC and BNB have extremely high funding rate Z-Scores (>115%), indicating crowded longs and risk of long squeeze; ETH has negative funding rate Z-Score (-32.16%), indicating crowded shorts with price resilience, creating a short squeeze opportunity. 3. 【Hypothesis Scenario】: I select the 【Microstructure Squeeze】 scenario to go long on ETH due to negative funding (crowded shorts) and price strength, while the 【Mean Reversion】 scenario applies to BTC/BNB (high funding + price stagnation), but given the daily bearish trend, I prioritize managing existing positions and controlling risk."
     },
@@ -3124,50 +3192,5 @@
       }
     ],
     "timestamp": "2025-12-12 03:20:00"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】市场整体处于熊市（BTC低于SMA50），恐惧贪婪指数23（极度恐惧），但48小时内多头清算远超空头（$3.45亿 vs $1.41亿），显示抛压已部分释放，存在技术性反弹可能。2. 【痛苦交易】所有币种资金费率均为负值（DOGE -0.0072%，SOL -0.0127%，BNB -0.0084%），显示市场普遍做空，尤其是DOGE资金费率Z值-225.6%处于极端水平，存在空头挤压风险。3. 【假设选择】DOGE（排名1）符合【微观结构挤压】剧本。现有BNB和SOL多头仓位仍有效（价格高于入场价且未触发止损），继续持有。",
-      "en": "1. [Narrative Check] Market is bearish (BTC < SMA50), Fear & Greed 23. Heavy long liquidations suggest potential technical bounce. 2. [Pain Trade] Negative funding rates across the board indicate crowded shorts. 3. [Hypothesis] DOGE fits Microstructure Squeeze. Existing BNB and SOL positions are valid, holding."
-    },
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4312.28,
-        "entry_reason": {
-          "zh": "现有持仓。Qlib评分0.2014（排名第3），资金费率负（-0.0084%），存在轧空潜力，且价格接近入场价，止损未触发。",
-          "en": "Existing position. Negative funding supports squeeze potential. Price near entry, stop loss not hit."
-        },
-        "exit_plan": {
-          "take_profit": 920.0,
-          "stop_loss": 840.0,
-          "invalidation": {
-            "zh": "资金费率转正或价格跌破840支撑。",
-            "en": "Funding turns positive or price breaks 840 support."
-          }
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 1078.08,
-        "entry_reason": {
-          "zh": "现有持仓。Qlib评分0.324（排名第2），资金费率负（-0.0127%），轧空机会仍存，价格略高于入场价，止损未触发。",
-          "en": "Existing position. Negative funding supports squeeze potential. Price above entry, stop loss not hit."
-        },
-        "exit_plan": {
-          "take_profit": 138.0,
-          "stop_loss": 125.0,
-          "invalidation": {
-            "zh": "资金费率转正或价格跌破125支撑。",
-            "en": "Funding turns positive or price breaks 125 support."
-          }
-        }
-      }
-    ],
-    "timestamp": "2025-12-12 03:04:35"
   }
 ]
