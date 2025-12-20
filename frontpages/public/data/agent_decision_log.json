@@ -1,6 +1,53 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】当前市场处于极端恐惧状态（Fear & Greed Index 20.0），但新闻面缺乏新的宏观催化剂（如CPI已发布），显示利空可能已部分消化（Priced In）。2. 结合日线趋势，所有主要币种均处于熊市（价格低于SMA50），且RSI中性偏弱，市场整体偏空。检测到【痛苦交易】风险：BNB资金费率Z-Score高达91.17%（显示多头拥挤），存在轧多风险；而ETH资金费率Z-Score为-46.93%（显示空头拥挤），存在轧空机会。3. 我选择【微观结构/挤压】剧本，利用ETH的极端负资金费率（空头拥挤）和价格韧性（Qlib评分最高0.7027），做多ETH；同时避开BNB的多头拥挤风险。",
+      "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 20.0), but news lacks new macro catalysts (e.g., CPI already released), suggesting bearish factors may be partially priced in. 2. Combined with daily trends, all major coins are in bear markets (price below SMA50) with neutral-to-weak RSI, indicating overall bearish bias. 【Pain Trade】 detection shows: BNB funding rate Z-Score at 91.17% (crowded longs), posing long squeeze risk; ETH funding rate Z-Score at -46.93% (crowded shorts), offering short squeeze opportunity. 3. I select the 【Microstructure/Squeeze】 scenario, leveraging ETH's extreme negative funding (crowded shorts) and price resilience (highest Qlib score 0.7027) to go long on ETH, while avoiding BNB's crowded long risk."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 3453.5,
+        "entry_reason": {
+          "zh": "现有ETH多头仓位（入场价2900.42）符合【微观结构挤压】剧本：资金费率Z-Score -46.93%显示空头拥挤，Qlib评分0.7027（排名第一）显示相对强势，价格已上涨至2985.8，未触发止损。",
+          "en": "Existing ETH long position (entry 2900.42) aligns with 【Microstructure Squeeze】 scenario: funding rate Z-Score -46.93% indicates crowded shorts, Qlib score 0.7027 (rank 1) shows relative strength, price has risen to 2985.8 without hitting stop loss."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2850,
+          "invalidation": {
+            "zh": "价格跌破2850（基于ATR 55.85和支撑）或资金费率Z-Score升至-20%以上（显示空头压力缓解），则平仓。",
+            "en": "Close position if price breaks below 2850 (based on ATR 55.85 and support) or funding rate Z-Score rises above -20% (indicating short pressure easing)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": {
+          "zh": "符合【痛苦交易】轧多风险剧本：资金费率Z-Score 91.17%显示极端多头拥挤，Qlib评分0.4574（排名第二）但动量较弱（momentum_12 0.006），日线趋势熊市（价格低于SMA50），存在回调压力。",
+          "en": "Matches 【Pain Trade】 long squeeze risk scenario: funding rate Z-Score 91.17% indicates extreme crowded longs, Qlib score 0.4574 (rank 2) but weak momentum (momentum_12 0.006), daily trend bearish (price below SMA50), suggesting pullback pressure."
+        },
+        "exit_plan": {
+          "take_profit": 830,
+          "stop_loss": 870,
+          "invalidation": {
+            "zh": "价格突破870（基于ATR 11.42和阻力）或资金费率Z-Score降至50%以下（显示多头压力缓解），则平仓。",
+            "en": "Close position if price breaks above 870 (based on ATR 11.42 and resistance) or funding rate Z-Score falls below 50% (indicating long pressure easing)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-20 20:17:09"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：最新新闻显示市场情绪极度恐惧（Fear & Greed Index 20.0），且Fundstrat警告2026年加密货币可能回调，但CPI等关键经济数据已发布且无突发宏观冲击，当前下跌趋势可能已部分反映悲观预期（Priced In）。2. 结合日线趋势（所有主要币种均处于熊市，价格低于SMA50）和【痛苦交易】检测，ETH资金费率Z-Score为-47.7%（极度负值），显示空头拥挤，存在轧空风险；BNB资金费率Z-Score为98.5%（极度正值），显示多头拥挤，存在轧多风险。3. 我选择【微观结构挤压】剧本，基于ETH的负资金费率极端值和价格韧性（Qlib评分最高0.7063），做多ETH以博弈空头平仓；同时平仓SOL多头以锁定利润，因其Qlib评分最低（0.0776）且日线趋势疲软。",
       "en": "1. 【Narrative Check】: Latest news shows extreme fear sentiment (Fear & Greed Index 20.0) and Fundstrat warns of a potential crypto pullback in 2026, but key economic data like CPI has been released with no sudden macro shocks, suggesting the current downtrend may already partially reflect pessimistic expectations (Priced In). 2. Combining daily trends (all major coins are in bear markets, price below SMA50) and 【Pain Trade】 detection, ETH's funding rate Z-Score is -47.7% (extremely negative), indicating crowded shorts and a short squeeze risk; BNB's funding rate Z-Score is 98.5% (extremely positive), indicating crowded longs and a long squeeze risk. 3. I select the 【Microstructure Squeeze】 scenario, going long on ETH based on its extreme negative funding rate and price resilience (highest Qlib score 0.7063) to bet on short covering; simultaneously closing the SOL long position to lock in profits due to its lowest Qlib score (0.0776) and weak daily trend."
     },
@@ -3188,10 +3235,5 @@
       }
     ],
     "timestamp": "2025-12-12 11:45:09"
-  },
-  {
-    "analysis_summary": "模型调用失败: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.",
-    "actions": [],
-    "timestamp": "2025-12-12 00:18:24"
   }
 ]
