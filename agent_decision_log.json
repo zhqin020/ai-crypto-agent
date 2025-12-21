@@ -1,6 +1,73 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 20），新闻显示分析师警告熊市风险（如'Bitcoin's apparent demand shrinks'），但长期清算已发生（48h内多头清算$1158万 vs 空头$253万），显示利空可能已部分消化（Priced In）。2. 结合日线趋势：所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），但RSI中性偏弱（39.5-52.1），无极端超卖。资金费率普遍为正（0.0057%-0.0100%），Z-Score较高（31.8%-138.5%），显示多头略微拥挤，存在轧多风险。3. 我选择【趋势跟随】剧本：Qlib模型推荐BNB（排名1，得分0.5035）、ETH（排名2，得分0.4648）、SOL（排名3，得分0.352），它们相对强度较高，且资金费率未达危险水平（<0.03%），适合在熊市中捕捉反弹机会。",
+      "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 20), with news showing analysts warning of bear market risks (e.g., 'Bitcoin's apparent demand shrinks'), but long liquidations have occurred (longs $11.58M vs shorts $2.53M over 48h), indicating bearish news may be partially priced in. 2. Combined with daily trend: All major coins (BTC, ETH, SOL, BNB, DOGE) are in a bear market (price below SMA50), but RSI is neutral-weak (39.5-52.1), with no extreme oversold conditions. Funding rates are generally positive (0.0057%-0.0100%) with high Z-Scores (31.8%-138.5%), showing slight long crowding and risk of long squeezes. 3. I choose the 【Trend Following】 scenario: Qlib model recommends BNB (rank 1, score 0.5035), ETH (rank 2, score 0.4648), SOL (rank 3, score 0.352), which have higher relative strength and funding rates not at dangerous levels (<0.03%), suitable for capturing bounce opportunities in a bear market."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 3453.5,
+        "entry_reason": {
+          "zh": "现有仓位：ETH多头（入场价$2900.42，当前价$2978.43），浮盈$92.89。理由：符合【趋势跟随】剧本，Qlib排名第2（得分0.4648），日线趋势熊市但4H结构稳定（RSI 51.81中性，MACD正），资金费率正常（0.0017%），未触发止损或止盈。",
+          "en": "Existing position: ETH long (entry $2900.42, current $2978.43), unrealized PnL $92.89. Reason: Matches 【Trend Following】 scenario, Qlib rank 2 (score 0.4648), daily trend bearish but 4H structure stable (RSI 51.81 neutral, MACD positive), funding rate normal (0.0017%), stop loss or take profit not triggered."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2850,
+          "invalidation": {
+            "zh": "价格跌破2850（基于ATR 69.00和支撑）或资金费率Z-Score升至20%以上（显示空头压力缓解），则平仓。",
+            "en": "Close position if price breaks below 2850 (based on ATR 69.00 and support) or funding rate Z-Score rises above 20% (indicating short pressure easing)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1998.76,
+        "entry_reason": {
+          "zh": "现有仓位：SOL多头（入场价$126.07，当前价$125.73），浮亏-$5.39。理由：符合【趋势跟随】剧本，Qlib排名第3（得分0.352），日线趋势熊市但4H结构中性（RSI 47.73，MACD正），资金费率略高（0.0100%）但未达危险水平，未触发止损。",
+          "en": "Existing position: SOL long (entry $126.07, current $125.73), unrealized PnL -$5.39. Reason: Matches 【Trend Following】 scenario, Qlib rank 3 (score 0.352), daily trend bearish but 4H structure neutral (RSI 47.73, MACD positive), funding rate slightly high (0.0100%) but not at dangerous levels, stop loss not triggered."
+        },
+        "exit_plan": {
+          "take_profit": 135,
+          "stop_loss": 120,
+          "invalidation": {
+            "zh": "价格跌破120（基于ATR 2.49和支撑）或资金费率Z-Score升至100%以上（显示过度看涨），则平仓。",
+            "en": "Close position if price breaks below 120 (based on ATR 2.49 and support) or funding rate Z-Score rises above 100% (indicating excessive bullishness)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": {
+          "zh": "符合【趋势跟随】剧本：Qlib排名第1（得分0.5035），相对强度最高。技术面：4H RSI 47.65中性，MACD正（1.6065），动量0.0085。资金费率正常（0.0057%），Z-Score 31.8%显示多头未过度拥挤。日线趋势熊市但4H结构提供反弹机会。",
+          "en": "Matches 【Trend Following】 scenario: Qlib rank 1 (score 0.5035), highest relative strength. Technicals: 4H RSI 47.65 neutral, MACD positive (1.6065), momentum 0.0085. Funding rate normal (0.0057%), Z-Score 31.8% indicates longs not overly crowded. Daily trend bearish but 4H structure offers bounce opportunity."
+        },
+        "exit_plan": {
+          "take_profit": 900,
+          "stop_loss": 830,
+          "invalidation": {
+            "zh": "价格跌破830（基于ATR 9.58和支撑）或资金费率Z-Score升至50%以上（显示多头过度拥挤），则平仓。",
+            "en": "Close position if price breaks below 830 (based on ATR 9.58 and support) or funding rate Z-Score rises above 50% (indicating excessive long crowding)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
+      }
+    ],
+    "timestamp": "2025-12-21 12:16:58"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】市场处于极端恐惧状态（Fear & Greed Index: 20），新闻显示分析师对比特币需求萎缩发出警告，但价格在日线熊市趋势中相对稳定，显示坏消息可能已部分消化（Priced In）。2. 结合日线趋势（所有主要币种均低于SMA50，熊市结构）和【痛苦交易】检测，SOL和DOGE的资金费率Z-Score极高（83.93%和138.80%），显示多头拥挤，存在轧多风险；而ETH资金费率Z-Score高达97.88%，但价格相对坚挺，可能隐含空头挤压机会。3. 我选择【微观结构/挤压】剧本，利用高资金费率Z-Score和价格韧性寻找机会，同时严格管理现有仓位风险。",
       "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index: 20), with news warning of shrinking Bitcoin demand, but prices are relatively stable within the daily bearish trend, suggesting bad news may be partially priced in. 2. Combined with the daily trend (all major coins below SMA50, bearish structure) and 【Pain Trade】detection, SOL and DOGE have extremely high funding rate Z-Scores (83.93% and 138.80%), indicating crowded longs and long squeeze risk; while ETH has a high funding rate Z-Score of 97.88% but price resilience, suggesting potential short squeeze opportunity. 3. I choose the 【Microstructure/Squeeze】scenario, leveraging high funding rate Z-Scores and price resilience for opportunities, while strictly managing risk in existing positions."
     },
@@ -3133,71 +3200,5 @@
       }
     ],
     "timestamp": "2025-12-13 08:17:36"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】：最新新闻显示美联储降息预期升温（隐含利率下降9.7基点）和长期清算主导（多头清算366M vs 空头122M），这可能是市场已部分消化的利好（Priced In），但恐惧贪婪指数29（恐惧）和宏观熊市背景（BTC/ETH/SOL等均低于SMA50）表明整体情绪仍脆弱。2. 【痛苦交易检测】：SOL的资金费率Z-score高达104.8%（极端正），显示拥挤多头，存在轧多风险；但近期大量多头清算可能已释放部分压力，需警惕反弹失败。3. 【假设剧本】：我选择【均值回归】剧本，基于SOL的极端正资金费率（拥挤多头）和日线熊市趋势（价格低于SMA50，RSI 44.8），预期价格可能回调，但鉴于Qlib模型给予SOL最高评分（0.3453，排名第1），暂不新开仓，优先管理现有持仓。",
-      "en": "1. 【Narrative Check】: Latest news shows rising Fed rate cut expectations (implied rate down 9.7 bps) and long-dominated liquidations (longs $366M vs shorts $122M), which may be partially priced-in positives, but the Fear & Greed Index at 29 (Fear) and macro bearish backdrop (BTC/ETH/SOL all below SMA50) indicate overall sentiment remains fragile. 2. 【Pain Trade Detection】: SOL's funding rate Z-score is extremely high at 104.8% (crowded longs), posing a long squeeze risk; however, recent heavy long liquidations may have released some pressure, warranting caution against failed bounces. 3. 【Hypothesis Scenario】: I choose the 【Mean Reversion】 scenario, based on SOL's extreme positive funding rate (crowded longs) and daily bearish trend (price below SMA50, RSI 44.8), expecting a potential pullback, but given Qlib model assigns SOL the highest score (0.3453, rank 1), I will not open new positions and prioritize managing existing holdings."
-    },
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4312.28,
-        "entry_reason": {
-          "zh": "持仓理由：BNB当前价格889.1高于入场价867.1，未实现盈利109.41，日线趋势熊市但价格接近SMA50（877.5 vs 941.52），RSI 49.4中性，资金费率数据未提供异常信号，止损840.0未触发，继续持有等待目标920.0。",
-          "en": "Hold reason: BNB current price 889.1 is above entry 867.1 with unrealized profit 109.41, daily trend bearish but price near SMA50 (877.5 vs 941.52), RSI 49.4 neutral, no abnormal funding rate signals provided, stop-loss 840.0 not triggered, continue holding for target 920.0."
-        },
-        "exit_plan": {
-          "take_profit": 920.0,
-          "stop_loss": 840.0,
-          "invalidation": {
-            "zh": "失效条件：资金费率转正或价格跌破840支撑（日线新低）。",
-            "en": "Invalidation condition: Funding turns positive or price breaks below 840 support (daily new low)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 40.04,
-        "entry_reason": {
-          "zh": "持仓理由：SOL当前价格138.99高于入场价134.98，未实现盈利1.19，Qlib评分最高（0.3453，排名第1）显示相对强势，但资金费率Z-score 104.8%极高（拥挤多头风险），日线趋势熊市（价格低于SMA50），暂持有但警惕轧多，止损128.0未触发。",
-          "en": "Hold reason: SOL current price 138.99 is above entry 134.98 with unrealized profit 1.19, Qlib score highest (0.3453, rank 1) indicates relative strength, but funding rate Z-score 104.8% extremely high (crowded long risk), daily trend bearish (price below SMA50), hold for now but wary of long squeeze, stop-loss 128.0 not triggered."
-        },
-        "exit_plan": {
-          "take_profit": 142.0,
-          "stop_loss": 128.0,
-          "invalidation": {
-            "zh": "失效条件：资金费率转正或价格跌破128支撑（4H前低），或BTC大幅下跌带动整体市场走弱。",
-            "en": "Invalidation condition: Funding turns positive or price breaks below 128 support (4H previous low), or BTC drops sharply dragging the overall market down."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000.0,
-        "entry_reason": {
-          "zh": "持仓理由：ETH当前价格3245.13等于入场价，未实现盈亏为0，日线趋势熊市（价格低于SMA50），RSI 52.0中性，资金费率数据未提供异常信号，止损3150.0未触发，继续持有等待目标3400.0。",
-          "en": "Hold reason: ETH current price 3245.13 equals entry with unrealized PnL 0, daily trend bearish (price below SMA50), RSI 52.0 neutral, no abnormal funding rate signals provided, stop-loss 3150.0 not triggered, continue holding for target 3400.0."
-        },
-        "exit_plan": {
-          "take_profit": 3400.0,
-          "stop_loss": 3150.0,
-          "invalidation": {
-            "zh": "失效条件：资金费率转正（空头平仓结束）或价格跌破3150支撑（日线前低），或BTC大幅下跌破坏市场结构。",
-            "en": "Invalidation condition: Funding turns positive (short covering ends) or price breaks below 3150 support (daily previous low), or BTC drops sharply disrupting market structure."
-          }
-        },
-        "status": "executed"
-      }
-    ],
-    "timestamp": "2025-12-13 04:02:04"
   }
 ]
