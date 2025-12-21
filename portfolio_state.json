@@ -1,6 +1,6 @@
 {
-  "nav": 10922.34,
-  "cash": 9078.297973569754,
+  "nav": 10892.2,
+  "cash": 8072.450293569754,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1726.75,
       "notional": 3453.5,
-      "current_price": 2998.92,
-      "unrealized_pnl": 117.29,
+      "current_price": 2975.3,
+      "unrealized_pnl": 89.16,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2850,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2025-12-18 12:17:32"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 2.3681056853031377,
+      "entry_price": 847.8,
+      "leverage": 2.0,
+      "margin": 1003.84,
+      "notional": 2007.68,
+      "current_price": 847.8,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 900,
+        "stop_loss": 820,
+        "invalidation": {
+          "zh": "价格跌破820（基于ATR 9.45和支撑）或资金费率Z-Score升至80%以上（显示轧多压力加剧），则平仓。",
+          "en": "Close position if price breaks below 820 (based on ATR 9.45 and support) or funding rate Z-Score rises above 80% (indicating increased long squeeze pressure)."
+        }
+      },
+      "opened_at": "2025-12-21 16:16:43"
     }
   ],
-  "last_update": "2025-12-21T12:16:58.094596"
+  "last_update": "2025-12-21T16:16:43.374547"
 }
