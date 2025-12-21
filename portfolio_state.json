@@ -1,6 +1,6 @@
 {
-  "nav": 10890.07,
-  "cash": 8085.19313187863,
+  "nav": 10922.34,
+  "cash": 9078.297973569754,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1726.75,
       "notional": 3453.5,
-      "current_price": 2981.6,
-      "unrealized_pnl": 96.67,
+      "current_price": 2998.92,
+      "unrealized_pnl": 117.29,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2850,
@@ -21,27 +21,7 @@
         }
       },
       "opened_at": "2025-12-18 12:17:32"
-    },
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 15.854366621718095,
-      "entry_price": 126.07,
-      "leverage": 2.0,
-      "margin": 999.38,
-      "notional": 1998.76,
-      "current_price": 124.94,
-      "unrealized_pnl": -17.92,
-      "exit_plan": {
-        "take_profit": 135,
-        "stop_loss": 120,
-        "invalidation": {
-          "zh": "价格跌破120（基于ATR 2.49和支撑）或资金费率Z-Score升至100%以上（显示过度看涨），则平仓。",
-          "en": "Close position if price breaks below 120 (based on ATR 2.49 and support) or funding rate Z-Score rises above 100% (indicating excessive bullishness)."
-        }
-      },
-      "opened_at": "2025-12-20 20:16:59"
     }
   ],
-  "last_update": "2025-12-21T08:16:17.731460"
+  "last_update": "2025-12-21T12:16:58.094596"
 }
