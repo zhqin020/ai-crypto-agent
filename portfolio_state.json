@@ -1,6 +1,6 @@
 {
-  "nav": 10907.16,
-  "cash": 9889.354756762192,
+  "nav": 10914.02,
+  "cash": 9399.997802639185,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1003.84,
       "notional": 2007.68,
-      "current_price": 848.8,
-      "unrealized_pnl": 2.37,
+      "current_price": 852.1,
+      "unrealized_pnl": 10.18,
       "exit_plan": {
         "take_profit": 900,
         "stop_loss": 820,
@@ -23,25 +23,25 @@
       "opened_at": "2025-12-21 16:16:43"
     },
     {
-      "symbol": "DOGE",
+      "symbol": "SOL",
       "side": "long",
-      "quantity": 179.34700075930144,
-      "entry_price": 0.1317,
+      "quantity": 8.017960230917256,
+      "entry_price": 124.72,
       "leverage": 2.0,
-      "margin": 11.81,
-      "notional": 23.62,
-      "current_price": 0.1305,
-      "unrealized_pnl": -0.22,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 124.72,
+      "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 0.14,
-        "stop_loss": 0.125,
+        "take_profit": 135,
+        "stop_loss": 120,
         "invalidation": {
-          "zh": "价格跌破0.125（基于ATR 0.0023和支撑）或资金费率Z-Score升至20%以上（显示空头压力缓解），则平仓。",
-          "en": "Close position if price breaks below 0.125 (based on ATR 0.0023 and support) or funding rate Z-Score rises above 20% (indicating short pressure easing)."
+          "zh": "价格跌破120（基于ATR 2.10和支撑）或资金费率Z-Score升至20%以上（显示空头压力缓解），则平仓。",
+          "en": "Close position if price breaks below 120 (based on ATR 2.10 and support) or funding rate Z-Score rises above 20% (indicating short pressure easing)."
         }
       },
-      "opened_at": "2025-12-22 08:17:12"
+      "opened_at": "2025-12-23 12:17:31"
     }
   ],
-  "last_update": "2025-12-23T08:17:04.148264"
+  "last_update": "2025-12-23T12:17:31.269999"
 }
