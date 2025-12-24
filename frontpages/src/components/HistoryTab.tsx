@@ -28,7 +28,7 @@ export function HistoryTab({ language }: { language: 'zh' | 'en' }) {
 
       if (import.meta.env.MODE === 'production') {
         try {
-          const response = await fetch('/data/trade_log.csv');
+          const response = await fetch(`/data/trade_log.csv?t=${Date.now()}`);
           if (response.ok) {
             const text = await response.text();
             const lines = text.trim().split('\n');
