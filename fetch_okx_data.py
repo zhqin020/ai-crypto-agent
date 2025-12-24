@@ -47,15 +47,19 @@ def okx_get(path: str, params: dict) -> dict:
         print(f"⚠️ Request failed: {e}")
         return {}
 
-def fetch_okx_candles(symbol: str, bar: str = "4H", days: int = 730) -> pd.DataFrame:
+def fetch_okx_candles(symbol: str, bar: str = "4H", days: int = 730, since_date: datetime = None) -> pd.DataFrame:
     """
     Fetch OHLCV candles from OKX
     API: GET /api/v5/market/candles?instId=BTC-USDT&bar=4H&limit=300
     """
-    print(f"Fetching {symbol} {bar} data for {days} days...")
     
     end_dt = datetime.now(timezone.utc)
-    start_dt = end_dt - timedelta(days=days + 5)
+    if since_date:
+        start_dt = since_date
+        print(f"Fetching {symbol} {bar} data since {start_dt}...")
+    else:
+        start_dt = end_dt - timedelta(days=days + 5)
+        print(f"Fetching {symbol} {bar} data for {days} days...")
     
     all_records = []
     after = None
@@ -121,16 +125,21 @@ def fetch_okx_candles(symbol: str, bar: str = "4H", days: int = 730) -> pd.DataF
     print(f"  ✅ Total {len(df)} candles from {df['date'].min()} to {df['date'].max()}")
     
     return df
-def fetch_funding_rate(symbol: str, days: int = 730) -> pd.DataFrame:
+
+def fetch_funding_rate(symbol: str, days: int = 730, since_date: datetime = None) -> pd.DataFrame:
     """
     Fetch funding rate history
     API: GET /api/v5/public/funding-rate-history?instId=BTC-USDT-SWAP&limit=100
     """
     swap_symbol = symbol.replace("-USDT", "-USDT-SWAP")
-    print(f"Fetching funding rate for {swap_symbol}...")
     
     end_dt = datetime.now(timezone.utc)
-    start_dt = end_dt - timedelta(days=days + 5)
+    if since_date:
+        start_dt = since_date - timedelta(hours=8)
+        print(f"Fetching funding rate for {swap_symbol} since {start_dt}...")
+    else:
+        start_dt = end_dt - timedelta(days=days + 5)
+        print(f"Fetching funding rate for {swap_symbol}...")
     
     all_records = []
     after = None
@@ -189,16 +198,21 @@ def fetch_funding_rate(symbol: str, days: int = 730) -> pd.DataFrame:
     print(f"  ✅ Fetched {len(df)} funding rate records")
     return df
 
-def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730) -> pd.DataFrame:
+def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730, since_date: datetime = None) -> pd.DataFrame:
     """
     Fetch open interest history (Manual OKX API)
     Note: OKX only supports 5m, 1h, 1d. We fetch 1h and resample to 4H.
     """
     swap_symbol = symbol.replace("-USDT", "-USDT-SWAP")
-    print(f"Fetching open interest for {swap_symbol} (1H -> 4H)...")
     
     end_dt = datetime.now(timezone.utc)
-    start_dt = end_dt - timedelta(days=days)
+    if since_date:
+        start_dt = since_date - timedelta(hours=8)
+        print(f"Fetching open interest for {swap_symbol} since {start_dt}...")
+    else:
+        start_dt = end_dt - timedelta(days=days)
+        print(f"Fetching open interest for {swap_symbol} (1H -> 4H)...")
+        
     start_ts_ms = int(start_dt.timestamp() * 1000)
     
     all_records = []
@@ -233,14 +247,7 @@ def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730) -> pd.Dat
             # Response: {'ts': '...', 'oi': '...', 'oiCcy': '...'}
             try:
                 ts = int(row.get('ts', 0))
-                oi = float(row.get('oi', 0)) # Usually in contracts or coins? 
-                                             # OKX: oi is in contracts (usually). 
-                                             # But we want USD value if possible? 
-                                             # API doc says: oi: Open interest in contracts.
-                                             # oiCcy: Open interest in currency (e.g. BTC).
-                                             # We probably want USD value? 
-                                             # But wait, previous logic used 'oi'. Let's stick to 'oi' for consistency or check if 'volUsd' exists?
-                                             # Actually, let's use 'oi' (contracts) as a proxy for activity.
+                oi = float(row.get('oi', 0)) 
             except (ValueError, AttributeError):
                 continue
                 
@@ -284,10 +291,8 @@ def fetch_open_interest(symbol: str, bar: str = "4H", days: int = 730) -> pd.Dat
     
     print(f"  ✅ Fetched {len(df)} 1H records, resampled to {len(df_4h)} 4H records")
     return df_4h
+
 import sys
-
-
-# ... (imports)
 
 def fetch_binance_candles(symbol: str, bar: str = "4H", days: int = 730) -> pd.DataFrame:
     """
@@ -372,9 +377,6 @@ def fetch_binance_candles(symbol: str, bar: str = "4H", days: int = 730) -> pd.D
     
     print(f"  ✅ Binance: {len(df)} candles from {df['date'].min()} to {df['date'].max()}")
     return df
-
-
-
 
 def fetch_ccxt_candles(symbol: str, bar: str = "4H", days: int = 730) -> pd.DataFrame:
     """
@@ -479,9 +481,6 @@ def fetch_yfinance_candles(symbol: str, bar: str = "4H", days: int = 730) -> pd.
         # Fetch data
         # yfinance allows fetching by period or start/end
         # max period for 1h is 730d
-        # Fetch data
-        # yfinance allows fetching by period or start/end
-        # max period for 1h is 730d
         df = yf.download(yf_symbol, period=f"{days}d", interval=interval, progress=False)
         
         if df.empty:
@@ -552,7 +551,7 @@ def main():
         'SOL-USDT': 'SOL',
     }
     
-    print("🚀 Fetching Multi-Coin 4H Data\n")
+    print("🚀 Fetching Multi-Coin 4H Data (Incremental - Optimized)\n")
     
     failure_count = 0
     
@@ -561,103 +560,134 @@ def main():
         print(f"Processing {symbol} ({coin_name})")
         print(f"{'='*60}")
         
+        # Check for existing data
+        existing_df = pd.DataFrame()
+        since_date = None
+        filename_4h = CSV_DIR / f"{coin_name}_4h.csv"
+        
+        if filename_4h.exists():
+             try:
+                 existing_df = pd.read_csv(filename_4h)
+                 if not existing_df.empty and 'date' in existing_df.columns:
+                     existing_df['date'] = pd.to_datetime(existing_df['date'])
+                     # Handle timezone
+                     if existing_df['date'].dt.tz is None:
+                         existing_df['date'] = existing_df['date'].dt.tz_localize('UTC')
+                     else:
+                         existing_df['date'] = existing_df['date'].dt.tz_convert('UTC')
+                     
+                     since_date = existing_df['date'].max()
+                     print(f"  Found existing data until {since_date}")
+             except Exception as e:
+                 print(f"  Error reading existing file: {e}")
+                 existing_df = pd.DataFrame()
+
         # 1. Fetch 4H Data (Primary for Qlib)
-        df_4h = fetch_okx_candles(symbol, bar="4H", days=730)
+        df_4h = fetch_okx_candles(symbol, bar="4H", days=730, since_date=since_date)
+        
         if not df_4h.empty:
-            # Save 4H
-            filename_4h = CSV_DIR / f"{coin_name}_4h.csv"
-            df_4h.to_csv(filename_4h, index=False)
-            print(f"✅ Saved {symbol} 4H data to {filename_4h}")
-            print(f"   Last 3 rows:\n{df_4h.tail(3)[['date', 'close', 'volume']]}")
+            # New data found
+            print(f"  Fetched {len(df_4h)} new candles.")
         else:
-            print(f"❌ Failed to fetch {symbol} 4H from OKX")
+            if existing_df.empty:
+                print(f"❌ Failed to fetch {symbol} 4H from OKX (Initial)")
+            else:
+                print(f"  No new candles or fetch failed. Using existing data.")
+        
+        # Combine
+        full_df = pd.DataFrame()
+        if not df_4h.empty and not existing_df.empty:
+            full_df = pd.concat([existing_df, df_4h]).drop_duplicates(subset=['date']).sort_values('date').reset_index(drop=True)
+        elif not df_4h.empty:
+            full_df = df_4h
+        elif not existing_df.empty:
+            full_df = existing_df
             
-        # 2. Fetch 1D Data (Context for Agent)
-        df_1d = fetch_okx_candles(symbol, bar="1D", days=730)
+        if full_df.empty:
+             print(f"❌ No data for {symbol} (Existing or New)")
+             failure_count += 1
+             continue
+
+        # Check Freshness
+        last_date = full_df['date'].max()
+        now = datetime.now(timezone.utc)
+        age = now - last_date
+        is_stale = age > timedelta(hours=12)
+        
+        if is_stale:
+             print(f"⚠️ Data for {symbol} is stale! Age: {age}")
+             if df_4h.empty and not existing_df.empty:
+                 print(f"🔄 Trying Binance for {symbol}...")
+                 fallback_df = fetch_binance_candles(symbol, bar="4H", days=730)
+                 if not fallback_df.empty:
+                     if fallback_df['date'].max() > last_date:
+                         print("  Using Binance data (Fresher)")
+                         full_df = fallback_df 
+                         df_4h = fallback_df
+                         existing_df = pd.DataFrame() 
+
+        # 2. Fetch 1D Data (Context for Agent) - Full fetch
+        df_1d = fetch_okx_candles(symbol, bar="1D", days=730) 
         if not df_1d.empty:
-            # Save 1D
             filename_1d = CSV_DIR / f"{coin_name}_1d.csv"
             df_1d.to_csv(filename_1d, index=False)
             print(f"✅ Saved {symbol} 1D data to {filename_1d}")
         else:
             print(f"⚠️ Failed to fetch {symbol} 1D from OKX (Non-critical)")
 
-        # Continue with Funding Rate logic (using 4H or just symbol)
-        # Note: Funding rate is usually independent of bar size for storage, 
-        # but we need it for the main dataset.
+        # Intermediate Save for 4H
+        full_df.to_csv(filename_4h, index=False)
         
-        # If 4H failed, try fallback (logic below expects df to be the primary 4H df)
-        df = df_4h
-        if df.empty:
-            # Fallback logic (Binance/CCXT/YF) - assumes they return 4H
-            # ... (existing fallback logic)
-            
-            # Try Binance
-            print(f"🔄 Trying Binance for {symbol}...")
-            df = fetch_binance_candles(symbol, bar="4H", days=730)
-            
-
-        # 4. Fallback to yfinance
-        if df.empty:
-            print(f"⚠️ CCXT failed for {symbol}, trying yfinance fallback...")
-            df = fetch_yfinance_candles(symbol, bar="4H", days=730)
-        
-        # Check Data Freshness
-        if not df.empty:
-            last_date = df['datetime'].max()
-            now = datetime.now(timezone.utc)
-            age = now - last_date
-            if age > timedelta(hours=12):
-                print(f"❌ Data for {symbol} is stale! Last date: {last_date}, Age: {age}")
-                df = pd.DataFrame() # Treat as failed
-                failure_count += 1
-                continue
-        
-        if df.empty:
-            print(f"❌ Failed to fetch {symbol} from ALL sources")
-            failure_count += 1
-            continue
-            
-        # Save candles immediately (Intermediate save)
-        output_path = CSV_DIR / f"{coin_name}_4h.csv"
-        df.to_csv(output_path, index=False)
-        print(f"💾 Saved candles to {output_path} (Intermediate)")
-
         # Fetch Sentiment Data
         try:
-            fr_df = fetch_funding_rate(symbol, days=730)
+            # We fetch using since_date if we are appending
+            fetch_since = since_date if not df_4h.empty and not existing_df.empty else None
+            
+            fr_df = fetch_funding_rate(symbol, days=730, since_date=fetch_since)
+            oi_df = fetch_open_interest(symbol, bar="4H", days=730, since_date=fetch_since)
         except Exception as e:
-            print(f"⚠️ Failed to fetch Funding Rate: {e}")
+            print(f"⚠️ Failed to fetch Sentiment: {e}")
             fr_df = pd.DataFrame()
-
-        try:
-            oi_df = fetch_open_interest(symbol, bar="4H", days=730)
-            # print("⚠️ Skipping Open Interest fetch to prevent hang")
-            # oi_df = pd.DataFrame()
-        except Exception as e:
-            import traceback
-            traceback.print_exc()
-            print(f"⚠️ Failed to fetch Open Interest: {e}")
             oi_df = pd.DataFrame()
-        
-        # Merge Funding Rate
-        if not fr_df.empty:
-            df = pd.merge_asof(df, fr_df, on='datetime', direction='backward')
-            df['funding_rate'] = df['funding_rate'].fillna(method='ffill')
-        else:
-            df['funding_rate'] = 0.0 # Default neutral
             
-        # Merge Open Interest
-        if not oi_df.empty:
-            df = pd.merge_asof(df, oi_df, on='datetime', direction='nearest', tolerance=pd.Timedelta(hours=1))
-        else:
-            df['open_interest'] = 0.0
+        # Merge logic
+        if not df_4h.empty:
+            df_work = df_4h.sort_values('datetime').copy()
             
+            if not fr_df.empty:
+                fr_df = fr_df.sort_values('datetime')
+                df_work = pd.merge_asof(df_work, fr_df, on='datetime', direction='backward')
+                df_work['funding_rate'] = df_work['funding_rate'].fillna(method='ffill')
+            else:
+                 df_work['funding_rate'] = 0.0
+
+            if not oi_df.empty:
+                oi_df = oi_df.sort_values('datetime')
+                df_work = pd.merge_asof(df_work, oi_df, on='datetime', direction='nearest', tolerance=pd.Timedelta(hours=1))
+            else:
+                 df_work['open_interest'] = 0.0
+                 
+            cols = ['date', 'datetime', 'open', 'high', 'low', 'close', 'volume', 'funding_rate', 'open_interest']
+            for c in cols:
+                if c not in df_work.columns: df_work[c] = 0.0
+            df_work = df_work[cols]
+
+            if not existing_df.empty:
+                for c in cols:
+                    if c not in existing_df.columns: existing_df[c] = 0.0
+                existing_df = existing_df[cols]
+                
+                final_df = pd.concat([existing_df, df_work]).drop_duplicates(subset=['date']).sort_values('date')
+            else:
+                final_df = df_work
+        else:
+            final_df = full_df
+
         # Save Final
-        df.to_csv(output_path, index=False)
-        print(f"💾 Saved final data to {output_path}")
+        final_df.to_csv(filename_4h, index=False)
+        print(f"💾 Saved final data to {filename_4h}")
         
-        time.sleep(1)
+        time.sleep(0.5)
     
     if failure_count > 0:
         print(f"\n❌ Failed to fetch data for {failure_count} coins. Exiting with error to stop pipeline.")
