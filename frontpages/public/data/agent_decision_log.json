@@ -1,6 +1,73 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：最新新闻显示比特币ETF持续流出（5天流出8.25亿美元）且市场情绪极度恐惧（指数23），但过去48小时多头已被大量清算（5,985万美元 vs 2,888万美元空头），显示利空可能已部分兑现（Priced In）。2. 日线趋势全盘看跌（所有币种价格低于SMA50），但资金费率普遍偏高（SOL 0.0065%、DOGE 0.0100%、BTC 0.0081%），存在轧多风险，尤其BTC资金费率Z值高达208.97%显示极度拥挤。3. 我选择【均值回归】剧本：利用高资金费率+超卖日线RSI（ETH 29.9、SOL 34.1、DOGE 35.4）进行反弹博弈，但需严格风控避免轧多。",
+      "en": "1. 【Narrative Check】: Latest news shows continuous Bitcoin ETF outflows ($825M over 5 days) and extreme fear sentiment (index 23), but long positions have been heavily liquidated over 48h ($59.85M vs $28.88M shorts), suggesting bearish news may be partially priced in. 2. Daily trends are bearish across all coins (price below SMA50), but funding rates are elevated (SOL 0.0065%, DOGE 0.0100%, BTC 0.0081%), posing long squeeze risks, especially with BTC funding Z-score at 208.97% indicating extreme crowding. 3. I select the 【Mean Reversion】 scenario: betting on a bounce using high funding rates + oversold daily RSI (ETH 29.9, SOL 34.1, DOGE 35.4), but with strict risk controls to avoid long squeezes."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000.0,
+        "entry_reason": {
+          "zh": "现有仓位：符合【均值回归】剧本。ETH日线RSI 29.9严重超卖，资金费率0.0083%偏高但未达极端（Z值129.73%），价格在支撑位附近（$2924），Qlib评分0.4662中等。持仓等待反弹，但需监控资金费率恶化风险。",
+          "en": "Existing position: aligns with 【Mean Reversion】 scenario. ETH daily RSI 29.9 is severely oversold, funding rate 0.0083% is elevated but not extreme (Z-score 129.73%), price near support ($2924), Qlib score 0.4662 is moderate. Holding for a bounce, but monitoring funding rate deterioration risk."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（日线支撑）或资金费率Z值升至>150%（轧多风险加剧），则失效。",
+            "en": "Invalidated if price breaks below 2800 (daily support) or funding rate Z-score rises >150% (increased long squeeze risk)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1315.76,
+        "entry_reason": {
+          "zh": "现有仓位：符合【均值回归】剧本。BNB资金费率-0.0049%为负（Z值-59.31%），显示空头拥挤，日线RSI 42.2中性偏弱，价格$837接近支撑。空头仓位可受益于潜在轧空，但Qlib评分0.3979较低需谨慎。",
+          "en": "Existing position: aligns with 【Mean Reversion】 scenario. BNB funding rate -0.0049% is negative (Z-score -59.31%), indicating short crowding, daily RSI 42.2 is neutral-weak, price $837 near support. Short position may benefit from potential short squeeze, but Qlib score 0.3979 is low requiring caution."
+        },
+        "exit_plan": {
+          "take_profit": 800,
+          "stop_loss": 870,
+          "invalidation": {
+            "zh": "如果价格突破870（阻力位）或资金费率转为正值>0.01%（空头平仓风险），则失效。",
+            "en": "Invalidated if price breaks above 870 (resistance) or funding rate turns positive >0.01% (short covering risk)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "新开仓位：符合【均值回归】剧本。SOL Qlib评分0.682最高（排名第1），日线RSI 34.1超卖，资金费率0.0065%偏高（Z值97.64%）但未达极端，存在反弹潜力。风险：高资金费率可能引发轧多，需严格止损。",
+          "en": "New position: aligns with 【Mean Reversion】 scenario. SOL has highest Qlib score 0.682 (rank 1), daily RSI 34.1 is oversold, funding rate 0.0065% is elevated (Z-score 97.64%) but not extreme, offering bounce potential. Risk: high funding rate may trigger long squeeze, requiring strict stop-loss."
+        },
+        "exit_plan": {
+          "take_profit": 130,
+          "stop_loss": 118,
+          "invalidation": {
+            "zh": "如果价格跌破118（近期低点）或资金费率Z值升至>120%（轧多风险确认），则失效。",
+            "en": "Invalidated if price breaks below 118 (recent low) or funding rate Z-score rises >120% (confirmed long squeeze risk)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Insufficient Exposure Room"
+      }
+    ],
+    "timestamp": "2025-12-25 20:01:41"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】市场处于极端恐惧（Fear & Greed Index 23.0），比特币ETF持续流出和期权到期偏空等利空消息已部分反映在价格中（Priced In），但宏观上美联储降息预期稳定，无重大经济数据冲击。2. 结合日线趋势（所有币种均低于SMA50，整体熊市）和【痛苦交易】检测，BTC、ETH、DOGE资金费率Z-score均超过140%（极端正值），显示多头拥挤，存在轧多风险；BNB资金费率负值提供短期支撑。3. 我选择【均值回归】剧本，利用高资金费率下的轧多风险，做空拥挤多头币种（如DOGE），同时考虑低费率币种（如BNB）的反弹机会。",
       "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 23.0), with negative catalysts like Bitcoin ETF outflows and bearish options expiry partially priced in, while macro Fed rate expectations remain stable with no major economic data shocks. 2. Combined with daily trends (all coins below SMA50, overall bearish) and 【Pain Trade】detection, BTC, ETH, DOGE funding rate Z-scores exceed 140% (extreme positive), indicating crowded longs and long squeeze risk; BNB's negative funding provides short-term support. 3. I choose the 【Mean Reversion】scenario, exploiting long squeeze risk from high funding rates to short crowded longs (e.g., DOGE), while considering bounce opportunities in low-rate coins (e.g., BNB)."
     },
@@ -1750,35 +1817,5 @@
       }
     ],
     "timestamp": "2025-12-06 20:17:27"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：最新新闻显示CFTC批准现货比特币和以太坊交易是重大利好，但市场处于极端恐惧（指数23），且日线趋势均为熊市（所有币种价格低于SMA50），表明利好可能已被部分消化（Priced In），市场情绪依然悲观。2. 结合日线趋势和【痛苦交易】检测：整体资金费率偏负（平均-0.0038%），SOL、DOGE、ETH的费率Z-Score极负（<-100%），显示空头拥挤，存在轧空风险；但市场趋势熊市，需谨慎做多。3. 我选择【微观结构/挤压】剧本，优先关注空头拥挤的币种（如SOL、ETH），但鉴于日线熊市和波动率中等，采用低杠杆、小仓位试探性做多，博弈短期轧空反弹。",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4000,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率Z-Score极负（-113.89%），显示空头拥挤，价格在133附近抗跌，Qlib评分最高（0.2484），存在轧空潜力。",
-        "exit_plan": {
-          "take_profit": 138.0,
-          "stop_loss": 128.0,
-          "invalidation": "资金费率Z-Score回升至-50%以上或价格跌破128.0支撑，表明空头压力缓解或下跌趋势延续。"
-        }
-      },
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "Qlib评分第二（0.2329），资金费率微负（-0.0006%），日线熊市但4H结构稳定，作为对冲持仓。",
-        "exit_plan": {
-          "take_profit": 92000,
-          "stop_loss": 88000,
-          "invalidation": "资金费率转正或价格跌破88000支撑，表明空头压力缓解或下跌趋势延续。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-06 16:16:37"
   }
 ]
