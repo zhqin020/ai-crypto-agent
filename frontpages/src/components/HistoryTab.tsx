@@ -33,7 +33,8 @@ export function HistoryTab({ language }: { language: 'zh' | 'en' }) {
             const text = await response.text();
             const lines = text.trim().split('\n');
             const parsedHistory: HistoryRecord[] = [];
-            const openPositions: Record<string, { entryTime: string, entryPrice: number, qty: number, notional: number, margin: number, leverage: number }> = {};
+
+            const openPositions: Record<string, { entryTime: string, entryPrice: number, qty: number, notional: number, margin: number, leverage: number }[]> = {};
 
             for (let i = 1; i < lines.length; i++) {
               const line = lines[i].trim();
@@ -52,15 +53,17 @@ export function HistoryTab({ language }: { language: 'zh' | 'en' }) {
               const realized_pnl = fields[9];
               const leverage = fields.length > 12 ? fields[12] : null;
 
-              if (action === 'open_long' || action === 'open_short') {
-                openPositions[symbol] = {
+              if (action === 'open_long' || action === 'open_short' || action === 'open_long_merge' || action === 'open_short_merge') { // handle merge types too
+                if (!openPositions[symbol]) openPositions[symbol] = [];
+                openPositions[symbol].push({
                   entryTime: time,
                   entryPrice: parseFloat(price),
                   qty: parseFloat(qty),
                   notional: parseFloat(notional),
                   margin: parseFloat(margin),
                   leverage: leverage ? parseFloat(leverage) : (parseFloat(notional) / parseFloat(margin))
-                };
+                });
+
               } else if (action === 'close_position') {
                 const exitPrice = parseFloat(price);
                 const quantity = parseFloat(qty);
@@ -68,14 +71,28 @@ export function HistoryTab({ language }: { language: 'zh' | 'en' }) {
                 const feeVal = parseFloat(fee);
                 const rawPnl = pnlVal + feeVal;
 
-                const openInfo = openPositions[symbol];
+
+                const openInfos = openPositions[symbol] || [];
                 let entryPrice = 0;
                 let entryTime = 'Unknown';
+                let matchedIndex = -1;
+                let openInfo = null;
 
-                if (openInfo) {
+                // 1. Try to find exact quantity match (within small epsilon)
+                matchedIndex = openInfos.findIndex(p => Math.abs(p.qty - quantity) < 0.0001);
+
+                // 2. If no exact match, try to find "contained" match (open qty >= close qty) - simple FIFO for now
+                if (matchedIndex === -1 && openInfos.length > 0) {
+                  matchedIndex = 0; // Fallback to FIFO
+                }
+
+                if (matchedIndex !== -1) {
+                  openInfo = openInfos[matchedIndex];
                   entryPrice = openInfo.entryPrice;
                   entryTime = openInfo.entryTime;
-                  delete openPositions[symbol];
+
+                  // Remove the matched position
+                  openInfos.splice(matchedIndex, 1);
                 } else {
                   if (side === 'long') {
                     entryPrice = exitPrice - (rawPnl / quantity);
