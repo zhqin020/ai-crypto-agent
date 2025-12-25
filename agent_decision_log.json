@@ -1,6 +1,73 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：当前市场处于极端恐惧状态（恐惧贪婪指数23），但新闻面缺乏新的宏观催化剂（主要是假期和税务新闻），美联储利率预期稳定，显示近期下跌可能已反映悲观情绪（Priced In）。2. 结合日线趋势（所有主要币种均处于熊市，价格低于SMA50）和【痛苦交易】检测：BTC资金费率Z-score高达412.7%（极端正值），显示多头拥挤，存在轧多风险；DOGE资金费率Z-score也达199.7%，同样拥挤。3. 我选择【均值回归】剧本，利用高资金费率+熊市背景下的反弹乏力，做空拥挤的多头仓位，同时管理现有头寸的风险。",
+      "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 23), but news lacks new macro catalysts (mostly holiday and tax news), and Fed rate expectations are stable, suggesting recent declines may already reflect pessimism (Priced In). 2. Combining daily trends (all major coins are in bear markets, price below SMA50) and 【Pain Trade】 detection: BTC funding rate Z-score is extremely high at 412.7% (crowded longs), posing long squeeze risk; DOGE funding Z-score is also high at 199.7%, similarly crowded. 3. I choose the 【Mean Reversion】 scenario, leveraging high funding rates + weak rebounds in a bear market to short crowded long positions, while managing risk on existing positions."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4000.0,
+        "entry_reason": {
+          "zh": "现有ETH多头头寸：价格（$2947.4）高于入场价（$2917.35），小幅盈利；日线趋势熊市但4H RSI（46.64）中性，资金费率Z-score（61.5%）相对温和，无轧空风险；止损位（$2800）仍有空间，继续持有。",
+          "en": "Existing ETH long position: Price ($2947.4) above entry ($2917.35), small profit; daily trend bearish but 4H RSI (46.64) neutral, funding Z-score (61.5%) relatively mild, no squeeze risk; stop-loss ($2800) still has room, hold."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（支撑位）或资金费率转为极端负值（轧空风险），则失效。",
+            "en": "Invalidated if price breaks below 2800 (support) or funding rate turns extremely negative (short squeeze risk)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1315.76,
+        "entry_reason": {
+          "zh": "现有BNB空头头寸：价格（$847.8）略高于入场价（$839.3），小幅亏损；日线趋势熊市，4H RSI（47.77）中性，资金费率Z-score（99.1%）偏高但未极端，Qlib评分低（0.4829），止损位（$870）仍有空间，继续持有。",
+          "en": "Existing BNB short position: Price ($847.8) slightly above entry ($839.3), small loss; daily trend bearish, 4H RSI (47.77) neutral, funding Z-score (99.1%) high but not extreme, Qlib score low (0.4829), stop-loss ($870) still has room, hold."
+        },
+        "exit_plan": {
+          "take_profit": 800,
+          "stop_loss": 870,
+          "invalidation": {
+            "zh": "如果价格突破870（阻力位）或资金费率转为极端正值（轧多风险），则失效。",
+            "en": "Invalidated if price breaks above 870 (resistance) or funding rate turns extremely positive (long squeeze risk)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本：Qlib评分最高（0.6417）但日线趋势熊市（价格低于SMA50），4H RSI（43.96）中性偏弱，资金费率Z-score极高（199.7%），显示多头拥挤，存在轧多风险；熊市背景下反弹乏力，做空拥挤多头。",
+          "en": "Matches 【Mean Reversion】 scenario: Highest Qlib score (0.6417) but daily trend bearish (price below SMA50), 4H RSI (43.96) neutral-weak, funding Z-score extremely high (199.7%), indicating crowded longs and long squeeze risk; weak rebounds in bear market, short crowded longs."
+        },
+        "exit_plan": {
+          "take_profit": 0.118,
+          "stop_loss": 0.135,
+          "invalidation": {
+            "zh": "如果价格突破0.135（近期高点）或资金费率转为极端负值（轧空风险），则失效。",
+            "en": "Invalidated if price breaks above 0.135 (recent high) or funding rate turns extremely negative (short squeeze risk)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Insufficient Exposure Room"
+      }
+    ],
+    "timestamp": "2025-12-25 08:02:18"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】当前市场处于极端恐惧（Fear & Greed Index 24.0），但新闻面缺乏新的宏观催化剂（仅有Fed候选人评论和假期消息），属于旧叙事（Priced In）。价格在日线熊市趋势下小幅反弹，显示为技术性修复而非趋势反转。2. 结合日线趋势（所有主要币种价格低于SMA50）和【痛苦交易】检测，市场整体杠杆情绪看跌（平均资金费率-0.0007%），但DOGE资金费率轻微正（0.0025%）且Z-score极低（-33.1%），存在潜在的轧空风险。3. 我选择【均值回归】剧本，基于Qlib相对强度排名，做多DOGE（排名第一，得分0.7095），同时持有现有ETH多头和BNB空头，等待市场回归均值。",
       "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 24.0), but news lacks new macro catalysts (only Fed candidate comments and holiday messages), indicating old narratives (Priced In). Prices show minor rebounds under daily bearish trends, suggesting technical corrections rather than trend reversals. 2. Combining daily trends (all major coins below SMA50) and 【Pain Trade】detection, overall leverage sentiment is bearish (avg funding rate -0.0007%), but DOGE has slightly positive funding (0.0025%) with extremely low Z-score (-33.1%), indicating potential short squeeze risk. 3. I choose the 【Mean Reversion】scenario, going long on DOGE (rank #1, score 0.7095) based on Qlib relative strength, while holding existing ETH long and BNB short positions, awaiting mean reversion."
     },
@@ -1631,47 +1698,5 @@
       }
     ],
     "timestamp": "2025-12-06 10:00:11"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：最新新闻显示核心PCE通胀数据低于预期（2.8% vs 预期更高），这通常是利好，但市场反应平淡（价格横盘/微跌），表明利好可能已部分兑现（Priced In）。恐惧与贪婪指数23（极度恐惧）和近期大量多头清算（$3.45亿 vs 空头$1.4亿）暗示市场情绪悲观，但空头拥挤可能带来反弹机会。2. 结合日线趋势：所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），但4H数据中资金费率极负（SOL -0.0056%，BTC -0.0047%，DOGE -0.0028%），Z-Score均低于-150%，显示空头过度拥挤，存在【轧空风险】。3. 我选择【微观结构挤压】剧本：利用极端负资金费率下的价格韧性，在风险可控下做多相对强势币种，博弈空头回补反弹。",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4000,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率极负（-0.0056%），Z-Score -200.7%显示空头极度拥挤，价格在132.4附近抗跌，Qlib评分最高（0.4973），相对强度领先。",
-        "exit_plan": {
-          "take_profit": 138.0,
-          "stop_loss": 128.0,
-          "invalidation": "资金费率Z-Score回升至-50%以上或价格跌破128.0支撑，表明空头压力缓解或下跌趋势延续。"
-        }
-      },
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率负（-0.0047%），Z-Score -253.5%为空头最拥挤，价格在89258附近横盘，Qlib评分第二高（0.4838），作为基准币种有反弹潜力。",
-        "exit_plan": {
-          "take_profit": 92000,
-          "stop_loss": 88000,
-          "invalidation": "资金费率转正或价格跌破88000支撑，表明空头压力缓解或下跌趋势延续。"
-        }
-      },
-      {
-        "symbol": "DOGE",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率负（-0.0028%），Z-Score -153.0%显示空头拥挤，价格在0.1388附近微跌，Qlib评分第三（0.1604），但持仓已存在且风险可控。",
-        "exit_plan": {
-          "take_profit": 0.145,
-          "stop_loss": 0.137,
-          "invalidation": "价格跌破0.137支撑或资金费率Z-Score回升至-150%以上，表明空头压力缓解或下跌趋势延续。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-06 09:16:26"
   }
 ]
