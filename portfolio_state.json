@@ -1,27 +1,47 @@
 {
-  "nav": 10638.41,
-  "cash": 9977.392396774683,
+  "nav": 10633.1,
+  "cash": 8633.095146866426,
   "positions": [
     {
-      "symbol": "BNB",
+      "symbol": "SOL",
       "side": "short",
-      "quantity": -1.5676873585130466,
-      "entry_price": 839.3,
+      "quantity": -16.429803663846215,
+      "entry_price": 121.73,
       "leverage": 2.0,
-      "margin": 657.88,
-      "notional": 1315.76,
-      "current_price": 837.3,
-      "unrealized_pnl": 3.14,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 121.73,
+      "unrealized_pnl": -0.0,
       "exit_plan": {
-        "take_profit": 800,
-        "stop_loss": 870,
+        "take_profit": 115,
+        "stop_loss": 128,
         "invalidation": {
-          "zh": "如果价格突破870（阻力位）或资金费率转为极端正值（轧多风险），则失效。",
-          "en": "Invalidated if price breaks above 870 (resistance) or funding rate turns extremely positive (long squeeze risk)."
+          "zh": "如果价格突破128（阻力位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
+          "en": "Invalidated if price breaks above 128 (resistance) or funding rate Z-Score drops below 50% (long pressure eases)."
         }
       },
-      "opened_at": "2025-12-24 15:39:03"
+      "opened_at": "2025-12-25 12:20:58"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "short",
+      "quantity": -15835.312747426762,
+      "entry_price": 0.1263,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.1263,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 0.118,
+        "stop_loss": 0.135,
+        "invalidation": {
+          "zh": "如果价格突破0.135（阻力位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
+          "en": "Invalidated if price breaks above 0.135 (resistance) or funding rate Z-Score drops below 50% (long pressure eases)."
+        }
+      },
+      "opened_at": "2025-12-25 12:20:58"
     }
   ],
-  "last_update": "2025-12-25T12:05:00.460267"
+  "last_update": "2025-12-25T12:20:58.314015"
 }
