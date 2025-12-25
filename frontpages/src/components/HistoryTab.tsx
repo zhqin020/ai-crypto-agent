@@ -121,7 +121,11 @@ export function HistoryTab({ language }: { language: 'zh' | 'en' }) {
                 });
               }
             }
-            parsedHistory.sort((a, b) => new Date(b.exitTime).getTime() - new Date(a.exitTime).getTime());
+            parsedHistory.sort((a, b) => {
+              const dateA = new Date(a.exitTime.replace(' ', 'T'));
+              const dateB = new Date(b.exitTime.replace(' ', 'T'));
+              return dateB.getTime() - dateA.getTime();
+            });
             setHistory(parsedHistory);
           } else {
             setHistory([]);
