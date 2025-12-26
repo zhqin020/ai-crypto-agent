@@ -1,6 +1,6 @@
 {
-  "nav": 10693.17,
-  "cash": 7973.498586866426,
+  "nav": 10638.04,
+  "cash": 8962.799026090495,
   "positions": [
     {
       "symbol": "SOL",
@@ -10,34 +10,14 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 119.98,
-      "unrealized_pnl": 28.75,
+      "current_price": 122.59,
+      "unrealized_pnl": -14.13,
       "exit_plan": {
         "take_profit": 115,
         "stop_loss": 128,
         "invalidation": {
           "zh": "如果价格突破128（阻力位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
           "en": "Invalidated if price breaks above 128 (resistance) or funding rate Z-Score drops below 50% (long pressure eases)."
-        }
-      },
-      "opened_at": "2025-12-25 12:20:58"
-    },
-    {
-      "symbol": "DOGE",
-      "side": "short",
-      "quantity": -15835.312747426762,
-      "entry_price": 0.1263,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 0.1236,
-      "unrealized_pnl": 42.76,
-      "exit_plan": {
-        "take_profit": 0.118,
-        "stop_loss": 0.135,
-        "invalidation": {
-          "zh": "如果价格突破0.135（阻力位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
-          "en": "Invalidated if price breaks above 0.135 (resistance) or funding rate Z-Score drops below 50% (long pressure eases)."
         }
       },
       "opened_at": "2025-12-25 12:20:58"
@@ -50,8 +30,8 @@
       "leverage": 2.0,
       "margin": 658.28,
       "notional": 1316.56,
-      "current_price": 2904.39,
-      "unrealized_pnl": -10.12,
+      "current_price": 2962.64,
+      "unrealized_pnl": 16.08,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2800,
@@ -61,7 +41,27 @@
         }
       },
       "opened_at": "2025-12-25 14:24:18"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 238.44320889594914,
+      "entry_price": 0.1259,
+      "leverage": 2.0,
+      "margin": 15.01,
+      "notional": 30.02,
+      "current_price": 0.1259,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.135,
+        "stop_loss": 0.118,
+        "invalidation": {
+          "zh": "如果价格跌破0.118（支撑位）或融资费率Z-Score升至-50%以上（空头压力缓解），则失效。",
+          "en": "Invalidated if price breaks below 0.118 (support) or funding rate Z-Score rises above -50% (short pressure eases)."
+        }
+      },
+      "opened_at": "2025-12-26 04:01:57"
     }
   ],
-  "last_update": "2025-12-26T00:02:05.554939"
+  "last_update": "2025-12-26T04:01:57.479895"
 }
