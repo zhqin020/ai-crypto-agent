@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】当前市场处于极端恐惧（Fear & Greed Index 20），但新闻面缺乏重大经济数据或突发事件，仅有分析师预测（如ETF利好、BTC类似2019年）等旧叙事，显示利好可能已部分兑现（Priced In）。2. 结合日线趋势（所有币种均低于SMA50，呈熊市）和【痛苦交易】检测，DOGE融资费率Z-Score高达12.6%（相对较高），但整体市场融资费率中性（平均0.0030%），无明显轧空/轧多风险。3. 我选择【趋势跟随】剧本，基于Qlib相对强度排名，在熊市环境中做多相对强势币种（DOGE、BNB、SOL），但严格控制仓位和风险。",
+      "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 20), but news lacks major economic data or sudden events, with only analyst predictions (e.g., ETF optimism, BTC resembling 2019) as old narratives, indicating positives may be partially priced in. 2. Combined with daily trends (all coins below SMA50, bearish) and 【Pain Trade】detection, DOGE funding rate Z-Score is high at 12.6%, but overall market funding rates are neutral (avg 0.0030%), with no clear squeeze risks. 3. I choose the 【Trend Following】scenario, based on Qlib relative strength rankings, going long on relatively strong coins (DOGE, BNB, SOL) in a bear market, but strictly controlling position size and risk."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1316.56,
+        "entry_reason": {
+          "zh": "ETH持仓仍有效：价格在止损（2800）和止盈（3100）之间，融资费率Z-Score为-63.8%（负值显示空头压力），日线趋势熊市但4H RSI中性（45.15），Qlib排名第4（中等），无强平仓信号。",
+          "en": "ETH position remains valid: price between stop-loss (2800) and take-profit (3100), funding rate Z-Score is -63.8% (negative indicates short pressure), daily trend bearish but 4H RSI neutral (45.15), Qlib rank 4 (medium), no strong exit signals."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（支撑位）或融资费率Z-Score升至-50%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 2800 (support) or funding rate Z-Score rises above -50% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "BNB空头持仓仍有效：价格接近止盈（800），融资费率Z-Score为59.97%（正值但未极端），日线趋势熊市且RSI超卖（29.8），Qlib排名第2（强势），符合熊市做空逻辑。",
+          "en": "BNB short position remains valid: price near take-profit (800), funding rate Z-Score is 59.97% (positive but not extreme), daily trend bearish with oversold RSI (29.8), Qlib rank 2 (strong), aligns with bearish short logic."
+        },
+        "exit_plan": {
+          "take_profit": 800,
+          "stop_loss": 870,
+          "invalidation": {
+            "zh": "如果价格突破870（阻力位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
+            "en": "Invalidated if price breaks above 870 (resistance) or funding rate Z-Score drops below 50% (long pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 500,
+        "entry_reason": {
+          "zh": "符合【趋势跟随】剧本：DOGE Qlib排名第1（得分0.6028），相对强度最高，4H RSI超卖（32.5），融资费率Z-Score为12.6%（偏高但可接受），日线趋势熊市但动量改善（momentum_12 -0.0477 vs 市场平均 -0.0158）。",
+          "en": "Matches 【Trend Following】scenario: DOGE Qlib rank 1 (score 0.6028), highest relative strength, 4H RSI oversold (32.5), funding rate Z-Score is 12.6% (high but acceptable), daily trend bearish but momentum improving (momentum_12 -0.0477 vs market avg -0.0158)."
+        },
+        "exit_plan": {
+          "take_profit": 0.135,
+          "stop_loss": 0.115,
+          "invalidation": {
+            "zh": "如果价格跌破0.115（支撑位）或融资费率Z-Score升至20%以上（多头压力过高），则失效。",
+            "en": "Invalidated if price breaks below 0.115 (support) or funding rate Z-Score rises above 20% (long pressure too high)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-27 04:01:43"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】当前市场处于极端恐惧（Fear & Greed Index 20），但经济日历显示假期休市，最新新闻多为年末常规报道（如税收、关税、企业财报），无重大宏观催化剂，属于【Priced In】状态——利空情绪已反映在价格中。2. 结合日线趋势（所有币种均低于SMA50，呈熊市）和【痛苦交易】检测，DOGE融资费率Z-Score高达4.97%（多头拥挤），存在轧多风险；ETH融资费率Z-Score为-71.29%（空头拥挤），存在轧空机会。3. 我选择【微观结构/挤压】剧本，利用ETH的极端负融资费率（-0.0023%）和价格韧性（MACD为正），做多ETH以博弈空头回补。",
       "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 20), but the economic calendar shows holiday closures, and latest news are mostly routine year-end reports (e.g., taxes, tariffs, earnings), with no major macro catalysts—this is a 【Priced In】 state where bearish sentiment is already reflected in prices. 2. Combining daily trends (all coins below SMA50, bearish) and 【Pain Trade】 detection, DOGE has a high funding rate Z-Score of 4.97% (crowded longs), posing a long squeeze risk; ETH has a funding rate Z-Score of -71.29% (crowded shorts), offering a short squeeze opportunity. 3. I select the 【Microstructure/Squeeze】 scenario, leveraging ETH's extreme negative funding rate (-0.0023%) and price resilience (positive MACD), to go long on ETH betting on short covering."
     },
@@ -2184,35 +2250,5 @@
       }
     ],
     "timestamp": "2025-12-08 12:22:56"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：最新新闻显示比特币因FOMC担忧跌破88K，但当前价格已反弹至91.5K以上，表明利空消息可能已被部分消化（Priced In）。市场情绪指数为20（极度恐惧），与价格反弹形成看涨背离（Divergence）。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于熊市（价格低于SMA50），但4H数据动量整体为正（平均0.0224），显示短期反弹潜力。资金费率Z-score普遍偏高（DOGE 110%、BNB 185%、BTC 230%），存在轧多风险（Long Squeeze Risk），尤其是BTC和BNB。3. 我选择【均值回归】剧本，利用高资金费率Z-score和日线熊市背景，优先管理现有高风险头寸（如BNB），并寻找低费率机会（如SOL）。",
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "close_position",
-        "leverage": 0,
-        "position_size_usd": 0,
-        "entry_reason": "不适用（平仓操作）",
-        "exit_plan": {
-          "take_profit": 0,
-          "stop_loss": 0,
-          "invalidation": "不适用"
-        }
-      },
-      {
-        "symbol": "SOL",
-        "action": "adjust_sl",
-        "leverage": 0,
-        "position_size_usd": 0,
-        "entry_reason": "不适用（调整止损）",
-        "exit_plan": {
-          "take_profit": 145,
-          "stop_loss": 130,
-          "invalidation": "价格跌破130支撑或资金费率Z-score转正超过150%，表明空头压力缓解或上涨动力减弱。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-08 08:16:15"
   }
 ]
