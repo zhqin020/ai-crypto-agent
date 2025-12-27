@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 23），但近期新闻多为回顾性（如2025年熊市总结）或长期展望（如以太坊TVL增长预测），无即时宏观催化剂，属于Priced In状态。2. 结合日线趋势（所有主要币种均处于熊市，价格低于SMA50）和【痛苦交易】检测：DOGE融资费率Z-Score极低（-14.63%），显示空头拥挤，存在轧空风险；SOL融资费率Z-Score极高（154.87%），显示多头拥挤，存在轧多风险。3. 我选择【微观结构/轧空】剧本，做多DOGE（利用空头挤压），并【均值回归】剧本，做空SOL（利用多头挤压），同时持有现有ETH多头（技术面中性）。",
+      "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 23), but recent news is mostly retrospective (e.g., 2025 bear market summary) or long-term outlooks (e.g., Ethereum TVL growth forecast), with no immediate macro catalysts, indicating a Priced In state. 2. Combining daily trends (all major coins are in a bear market, price below SMA50) and 【Pain Trade】 detection: DOGE has an extremely low funding rate Z-Score (-14.63%), showing crowded shorts and a short squeeze risk; SOL has an extremely high funding rate Z-Score (154.87%), showing crowded longs and a long squeeze risk. 3. I select the 【Microstructure/Squeeze】 scenario for DOGE (exploiting short covering) and the 【Mean Reversion】 scenario for SOL (exploiting long unwinding), while holding the existing ETH long (neutral technically)."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1316.56,
+        "entry_reason": {
+          "zh": "持有现有ETH多头头寸：价格接近入场价，RSI中性（46.57），融资费率Z-Score极低（-120.83%），显示空头压力，但日线趋势熊市，技术面无强信号，保持持有等待突破。",
+          "en": "Hold existing ETH long position: Price is near entry, RSI neutral (46.57), funding rate Z-Score extremely low (-120.83%) indicating short pressure, but daily trend is bearish with no strong technical signals, maintain hold for breakout."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（支撑位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 2800 (support) or funding rate Z-Score drops below 50% (long pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "持有现有DOGE多头头寸：Qlib评分最高（0.8544），融资费率Z-Score极低（-14.63%）显示空头拥挤，存在轧空机会，价格小幅盈利，继续持有。",
+          "en": "Hold existing DOGE long position: Highest Qlib score (0.8544), funding rate Z-Score extremely low (-14.63%) indicating crowded shorts and short squeeze opportunity, price slightly profitable, continue holding."
+        },
+        "exit_plan": {
+          "take_profit": 0.135,
+          "stop_loss": 0.115,
+          "invalidation": {
+            "zh": "如果价格跌破0.115（支撑位）或融资费率Z-Score升至20%以上（多头压力过高），则失效。",
+            "en": "Invalidated if price breaks below 0.115 (support) or funding rate Z-Score rises above 20% (long pressure too high)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "持有现有SOL空头头寸：融资费率Z-Score极高（154.87%）显示多头拥挤，存在轧多风险，Qlib评分中等（0.277），日线趋势熊市，价格持平，继续持有。",
+          "en": "Hold existing SOL short position: Funding rate Z-Score extremely high (154.87%) indicating crowded longs and long squeeze risk, Qlib score moderate (0.277), daily trend bearish, price flat, continue holding."
+        },
+        "exit_plan": {
+          "take_profit": 110,
+          "stop_loss": 130,
+          "invalidation": {
+            "zh": "如果价格突破130（阻力位）或融资费率Z-Score降至100%以下（多头压力缓解），则失效。",
+            "en": "Invalidated if price breaks above 130 (resistance) or funding rate Z-Score drops below 100% (long pressure eases)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-27 20:01:27"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：当前市场处于极端恐惧（Fear & Greed Index 23.0），且新闻显示比特币在2025年经历了熊市，但长期看涨预期存在（Mow预测十年牛市）。然而，日线趋势显示所有主要币种均处于熊市（价格低于SMA50），且近期多头已被大量清算（48小时长仓清算$98M vs 短仓$16M），表明利空可能已部分兑现（Priced In），但市场情绪仍脆弱。2. 【痛苦交易检测】：DOGE融资费率Z-Score为-16.8%（极度负值），显示空头拥挤，存在轧空风险；SOL融资费率Z-Score为176.5%（极高正值），显示多头拥挤，存在轧多风险。3. 【假设剧本】：我选择【微观结构挤压】剧本，基于DOGE空头拥挤（负融资费率Z-Score）且Qlib评分最高（0.8528），做多DOGE以博弈空头回补；同时，鉴于SOL多头拥挤（正融资费率Z-Score）且日线趋势熊市，做空SOL以博弈多头清算。",
       "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 23.0), with news indicating Bitcoin experienced a bear market in 2025 but long-term bullish expectations exist (Mow predicts a decade-long bull run). However, daily trends show all major coins are in a bear market (price below SMA50), and recent long positions have been heavily liquidated (48h long liquidations $98M vs short $16M), suggesting bearish factors may be partially priced in, but sentiment remains fragile. 2. 【Pain Trade Detection】: DOGE funding rate Z-Score is -16.8% (extremely negative), indicating crowded shorts and a short squeeze risk; SOL funding rate Z-Score is 176.5% (extremely positive), indicating crowded longs and a long squeeze risk. 3. 【Hypothesis Scenario】: I choose the 【Microstructure Squeeze】 scenario, going long DOGE based on crowded shorts (negative funding Z-Score) and highest Qlib score (0.8528) to bet on short covering; simultaneously, given SOL's crowded longs (positive funding Z-Score) and bearish daily trend, going short SOL to bet on long liquidation."
     },
@@ -2316,23 +2382,5 @@
       }
     ],
     "timestamp": "2025-12-09 04:13:26"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】宏观新闻显示市场情绪改善（加密基金连续两周流入、BlackRock申请以太坊质押ETF），但比特币价格仍低于50日均线，且恐惧贪婪指数处于22（极度恐惧），表明利好可能尚未完全反映在价格中（Impulse）。2. 日线趋势上，所有主要币种均处于熊市（价格低于SMA50），但市场整体波动率低，杠杆情绪偏空，存在潜在的轧空机会。3. 我选择【微观结构挤压】剧本，重点关注资金费率极负的SOL，其费率Z-score为-177.15%，显示空头拥挤，价格在133附近抗跌，配合低波动环境，可能触发空头回补。",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率极负（-0.0101%），Z-score为-177.15%，显示空头过度拥挤；价格在133附近抗跌，日线RSI中性（46.01），配合低波动市场，预计将发生轧空反弹。",
-        "exit_plan": {
-          "take_profit": 140,
-          "stop_loss": 128,
-          "invalidation": "资金费率转正超过-0.005%或价格跌破128支撑，表明空头压力缓解或下跌动能增强。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-09 00:16:41"
   }
 ]
