@@ -1,6 +1,6 @@
 {
-  "nav": 10629.68,
-  "cash": 9458.727470617303,
+  "nav": 10622.7,
+  "cash": 8456.727470617303,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 658.28,
       "notional": 1316.56,
-      "current_price": 2933.21,
-      "unrealized_pnl": 2.84,
+      "current_price": 2933.06,
+      "unrealized_pnl": 2.78,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2800,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 500.0,
       "notional": 1000.0,
-      "current_price": 0.1233,
-      "unrealized_pnl": 9.83,
+      "current_price": 0.1227,
+      "unrealized_pnl": 4.91,
       "exit_plan": {
         "take_profit": 0.135,
         "stop_loss": 0.115,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2025-12-26 20:01:44"
+    },
+    {
+      "symbol": "SOL",
+      "side": "short",
+      "quantity": -16.233766233766232,
+      "entry_price": 123.2,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 123.2,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 110,
+        "stop_loss": 130,
+        "invalidation": {
+          "zh": "如果价格突破130（阻力位）或融资费率Z-Score降至100%以下（多头压力缓解），则失效。",
+          "en": "Invalidated if price breaks above 130 (resistance) or funding rate Z-Score drops below 100% (long pressure eases)."
+        }
+      },
+      "opened_at": "2025-12-27 08:01:46"
     }
   ],
-  "last_update": "2025-12-27T04:02:08.259789"
+  "last_update": "2025-12-27T08:01:46.532709"
 }
