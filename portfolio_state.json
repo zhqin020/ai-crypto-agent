@@ -1,6 +1,6 @@
 {
-  "nav": 10640.11,
-  "cash": 9452.777470617304,
+  "nav": 10631.55,
+  "cash": 8450.777470617304,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 658.28,
       "notional": 1316.56,
-      "current_price": 2949.6,
-      "unrealized_pnl": 10.22,
+      "current_price": 2942.3,
+      "unrealized_pnl": 6.93,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2800,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 500.0,
       "notional": 1000.0,
-      "current_price": 0.1244,
-      "unrealized_pnl": 18.84,
+      "current_price": 0.124,
+      "unrealized_pnl": 15.56,
       "exit_plan": {
         "take_profit": 0.135,
         "stop_loss": 0.115,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2025-12-26 20:01:44"
+    },
+    {
+      "symbol": "BTC",
+      "side": "long",
+      "quantity": 0.022804497046817633,
+      "entry_price": 87702.0,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 87702.0,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 90000,
+        "stop_loss": 86000,
+        "invalidation": {
+          "zh": "如果价格跌破86000（近期低点支撑）或融资费率Z-Score升至-50%以上（空头压力缓解），则失效。",
+          "en": "Invalidated if price breaks below 86000 (recent low support) or funding rate Z-Score rises above -50% (short pressure eases)."
+        }
+      },
+      "opened_at": "2025-12-28 04:02:00"
     }
   ],
-  "last_update": "2025-12-28T00:01:18.417110"
+  "last_update": "2025-12-28T04:02:00.398331"
 }
