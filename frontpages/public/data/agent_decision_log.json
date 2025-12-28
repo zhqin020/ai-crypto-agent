@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】市场处于极端恐惧（Fear & Greed Index 24），比特币ETF流出和价格停滞新闻已部分反映在价格中（Priced In），但日线趋势仍为熊市（所有主要币种价格低于SMA50），宏观情绪偏空。2. 【痛苦交易检测】DOGE融资费率Z-Score高达92.06%（极度拥挤多头），SOL融资费率Z-Score 104.03%（极端拥挤多头），存在轧多风险；而BTC融资费率Z-Score仅32.06%（相对中性），空头压力较小。3. 【假设剧本】我选择【均值回归】剧本，针对DOGE和SOL的高拥挤多头进行做空，同时利用Qlib相对强度模型（DOGE排名第一但技术面疲软）的背离信号。",
+      "en": "1. 【Narrative Check】Market is in extreme fear (Fear & Greed Index 24), Bitcoin ETF outflows and price stagnation news are partially priced in, but daily trend remains bearish (all major coins below SMA50), macro sentiment is bearish. 2. 【Pain Trade Detection】DOGE funding rate Z-Score is extremely high at 92.06% (crowded longs), SOL funding rate Z-Score is 104.03% (extremely crowded longs), posing long squeeze risks; BTC funding rate Z-Score is only 32.06% (relatively neutral), with less short pressure. 3. 【Hypothesis】I choose the 【Mean Reversion】scenario, shorting DOGE and SOL due to their high crowded longs, while leveraging the divergence signal from Qlib relative strength model (DOGE ranks first but technicals are weak)."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1316.56,
+        "entry_reason": {
+          "zh": "现有ETH多头仓位：价格接近入场价（$2939.11 vs $2926.89），融资费率Z-Score 45.41%相对中性，日线趋势熊市但4H RSI 50.36中性，MACD为正，未触发止损或止盈，继续持有。",
+          "en": "Existing ETH long position: Price near entry ($2939.11 vs $2926.89), funding rate Z-Score 45.41% relatively neutral, daily trend bearish but 4H RSI 50.36 neutral, MACD positive, stop loss or take profit not triggered, continue holding."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（支撑位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 2800 (support) or funding rate Z-Score drops below 50% (long pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "现有BTC多头仓位：价格接近入场价（$87750 vs $87702），融资费率Z-Score 32.06%中性偏低，日线趋势熊市但4H RSI 51.69中性，MACD为正，未触发止损或止盈，继续持有。",
+          "en": "Existing BTC long position: Price near entry ($87750 vs $87702), funding rate Z-Score 32.06% neutral-low, daily trend bearish but 4H RSI 51.69 neutral, MACD positive, stop loss or take profit not triggered, continue holding."
+        },
+        "exit_plan": {
+          "take_profit": 90000,
+          "stop_loss": 86000,
+          "invalidation": {
+            "zh": "如果价格跌破86000（近期低点支撑）或融资费率Z-Score升至-50%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 86000 (recent low support) or funding rate Z-Score rises above -50% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 999.22,
+        "entry_reason": {
+          "zh": "现有DOGE空头仓位：价格持平于入场价$0.1242，融资费率Z-Score 92.06%极高（拥挤多头），日线趋势熊市（RSI 33.1超卖但价格低于SMA50），4H RSI 43.41偏弱，符合【均值回归】剧本，继续持有以捕捉轧多机会。",
+          "en": "Existing DOGE short position: Price flat at entry $0.1242, funding rate Z-Score extremely high at 92.06% (crowded longs), daily trend bearish (RSI 33.1 oversold but price below SMA50), 4H RSI 43.41 weak, aligns with 【Mean Reversion】scenario, continue holding to capture long squeeze opportunity."
+        },
+        "exit_plan": {
+          "take_profit": 0.115,
+          "stop_loss": 0.135,
+          "invalidation": {
+            "zh": "如果价格突破0.135（阻力位）或融资费率Z-Score降至50%以下（多头压力缓解），则失效。",
+            "en": "Invalidated if price breaks above 0.135 (resistance) or funding rate Z-Score drops below 50% (long pressure eases)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-28 20:01:27"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：当前市场处于极端恐惧（Fear & Greed Index 24.0），但新闻面平淡（无重大经济数据发布），比特币相关新闻偏中性（分析师称回报将强劲但不惊人），显示利空情绪已部分消化（Priced In）。2. 结合日线趋势（所有主要币种均处于熊市，价格低于SMA50）和【痛苦交易】检测，DOGE融资费率Z-Score高达85.97%（接近极端多头），存在轧多风险；SOL和BNB融资费率Z-Score也偏高（110.50%和93.50%），多头拥挤。3. 我选择【均值回归】剧本，利用高融资费率Z-Score和日线熊市背景，做空DOGE以捕捉潜在回调，同时持有现有ETH和BTC多头（因融资费率中性且Qlib评分尚可）。",
       "en": "1. 【Narrative Check】：The market is in extreme fear (Fear & Greed Index 24.0), but news is muted (no major economic data releases), with Bitcoin-related news neutral (analysts say returns will be strong but not spectacular), indicating bearish sentiment is partially priced in. 2. Combined with daily trends (all major coins in bear market, price below SMA50) and 【Pain Trade】 detection, DOGE funding rate Z-Score is extremely high at 85.97% (near extreme long), posing a long squeeze risk; SOL and BNB also have high Z-Scores (110.50% and 93.50%), showing crowded longs. 3. I choose the 【Mean Reversion】 scenario, leveraging high funding rate Z-Scores and the daily bear market context to short DOGE for potential pullback, while holding existing ETH and BTC longs (due to neutral funding and decent Qlib scores)."
     },
@@ -2571,23 +2637,5 @@
       }
     ],
     "timestamp": "2025-12-10 04:13:39"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】当前市场处于宏观观望期，投资者等待中国通胀数据和美联储决议，但新闻多为旧闻（如特朗普演讲、哈塞特可能任美联储主席），已被市场消化（Priced In），无明显新驱动。2. 日线趋势显示所有主要币种均处于熊市（价格低于SMA50），结合恐惧与贪婪指数26（恐惧），市场情绪谨慎。资金费率普遍偏高（ETH、DOGE、BNB、SOL均+0.01%），存在轧多风险，但BTC费率负值（-0.0021%）显示空头拥挤，可能引发轧空。3. 我选择【微观结构挤压】剧本，利用BTC负费率与价格韧性做多，同时避免高费率币种的多头陷阱。",
-    "actions": [
-      {
-        "symbol": "BTC",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 2212.63,
-        "entry_reason": "符合【微观结构挤压】剧本。资金费率极负（-0.0021%，Z-Score -195.98%），显示空头过度拥挤，而价格在92675附近持稳，日线RSI 59.06未超买，存在轧空潜力。Qlib评分0.1987虽低，但负费率提供反向机会。",
-        "exit_plan": {
-          "take_profit": 95000,
-          "stop_loss": 91000,
-          "invalidation": "资金费率转正或价格跌破91000关键支撑（基于ATR 1300调整）。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-10 00:13:46"
   }
 ]
