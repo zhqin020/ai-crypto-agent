@@ -1,6 +1,53 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】当前市场处于极端恐惧（Fear & Greed Index 24.0），但新闻面平淡（无重大经济数据发布），比特币ETF等利好可能已部分兑现（Priced In）。2. 日线趋势显示所有主要币种均处于熊市（价格低于SMA50），结合融资费率Z-Score普遍为负（DOGE -45.6%、ETH -70.4%、SOL -225.2%、BTC -268.8%），显示市场存在显著的【轧空风险】（空头拥挤）。3. 我选择【微观结构挤压】剧本，利用负融资费率下的价格韧性，在Qlib评分最高的DOGE上继续持有多头，并考虑增持ETH以捕捉潜在的轧空反弹。",
+      "en": "1. 【Narrative Check】The market is in extreme fear (Fear & Greed Index 24.0), but news flow is light (no major economic data releases), and positives like Bitcoin ETF may be partially priced in. 2. Daily trends show all major coins in bear markets (price below SMA50), combined with universally negative funding rate Z-Scores (DOGE -45.6%, ETH -70.4%, SOL -225.2%, BTC -268.8%), indicating significant 【short squeeze risk】 (crowded shorts). 3. I select the 【Microstructure Squeeze】scenario, leveraging price resilience amid negative funding rates, holding long on DOGE (highest Qlib score) and considering adding ETH to capture potential short-covering rallies."
+    },
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1003.34,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：融资费率Z-Score极低（-45.6%），显示空头拥挤，价格在支撑位0.124附近保持韧性，Qlib评分最高（0.6168），日线RSI超卖（34.5）提供反弹潜力。",
+          "en": "Matches 【Microstructure Squeeze】scenario: extremely low funding rate Z-Score (-45.6%) indicates crowded shorts, price shows resilience near support at 0.124, highest Qlib score (0.6168), and daily RSI oversold (34.5) offers rebound potential."
+        },
+        "exit_plan": {
+          "take_profit": 0.135,
+          "stop_loss": 0.115,
+          "invalidation": {
+            "zh": "如果价格跌破0.115（支撑位）或融资费率Z-Score回升至-20%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 0.115 (support) or funding rate Z-Score rises above -20% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 500,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：融资费率Z-Score极低（-70.4%），空头拥挤严重，Qlib评分第二高（0.4566），日线RSI中性（47.0）无超买风险，与BTC高相关性（0.921）可受益于潜在轧空。",
+          "en": "Matches 【Microstructure Squeeze】scenario: extremely low funding rate Z-Score (-70.4%) indicates severe crowded shorts, second-highest Qlib score (0.4566), daily RSI neutral (47.0) with no overbought risk, and high BTC correlation (0.921) can benefit from potential short squeeze."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（关键支撑）或融资费率Z-Score回升至-30%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 2800 (key support) or funding rate Z-Score rises above -30% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-30 00:01:31"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】最新新闻显示比特币和以太坊ETF持续流出，而Solana和XRP有最大流入，但市场整体处于极端恐惧（Fear & Greed Index 24.0），且美联储利率预期下降（鸽派），显示宏观情绪谨慎。然而，所有主要币种（BTC、ETH、SOL、BNB、DOGE）日线趋势均为熊市（价格低于SMA50），且过去24小时回报为负，表明利空可能已部分兑现（Priced In）。2. 【痛苦交易检测】过去48小时空头清算（$149.6M）远多于多头清算（$53.3M），显示空头已被挤压，但当前融资费率Z-Score普遍偏高（如DOGE 136.6%、BTC 153.5%），表明多头拥挤，存在轧多风险。3. 【假设剧本】我选择【均值回归】剧本，因为市场在熊市趋势下，融资费率过高（多头过度乐观），且RSI接近中性（无超卖），价格可能回调以挤压多头。",
       "en": "1. 【Narrative Check】Latest news shows Bitcoin and Ethereum ETFs continue outflows while Solana and XRP record largest inflows, but overall market sentiment is extreme fear (Fear & Greed Index 24.0) and Fed rate expectations are dropping (dovish), indicating cautious macro sentiment. However, all major coins (BTC, ETH, SOL, BNB, DOGE) have bearish daily trends (price below SMA50) and negative 24h returns, suggesting bearish factors may be partially priced in. 2. 【Pain Trade Detection】Short liquidations ($149.6M) far exceed long liquidations ($53.3M) over 48h, showing shorts have been squeezed, but current funding rate Z-Scores are generally high (e.g., DOGE 136.6%, BTC 153.5%), indicating crowded longs and risk of long squeeze. 3. 【Hypothesis Menu】I choose the 【Mean Reversion】scenario because the market is in a bearish trend with high funding rates (overly optimistic longs) and RSI near neutral (no oversold), suggesting price may pull back to squeeze longs."
     },
@@ -2921,35 +2968,5 @@
       }
     ],
     "timestamp": "2025-12-11 08:17:14"
-  },
-  {
-    "analysis_summary": "1. 【叙事校验】：美联储降息消息（12月10日）已公布，市场隐含利率下降14.8基点，显示利好已部分兑现（Priced In），但恐惧贪婪指数29.0（恐惧）表明情绪仍偏悲观，价格未出现强劲反弹，存在利好出尽风险。2. 日线趋势全盘熊市（所有币种价格低于SMA50），市场整体处于下跌结构，【痛苦交易】检测显示BNB资金费率Z-score高达108.1%（极度拥挤多头），存在轧多风险；SOL资金费率Z-score为-46.6%（轻度拥挤空头），但价格反弹乏力。3. 我选择【均值回归】剧本，优先处理现有持仓风险，避免在熊市趋势中开新仓，等待更清晰的反转信号。",
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 4407.22,
-        "entry_reason": "现有持仓：开仓理由为做多SOL，但当前市场环境恶化。日线趋势熊市（价格130.22 vs SMA50 153.48），4H数据中资金费率Z-score为-46.6%显示轻度空头拥挤，但价格反弹微弱（ret 0.63%），且Qlib评分仅0.3355（排名第三），强度不足。宏观利好已兑现，熊市趋势下持仓风险过高。",
-        "exit_plan": {
-          "take_profit": 136.22,
-          "stop_loss": 130.0,
-          "invalidation": "价格已接近开仓价，但趋势和强度不支持持有，选择平仓离场。"
-        }
-      },
-      {
-        "symbol": "ETH",
-        "action": "close_position",
-        "leverage": 2,
-        "position_size_usd": 1101.8,
-        "entry_reason": "现有持仓：开仓理由为做多ETH，但当前市场环境不支持。日线趋势熊市（价格3182.77 vs SMA50 3319.54），4H数据中RSI 48.03中性偏弱，动量0.019%微弱，Qlib评分0.2912（排名第四），强度差。宏观利好已兑现，熊市趋势下持仓无优势。",
-        "exit_plan": {
-          "take_profit": 3326.39,
-          "stop_loss": 3250.0,
-          "invalidation": "价格已接近开仓价，但趋势和强度不支持持有，选择平仓离场。"
-        }
-      }
-    ],
-    "timestamp": "2025-12-11 04:17:07"
   }
 ]
