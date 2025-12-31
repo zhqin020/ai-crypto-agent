@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：Fed会议纪要显示官员对12月降息存在分歧，但市场隐含利率已下降13.3基点（鸽派），且新闻强调2026年降息将是关键催化剂，显示降息预期已部分定价（Priced In）。中国制造业数据超预期为积极宏观信号，但加密市场仍处极端恐惧（指数21）。2. 日线趋势全为熊市（所有币种价格低于SMA50），且近期空头清算（$94M）远超多头（$46M），显示空头已被挤压，存在轧空风险。3. 我选择【微观结构挤压】剧本：SOL融资费率Z-Score为-73.2%（极端负值），表明空头拥挤，价格在日线支撑位附近企稳，配合Qlib评分低（排名第5），提供反向做多机会。",
+      "en": "1. 【Narrative Check】: Fed minutes show officials were split over December rate cuts, but market-implied rates have dropped 13.3 bps (dovish), and news highlights 2026 cuts as a key catalyst, indicating rate cut expectations are partially priced in. China's better-than-expected manufacturing data is a positive macro signal, but crypto remains in extreme fear (index 21). 2. Daily trends are all bearish (all coins below SMA50), and recent short liquidations ($94M) far exceed longs ($46M), showing shorts have been squeezed, creating a short squeeze risk. 3. I select the 【Microstructure Squeeze】 scenario: SOL's funding rate Z-Score is -73.2% (extremely negative), indicating crowded shorts, with price stabilizing near daily support, combined with low Qlib score (rank 5), offering a contrarian long opportunity."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": {
+          "zh": "ETH持仓仍有效：价格（$2976.86）在止损（$2800）和止盈（$3100）之间，融资费率Z-Score为45.2%（中性），未触发失效条件。日线趋势熊市但4H动量改善，Qlib评分高（排名第2），支持持有。",
+          "en": "ETH position remains valid: Price ($2976.86) is between stop-loss ($2800) and take-profit ($3100), funding rate Z-Score is 45.2% (neutral), no invalidation triggered. Daily trend bearish but 4H momentum improving, high Qlib score (rank 2), supports holding."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2800,
+          "invalidation": {
+            "zh": "如果价格跌破2800（关键支撑）或融资费率Z-Score回升至-30%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 2800 (key support) or funding rate Z-Score rises above -30% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": {
+          "zh": "SOL持仓仍有效：价格（$125.98）在止损（$115）和止盈（$135）之间，融资费率Z-Score为-73.2%（极端负值），空头拥挤未变，未触发失效条件。日线趋势熊市但存在轧空潜力，支持持有。",
+          "en": "SOL position remains valid: Price ($125.98) is between stop-loss ($115) and take-profit ($135), funding rate Z-Score is -73.2% (extremely negative), crowded shorts unchanged, no invalidation triggered. Daily trend bearish but short squeeze potential, supports holding."
+        },
+        "exit_plan": {
+          "take_profit": 135,
+          "stop_loss": 115,
+          "invalidation": {
+            "zh": "如果价格跌破115（支撑位）或融资费率Z-Score回升至-100%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 115 (support) or funding rate Z-Score rises above -100% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": {
+          "zh": "BTC持仓仍有效：价格（$88614.3）在止损（$86000）和止盈（$92000）之间，融资费率Z-Score为82.9%（偏高但未极端），未触发失效条件。日线趋势熊市但Qlib评分中等（排名第3），宏观鸽派提供支撑，支持持有。",
+          "en": "BTC position remains valid: Price ($88614.3) is between stop-loss ($86000) and take-profit ($92000), funding rate Z-Score is 82.9% (high but not extreme), no invalidation triggered. Daily trend bearish but Qlib score moderate (rank 3), dovish macro provides support, supports holding."
+        },
+        "exit_plan": {
+          "take_profit": 92000,
+          "stop_loss": 86000,
+          "invalidation": {
+            "zh": "如果价格跌破86000（关键支撑）或融资费率Z-Score回升至-30%以上（空头压力缓解），则失效。",
+            "en": "Invalidated if price breaks below 86000 (key support) or funding rate Z-Score rises above -30% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2025-12-31 16:01:23"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】Fed会议纪要显示官员对12月降息存在分歧，但市场隐含利率持续下降（鸽派），显示降息预期已部分消化（Priced In）。中国制造业数据超预期为积极信号，但整体市场仍处极端恐惧（Fear & Greed Index 21），且日线趋势普遍熊市（所有币种价格低于SMA50）。2. 【痛苦交易检测】DOGE融资费率Z-Score高达117.94%（极端拥挤多头），结合其日线RSI 37.2（超卖）和熊市趋势，存在轧多风险；BTC融资费率Z-Score为-59.39%（拥挤空头），但价格微涨，可能酝酿轧空机会。3. 【假设剧本】我选择【微观结构挤压】剧本，基于BTC拥挤空头（负融资费率Z-Score）和价格韧性（微涨0.0157%），做多BTC以博弈空头回补；同时避开DOGE（拥挤多头风险）。",
       "en": "1. 【Narrative Check】Fed minutes show officials were split over December rate cuts, but market-implied rates continue to fall (dovish), indicating rate cut expectations are partially priced in. China's manufacturing data beat expectations is positive, but overall market remains in extreme fear (Fear & Greed Index 21), with daily trends bearish (all coins below SMA50). 2. 【Pain Trade Detection】DOGE funding rate Z-Score at 117.94% (extremely crowded longs), combined with daily RSI 37.2 (oversold) and bearish trend, poses long squeeze risk; BTC funding rate Z-Score at -59.39% (crowded shorts) with slight price gain may present short squeeze opportunity. 3. 【Hypothesis Scenario】I select the 【Microstructure Squeeze】scenario, going long BTC based on crowded shorts (negative funding Z-Score) and price resilience (slight gain 0.0157%) to bet on short covering; avoiding DOGE due to crowded long risk."
     },
@@ -3271,52 +3337,5 @@
     "analysis_summary": "模型调用失败: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.",
     "actions": [],
     "timestamp": "2025-12-12 00:18:24"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】Fed降息预期已部分兑现（市场隐含利率下降14.7基点），但BTC反弹在94K受阻，显示利好已Priced In。新闻显示市场情绪谨慎（恐惧指数29），长期清算已发生（362M vs 158M），可能为反弹创造条件。2. 日线趋势全盘熊市（所有币种低于SMA50），但【痛苦交易】检测显示BNB、SOL、DOGE资金费率极度负值（-0.0050%至-0.0081%），存在轧空机会，尤其SOL费率Z-Score -93.2%显示空头拥挤。3. 我选择【微观结构挤压】剧本，利用负费率+价格韧性做多，同时管理现有仓位风险。",
-      "en": "1. 【Narrative Check】Fed rate cut expectations are partially priced in (market-implied rate down 14.7 bps), but BTC rally fails at 94K, indicating good news is Priced In. News shows cautious sentiment (Fear & Greed 29), long liquidations have occurred (362M vs 158M), potentially setting up a bounce. 2. Daily trend is fully bearish (all coins below SMA50), but 【Pain Trade】 detection shows BNB, SOL, DOGE have extremely negative funding rates (-0.0050% to -0.0081%), indicating short squeeze opportunities, especially SOL with funding Z-Score -93.2% showing crowded shorts. 3. I select the 【Microstructure Squeeze】 scenario, going long on negative funding + price resilience, while managing risk in existing positions."
-    },
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4312.28,
-        "entry_reason": {
-          "zh": "符合【微观结构挤压】剧本：Qlib评分最高（0.4391），资金费率负值（-0.0050%），价格从低点反弹，存在轧空潜力。日线趋势熊市但4H结构改善。",
-          "en": "Matches 【Microstructure Squeeze】 scenario: Highest Qlib score (0.4391), negative funding rate (-0.0050%), price bouncing from lows, short squeeze potential. Daily trend bearish but 4H structure improving."
-        },
-        "exit_plan": {
-          "take_profit": 920.0,
-          "stop_loss": 840.0,
-          "invalidation": {
-            "zh": "资金费率转正或价格跌破840支撑（日线新低），或BTC大幅下跌破坏反弹结构。",
-            "en": "Funding turns positive or price breaks below 840 support (daily new low), or BTC drops sharply disrupting bounce structure."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 1118.12,
-        "entry_reason": {
-          "zh": "符合【微观结构挤压】剧本：资金费率极度负值（-0.0081%，Z-Score -93.2%），空头拥挤，价格从133.81低点反弹至136.79，轧空动能强。Qlib评分中性（-0.0011）但动量改善。",
-          "en": "Matches 【Microstructure Squeeze】 scenario: Extremely negative funding rate (-0.0081%, Z-Score -93.2%), crowded shorts, price bounced from 133.81 low to 136.79, strong squeeze momentum. Qlib score neutral (-0.0011) but momentum improving."
-        },
-        "exit_plan": {
-          "take_profit": 142.0,
-          "stop_loss": 125.0,
-          "invalidation": {
-            "zh": "资金费率转正或价格跌破125支撑（前低区域），或BTC大幅下跌带动整体市场走弱。",
-            "en": "Funding turns positive or price breaks below 125 support (previous low area), or BTC drops sharply dragging the overall market down."
-          }
-        },
-        "status": "executed"
-      }
-    ],
-    "timestamp": "2025-12-12 05:07:52"
   }
 ]
