@@ -1,6 +1,6 @@
 {
-  "nav": 10662.59,
-  "cash": 9123.124839591337,
+  "nav": 10672.7,
+  "cash": 8121.124839591337,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 500.0,
       "notional": 1000.0,
-      "current_price": 2971.82,
-      "unrealized_pnl": 12.3,
+      "current_price": 2981.09,
+      "unrealized_pnl": 15.46,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2800,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 124.62,
-      "unrealized_pnl": 27.17,
+      "current_price": 125.17,
+      "unrealized_pnl": 36.11,
       "exit_plan": {
         "take_profit": 135,
         "stop_loss": 115,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2025-12-29 20:02:13"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 16906.170752324597,
+      "entry_price": 0.1183,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.1183,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.13,
+        "stop_loss": 0.11,
+        "invalidation": {
+          "zh": "如果价格跌破0.11（关键支撑）或融资费率Z-Score回升至-50%以上（空头压力缓解），则失效。",
+          "en": "Invalidated if price breaks below 0.11 (key support) or funding rate Z-Score rises above -50% (short pressure eases)."
+        }
+      },
+      "opened_at": "2026-01-01 04:01:39"
     }
   ],
-  "last_update": "2026-01-01T00:02:00.277484"
+  "last_update": "2026-01-01T04:01:39.145793"
 }
