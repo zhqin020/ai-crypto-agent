@@ -1,23 +1,23 @@
 {
-  "nav": 10889.12,
-  "cash": 9360.876757795446,
+  "nav": 10918.14,
+  "cash": 8358.876757795446,
   "positions": [
     {
       "symbol": "ETH",
       "side": "long",
-      "quantity": 0.34063310068092556,
-      "entry_price": 2935.71,
+      "quantity": 0.9973591244347059,
+      "entry_price": 3007.9436047676136,
       "leverage": 2.0,
-      "margin": 500.0,
-      "notional": 1000.0,
-      "current_price": 3018.63,
-      "unrealized_pnl": 28.25,
+      "margin": 1500.0,
+      "notional": 3000.0,
+      "current_price": 3045.41,
+      "unrealized_pnl": 37.37,
       "exit_plan": {
-        "take_profit": 3100,
-        "stop_loss": 2800,
+        "take_profit": 3200,
+        "stop_loss": 2950,
         "invalidation": {
-          "zh": "如果价格跌破2800（关键支撑）或融资费率Z-Score回升至-30%以上（空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 2800 (key support) or funding rate Z-Score rises above -30% (short pressure eases)."
+          "zh": "如果价格跌破2950（近期低点支撑）或融资费率Z-Score回升至-50%以上（空头压力显著缓解），则失效。",
+          "en": "Invalidated if price breaks below 2950 (recent low support) or funding rate Z-Score rises above -50% (short pressure significantly eases)."
         }
       },
       "opened_at": "2025-12-29 16:01:32"
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.1279,
-      "unrealized_pnl": 0.0,
+      "current_price": 0.1293,
+      "unrealized_pnl": 21.89,
       "exit_plan": {
         "take_profit": 0.135,
         "stop_loss": 0.122,
@@ -43,5 +43,5 @@
       "opened_at": "2026-01-02 08:02:18"
     }
   ],
-  "last_update": "2026-01-02T08:02:18.431628"
+  "last_update": "2026-01-02T12:02:04.394369"
 }
