@@ -1,6 +1,6 @@
 {
-  "nav": 10902.99,
-  "cash": 9296.462117697845,
+  "nav": 10889.12,
+  "cash": 9360.876757795446,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 500.0,
       "notional": 1000.0,
-      "current_price": 3024.47,
-      "unrealized_pnl": 30.23,
+      "current_price": 3018.63,
+      "unrealized_pnl": 28.25,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2800,
@@ -23,25 +23,25 @@
       "opened_at": "2025-12-29 16:01:32"
     },
     {
-      "symbol": "SOL",
+      "symbol": "DOGE",
       "side": "long",
-      "quantity": 16.26677511183408,
-      "entry_price": 122.95,
+      "quantity": 15637.216575449569,
+      "entry_price": 0.1279,
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 127.64,
-      "unrealized_pnl": 76.29,
+      "current_price": 0.1279,
+      "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 135,
-        "stop_loss": 115,
+        "take_profit": 0.135,
+        "stop_loss": 0.122,
         "invalidation": {
-          "zh": "如果价格跌破115（支撑位）或融资费率Z-Score回升至-100%以上（空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 115 (support) or funding rate Z-Score rises above -100% (short pressure eases)."
+          "zh": "如果价格跌破0.122（基于ATR支撑）或融资费率Z-Score升至90%以上（轧多风险加剧），则失效。",
+          "en": "Invalidated if price breaks below 0.122 (based on ATR support) or funding rate Z-Score rises above 90% (long squeeze risk intensifies)."
         }
       },
-      "opened_at": "2025-12-29 20:02:13"
+      "opened_at": "2026-01-02 08:02:18"
     }
   ],
-  "last_update": "2026-01-02T04:01:40.585347"
+  "last_update": "2026-01-02T08:02:18.431628"
 }
