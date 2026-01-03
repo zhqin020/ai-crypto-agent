@@ -1,6 +1,6 @@
 {
-  "nav": 11104.58,
-  "cash": 8235.800911243452,
+  "nav": 11023.31,
+  "cash": 9211.194638937279,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1500.0,
       "notional": 3000.0,
-      "current_price": 3125.51,
-      "unrealized_pnl": 117.26,
+      "current_price": 3089.85,
+      "unrealized_pnl": 81.69,
       "exit_plan": {
         "take_profit": 3200,
         "stop_loss": 2950,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 229.53,
       "notional": 459.06,
-      "current_price": 90335.7,
-      "unrealized_pnl": 4.84,
+      "current_price": 89569.1,
+      "unrealized_pnl": 0.9,
       "exit_plan": {
         "take_profit": 95000,
         "stop_loss": 88000,
@@ -41,27 +41,7 @@
         }
       },
       "opened_at": "2026-01-02 16:01:46"
-    },
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 15.18718201837649,
-      "entry_price": 131.69,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 132.82,
-      "unrealized_pnl": 17.16,
-      "exit_plan": {
-        "take_profit": 140,
-        "stop_loss": 125,
-        "invalidation": {
-          "zh": "如果价格跌破125（基于ATR支撑）或融资费率Z-Score回升至-50%以上（空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 125 (support based on ATR) or funding rate Z-Score rises above -50% (short pressure eases)."
-        }
-      },
-      "opened_at": "2026-01-02 20:01:25"
     }
   ],
-  "last_update": "2026-01-03T04:01:41.259643"
+  "last_update": "2026-01-03T08:02:34.319048"
 }
