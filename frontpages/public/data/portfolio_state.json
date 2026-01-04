@@ -1,6 +1,6 @@
 {
-  "nav": 11065.8,
-  "cash": 8209.194638937279,
+  "nav": 11105.36,
+  "cash": 8444.674110765454,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1500.0,
       "notional": 3000.0,
-      "current_price": 3113.92,
-      "unrealized_pnl": 105.7,
+      "current_price": 3127.47,
+      "unrealized_pnl": 119.21,
       "exit_plan": {
         "take_profit": 3200,
         "stop_loss": 2950,
@@ -23,26 +23,6 @@
       "opened_at": "2025-12-29 16:01:32"
     },
     {
-      "symbol": "BTC",
-      "side": "long",
-      "quantity": 0.005135243976105779,
-      "entry_price": 89394.0,
-      "leverage": 2.0,
-      "margin": 229.53,
-      "notional": 459.06,
-      "current_price": 90130.4,
-      "unrealized_pnl": 3.78,
-      "exit_plan": {
-        "take_profit": 95000,
-        "stop_loss": 88000,
-        "invalidation": {
-          "zh": "如果价格跌破88000（基于ATR支撑）或融资费率Z-Score回升至-50%以上（空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 88000 (support based on ATR) or funding rate Z-Score rises above -50% (short pressure eases)."
-        }
-      },
-      "opened_at": "2026-01-02 16:01:46"
-    },
-    {
       "symbol": "SOL",
       "side": "long",
       "quantity": 15.304560759106213,
@@ -50,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 131.83,
-      "unrealized_pnl": 17.6,
+      "current_price": 133.39,
+      "unrealized_pnl": 41.48,
       "exit_plan": {
         "take_profit": 140,
         "stop_loss": 125,
@@ -63,5 +43,5 @@
       "opened_at": "2026-01-03 12:02:11"
     }
   ],
-  "last_update": "2026-01-03T20:01:23.208879"
+  "last_update": "2026-01-04T00:02:07.973541"
 }
