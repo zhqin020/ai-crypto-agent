@@ -1,6 +1,6 @@
 {
-  "nav": 11105.36,
-  "cash": 8444.674110765454,
+  "nav": 11142.24,
+  "cash": 8167.781430765454,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1500.0,
       "notional": 3000.0,
-      "current_price": 3127.47,
-      "unrealized_pnl": 119.21,
+      "current_price": 3147.82,
+      "unrealized_pnl": 139.51,
       "exit_plan": {
         "take_profit": 3200,
         "stop_loss": 2950,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 133.39,
-      "unrealized_pnl": 41.48,
+      "current_price": 134.51,
+      "unrealized_pnl": 58.62,
       "exit_plan": {
         "take_profit": 140,
         "stop_loss": 125,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-01-03 12:02:11"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 0.6256282544713606,
+      "entry_price": 883.4,
+      "leverage": 2.0,
+      "margin": 276.34,
+      "notional": 552.68,
+      "current_price": 883.4,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 950,
+        "stop_loss": 850,
+        "invalidation": {
+          "zh": "如果价格跌破850（基于ATR和近期支撑）或融资费率Z-Score超过90%（显示过度拥挤多头），则失效。",
+          "en": "Invalidated if price breaks below 850 (based on ATR and recent support) or funding rate Z-Score exceeds 90% (indicating overly crowded longs)."
+        }
+      },
+      "opened_at": "2026-01-04 04:01:46"
     }
   ],
-  "last_update": "2026-01-04T00:02:07.973541"
+  "last_update": "2026-01-04T04:01:46.102779"
 }
