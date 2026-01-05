@@ -1,6 +1,6 @@
 {
-  "nav": 11219.22,
-  "cash": 8143.324822745246,
+  "nav": 11287.46,
+  "cash": 8165.54355925998,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,14 +10,14 @@
       "leverage": 2.0,
       "margin": 1777.5,
       "notional": 3555.0,
-      "current_price": 3193.7,
-      "unrealized_pnl": 194.04,
+      "current_price": 3223.63,
+      "unrealized_pnl": 229.17,
       "exit_plan": {
         "take_profit": 3300,
-        "stop_loss": 3150,
+        "stop_loss": 3170,
         "invalidation": {
-          "zh": "如果价格跌破3150（基于ATR 16.9981和近期支撑调整，原为3120）或融资费率Z-Score超过100%（显示进一步拥挤），则失效。",
-          "en": "Invalidated if price breaks below 3150 (adjusted from 3120 based on ATR 16.9981 and recent support) or funding rate Z-Score exceeds 100% (indicating further crowding)."
+          "zh": "如果价格跌破3170（基于ATR 17.9218和近期支撑调整，原为3150）或融资费率Z-Score超过100%（显示进一步拥挤），则失效。",
+          "en": "Invalidated if price breaks below 3170 (adjusted from 3150 based on ATR 17.9218 and recent support) or funding rate Z-Score exceeds 100% (indicating further crowding)."
         }
       },
       "opened_at": "2025-12-29 16:01:32"
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 136.06,
-      "unrealized_pnl": 82.34,
+      "current_price": 138.21,
+      "unrealized_pnl": 115.24,
       "exit_plan": {
         "take_profit": 140,
         "stop_loss": 125,
@@ -41,27 +41,7 @@
         }
       },
       "opened_at": "2026-01-03 12:02:11"
-    },
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 0.04860390685354817,
-      "entry_price": 906.1,
-      "leverage": 2.0,
-      "margin": 22.02,
-      "notional": 44.04,
-      "current_price": 906.1,
-      "unrealized_pnl": 0.0,
-      "exit_plan": {
-        "take_profit": 950,
-        "stop_loss": 880,
-        "invalidation": {
-          "zh": "如果价格跌破880（基于ATR 3.5498和近期支撑）或融资费率Z-Score转为正值超过50%（显示空头平仓完成），则失效。",
-          "en": "Invalidated if price breaks below 880 (based on ATR 3.5498 and recent support) or funding rate Z-Score turns positive exceeding 50% (indicating short covering completed)."
-        }
-      },
-      "opened_at": "2026-01-05 16:02:03"
     }
   ],
-  "last_update": "2026-01-05T16:02:03.749666"
+  "last_update": "2026-01-05T20:01:44.605258"
 }
