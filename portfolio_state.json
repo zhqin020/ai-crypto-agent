@@ -1,27 +1,7 @@
 {
-  "nav": 11281.46,
-  "cash": 8229.49664270899,
+  "nav": 11263.08,
+  "cash": 10230.576494916442,
   "positions": [
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 1.1738847190556052,
-      "entry_price": 3028.4064033647282,
-      "leverage": 2.0,
-      "margin": 1777.5,
-      "notional": 3555.0,
-      "current_price": 3225.25,
-      "unrealized_pnl": 231.07,
-      "exit_plan": {
-        "take_profit": 3300,
-        "stop_loss": 3200,
-        "invalidation": {
-          "zh": "如果价格跌破3200（基于ATR 15.6368和近期支撑调整，原为3170）或融资费率Z-Score超过80%（显示进一步拥挤），则失效。",
-          "en": "Invalidated if price breaks below 3200 (adjusted from 3170 based on ATR 15.6368 and recent support) or funding rate Z-Score exceeds 80% (indicating further crowding)."
-        }
-      },
-      "opened_at": "2025-12-29 16:01:32"
-    },
     {
       "symbol": "BTC",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1043.39,
       "notional": 2086.78,
-      "current_price": 93757.9,
-      "unrealized_pnl": 0.0,
+      "current_price": 93269.0,
+      "unrealized_pnl": -10.88,
       "exit_plan": {
         "take_profit": 97000,
         "stop_loss": 93000,
@@ -43,5 +23,5 @@
       "opened_at": "2026-01-06 04:02:10"
     }
   ],
-  "last_update": "2026-01-06T04:02:10.771921"
+  "last_update": "2026-01-06T08:01:49.574347"
 }
