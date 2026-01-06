@@ -1,6 +1,6 @@
 {
-  "nav": 11272.73,
-  "cash": 8454.651734916442,
+  "nav": 11304.82,
+  "cash": 10262.933148129849,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1043.39,
       "notional": 2086.78,
-      "current_price": 93861.5,
-      "unrealized_pnl": 2.31,
+      "current_price": 93690.3,
+      "unrealized_pnl": -1.5,
       "exit_plan": {
         "take_profit": 97000,
         "stop_loss": 93000,
@@ -21,47 +21,7 @@
         }
       },
       "opened_at": "2026-01-06 04:02:10"
-    },
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 2.189621195533173,
-      "entry_price": 913.4,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 913.4,
-      "unrealized_pnl": 0.0,
-      "exit_plan": {
-        "take_profit": 950,
-        "stop_loss": 890,
-        "invalidation": {
-          "zh": "如果价格跌破890（基于ATR 3.6878和近期支撑）或融资费率Z-Score转为正值超过-50%（显示空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 890 (based on ATR 3.6878 and recent support) or funding rate Z-Score turns positive above -50% (indicating short pressure easing)."
-        }
-      },
-      "opened_at": "2026-01-06 12:01:33"
-    },
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 11.075930307593032,
-      "entry_price": 139.47,
-      "leverage": 2.0,
-      "margin": 772.38,
-      "notional": 1544.76,
-      "current_price": 139.47,
-      "unrealized_pnl": 0.0,
-      "exit_plan": {
-        "take_profit": 145,
-        "stop_loss": 135,
-        "invalidation": {
-          "zh": "如果价格跌破135（基于ATR 1.0448和近期支撑）或融资费率Z-Score转为正值超过-20%（显示空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 135 (based on ATR 1.0448 and recent support) or funding rate Z-Score turns positive above -20% (indicating short pressure easing)."
-        }
-      },
-      "opened_at": "2026-01-06 12:01:33"
     }
   ],
-  "last_update": "2026-01-06T12:01:33.159669"
+  "last_update": "2026-01-06T16:02:26.532287"
 }
