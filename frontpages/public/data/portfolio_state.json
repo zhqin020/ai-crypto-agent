@@ -1,27 +1,7 @@
 {
-  "nav": 11227.45,
-  "cash": 10533.495057899534,
+  "nav": 11207.79,
+  "cash": 9548.687926457485,
   "positions": [
-    {
-      "symbol": "DOGE",
-      "side": "long",
-      "quantity": 242.99191374663073,
-      "entry_price": 0.1484,
-      "leverage": 2.0,
-      "margin": 18.03,
-      "notional": 36.06,
-      "current_price": 0.1464,
-      "unrealized_pnl": -0.49,
-      "exit_plan": {
-        "take_profit": 0.155,
-        "stop_loss": 0.142,
-        "invalidation": {
-          "zh": "如果价格跌破0.142（基于ATR 0.002和近期支撑）或融资费率Z-Score超过80%（显示轧多风险），则失效。",
-          "en": "Invalidated if price breaks below 0.142 (based on ATR 0.002 and recent support) or funding rate Z-Score exceeds 80% (indicating long squeeze risk)."
-        }
-      },
-      "opened_at": "2026-01-07 04:02:23"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 3.0,
       "margin": 675.36,
       "notional": 2026.08,
-      "current_price": 3168.36,
-      "unrealized_pnl": 1.05,
+      "current_price": 3141.31,
+      "unrealized_pnl": -16.26,
       "exit_plan": {
         "take_profit": 3400,
         "stop_loss": 3100,
@@ -41,7 +21,47 @@
         }
       },
       "opened_at": "2026-01-07 16:02:00"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "short",
+      "quantity": -6891.798759476223,
+      "entry_price": 0.1451,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 0.1451,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 0.14,
+        "stop_loss": 0.15,
+        "invalidation": {
+          "zh": "如果价格突破0.15（基于ATR 0.0018和近期阻力）或融资费率Z-Score降至50%以下（显示多头压力缓解），则失效。",
+          "en": "Invalidated if price breaks above 0.15 (based on ATR 0.0018 and recent resistance) or funding rate Z-Score falls below 50% (indicating long pressure easing)."
+        }
+      },
+      "opened_at": "2026-01-08 04:01:58"
+    },
+    {
+      "symbol": "BTC",
+      "side": "short",
+      "quantity": -0.011015144722478935,
+      "entry_price": 90784.1,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 90784.1,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 90000,
+        "stop_loss": 92000,
+        "invalidation": {
+          "zh": "如果价格突破92000（基于ATR 540.5591和近期阻力）或融资费率Z-Score降至50%以下（显示多头压力缓解），则失效。",
+          "en": "Invalidated if price breaks above 92000 (based on ATR 540.5591 and recent resistance) or funding rate Z-Score falls below 50% (indicating long pressure easing)."
+        }
+      },
+      "opened_at": "2026-01-08 04:01:58"
     }
   ],
-  "last_update": "2026-01-08T00:02:05.618739"
+  "last_update": "2026-01-08T04:01:58.224700"
 }
