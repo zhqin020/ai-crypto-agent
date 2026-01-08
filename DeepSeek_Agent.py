@@ -419,36 +419,36 @@ def run_agent():
         
         with open(log_path, "w") as f:
             json.dump(history, f, indent=2, ensure_ascii=False)
+                
+    except Exception as e:
+        print(f"❌ Error calling DeepSeek (OpenAI SDK): {e}")
             
-except Exception as e:
-    print(f"❌ Error calling DeepSeek (OpenAI SDK): {e}")
+        # Write error to log so frontend shows something
+        error_decision = {
+            "analysis_summary": f"模型调用失败: {str(e)}",
+            "actions": [],
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
         
-    # Write error to log so frontend shows something
-    error_decision = {
-        "analysis_summary": f"模型调用失败: {str(e)}",
-        "actions": [],
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
-    
-    log_path = BASE_DIR / "agent_decision_log.json"
-    
-    history = []
-    if log_path.exists():
-        try:
-            with open(log_path, "r") as f:
-                content = json.load(f)
-                if isinstance(content, list):
-                    history = content
-                else:
-                    history = [content]
-        except:
-            history = []
-            
-    history.insert(0, error_decision)
-    history = history[:50]
-    
-    with open(log_path, "w") as f:
-        json.dump(history, f, indent=2, ensure_ascii=False)
+        log_path = BASE_DIR / "agent_decision_log.json"
+        
+        history = []
+        if log_path.exists():
+            try:
+                with open(log_path, "r") as f:
+                    content = json.load(f)
+                    if isinstance(content, list):
+                        history = content
+                    else:
+                        history = [content]
+            except:
+                history = []
+                
+        history.insert(0, error_decision)
+        history = history[:50]
+        
+        with open(log_path, "w") as f:
+            json.dump(history, f, indent=2, ensure_ascii=False)
 
 ALLOWED_ACTIONS = {"open_long", "open_short", "close_position", "adjust_sl", "hold"}
 
