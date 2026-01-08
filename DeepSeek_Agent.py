@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import pandas as pd
 from datetime import datetime
 from openai import OpenAI  # NEW IMPORT
+import time  # FOR RETRIES
 
 # Load environment variables
 load_dotenv()
@@ -348,29 +349,46 @@ def run_agent():
     final_prompt = final_prompt.replace("{{PORTFOLIO_STATE_JSON}}", portfolio_state)
     final_prompt = final_prompt.replace("{{NEWS_CONTEXT}}", news_context)
     
-    # 3. Call DeepSeek API with OpenAI SDK
+    # 3. Call DeepSeek API with OpenAI SDK (with manual retry loop)
     try:
-        print(f"🤔 Dolores is thinking... (Timeout: 120s)")
+        MAX_RETRIES = 5
+        RETRY_DELAY = 5 # base seconds
         
-        response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=[
-                {"role": "system", "content": final_prompt},
-                {"role": "user", "content": "Analyze the market and generate trading actions based on the latest data."}
-            ],
-            temperature=0.1,
-            response_format={"type": "json_object"},
-            timeout=120
-        )
+        decision = None
+        content = None
         
-        content = response.choices[0].message.content
-        
-        # Parse JSON
-        decision = json.loads(content)
+        for attempt in range(MAX_RETRIES):
+            try:
+                print(f"🤔 Dolores is thinking... (Attempt {attempt+1}/{MAX_RETRIES}, Timeout: 120s)")
+                
+                response = client.chat.completions.create(
+                    model="deepseek-chat",
+                    messages=[
+                        {"role": "system", "content": final_prompt},
+                        {"role": "user", "content": "Analyze the market and generate trading actions based on the latest data."}
+                    ],
+                    temperature=0.1,
+                    response_format={"type": "json_object"},
+                    timeout=120
+                )
+                
+                content = response.choices[0].message.content
+                # Parse JSON
+                decision = json.loads(content)
+                break # Success!
+                
+            except Exception as e:
+                wait_time = RETRY_DELAY * (2 ** attempt) # Exponential backoff: 5, 10, 20, 40, 80...
+                print(f"⚠️ Attempt {attempt+1} failed: {e}")
+                if attempt < MAX_RETRIES - 1:
+                    print(f"🔄 Retrying in {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    raise e # Final attempt failed
         
         # Validate & Enforce
         decision = validate_and_enforce_decision(decision, market_summary, daily_context, fear_index)
-        
+            
         print("\n💡 Dolores' Decision:")
         print(json.dumps(decision, indent=2, ensure_ascii=False))
         
@@ -402,35 +420,35 @@ def run_agent():
         with open(log_path, "w") as f:
             json.dump(history, f, indent=2, ensure_ascii=False)
             
-    except Exception as e:
-        print(f"❌ Error calling DeepSeek (OpenAI SDK): {e}")
+except Exception as e:
+    print(f"❌ Error calling DeepSeek (OpenAI SDK): {e}")
+        
+    # Write error to log so frontend shows something
+    error_decision = {
+        "analysis_summary": f"模型调用失败: {str(e)}",
+        "actions": [],
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    log_path = BASE_DIR / "agent_decision_log.json"
+    
+    history = []
+    if log_path.exists():
+        try:
+            with open(log_path, "r") as f:
+                content = json.load(f)
+                if isinstance(content, list):
+                    history = content
+                else:
+                    history = [content]
+        except:
+            history = []
             
-        # Write error to log so frontend shows something
-        error_decision = {
-            "analysis_summary": f"模型调用失败: {str(e)}",
-            "actions": [],
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        }
-        
-        log_path = BASE_DIR / "agent_decision_log.json"
-        
-        history = []
-        if log_path.exists():
-            try:
-                with open(log_path, "r") as f:
-                    content = json.load(f)
-                    if isinstance(content, list):
-                        history = content
-                    else:
-                        history = [content]
-            except:
-                history = []
-                
-        history.insert(0, error_decision)
-        history = history[:50]
-        
-        with open(log_path, "w") as f:
-            json.dump(history, f, indent=2, ensure_ascii=False)
+    history.insert(0, error_decision)
+    history = history[:50]
+    
+    with open(log_path, "w") as f:
+        json.dump(history, f, indent=2, ensure_ascii=False)
 
 ALLOWED_ACTIONS = {"open_long", "open_short", "close_position", "adjust_sl", "hold"}
 

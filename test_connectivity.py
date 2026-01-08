@@ -18,4 +18,5 @@ if __name__ == "__main__":
     test_url("OKX Public API", "https://www.okx.com/api/v5/public/instruments?instType=SPOT")
     test_url("Binance Public API", "https://api.binance.com/api/v3/ping")
     test_url("Yahoo Finance", "https://query2.finance.yahoo.com/v8/finance/chart/BTC-USD")
+    test_url("DeepSeek API", "https://api.deepseek.com")
     print("-----------------------")
