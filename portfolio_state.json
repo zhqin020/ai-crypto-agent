@@ -1,6 +1,6 @@
 {
-  "nav": 11162.74,
-  "cash": 8843.224797997775,
+  "nav": 11166.15,
+  "cash": 9829.480657466927,
   "positions": [
     {
       "symbol": "SOL",
@@ -10,8 +10,8 @@
       "leverage": 3.0,
       "margin": 1357.0,
       "notional": 3573.84,
-      "current_price": 136.13,
-      "unrealized_pnl": -20.59,
+      "current_price": 136.14,
+      "unrealized_pnl": -20.33,
       "exit_plan": {
         "take_profit": 150,
         "stop_loss": 135,
@@ -21,27 +21,7 @@
         }
       },
       "opened_at": "2026-01-08 20:02:10"
-    },
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 0.6427499413490678,
-      "entry_price": 3111.63,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 3085.35,
-      "unrealized_pnl": -16.89,
-      "exit_plan": {
-        "take_profit": 3300,
-        "stop_loss": 3050,
-        "invalidation": {
-          "zh": "如果价格跌破3050（基于ATR 19.6641和近期支撑）或融资费率Z-Score升至-10%以上（显示空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 3050 (based on ATR 19.6641 and recent support) or funding rate Z-Score rises above -10% (indicating short pressure easing)."
-        }
-      },
-      "opened_at": "2026-01-09 16:01:59"
     }
   ],
-  "last_update": "2026-01-10T04:01:27.777753"
+  "last_update": "2026-01-10T08:02:00.123283"
 }
