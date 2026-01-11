@@ -1,6 +1,6 @@
 {
-  "nav": 11245.07,
-  "cash": 9323.948597466928,
+  "nav": 11279.23,
+  "cash": 9304.169117466929,
   "positions": [
     {
       "symbol": "SOL",
@@ -10,8 +10,8 @@
       "leverage": 3.0,
       "margin": 1861.02,
       "notional": 5085.9,
-      "current_price": 138.45,
-      "unrealized_pnl": 60.11,
+      "current_price": 139.37,
+      "unrealized_pnl": 94.3,
       "exit_plan": {
         "take_profit": 145,
         "stop_loss": 134,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2026-01-08 20:02:10"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 287.12727272727267,
+      "entry_price": 0.1375,
+      "leverage": 2.0,
+      "margin": 19.74,
+      "notional": 39.48,
+      "current_price": 0.1375,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.145,
+        "stop_loss": 0.132,
+        "invalidation": {
+          "zh": "如果价格跌破0.132（基于ATR 0.0011和近期低点）或融资费率Z-Score降至50%以下（显示多头压力增加），则失效。",
+          "en": "Invalidated if price breaks below 0.132 (based on ATR 0.0011 and recent lows) or funding rate Z-Score falls below 50% (indicating increased long pressure)."
+        }
+      },
+      "opened_at": "2026-01-11 20:01:49"
     }
   ],
-  "last_update": "2026-01-11T16:01:22.393515"
+  "last_update": "2026-01-11T20:01:49.325960"
 }
