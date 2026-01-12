@@ -1,6 +1,6 @@
 {
-  "nav": 11346.68,
-  "cash": 10789.197518277906,
+  "nav": 11351.26,
+  "cash": 10288.197518277906,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 47.79,
       "notional": 95.58,
-      "current_price": 0.1366,
-      "unrealized_pnl": -0.83,
+      "current_price": 0.1386,
+      "unrealized_pnl": 0.56,
       "exit_plan": {
         "take_profit": 0.145,
         "stop_loss": 0.132,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 510.62,
       "notional": 1021.24,
-      "current_price": 900.7,
-      "unrealized_pnl": -0.1,
+      "current_price": 904.4,
+      "unrealized_pnl": 4.09,
       "exit_plan": {
         "take_profit": 950,
         "stop_loss": 880,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-01-12 04:01:47"
+    },
+    {
+      "symbol": "SOL",
+      "side": "long",
+      "quantity": 7.016559079427449,
+      "entry_price": 142.52,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 142.52,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 150,
+        "stop_loss": 138,
+        "invalidation": {
+          "zh": "如果价格跌破138（基于ATR 1.1761和近期支撑）或融资费率Z-Score升至-50%以上（显示空头压力缓解），则失效。",
+          "en": "Invalidated if price breaks below 138 (based on ATR 1.1761 and recent support) or funding rate Z-Score rises above -50% (indicating short pressure easing)."
+        }
+      },
+      "opened_at": "2026-01-12 16:01:51"
     }
   ],
-  "last_update": "2026-01-12T12:02:15.280951"
+  "last_update": "2026-01-12T16:01:51.262274"
 }
