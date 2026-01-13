@@ -1,27 +1,7 @@
 {
-  "nav": 11356.09,
-  "cash": 9046.010131568342,
+  "nav": 11428.33,
+  "cash": 9574.533098900127,
   "positions": [
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 1.1337146054302625,
-      "entry_price": 900.7910766152858,
-      "leverage": 2.0,
-      "margin": 510.62,
-      "notional": 1021.24,
-      "current_price": 907.9,
-      "unrealized_pnl": 8.06,
-      "exit_plan": {
-        "take_profit": 950,
-        "stop_loss": 880,
-        "invalidation": {
-          "zh": "如果价格跌破880（基于ATR 3.8686和近期支撑）或融资费率Z-Score升至-50%以上（显示空头压力缓解），则失效。",
-          "en": "Invalidated if price breaks below 880 (based on ATR 3.8686 and recent support) or funding rate Z-Score rises above -50% (indicating short pressure easing)."
-        }
-      },
-      "opened_at": "2026-01-12 04:01:47"
-    },
     {
       "symbol": "SOL",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 141.9,
-      "unrealized_pnl": 15.34,
+      "current_price": 143.71,
+      "unrealized_pnl": 41.05,
       "exit_plan": {
         "take_profit": 145,
         "stop_loss": 135,
@@ -50,8 +30,8 @@
       "leverage": 2.0,
       "margin": 770.5,
       "notional": 1541.0,
-      "current_price": 0.1391,
-      "unrealized_pnl": 5.56,
+      "current_price": 0.1424,
+      "unrealized_pnl": 42.25,
       "exit_plan": {
         "take_profit": 0.145,
         "stop_loss": 0.132,
@@ -63,5 +43,5 @@
       "opened_at": "2026-01-13 08:01:44"
     }
   ],
-  "last_update": "2026-01-13T12:01:20.193388"
+  "last_update": "2026-01-13T16:01:58.881182"
 }
