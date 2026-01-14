@@ -1,6 +1,56 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：新闻显示比特币现货流入推动上涨至$95K以上，但市场已部分消化此利好（Priced In），且恐惧贪婪指数中性（48.0），短期缺乏新催化剂。2. 日线趋势全为看涨（价格>SMA50），但4H RSI普遍超买（BTC 77.37，ETH 80.58），且资金费率偏高（DOGE 0.0100%，BTC 0.0091%），显示【痛苦交易】风险为轧多（Long Squeeze），尤其BTC资金费率Z-Score达120.97%极端水平。3. 我选择【均值回归】剧本，利用Qlib相对强度排名做多DOGE（排名第1，得分0.5009），同时做空BTC（排名第2，但超买且拥挤），对冲市场回调风险。",
+      "en": "1. 【Narrative Check】: News shows Bitcoin spot inflows driving prices above $95K, but this is partially priced in, with Fear & Greed Index neutral (48.0) and no new short-term catalysts. 2. Daily trends are all bullish (price > SMA50), but 4H RSI is overbought (BTC 77.37, ETH 80.58) and funding rates are elevated (DOGE 0.0100%, BTC 0.0091%), indicating 【Pain Trade】 risk of a long squeeze, especially with BTC funding Z-Score at extreme 120.97%. 3. I select the 【Mean Reversion】 scenario, going long DOGE (rank #1, score 0.5009) for relative strength and short BTC (rank #2 but overbought and crowded) to hedge against a market pullback."
+    },
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "open_long",
+        "leverage": 3,
+        "position_size_usd": 1919.95,
+        "entry_reason": {
+          "zh": "符合【趋势跟随】与【均值回归】混合剧本：Qlib排名第1（得分0.5009），相对强度最高；4H RSI 70.75未极端超买，资金费率0.0100%适中，BTC相关性0.8811提供分散性；日线趋势看涨（价格>$0.14 SMA50）。",
+          "en": "Matches hybrid 【Trend Following】 and 【Mean Reversion】 scenario: Qlib rank #1 (score 0.5009), highest relative strength; 4H RSI 70.75 not extremely overbought, funding rate 0.0100% moderate, BTC correlation 0.8811 provides diversification; daily trend bullish (price > $0.14 SMA50)."
+        },
+        "exit_plan": {
+          "take_profit": 0.155,
+          "stop_loss": 0.145,
+          "invalidation": {
+            "zh": "如果价格跌破$0.145（ATR止损），或4H RSI跌破50失去动能，或资金费率Z-Score超过80%显示过度拥挤。",
+            "en": "Invalidated if price breaks below $0.145 (ATR stop-loss), or 4H RSI falls below 50 losing momentum, or funding rate Z-Score exceeds 80% indicating over-crowding."
+          }
+        },
+        "status": "executed",
+        "original_size_usd": 3455.91,
+        "rejection_reason": "Size Reduced due to Exposure Limit"
+      },
+      {
+        "symbol": "BTC",
+        "action": "open_short",
+        "leverage": 2,
+        "position_size_usd": 2303.94,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本：4H RSI 77.37超买，资金费率Z-Score 120.97%极端高位，显示轧多（Long Squeeze）风险；Qlib排名第2但得分0.391相对较低，日线趋势看涨但短期回调概率高。",
+          "en": "Matches 【Mean Reversion】 scenario: 4H RSI 77.37 overbought, funding rate Z-Score 120.97% extreme high, indicating long squeeze risk; Qlib rank #2 but score 0.391 relatively low; daily trend bullish but high probability of short-term pullback."
+        },
+        "exit_plan": {
+          "take_profit": 94000,
+          "stop_loss": 97000,
+          "invalidation": {
+            "zh": "如果价格突破$97,000（前高阻力），或4H RSI持续高于80，或资金费率转为负值引发空头挤压。",
+            "en": "Invalidated if price breaks above $97,000 (previous high resistance), or 4H RSI remains above 80, or funding rate turns negative triggering a short squeeze."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
+      }
+    ],
+    "timestamp": "2026-01-14 12:01:31"
+  },
+  {
+    "analysis_summary": {
       "zh": "首先进行【叙事校验】：最新新闻显示比特币无视CLARITY法案延迟而上涨至93K以上，且特朗普攻击鲍威尔等政治新闻未引发市场恐慌，表明利空消息已被消化（Priced In），市场情绪偏强。结合日线趋势（Section 2.1），所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于牛市（价格>SMA50），但日线RSI普遍超买（BTC 75.2，ETH 74.2，SOL 76.4，BNB 74.2，DOGE 74.1），显示过热风险。其次，【痛苦交易】检测：过去48小时空头清算（$353M）远多于多头清算（$35M），表明空头已被挤压，但当前融资费率普遍为正（如BTC 0.0091%，Z-Score 131.2%），存在轧多风险（Crowded Longs）。我选择【均值回归】剧本，优先管理现有持仓，避免在高位开新仓，并准备在超买信号出现时减仓或设置止损。",
       "en": "First, 【Narrative Check】: Latest news shows Bitcoin rising above $93K despite CLARITY Act delays, and political news like Trump attacking Powell hasn't triggered panic, indicating bearish news is already priced in and market sentiment is strong. Combined with daily trends (Section 2.1), all major coins (BTC, ETH, SOL, BNB, DOGE) are in a bull market (price > SMA50), but daily RSI is generally overbought (BTC 75.2, ETH 74.2, SOL 76.4, BNB 74.2, DOGE 74.1), showing overheating risk. Second, 【Pain Trade】 detection: Short liquidations ($353M) far exceed long liquidations ($35M) over the past 48 hours, indicating shorts have been squeezed, but current funding rates are mostly positive (e.g., BTC 0.0091%, Z-Score 131.2%), posing a long squeeze risk (Crowded Longs). I choose the 【Mean Reversion】 scenario, prioritizing management of existing positions, avoiding new entries at highs, and preparing to reduce positions or set stop-losses on overbought signals."
     },
@@ -2957,54 +3007,5 @@
       }
     ],
     "timestamp": "2026-01-06 16:01:48"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】：当前市场处于牛市（BTC > SMA50），但恐惧与贪婪指数为44（恐惧），显示市场情绪谨慎；最新新闻中比特币价格触及94K但成交量低迷，表明上涨动能可能减弱，利好部分已兑现（Priced In）。2. 结合日线趋势，所有主要币种均呈看涨（价格 > SMA50），但RSI普遍超买（BTC 74.6, ETH 75.2, BNB 73.2），且融资费率Z-Score显示BTC为-146.4%（极度负值），存在轧空风险（空头拥挤）。3. 我选择【微观结构挤压】剧本，利用BTC负融资费率（-0.0052%）和价格韧性（接近历史高点），预期空头回补推动上涨；同时管理现有ETH多头仓位，因RSI超买且融资费率Z-Score为55.2%（中性偏高），需警惕回调。",
-      "en": "1. 【Narrative Check】: The market is in a bull trend (BTC > SMA50), but the Fear & Greed Index at 44 (Fear) indicates cautious sentiment; latest news shows Bitcoin hitting $94K with low volume, suggesting bullish momentum may be weakening and good news is partially priced in. 2. Combined with daily trends, all major coins are bullish (price > SMA50), but RSI is generally overbought (BTC 74.6, ETH 75.2, BNB 73.2), and funding rate Z-Score shows BTC at -146.4% (extremely negative), indicating short squeeze risk (crowded shorts). 3. I select the 【Microstructure Squeeze】 scenario, leveraging BTC's negative funding rate (-0.0052%) and price resilience (near highs) to bet on short covering; meanwhile, manage the existing ETH long position as RSI is overbought and funding rate Z-Score is 55.2% (neutral-high), warranting caution for pullbacks."
-    },
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "adjust_sl",
-        "leverage": 2.0,
-        "position_size_usd": 3555.0,
-        "entry_reason": {
-          "zh": "现有ETH多头仓位（入场价3028.41）已盈利231.1美元，但日线RSI超买（75.2）且融资费率Z-Score为55.2%（中性偏高），存在回调风险。根据【均值回归】逻辑，上调止损以锁定利润并降低风险。",
-          "en": "Existing ETH long position (entry 3028.41) has unrealized profit of 231.1 USD, but daily RSI is overbought (75.2) and funding rate Z-Score is 55.2% (neutral-high), indicating pullback risk. Based on 【Mean Reversion】 logic, adjust stop-loss to lock in profits and reduce risk."
-        },
-        "exit_plan": {
-          "take_profit": 3300,
-          "stop_loss": 3200,
-          "invalidation": {
-            "zh": "如果价格跌破3200（基于ATR 15.6368和近期支撑调整，原为3170）或融资费率Z-Score超过80%（显示进一步拥挤），则失效。",
-            "en": "Invalidated if price breaks below 3200 (adjusted from 3170 based on ATR 15.6368 and recent support) or funding rate Z-Score exceeds 80% (indicating further crowding)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "BTC",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1043.39,
-        "entry_reason": {
-          "zh": "符合【微观结构挤压】剧本：BTC融资费率Z-Score为-146.4%（极度负值，空头拥挤），价格在93757.9美元附近保持韧性（接近历史高点），Qlib评分最高（0.4248），日线趋势看涨（价格 > SMA50）。预期空头回补推动上涨。",
-          "en": "Matches 【Microstructure Squeeze】 scenario: BTC funding rate Z-Score is -146.4% (extremely negative, crowded shorts), price shows resilience around 93757.9 USD (near highs), Qlib score is highest (0.4248), and daily trend is bullish (price > SMA50). Expect short covering to drive upside."
-        },
-        "exit_plan": {
-          "take_profit": 97000,
-          "stop_loss": 93000,
-          "invalidation": {
-            "zh": "如果价格跌破93000（基于ATR 413.8247和近期支撑）或融资费率Z-Score转为正值超过50%（显示空头压力缓解），则失效。",
-            "en": "Invalidated if price breaks below 93000 (based on ATR 413.8247 and recent support) or funding rate Z-Score turns positive above 50% (indicating short pressure easing)."
-          }
-        },
-        "status": "executed",
-        "original_size_usd": 2000.0,
-        "rejection_reason": "Size Reduced due to Exposure Limit"
-      }
-    ],
-    "timestamp": "2026-01-06 12:02:09"
   }
 ]
