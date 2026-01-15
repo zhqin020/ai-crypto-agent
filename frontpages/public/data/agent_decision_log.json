@@ -1,6 +1,74 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：比特币ETF资金流入和价格创新高（$97K）的利好消息已被市场消化（Priced In），因为BTC日线RSI已达77.4超买，且4H RSI为73.52，显示动能减弱。2. 结合日线趋势（全部币种均处于牛市）和【痛苦交易】检测：ETH和BTC的资金费率Z-Score分别为-144.48%和-236.93%，表明空头拥挤，存在轧空风险；而DOGE资金费率Z-Score为48.53%相对中性。3. 我选择【微观结构/轧空】剧本，基于ETH和BTC的极端负资金费率（空头过度拥挤）和价格韧性（日线趋势强劲），做多这些币种以捕捉空头回补机会。",
+      "en": "1. 【Narrative Check】：The positive news of Bitcoin ETF inflows and price hitting new highs ($97K) is already priced in, as BTC daily RSI is 77.4 (overbought) and 4H RSI is 73.52, showing weakening momentum. 2. Combined with daily trends (all coins in bullish trends) and 【Pain Trade】 detection: ETH and BTC have funding rate Z-Scores of -144.48% and -236.93%, indicating crowded shorts and short squeeze risk; DOGE's funding Z-Score is 48.53% (neutral). 3. I select the 【Microstructure/Squeeze】 scenario, going long on ETH and BTC based on their extreme negative funding rates (overcrowded shorts) and price resilience (strong daily trends) to capture short-covering opportunities."
+    },
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 3.0,
+        "position_size_usd": 5759.85,
+        "entry_reason": {
+          "zh": "现有持仓：基于Qlib评分0.657（排名第3）和日线牛市趋势（价格$0.15 > SMA50 $0.14），持有DOGE多头。当前价格$0.1478接近入场价$0.1496，未触发止损或止盈。",
+          "en": "Existing position: Holding DOGE long based on Qlib score 0.657 (rank 3) and daily bullish trend (price $0.15 > SMA50 $0.14). Current price $0.1478 near entry $0.1496, stop-loss or take-profit not triggered."
+        },
+        "exit_plan": {
+          "take_profit": 0.155,
+          "stop_loss": 0.145,
+          "invalidation": {
+            "zh": "如果价格跌破$0.145（ATR止损），或4H RSI跌破50失去动能，或资金费率Z-Score超过80%显示过度拥挤。",
+            "en": "Invalidated if price breaks below $0.145 (ATR stop-loss), or 4H RSI falls below 50 losing momentum, or funding rate Z-Score exceeds 80% indicating over-crowding."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 3,
+        "position_size_usd": 2000,
+        "entry_reason": {
+          "zh": "符合【微观结构/轧空】剧本：ETH资金费率Z-Score为-144.48%（极端负值，空头拥挤），Qlib评分0.8765（排名第1），日线趋势强劲（价格$3354.70 > SMA50 $3063.89），存在空头回补推动价格上涨的机会。",
+          "en": "Matches 【Microstructure/Squeeze】 scenario: ETH funding rate Z-Score is -144.48% (extreme negative, crowded shorts), Qlib score 0.8765 (rank 1), daily trend strong (price $3354.70 > SMA50 $3063.89), opportunity for price rise from short covering."
+        },
+        "exit_plan": {
+          "take_profit": 3500,
+          "stop_loss": 3250,
+          "invalidation": {
+            "zh": "如果价格跌破$3250（基于ATR止损），或4H RSI跌破50失去动能，或资金费率Z-Score转为正值超过50%显示空头压力缓解。",
+            "en": "Invalidated if price breaks below $3250 (based on ATR stop-loss), or 4H RSI falls below 50 losing momentum, or funding rate Z-Score turns positive exceeding 50% indicating short pressure easing."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
+      },
+      {
+        "symbol": "BTC",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1500,
+        "entry_reason": {
+          "zh": "符合【微观结构/轧空】剧本：BTC资金费率Z-Score为-236.93%（极端负值，空头高度拥挤），Qlib评分0.7177（排名第2），日线趋势强劲（价格$96945.90 > SMA50 $90098.38），尽管RSI超买，但空头挤压可能推动价格短期上涨。",
+          "en": "Matches 【Microstructure/Squeeze】 scenario: BTC funding rate Z-Score is -236.93% (extreme negative, highly crowded shorts), Qlib score 0.7177 (rank 2), daily trend strong (price $96945.90 > SMA50 $90098.38), despite overbought RSI, short squeeze may drive short-term price rise."
+        },
+        "exit_plan": {
+          "take_profit": 99000,
+          "stop_loss": 95000,
+          "invalidation": {
+            "zh": "如果价格跌破$95000（基于ATR止损），或4H RSI跌破50失去动能，或资金费率Z-Score转为正值超过50%显示空头压力缓解。",
+            "en": "Invalidated if price breaks below $95000 (based on ATR stop-loss), or 4H RSI falls below 50 losing momentum, or funding rate Z-Score turns positive exceeding 50% indicating short pressure easing."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
+      }
+    ],
+    "timestamp": "2026-01-15 08:01:26"
+  },
+  {
+    "analysis_summary": {
       "zh": "首先进行【叙事校验】：比特币突破97K创2026年新高，但新闻显示PPI通胀高企且无美国关税裁决，属于‘利好已兑现（Priced In）’——价格无视负面宏观数据上涨，显示市场情绪强劲。结合日线趋势，所有主要币种均处于牛市（价格>SMA50），但BTC日线RSI达77.8超买，且48小时内空头清算（4亿美元）远多于多头（1.57亿美元），存在【轧空风险】。我选择【趋势跟随】剧本，优先做多Qlib评分最高的DOGE，同时监控ETH的高资金费率Z-Score（153.33%）以防轧多回调。",
       "en": "First, conducting [Narrative vs Reality Check]: Bitcoin broke above 97K to a 2026 high, but news shows high PPI inflation and no US tariff ruling, indicating 'Priced In'—price rising despite negative macro data shows strong market sentiment. Combined with daily trends, all major coins are in bull markets (price > SMA50), but BTC daily RSI at 77.8 is overbought, and short liquidations ($400M) over 48h far exceed longs ($157M), suggesting [Short Squeeze Risk]. I choose the [Trend Following] scenario, prioritizing long on DOGE with the highest Qlib score, while monitoring ETH's high funding rate Z-Score (153.33%) for potential long squeeze corrections."
     },
@@ -2800,54 +2868,5 @@
       }
     ],
     "timestamp": "2026-01-07 12:02:22"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】：尽管有比特币ETF流入和看涨分析师预测等利好新闻，但市场已连续上涨，日线RSI普遍超买（BTC 77.4，ETH 88.6），且恐惧贪婪指数处于42（恐惧），显示利好可能已部分兑现（Priced In）。2. 结合日线趋势（全部看涨）和【痛苦交易】检测：DOGE融资费率Z-Score高达65.16%（拥挤多头），存在轧多风险；BTC融资费率Z-Score为-24.96%（轻微空头），但价格坚挺，有潜在轧空机会。3. 我选择【均值回归】剧本，对超买且拥挤的DOGE保持谨慎，并考虑【微观结构挤压】剧本，利用BTC负融资费率与价格韧性寻找机会。",
-      "en": "1. 【Narrative Check】: Despite positive news like Bitcoin ETF inflows and bullish analyst predictions, the market has rallied consecutively, with daily RSI generally overbought (BTC 77.4, ETH 88.6) and the Fear & Greed Index at 42 (Fear), indicating good news may be partially priced in. 2. Combined with daily trends (all bullish) and 【Pain Trade】 detection: DOGE funding rate Z-Score is high at 65.16% (crowded longs), posing a long squeeze risk; BTC funding rate Z-Score is -24.96% (slightly short), but price is resilient, offering potential short squeeze opportunities. 3. I choose the 【Mean Reversion】 scenario, being cautious with overbought and crowded DOGE, and consider the 【Microstructure Squeeze】 scenario to exploit BTC's negative funding rate and price resilience."
-    },
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 3.0,
-        "position_size_usd": 3565.62,
-        "entry_reason": {
-          "zh": "ETH日线趋势看涨（价格 > SMA50），Qlib评分0.5927排名第二，动量0.0482积极，融资费率Z-Score 40.53%中性，未显示极端拥挤。价格接近入场价3228.43，止损3150未触发，持有等待目标3400。",
-          "en": "ETH daily trend is bullish (price > SMA50), Qlib score 0.5927 ranks 2nd, momentum 0.0482 positive, funding rate Z-Score 40.53% neutral, no extreme crowding. Price near entry 3228.43, stop-loss 3150 not triggered, holding for target 3400."
-        },
-        "exit_plan": {
-          "take_profit": 3400,
-          "stop_loss": 3150,
-          "invalidation": {
-            "zh": "如果价格跌破3150（基于ATR 22.3865和近期支撑）或融资费率Z-Score转为正值超过20%（显示空头压力缓解），则失效。",
-            "en": "Invalidated if price breaks below 3150 (based on ATR 22.3865 and recent support) or funding rate Z-Score turns positive above 20% (indicating short pressure easing)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "BTC",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1038.14,
-        "entry_reason": {
-          "zh": "符合【微观结构挤压】剧本：BTC融资费率Z-Score -24.96%（轻微空头拥挤），价格在93713.2附近坚挺，日线趋势看涨（价格 > SMA50），Qlib评分虽低（0.0945），但负融资费率提供轧空机会。风险可控（ATR 569.8，止损设于支撑下方）。",
-          "en": "Matches 【Microstructure Squeeze】 scenario: BTC funding rate Z-Score -24.96% (slightly short crowded), price resilient around 93713.2, daily trend bullish (price > SMA50), Qlib score low (0.0945), but negative funding rate offers short squeeze opportunity. Risk manageable (ATR 569.8, stop-loss set below support)."
-        },
-        "exit_plan": {
-          "take_profit": 97000,
-          "stop_loss": 93000,
-          "invalidation": {
-            "zh": "如果价格跌破93000（基于ATR 569.8和近期低点）或融资费率Z-Score转为正值超过-10%（显示空头压力缓解），则失效。",
-            "en": "Invalidated if price breaks below 93000 (based on ATR 569.8 and recent lows) or funding rate Z-Score turns positive above -10% (indicating short pressure easing)."
-          }
-        },
-        "status": "executed",
-        "original_size_usd": 2000.0,
-        "rejection_reason": "Size Reduced due to Exposure Limit"
-      }
-    ],
-    "timestamp": "2026-01-07 08:01:33"
   }
 ]
