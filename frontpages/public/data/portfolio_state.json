@@ -1,6 +1,6 @@
 {
-  "nav": 11358.34,
-  "cash": 9054.924663179145,
+  "nav": 11365.4,
+  "cash": 8480.437983179145,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 2266.25,
       "notional": 4532.5,
-      "current_price": 931.4,
-      "unrealized_pnl": 37.16,
+      "current_price": 929.7,
+      "unrealized_pnl": 45.37,
       "exit_plan": {
         "take_profit": 920.0,
         "stop_loss": 950.0,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2026-01-15 08:01:20"
+    },
+    {
+      "symbol": "ETH",
+      "side": "short",
+      "quantity": -0.347935321194173,
+      "entry_price": 3295.67,
+      "leverage": 2.0,
+      "margin": 573.34,
+      "notional": 1146.68,
+      "current_price": 3295.67,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 3200,
+        "stop_loss": 3400,
+        "invalidation": {
+          "zh": "失效条件：价格突破$3400（近期阻力），或资金费率Z值降至50%以下（轧多风险缓解）。",
+          "en": "Invalidation condition: price breaks above $3400 (recent resistance), or funding Z-score drops below 50% (long squeeze risk eases)."
+        }
+      },
+      "opened_at": "2026-01-16 04:01:36"
     }
   ],
-  "last_update": "2026-01-16T00:02:09.607935"
+  "last_update": "2026-01-16T04:01:36.445810"
 }
