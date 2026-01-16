@@ -1,6 +1,73 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：比特币在97K遇阻回落，新闻显示‘Bitcoin rally collapses at $97K’，同时费率停滞、散户观望，表明利好已兑现（Priced In），市场缺乏新催化剂。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB）均处于牛市（价格>SMA50），但日线RSI接近超买（BTC 69.7，ETH 66.9），且市场总结为‘bearish’趋势，存在回调风险。3. 【痛苦交易】检测：BTC资金费率Z值+72.46%（偏高），显示多头拥挤，有轧多风险；ETH和SOL资金费率Z值为负（-83.08%/-114.35%），显示空头拥挤，存在轧空机会。4. 我选择【微观结构/挤压】剧本，利用负费率币种的轧空潜力，同时管理现有空头头寸的风险。",
+      "en": "1. 【Narrative Check】: Bitcoin faced resistance at $97K and pulled back, with news stating 'Bitcoin rally collapses at $97K', coupled with stalled funding rates and retail inactivity, indicating good news is priced in and lacking new catalysts. 2. Combined with daily trends, all major coins (BTC, ETH, SOL, BNB) are in bull markets (price > SMA50), but daily RSI is near overbought (BTC 69.7, ETH 66.9), and the market summary shows a 'bearish' trend, suggesting pullback risks. 3. 【Pain Trade Detection】: BTC funding rate Z-score is +72.46% (high), indicating crowded longs with long squeeze risk; ETH and SOL have negative funding Z-scores (-83.08%/-114.35%), showing crowded shorts with short squeeze opportunities. 4. I select the 【Microstructure/Squeeze】 scenario to exploit short-covering potential in negative funding coins while managing risks in existing short positions."
+    },
+    "actions": [
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 4532.5,
+        "entry_reason": {
+          "zh": "维持空头头寸，因为BNB资金费率Z值-252.11%极度负值，显示空头拥挤，但价格在934.4附近盘整，日线趋势仍为牛市，需谨慎观察。Qlib评分最低（0.0537），相对弱势，但短期可能反弹。",
+          "en": "Maintain short position as BNB funding rate Z-score is extremely negative at -252.11%, indicating crowded shorts, but price consolidates around 934.4 with daily trend still bullish, requiring caution. Qlib score is lowest (0.0537), showing relative weakness, but short-term bounce possible."
+        },
+        "exit_plan": {
+          "take_profit": 920.0,
+          "stop_loss": 950.0,
+          "invalidation": {
+            "zh": "失效条件：价格突破$950（日高阻力），或资金费率Z值升至-50%以上（轧空风险缓解）。",
+            "en": "Invalidation condition: price breaks above $950 (daily high resistance), or funding Z-score rises above -50% (short squeeze risk eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "close_position",
+        "leverage": 2,
+        "position_size_usd": 1146.68,
+        "entry_reason": {
+          "zh": "关闭ETH空头头寸，因为资金费率Z值-83.08%显示空头拥挤，存在轧空风险，且Qlib评分最高（0.7045），相对强势，与空头头寸矛盾。",
+          "en": "Close ETH short position as funding rate Z-score is -83.08% indicating crowded shorts with short squeeze risk, and Qlib score is highest (0.7045), showing relative strength, contradicting the short position."
+        },
+        "exit_plan": {
+          "take_profit": 3200,
+          "stop_loss": 3400,
+          "invalidation": {
+            "zh": "失效条件：价格突破$3400（近期阻力），或资金费率Z值升至-50%以上（轧空风险缓解）。",
+            "en": "Invalidation condition: price breaks above $3400 (recent resistance), or funding Z-score rises above -50% (short squeeze risk eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 2000,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：ETH资金费率Z值-83.08%极度负值（空头拥挤），Qlib评分最高（0.7045），日线趋势牛市，存在轧空机会。",
+          "en": "Matches 【Microstructure Squeeze】 scenario: ETH funding rate Z-score is extremely negative at -83.08% (crowded shorts), Qlib score is highest (0.7045), daily trend is bullish, presenting a short squeeze opportunity."
+        },
+        "exit_plan": {
+          "take_profit": 3400,
+          "stop_loss": 3200,
+          "invalidation": {
+            "zh": "失效条件：价格跌破$3200（支撑位），或资金费率Z值升至0%以上（轧空动力消失）。",
+            "en": "Invalidation condition: price falls below $3200 (support level), or funding Z-score rises above 0% (short squeeze momentum fades)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Insufficient Exposure Room"
+      }
+    ],
+    "timestamp": "2026-01-16 16:02:12"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：最新新闻显示比特币在97K遇阻回落，资金费率停滞，散户观望，表明近期上涨动能已耗尽，利好可能已兑现（Priced In）。美联储预期转鸽（隐含利率下降5.5基点）提供宏观支撑，但市场整体处于中性偏弱状态。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于牛市（价格>SMA50），但4H数据显示普遍动量负值、RSI中性偏弱，存在回调压力。检测到【痛苦交易】风险：ETH资金费率Z值高达127.7%（极端正），显示多头拥挤，有轧多风险；而DOGE资金费率Z值-107.8%（极端负），但价格疲软，短期轧空机会有限。3. 我选择【均值回归】剧本，针对ETH的高资金费率进行做空，同时利用QLIB模型相对强度（ETH排名第一但技术面矛盾）进行对冲。",
       "en": "1. 【Narrative Check】: Latest news shows Bitcoin rejected at $97K with stalled funding rates and retail sitting out, indicating recent bullish momentum is exhausted and positives may be priced in. Dovish Fed expectations (implied rate down 5.5 bps) provide macro support, but the market is overall neutral-weak. 2. Combined with daily trends, all major coins (BTC, ETH, SOL, BNB, DOGE) are in bull markets (price > SMA50), but 4H data shows negative momentum and neutral-weak RSI, suggesting pullback pressure. 【Pain Trade】 detection: ETH funding rate Z-score is extremely high at 127.7% (crowded longs), posing long squeeze risk; DOGE funding Z-score is -107.8% (crowded shorts), but price is weak, limiting short squeeze opportunities. 3. I select the 【Mean Reversion】 scenario, shorting ETH due to high funding rates, while hedging with QLIB model relative strength (ETH ranks first but technicals are contradictory)."
     },
@@ -2848,10 +2915,5 @@
     "analysis_summary": "模型调用失败: Connection error.",
     "actions": [],
     "timestamp": "2026-01-08 12:02:59"
-  },
-  {
-    "analysis_summary": "模型调用失败: Connection error.",
-    "actions": [],
-    "timestamp": "2026-01-08 08:02:27"
   }
 ]
