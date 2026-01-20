@@ -1,27 +1,7 @@
 {
-  "nav": 11003.91,
-  "cash": 8950.54555372173,
+  "nav": 10977.75,
+  "cash": 9892.091375219712,
   "positions": [
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 14.949917775452235,
-      "entry_price": 133.78,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 130.62,
-      "unrealized_pnl": -47.24,
-      "exit_plan": {
-        "take_profit": 140,
-        "stop_loss": 130,
-        "invalidation": {
-          "zh": "失效条件：价格跌破$130（支撑位），或费率Z值大幅转正（多头过度拥挤）。",
-          "en": "Invalidation condition: price breaks below $130 (support level), or funding Z-score turns significantly positive (excessive long crowding)."
-        }
-      },
-      "opened_at": "2026-01-19 04:01:32"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,18 +10,18 @@
       "leverage": 3.0,
       "margin": 1190.83,
       "notional": 3572.49,
-      "current_price": 3123.4,
-      "unrealized_pnl": -90.23,
+      "current_price": 3110.0,
+      "unrealized_pnl": -105.17,
       "exit_plan": {
         "take_profit": 3400,
-        "stop_loss": 3100,
+        "stop_loss": 3080,
         "invalidation": {
-          "zh": "失效条件：价格跌破$3100（日线支撑），或费率Z值转正（空头压力缓解）。",
-          "en": "Invalidation condition: price breaks below $3100 (daily support), or funding Z-score turns positive (short pressure eases)."
+          "zh": "失效条件：价格跌破$3080（日线支撑下方），或费率Z值转负（空头压力增加）。",
+          "en": "Invalidation condition: price breaks below $3080 (below daily support), or funding Z-score turns negative (increased short pressure)."
         }
       },
       "opened_at": "2026-01-19 08:02:12"
     }
   ],
-  "last_update": "2026-01-20T08:01:28.020629"
+  "last_update": "2026-01-20T12:01:58.577582"
 }
