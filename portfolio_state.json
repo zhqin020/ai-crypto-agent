@@ -1,6 +1,6 @@
 {
-  "nav": 10940.02,
-  "cash": 8978.766282727554,
+  "nav": 10921.67,
+  "cash": 8200.392642727555,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 958.19,
       "notional": 1916.38,
-      "current_price": 0.1255,
-      "unrealized_pnl": 3.06,
+      "current_price": 0.1249,
+      "unrealized_pnl": -6.12,
       "exit_plan": {
         "take_profit": 0.135,
         "stop_loss": 0.122,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 2981.51,
-      "unrealized_pnl": 0.0,
+      "current_price": 2970.16,
+      "unrealized_pnl": -7.61,
       "exit_plan": {
         "take_profit": 3100,
         "stop_loss": 2900,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-01-21 04:01:19"
+    },
+    {
+      "symbol": "SOL",
+      "side": "long",
+      "quantity": 12.181590089383723,
+      "entry_price": 127.54,
+      "leverage": 2.0,
+      "margin": 776.82,
+      "notional": 1553.64,
+      "current_price": 127.54,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 135,
+        "stop_loss": 124,
+        "invalidation": {
+          "zh": "失效条件：价格跌破$124（基于ATR止损），或资金费率Z值转正且价格下跌（挤压失效），或市场整体趋势恶化（BTC跌破关键支撑）。",
+          "en": "Invalidation condition: price breaks below $124 (ATR-based stop), or funding Z-score turns positive with price decline (squeeze invalidated), or overall market trend worsens (BTC breaks key support)."
+        }
+      },
+      "opened_at": "2026-01-21 08:02:02"
     }
   ],
-  "last_update": "2026-01-21T04:01:19.818706"
+  "last_update": "2026-01-21T08:02:02.028693"
 }
