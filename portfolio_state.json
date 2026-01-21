@@ -1,6 +1,6 @@
 {
-  "nav": 10911.43,
-  "cash": 9980.766282727554,
+  "nav": 10940.02,
+  "cash": 8978.766282727554,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 958.19,
       "notional": 1916.38,
-      "current_price": 0.1235,
-      "unrealized_pnl": -27.53,
+      "current_price": 0.1255,
+      "unrealized_pnl": 3.06,
       "exit_plan": {
         "take_profit": 0.135,
         "stop_loss": 0.122,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2026-01-20 16:01:25"
+    },
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 0.6708010370584032,
+      "entry_price": 2981.51,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 2981.51,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 3100,
+        "stop_loss": 2900,
+        "invalidation": {
+          "zh": "失效条件：价格跌破$2900（支撑位），或费率转正且价格停滞（挤压失效），或新闻利好被证伪（买入信号无效）。",
+          "en": "Invalidation condition: price breaks below $2900 (support level), or funding turns positive with price stagnation (squeeze invalidated), or news catalyst disproven (buy signal invalid)."
+        }
+      },
+      "opened_at": "2026-01-21 04:01:19"
     }
   ],
-  "last_update": "2026-01-21T00:01:53.953243"
+  "last_update": "2026-01-21T04:01:19.818706"
 }
