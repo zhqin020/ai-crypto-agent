@@ -1,47 +1,27 @@
 {
-  "nav": 10999.2,
-  "cash": 9173.473205919894,
+  "nav": 11040.6,
+  "cash": 9021.274299067141,
   "positions": [
     {
       "symbol": "ETH",
       "side": "long",
-      "quantity": 0.6708010370584032,
-      "entry_price": 2981.51,
+      "quantity": 1.3086952218089443,
+      "entry_price": 3015.1863736047694,
       "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 3002.85,
-      "unrealized_pnl": 14.31,
+      "margin": 1972.98,
+      "notional": 3945.96,
+      "current_price": 3050.6,
+      "unrealized_pnl": 46.35,
       "exit_plan": {
-        "take_profit": 3100,
-        "stop_loss": 2900,
+        "take_profit": 3150,
+        "stop_loss": 2950,
         "invalidation": {
-          "zh": "失效条件：价格跌破$2900（支撑位），或费率转正且价格停滞（挤压失效），或新闻利好被证伪（买入信号无效）。",
-          "en": "Invalidation condition: price breaks below $2900 (support level), or funding turns positive with price stagnation (squeeze invalidated), or news catalyst disproven (buy signal invalid)."
+          "zh": "失效条件：价格跌破$2950（基于ATR止损），或资金费率Z值升至>50%且价格下跌（挤压失效），或Qlib得分大幅下降（相对强度减弱）。",
+          "en": "Invalidation condition: price breaks below $2950 (ATR-based stop), or funding Z-score rises >50% with price decline (squeeze invalidated), or Qlib score drops significantly (relative strength weakens)."
         }
       },
       "opened_at": "2026-01-21 04:01:19"
-    },
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 12.181590089383723,
-      "entry_price": 127.54,
-      "leverage": 2.0,
-      "margin": 776.82,
-      "notional": 1553.64,
-      "current_price": 130.38,
-      "unrealized_pnl": 34.6,
-      "exit_plan": {
-        "take_profit": 135,
-        "stop_loss": 124,
-        "invalidation": {
-          "zh": "失效条件：价格跌破$124（基于ATR止损），或资金费率Z值转正且价格下跌（挤压失效），或市场整体趋势恶化（BTC跌破关键支撑）。",
-          "en": "Invalidation condition: price breaks below $124 (ATR-based stop), or funding Z-score turns positive with price decline (squeeze invalidated), or overall market trend worsens (BTC breaks key support)."
-        }
-      },
-      "opened_at": "2026-01-21 08:02:02"
     }
   ],
-  "last_update": "2026-01-21T16:01:41.358973"
+  "last_update": "2026-01-21T20:02:20.831860"
 }
