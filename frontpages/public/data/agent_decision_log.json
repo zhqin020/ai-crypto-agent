@@ -1,6 +1,74 @@
 [
   {
     "analysis_summary": {
+      "zh": "首先进行【叙事校验】，当前新闻显示GameStop可能出售比特币、分析师看跌BTC至10万美元，市场情绪处于极端恐惧（Fear & Greed Index 25.0），但价格反应平淡（BTC日线趋势熊市，4H数据中性），表明利空可能已部分消化（Priced In）。结合日线趋势，所有主要币种除BNB外均处于熊市，且市场波动性低，存在轧多风险（如DOGE费率Z-score 77.1%显示拥挤多头）。我选择【均值回归】剧本，基于Qlib相对强度排名，做多DOGE和SOL（排名前二），同时平仓现有DOGE头寸以重新调整风险。",
+      "en": "First, conducting a [Narrative vs Reality Check], current news indicates GameStop may sell Bitcoin and analysts are bearish on BTC reaching $100K, with market sentiment in extreme fear (Fear & Greed Index 25.0), but price reactions are muted (BTC daily trend bearish, 4H data neutral), suggesting bearish news may be partially priced in. Combined with daily trends, all major coins except BNB are in bear markets, and low volatility indicates a risk of long squeezes (e.g., DOGE funding Z-score 77.1% shows crowded longs). I select the [Mean Reversion] scenario, based on Qlib relative strength rankings, going long on DOGE and SOL (top two ranks), while closing the existing DOGE position to rebalance risk."
+    },
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "close_position",
+        "leverage": 0,
+        "position_size_usd": 0,
+        "entry_reason": {
+          "zh": "平仓现有DOGE头寸以重新调整风险，现有头寸已轻微亏损且市场条件变化。",
+          "en": "Closing existing DOGE position to rebalance risk, as it has a slight unrealized loss and market conditions have shifted."
+        },
+        "exit_plan": {
+          "take_profit": null,
+          "stop_loss": null,
+          "invalidation": {
+            "zh": "不适用，因为这是平仓操作。",
+            "en": "Not applicable, as this is a closing action."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "open_long",
+        "leverage": 3,
+        "position_size_usd": 2000,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本，DOGE Qlib排名第一（得分0.6013），RSI 40.73接近超卖，但费率Z-score高（77.1%）显示拥挤多头风险，我选择在低波动下做多，预期短期反弹。",
+          "en": "Matches the [Mean Reversion] scenario, DOGE ranks first in Qlib (score 0.6013), RSI 40.73 near oversold, but high funding Z-score (77.1%) indicates crowded long risk; I go long in low volatility, expecting a short-term bounce."
+        },
+        "exit_plan": {
+          "take_profit": 0.128,
+          "stop_loss": 0.122,
+          "invalidation": {
+            "zh": "如果价格跌破0.122（支撑位）或费率转正（空头平仓完成），则剧本失效。",
+            "en": "Invalid if price breaks below 0.122 (support) or funding turns positive (short covering complete)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
+      },
+      {
+        "symbol": "SOL",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1500,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本，SOL Qlib排名第二（得分0.5491），RSI 37.55超卖，费率负（-0.0073%）且Z-score -96.8%显示拥挤空头，存在轧空机会，日线趋势熊市但4H数据支持反弹。",
+          "en": "Matches the [Mean Reversion] scenario, SOL ranks second in Qlib (score 0.5491), RSI 37.55 oversold, negative funding (-0.0073%) with Z-score -96.8% indicating crowded shorts, offering a short squeeze opportunity; daily trend bearish but 4H data supports a bounce."
+        },
+        "exit_plan": {
+          "take_profit": 130,
+          "stop_loss": 125,
+          "invalidation": {
+            "zh": "如果价格跌破125（支撑位）或费率转正（空头平仓完成），则剧本失效。",
+            "en": "Invalid if price breaks below 125 (support) or funding turns positive (short covering complete)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
+      }
+    ],
+    "timestamp": "2026-01-24 20:02:01"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：当前市场处于极端恐惧（Fear & Greed Index 25），新闻面偏负面（如‘Bitcoin trade is over’），但价格已部分消化利空，属于Priced In而非新驱动。2. 结合日线趋势（BTC、ETH、SOL、DOGE均低于SMA50，整体熊市）和【痛苦交易】检测，DOGE费率Z-score高达84%（多头拥挤），存在轧多风险；SOL费率Z-score -107%（空头拥挤），存在轧空机会。3. 我选择【微观结构挤压】剧本，做多SOL（空头平仓驱动），同时持有DOGE多头但警惕轧多风险。",
       "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 25), with negative news (e.g., 'Bitcoin trade is over'), but prices have partially priced in the bearishness, indicating Priced In rather than a new impulse. 2. Combining daily trends (BTC, ETH, SOL, DOGE all below SMA50, overall bearish) and 【Pain Trade】 detection, DOGE funding Z-score is 84% (crowded longs), posing long squeeze risk; SOL funding Z-score -107% (crowded shorts), offering short squeeze opportunity. 3. I select the 【Microstructure Squeeze】 scenario, going long SOL (driven by short covering), while holding DOGE long but monitoring for long squeeze risk."
     },
@@ -2865,54 +2933,5 @@
       }
     ],
     "timestamp": "2026-01-16 16:02:12"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】：最新新闻显示比特币在97K遇阻回落，资金费率停滞，散户观望，表明近期上涨动能已耗尽，利好可能已兑现（Priced In）。美联储预期转鸽（隐含利率下降5.5基点）提供宏观支撑，但市场整体处于中性偏弱状态。2. 结合日线趋势，所有主要币种（BTC、ETH、SOL、BNB、DOGE）均处于牛市（价格>SMA50），但4H数据显示普遍动量负值、RSI中性偏弱，存在回调压力。检测到【痛苦交易】风险：ETH资金费率Z值高达127.7%（极端正），显示多头拥挤，有轧多风险；而DOGE资金费率Z值-107.8%（极端负），但价格疲软，短期轧空机会有限。3. 我选择【均值回归】剧本，针对ETH的高资金费率进行做空，同时利用QLIB模型相对强度（ETH排名第一但技术面矛盾）进行对冲。",
-      "en": "1. 【Narrative Check】: Latest news shows Bitcoin rejected at $97K with stalled funding rates and retail sitting out, indicating recent bullish momentum is exhausted and positives may be priced in. Dovish Fed expectations (implied rate down 5.5 bps) provide macro support, but the market is overall neutral-weak. 2. Combined with daily trends, all major coins (BTC, ETH, SOL, BNB, DOGE) are in bull markets (price > SMA50), but 4H data shows negative momentum and neutral-weak RSI, suggesting pullback pressure. 【Pain Trade】 detection: ETH funding rate Z-score is extremely high at 127.7% (crowded longs), posing long squeeze risk; DOGE funding Z-score is -107.8% (crowded shorts), but price is weak, limiting short squeeze opportunities. 3. I select the 【Mean Reversion】 scenario, shorting ETH due to high funding rates, while hedging with QLIB model relative strength (ETH ranks first but technicals are contradictory)."
-    },
-    "actions": [
-      {
-        "symbol": "BNB",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 4532.5,
-        "entry_reason": {
-          "zh": "现有BNB空头仓位（入场价939.1，当前价931.4）仍有效：价格低于入场价，资金费率Z值-122.8%（极端负）支持空头，且未触发止损（950）或止盈（920）。日线趋势牛市但4H动量负，符合均值回归剧本。",
-          "en": "Existing BNB short position (entry 939.1, current 931.4) remains valid: price below entry, funding Z-score -122.8% (extremely negative) supports shorts, and stop-loss (950) or take-profit (920) not triggered. Daily trend bullish but 4H momentum negative, fitting mean reversion scenario."
-        },
-        "exit_plan": {
-          "take_profit": 920.0,
-          "stop_loss": 950.0,
-          "invalidation": {
-            "zh": "失效条件：价格突破$950（日高阻力），或资金费率Z值升至-50%以上（轧空风险增加）。",
-            "en": "Invalidation condition: price breaks above $950 (daily high resistance), or funding Z-score rises above -50% (short squeeze risk increases)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "ETH",
-        "action": "open_short",
-        "leverage": 2,
-        "position_size_usd": 573.34,
-        "entry_reason": {
-          "zh": "符合【均值回归】剧本：ETH资金费率Z值127.7%（极端正，多头拥挤），4H RSI 55.46（中性偏强但动量负），MACD负值，存在轧多风险。QLIB评分高（0.4765，排名第一）但技术面矛盾，提供对冲机会。市场总结为熊市，支持空头。",
-          "en": "Matches 【Mean Reversion】 scenario: ETH funding rate Z-score 127.7% (extremely positive, crowded longs), 4H RSI 55.46 (neutral-strong but momentum negative), MACD negative, posing long squeeze risk. High QLIB score (0.4765, rank 1) but contradictory technicals provide hedging opportunity. Market summary bearish, supporting shorts."
-        },
-        "exit_plan": {
-          "take_profit": 3200,
-          "stop_loss": 3400,
-          "invalidation": {
-            "zh": "失效条件：价格突破$3400（近期阻力），或资金费率Z值降至50%以下（轧多风险缓解）。",
-            "en": "Invalidation condition: price breaks above $3400 (recent resistance), or funding Z-score drops below 50% (long squeeze risk eases)."
-          }
-        },
-        "status": "executed",
-        "original_size_usd": 2000.0,
-        "rejection_reason": "Size Reduced due to Exposure Limit"
-      }
-    ],
-    "timestamp": "2026-01-16 12:01:35"
   }
 ]
