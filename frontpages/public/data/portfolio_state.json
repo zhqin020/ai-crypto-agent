@@ -1,47 +1,27 @@
 {
-  "nav": 10814.18,
-  "cash": 8814.18186852648,
+  "nav": 10723.83,
+  "cash": 10020.280983769178,
   "positions": [
     {
-      "symbol": "DOGE",
+      "symbol": "SOL",
       "side": "long",
-      "quantity": 16366.612111292961,
-      "entry_price": 0.1222,
+      "quantity": 11.944821731748727,
+      "entry_price": 117.8,
       "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 0.1222,
+      "margin": 703.55,
+      "notional": 1407.1,
+      "current_price": 117.8,
       "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 0.128,
-        "stop_loss": 0.119,
+        "take_profit": 125,
+        "stop_loss": 115,
         "invalidation": {
-          "zh": "如果价格跌破0.119（关键支撑）或费率转为正值（>0.01%），则假设失效。",
-          "en": "Invalidated if price breaks below 0.119 (key support) or funding rate turns positive (>0.01%)."
+          "zh": "如果价格跌破115（支撑位）或费率大幅上升（>0.02%），则假设失效。",
+          "en": "Invalidated if price breaks below 115 (support) or funding rate rises sharply (>0.02%)."
         }
       },
-      "opened_at": "2026-01-25 16:01:37"
-    },
-    {
-      "symbol": "BTC",
-      "side": "long",
-      "quantity": 0.022613153392934068,
-      "entry_price": 88444.1,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 88444.1,
-      "unrealized_pnl": 0.0,
-      "exit_plan": {
-        "take_profit": 91000,
-        "stop_loss": 87000,
-        "invalidation": {
-          "zh": "如果价格跌破87000（关键支撑）或费率大幅上升（>0.01%），则假设失效。",
-          "en": "Invalidated if price breaks below 87000 (key support) or funding rate rises significantly (>0.01%)."
-        }
-      },
-      "opened_at": "2026-01-25 16:01:37"
+      "opened_at": "2026-01-25 20:02:07"
     }
   ],
-  "last_update": "2026-01-25T16:01:37.580790"
+  "last_update": "2026-01-25T20:02:07.501197"
 }
