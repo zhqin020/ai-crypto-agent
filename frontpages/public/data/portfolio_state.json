@@ -1,27 +1,7 @@
 {
-  "nav": 10835.35,
-  "cash": 8148.91978084808,
+  "nav": 10830.06,
+  "cash": 10287.463491822768,
   "positions": [
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 1.4702104067503245,
-      "entry_price": 2958.08,
-      "leverage": 2.0,
-      "margin": 2174.5,
-      "notional": 4349.0,
-      "current_price": 2938.86,
-      "unrealized_pnl": -28.26,
-      "exit_plan": {
-        "take_profit": 3050.0,
-        "stop_loss": 2900.0,
-        "invalidation": {
-          "zh": "如果价格跌破2900（日线支撑失效）或Funding Rate转正且Z-Score回升，则假设失效。",
-          "en": "Invalidated if price breaks below 2900 (daily support loss) or Funding Rate turns positive with Z-Score recovery."
-        }
-      },
-      "opened_at": "2026-01-24 16:01:32"
-    },
     {
       "symbol": "SOL",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 2.0,
       "margin": 543.62,
       "notional": 1087.24,
-      "current_price": 126.47,
-      "unrealized_pnl": -3.43,
+      "current_price": 126.75,
+      "unrealized_pnl": -1.03,
       "exit_plan": {
         "take_profit": 132.0,
         "stop_loss": 124.0,
@@ -43,5 +23,5 @@
       "opened_at": "2026-01-24 16:01:32"
     }
   ],
-  "last_update": "2026-01-25T08:01:44.480262"
+  "last_update": "2026-01-25T12:01:14.501597"
 }
