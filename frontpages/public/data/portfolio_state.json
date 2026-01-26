@@ -1,6 +1,6 @@
 {
-  "nav": 10797.71,
-  "cash": 8045.766679295493,
+  "nav": 10832.94,
+  "cash": 8028.692599295493,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1977.41,
       "notional": 3954.82,
-      "current_price": 0.1215,
-      "unrealized_pnl": 69.56,
+      "current_price": 0.1218,
+      "unrealized_pnl": 79.49,
       "exit_plan": {
         "take_profit": 0.125,
         "stop_loss": 0.115,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 704.98,
       "notional": 1409.96,
-      "current_price": 2853.22,
-      "unrealized_pnl": 0.0,
+      "current_price": 2904.46,
+      "unrealized_pnl": 25.32,
       "exit_plan": {
         "take_profit": 2950,
         "stop_loss": 2800,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-01-26 04:02:08"
+    },
+    {
+      "symbol": "BTC",
+      "side": "long",
+      "quantity": 0.0003871495433271232,
+      "entry_price": 88028.0,
+      "leverage": 2.0,
+      "margin": 17.04,
+      "notional": 34.08,
+      "current_price": 88028.0,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 90000,
+        "stop_loss": 87000,
+        "invalidation": {
+          "zh": "如果价格跌破87000（近期低点附近）或资金费率转为正且高于-0.005%（空头压力显著缓解），则假设失效。",
+          "en": "Invalidated if price breaks below 87000 (near recent low) or funding rate turns positive and above -0.005% (short pressure significantly eases)."
+        }
+      },
+      "opened_at": "2026-01-26 08:01:46"
     }
   ],
-  "last_update": "2026-01-26T04:02:08.118698"
+  "last_update": "2026-01-26T08:01:46.404830"
 }
