@@ -1,23 +1,23 @@
 {
-  "nav": 10872.27,
-  "cash": 9835.602854253179,
+  "nav": 10904.07,
+  "cash": 9334.602854253179,
   "positions": [
     {
       "symbol": "BTC",
       "side": "long",
-      "quantity": 0.0003871495433271232,
-      "entry_price": 88028.0,
+      "quantity": 0.011589472457006504,
+      "entry_price": 89225.804180141,
       "leverage": 2.0,
-      "margin": 17.04,
-      "notional": 34.08,
-      "current_price": 88399.1,
-      "unrealized_pnl": 0.14,
+      "margin": 517.04,
+      "notional": 1034.08,
+      "current_price": 89267.2,
+      "unrealized_pnl": 0.48,
       "exit_plan": {
-        "take_profit": 90000,
-        "stop_loss": 87000,
+        "take_profit": 91000,
+        "stop_loss": 88000,
         "invalidation": {
-          "zh": "如果价格跌破87000（近期低点附近）或资金费率转为正且高于-0.005%（空头压力显著缓解），则假设失效。",
-          "en": "Invalidated if price breaks below 87000 (near recent low) or funding rate turns positive and above -0.005% (short pressure significantly eases)."
+          "zh": "如果价格跌破88000（低于当前支撑）或资金费率转为负且低于-0.01%（空头压力加剧），则假设失效。",
+          "en": "Invalidated if price breaks below 88000 (below current support) or funding rate turns negative and below -0.01% (short pressure intensifies)."
         }
       },
       "opened_at": "2026-01-26 08:01:46"
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.1244,
-      "unrealized_pnl": 19.48,
+      "current_price": 0.1264,
+      "unrealized_pnl": 51.95,
       "exit_plan": {
         "take_profit": 0.128,
         "stop_loss": 0.118,
@@ -43,5 +43,5 @@
       "opened_at": "2026-01-27 16:01:53"
     }
   ],
-  "last_update": "2026-01-27T20:01:22.443067"
+  "last_update": "2026-01-28T00:01:43.838153"
 }
