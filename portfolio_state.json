@@ -1,6 +1,6 @@
 {
-  "nav": 10878.09,
-  "cash": 9354.929152954477,
+  "nav": 10880.54,
+  "cash": 9360.779446395578,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 517.04,
       "notional": 1034.08,
-      "current_price": 89494.1,
-      "unrealized_pnl": 3.11,
+      "current_price": 89460.3,
+      "unrealized_pnl": 2.72,
       "exit_plan": {
         "take_profit": 91000,
         "stop_loss": 88000,
@@ -23,25 +23,25 @@
       "opened_at": "2026-01-26 08:01:46"
     },
     {
-      "symbol": "ETH",
+      "symbol": "BNB",
       "side": "long",
-      "quantity": 0.6657767450840709,
-      "entry_price": 3004.01,
+      "quantity": 2.21141088014153,
+      "entry_price": 904.4,
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 3008.54,
-      "unrealized_pnl": 3.02,
+      "current_price": 904.4,
+      "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 3100,
-        "stop_loss": 2950,
+        "take_profit": 950,
+        "stop_loss": 880,
         "invalidation": {
-          "zh": "如果价格跌破2950（低于当前低点）或资金费率Z-score转为正值且高于+50%（空头压力缓解），则假设失效。",
-          "en": "Invalidated if price breaks below 2950 (below current low) or funding Z-score turns positive and above +50% (short pressure eases)."
+          "zh": "如果价格跌破880（低于SMA50支撑）或资金费率Z-score转为正值且高于+50%（空头压力缓解），则假设失效。",
+          "en": "Invalidated if price breaks below 880 (below SMA50 support) or funding Z-score turns positive and above +50% (short pressure eases)."
         }
       },
-      "opened_at": "2026-01-28 04:01:21"
+      "opened_at": "2026-01-28 20:02:04"
     }
   ],
-  "last_update": "2026-01-28T16:01:34.290030"
+  "last_update": "2026-01-28T20:02:04.661115"
 }
