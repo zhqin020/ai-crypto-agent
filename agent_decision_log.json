@@ -1,6 +1,92 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】当前市场处于恐惧状态（Fear & Greed Index 29），尽管有比特币ETF流入和AI代理标准等利好新闻，但价格反应疲软（多数币种日线下跌），显示利好可能已部分兑现（Priced In）。2. 结合日线趋势，除BNB外所有币种均处于熊市（价格低于SMA50），且日线RSI普遍超卖（BTC 24.9，ETH 27.3，SOL 25.6，DOGE 23.1），存在短期反弹机会。3. 【痛苦交易】检测显示DOGE资金费率Z-score高达+121.32%（极度拥挤多头），存在轧多风险；而BNB资金费率Z-score为-100.89%（极度拥挤空头），存在轧空机会。4. 我选择【均值回归】剧本，利用超卖日线RSI和拥挤空头进行反弹交易，同时规避过度拥挤的多头风险。",
+      "en": "1. 【Narrative Check】The market is in fear (Fear & Greed Index 29). Despite positive news like Bitcoin ETF inflows and AI agent standards, price reactions are weak (most coins down daily), suggesting the good news may be partially priced in. 2. Combined with daily trends, all coins except BNB are in a bear market (price below SMA50), with daily RSI oversold (BTC 24.9, ETH 27.3, SOL 25.6, DOGE 23.1), indicating potential short-term bounce opportunities. 3. 【Pain Trade】Detection shows DOGE funding Z-score at +121.32% (extremely crowded longs), posing a long squeeze risk; while BNB funding Z-score is -100.89% (extremely crowded shorts), offering a short squeeze opportunity. 4. I choose the 【Mean Reversion】scenario, leveraging oversold daily RSI and crowded shorts for bounce trades, while avoiding overly crowded long risks."
+    },
+    "actions": [
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 1034.08,
+        "entry_reason": {
+          "zh": "持有现有BTC多头仓位，因为日线RSI超卖（24.9）且资金费率中性（-15.67% Z-score），符合【均值回归】剧本的反弹潜力。",
+          "en": "Hold existing BTC long position because daily RSI is oversold (24.9) and funding rate is neutral (-15.67% Z-score), aligning with the 【Mean Reversion】scenario's bounce potential."
+        },
+        "exit_plan": {
+          "take_profit": 91000,
+          "stop_loss": 88000,
+          "invalidation": {
+            "zh": "如果价格跌破88000（低于当前支撑）或资金费率转为负且低于-0.01%（空头压力加剧），则假设失效。",
+            "en": "Invalidated if price breaks below 88000 (below current support) or funding rate turns negative and below -0.01% (short pressure intensifies)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "DOGE",
+        "action": "close_position",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "关闭DOGE多头仓位，因为资金费率Z-score高达+121.32%（极度拥挤多头），存在轧多风险，且日线趋势熊市（价格低于SMA50），不符合【均值回归】剧本。",
+          "en": "Close DOGE long position because funding Z-score is extremely high at +121.32% (crowded longs), posing a long squeeze risk, and daily trend is bearish (price below SMA50), not fitting the 【Mean Reversion】scenario."
+        },
+        "exit_plan": {
+          "take_profit": 0.128,
+          "stop_loss": 0.118,
+          "invalidation": {
+            "zh": "如果价格跌破0.118（支撑位）或资金费率转为负且低于-0.005%（空头压力增加），则假设失效。",
+            "en": "Invalidated if price breaks below 0.118 (support) or funding rate turns negative and below -0.005% (short pressure increases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 2,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "持有现有ETH多头仓位，因为日线RSI超卖（27.3）且资金费率Z-score为+41.50%（轻度多头拥挤），仍有反弹空间，符合【均值回归】剧本。",
+          "en": "Hold existing ETH long position because daily RSI is oversold (27.3) and funding Z-score is +41.50% (mildly crowded longs), still has bounce potential, fitting the 【Mean Reversion】scenario."
+        },
+        "exit_plan": {
+          "take_profit": 3100,
+          "stop_loss": 2950,
+          "invalidation": {
+            "zh": "如果价格跌破2950（低于当前低点）或资金费率Z-score转为正值且高于+50%（空头压力缓解），则假设失效。",
+            "en": "Invalidated if price breaks below 2950 (below current low) or funding Z-score turns positive and above +50% (short pressure eases)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "open_long",
+        "leverage": 2,
+        "position_size_usd": 1000,
+        "entry_reason": {
+          "zh": "开立BNB多头仓位，因为Qlib评分高（0.5011，排名第2），日线趋势牛市（价格高于SMA50），且资金费率Z-score为-100.89%（极度拥挤空头），符合【微观结构挤压】剧本的轧空机会。",
+          "en": "Open BNB long position because Qlib score is high (0.5011, rank 2), daily trend is bullish (price above SMA50), and funding Z-score is -100.89% (extremely crowded shorts), fitting the 【Microstructure Squeeze】scenario's short squeeze opportunity."
+        },
+        "exit_plan": {
+          "take_profit": 950,
+          "stop_loss": 850,
+          "invalidation": {
+            "zh": "如果价格跌破850（低于当前低点）或资金费率Z-score转为正值且高于+50%（空头压力缓解），则假设失效。",
+            "en": "Invalidated if price breaks below 850 (below current low) or funding Z-score turns positive and above +50% (short pressure eases)."
+          }
+        },
+        "status": "rejected",
+        "rejection_reason": "Position Limit Exceeded (Max 3 Unique Symbols)"
+      }
+    ],
+    "timestamp": "2026-01-29 00:01:33"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】当前市场呈现利好出尽（Priced In）特征：尽管有比特币ETF流入和AI代理标准等利好消息，但主要币种（BTC、ETH、SOL、DOGE）日线趋势仍为熊市（价格低于SMA50），且恐惧贪婪指数处于29（恐惧），显示市场情绪谨慎。2. 【痛苦交易】检测到潜在轧多风险：BNB和ETH的资金费率Z-score分别高达110.99%和118.90%，表明多头头寸拥挤，而近期短仓清算（$156.6M）远高于长仓（$53.1M），暗示若价格回调可能引发多头挤压。3. 我选择【均值回归】剧本：鉴于DOGE（排名第一）日线RSI仅23.8（超卖），但4H RSI为62.48（中性偏强），且资金费率正常（0.0050%），存在技术性反弹机会，同时BNB虽排名第二但资金费率过高，风险较大，优先持有现有DOGE多头并考虑加仓。",
       "en": "1. 【Narrative Check】The market shows signs of 'Priced In': Despite positive news like Bitcoin ETF inflows and AI agent standards, major coins (BTC, ETH, SOL, DOGE) remain in a bearish daily trend (price below SMA50), and the Fear & Greed Index is at 29 (Fear), indicating cautious sentiment. 2. 【Pain Trade】Potential long squeeze risk detected: BNB and ETH have high funding rate Z-scores of 110.99% and 118.90% respectively, suggesting crowded long positions, while recent short liquidations ($156.6M) far exceed long liquidations ($53.1M), hinting at possible long squeezes if prices pull back. 3. I select the 【Mean Reversion】scenario: DOGE (rank 1) has a daily RSI of only 23.8 (oversold) but a 4H RSI of 62.48 (neutral-strong) and normal funding rate (0.0050%), offering a technical rebound opportunity, while BNB (rank 2) has excessively high funding, posing higher risk, so I prioritize holding the existing DOGE long and consider adding to it."
     },
@@ -2957,72 +3043,5 @@
       }
     ],
     "timestamp": "2026-01-20 20:01:57"
-  },
-  {
-    "analysis_summary": {
-      "zh": "首先进行【叙事校验】：尽管有特朗普关税威胁等负面宏观新闻，但比特币机构需求强劲和链上条件改善的积极消息已部分抵消，市场呈现【Priced In】特征，价格在下跌后企稳。结合日线趋势，BTC和ETH仍处牛市（价格高于SMA50），但SOL和DOGE处于熊市，整体市场结构分化。检测【痛苦交易】：近期大量多头清算（$118M vs $13M空头）表明轧多风险已释放，当前费率Z值普遍为负或中性（如DOGE -12.1%），无显著轧空信号，存在反弹机会。我选择【均值回归】剧本，基于超卖RSI（DOGE 29.3, SOL 27.1, BTC 27.3）和负费率Z值，做多排名靠前的DOGE和SOL，同时持有现有头寸等待复苏。",
-      "en": "First, conducting a [Narrative vs Reality Check]: despite negative macro news like Trump's tariff threats, positive news on Bitcoin institutional demand and improving on-chain conditions has partially offset it, showing a [Priced In] characteristic with prices stabilizing after declines. Combining daily trends, BTC and ETH remain in bull markets (price above SMA50), but SOL and DOGE are in bear markets, indicating a divergent market structure. Detecting [Pain Trades]: recent heavy long liquidations ($118M vs $13M shorts) suggest long squeeze risks have been flushed; current funding Z-scores are mostly negative or neutral (e.g., DOGE -12.1%), with no significant short squeeze signals, presenting a bounce opportunity. I choose the [Mean Reversion] scenario, based on oversold RSI (DOGE 29.3, SOL 27.1, BTC 27.3) and negative funding Z-scores, to go long on top-ranked DOGE and SOL, while holding existing positions for recovery."
-    },
-    "actions": [
-      {
-        "symbol": "SOL",
-        "action": "hold",
-        "leverage": 2.0,
-        "position_size_usd": 2000.0,
-        "entry_reason": {
-          "zh": "现有头寸：基于超卖RSI（27.1）和负动量，符合【均值回归】剧本，价格接近支撑位$130，持有等待反弹。",
-          "en": "Existing position: based on oversold RSI (27.1) and negative momentum, aligns with [Mean Reversion] scenario, price near support at $130, holding for bounce."
-        },
-        "exit_plan": {
-          "take_profit": 140,
-          "stop_loss": 130,
-          "invalidation": {
-            "zh": "失效条件：价格跌破$130（支撑位），或费率Z值大幅转正（多头过度拥挤）。",
-            "en": "Invalidation condition: price breaks below $130 (support level), or funding Z-score turns significantly positive (excessive long crowding)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 3.0,
-        "position_size_usd": 3572.49,
-        "entry_reason": {
-          "zh": "现有头寸：日线趋势仍为牛市（价格高于SMA50），RSI 29.5接近超卖，持有等待均值回归。",
-          "en": "Existing position: daily trend remains bullish (price above SMA50), RSI 29.5 near oversold, holding for mean reversion."
-        },
-        "exit_plan": {
-          "take_profit": 3400,
-          "stop_loss": 3100,
-          "invalidation": {
-            "zh": "失效条件：价格跌破$3100（日线支撑），或费率Z值转正（空头压力缓解）。",
-            "en": "Invalidation condition: price breaks below $3100 (daily support), or funding Z-score turns positive (short pressure eases)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "DOGE",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 1000,
-        "entry_reason": {
-          "zh": "新开仓：排名第一（Qlib得分0.5972），符合【均值回归】剧本，RSI超卖（29.3），费率Z值负（-12.1%），无轧空风险，日线熊市但4H可能反弹。",
-          "en": "New position: top-ranked (Qlib score 0.5972), aligns with [Mean Reversion] scenario, oversold RSI (29.3), negative funding Z-score (-12.1%), no short squeeze risk, daily bearish but 4H bounce potential."
-        },
-        "exit_plan": {
-          "take_profit": 0.135,
-          "stop_loss": 0.122,
-          "invalidation": {
-            "zh": "失效条件：价格跌破$0.122（基于ATR支撑），或费率Z值转正且价格停滞（多头拥挤）。",
-            "en": "Invalidation condition: price breaks below $0.122 (based on ATR support), or funding Z-score turns positive with price stalling (long crowding)."
-          }
-        },
-        "status": "rejected",
-        "rejection_reason": "Max Exposure Limit Reached (BEAR/DEFENSIVE (Max 50%))"
-      }
-    ],
-    "timestamp": "2026-01-20 16:01:27"
   }
 ]
