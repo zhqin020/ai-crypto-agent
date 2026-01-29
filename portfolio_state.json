@@ -1,27 +1,7 @@
 {
-  "nav": 10912.16,
-  "cash": 9200.988986395578,
+  "nav": 10882.59,
+  "cash": 9702.802689035934,
   "positions": [
-    {
-      "symbol": "BTC",
-      "side": "long",
-      "quantity": 0.011589472457006504,
-      "entry_price": 89225.804180141,
-      "leverage": 2.0,
-      "margin": 517.04,
-      "notional": 1034.08,
-      "current_price": 88265.9,
-      "unrealized_pnl": -11.12,
-      "exit_plan": {
-        "take_profit": 91000,
-        "stop_loss": 88000,
-        "invalidation": {
-          "zh": "如果价格跌破88000（低于当前支撑）或资金费率转为负且低于-0.01%（空头压力加剧），则假设失效。",
-          "en": "Invalidated if price breaks below 88000 (below current support) or funding rate turns negative and below -0.01% (short pressure intensifies)."
-        }
-      },
-      "opened_at": "2026-01-26 08:01:46"
-    },
     {
       "symbol": "BNB",
       "side": "long",
@@ -30,14 +10,14 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 904.5,
-      "unrealized_pnl": 0.22,
+      "current_price": 894.2,
+      "unrealized_pnl": -22.56,
       "exit_plan": {
         "take_profit": 950,
-        "stop_loss": 880,
+        "stop_loss": 890,
         "invalidation": {
-          "zh": "如果价格跌破880（低于SMA50支撑）或资金费率Z-score转为正值且高于+50%（空头压力缓解），则假设失效。",
-          "en": "Invalidated if price breaks below 880 (below SMA50 support) or funding Z-score turns positive and above +50% (short pressure eases)."
+          "zh": "如果价格跌破890（接近SMA50支撑）或资金费率Z-score转为正值且高于+50%（空头压力缓解），则假设失效。",
+          "en": "Invalidated if price breaks below 890 (near SMA50 support) or funding Z-score turns positive and above +50% (short pressure eases)."
         }
       },
       "opened_at": "2026-01-28 20:02:04"
@@ -50,8 +30,8 @@
       "leverage": 2.0,
       "margin": 205.03,
       "notional": 410.06,
-      "current_price": 0.1219,
-      "unrealized_pnl": 0.0,
+      "current_price": 0.1211,
+      "unrealized_pnl": -2.69,
       "exit_plan": {
         "take_profit": 0.13,
         "stop_loss": 0.115,
@@ -63,5 +43,5 @@
       "opened_at": "2026-01-29 08:02:19"
     }
   ],
-  "last_update": "2026-01-29T08:02:19.644725"
+  "last_update": "2026-01-29T12:02:05.890813"
 }
