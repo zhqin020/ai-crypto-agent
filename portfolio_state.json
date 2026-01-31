@@ -1,27 +1,27 @@
 {
-  "nav": 10653.7,
-  "cash": 8183.627473724123,
+  "nav": 10589.91,
+  "cash": 10506.479186268649,
   "positions": [
     {
-      "symbol": "ETH",
+      "symbol": "SOL",
       "side": "long",
-      "quantity": 1.8835622688894649,
-      "entry_price": 2739.49,
+      "quantity": 1.4383242823894493,
+      "entry_price": 116.01,
       "leverage": 2.0,
-      "margin": 2580.0,
-      "notional": 5160.0,
-      "current_price": 2681.13,
-      "unrealized_pnl": -109.92,
+      "margin": 83.43,
+      "notional": 166.86,
+      "current_price": 116.01,
+      "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 2850,
-        "stop_loss": 2650,
+        "take_profit": 125,
+        "stop_loss": 110,
         "invalidation": {
-          "zh": "如果价格跌破2650（支撑位）或资金费率转正（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 2650 (support) or funding rate turns positive (short covering ends)."
+          "zh": "如果价格跌破110（关键支撑）或资金费率转正超过0.01%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 110 (key support) or funding rate turns positive above 0.01% (short covering ends)."
         }
       },
-      "opened_at": "2026-01-30 08:02:10"
+      "opened_at": "2026-01-31 12:01:33"
     }
   ],
-  "last_update": "2026-01-31T08:01:53.493246"
+  "last_update": "2026-01-31T12:01:33.941698"
 }
