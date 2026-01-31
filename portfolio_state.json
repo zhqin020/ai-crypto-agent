@@ -1,6 +1,6 @@
 {
-  "nav": 10684.52,
-  "cash": 8083.674934881569,
+  "nav": 10653.7,
+  "cash": 8183.627473724123,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 2580.0,
       "notional": 5160.0,
-      "current_price": 2695.12,
-      "unrealized_pnl": -83.57,
+      "current_price": 2681.13,
+      "unrealized_pnl": -109.92,
       "exit_plan": {
         "take_profit": 2850,
         "stop_loss": 2650,
@@ -21,27 +21,7 @@
         }
       },
       "opened_at": "2026-01-30 08:02:10"
-    },
-    {
-      "symbol": "DOGE",
-      "side": "long",
-      "quantity": 1849.7021276595747,
-      "entry_price": 0.1175,
-      "leverage": 2.0,
-      "margin": 108.67,
-      "notional": 217.34,
-      "current_price": 0.1152,
-      "unrealized_pnl": -4.25,
-      "exit_plan": {
-        "take_profit": 0.125,
-        "stop_loss": 0.112,
-        "invalidation": {
-          "zh": "如果价格跌破0.112（关键支撑）或资金费率转正（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 0.112 (key support) or funding rate turns positive (short covering ends)."
-        }
-      },
-      "opened_at": "2026-01-30 20:02:01"
     }
   ],
-  "last_update": "2026-01-31T04:01:20.589313"
+  "last_update": "2026-01-31T08:01:53.493246"
 }
