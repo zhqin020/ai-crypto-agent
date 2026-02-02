@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-02-01 20:00:00",
+  "as_of": "2026-02-02 00:00:00",
   "strategy": "Multi-Coin Relative Strength",
   "model_meta": {
     "trained_until": "2025-11-21",
@@ -12,142 +12,142 @@
     "volatility": "high",
     "leverage_sentiment": "bearish",
     "metrics": {
-      "avg_momentum_12": -0.1211,
-      "avg_bb_width": 0.2026,
-      "avg_funding_rate": "-0.0033%"
+      "avg_momentum_12": -0.1203,
+      "avg_bb_width": 0.2106,
+      "avg_funding_rate": "-0.0007%"
     }
   },
   "recommend_top": [
     {
       "symbol": "DOGE",
-      "weight": 0.41,
-      "score": 0.8687
+      "weight": 0.45,
+      "score": 1.0472
     },
     {
       "symbol": "SOL",
-      "weight": 0.34,
-      "score": 0.7265
+      "weight": 0.33,
+      "score": 0.7571
     },
     {
       "symbol": "ETH",
-      "weight": 0.25,
-      "score": 0.5365
+      "weight": 0.22,
+      "score": 0.4979
     }
   ],
   "coins": [
     {
       "symbol": "DOGE",
-      "qlib_score": 0.8687,
+      "qlib_score": 1.0472,
       "rank": 1,
       "market_data": {
-        "close": 0.104,
-        "high": 0.1042,
-        "low": 0.104,
-        "volume": 62969.6825,
-        "rsi_14": 28.32,
-        "macd_hist": -0.0005,
-        "atr_14": 0.0016,
-        "bb_width_20": 0.1929,
-        "funding_rate": "-0.0037%",
-        "funding_rate_zscore": "58.2158%",
+        "close": 0.1044,
+        "high": 0.1046,
+        "low": 0.1043,
+        "volume": 656930.097,
+        "rsi_14": 29.91,
+        "macd_hist": -0.0004,
+        "atr_14": 0.0015,
+        "bb_width_20": 0.1962,
+        "funding_rate": "-0.0078%",
+        "funding_rate_zscore": "18.1558%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.1151,
-        "ret": "-0.0192%",
-        "btc_corr_24h": 0.8825,
-        "natr_14": 0.0152
+        "momentum_12": -0.0983,
+        "ret": "0.4231%",
+        "btc_corr_24h": 0.8815,
+        "natr_14": 0.0145
       }
     },
     {
       "symbol": "SOL",
-      "qlib_score": 0.7265,
+      "qlib_score": 0.7571,
       "rank": 2,
       "market_data": {
-        "close": 101.83,
-        "high": 101.96,
-        "low": 101.76,
-        "volume": 177.0207,
-        "rsi_14": 25.49,
-        "macd_hist": -0.9959,
-        "atr_14": 1.8564,
-        "bb_width_20": 0.2295,
-        "funding_rate": "-0.0032%",
-        "funding_rate_zscore": "61.4836%",
+        "close": 100.89,
+        "high": 101.07,
+        "low": 100.78,
+        "volume": 1745.5844,
+        "rsi_14": 24.49,
+        "macd_hist": -0.9075,
+        "atr_14": 1.7988,
+        "bb_width_20": 0.2418,
+        "funding_rate": "-0.0075%",
+        "funding_rate_zscore": "37.0751%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.1374,
-        "ret": "0.2560%",
-        "btc_corr_24h": 0.8903,
-        "natr_14": 0.0182
+        "momentum_12": -0.1419,
+        "ret": "-0.9231%",
+        "btc_corr_24h": 0.8877,
+        "natr_14": 0.0178
       }
     },
     {
       "symbol": "ETH",
-      "qlib_score": 0.5365,
+      "qlib_score": 0.4979,
       "rank": 3,
       "market_data": {
-        "close": 2315.68,
-        "high": 2320.62,
-        "low": 2315.39,
-        "volume": 41.1491,
-        "rsi_14": 18.49,
-        "macd_hist": -28.1225,
-        "atr_14": 40.6191,
-        "bb_width_20": 0.2656,
-        "funding_rate": "-0.0069%",
-        "funding_rate_zscore": "-43.1113%",
+        "close": 2270.93,
+        "high": 2276.27,
+        "low": 2269.8,
+        "volume": 1569.0301,
+        "rsi_14": 16.99,
+        "macd_hist": -27.2783,
+        "atr_14": 40.9949,
+        "bb_width_20": 0.2799,
+        "funding_rate": "-0.0051%",
+        "funding_rate_zscore": "-4.3723%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.1552,
-        "ret": "0.2264%",
-        "btc_corr_24h": 0.9149,
-        "natr_14": 0.0175
+        "momentum_12": -0.1608,
+        "ret": "-1.9325%",
+        "btc_corr_24h": 0.9029,
+        "natr_14": 0.0181
       }
     },
     {
       "symbol": "BTC",
-      "qlib_score": 0.3459,
+      "qlib_score": 0.3849,
       "rank": 4,
       "market_data": {
-        "close": 77086.1,
-        "high": 77176.0,
-        "low": 77086.1,
-        "volume": 0.6099,
-        "rsi_14": 23.14,
-        "macd_hist": -383.8157,
-        "atr_14": 801.5104,
-        "bb_width_20": 0.1312,
-        "funding_rate": "0.0065%",
-        "funding_rate_zscore": "97.2608%",
+        "close": 77024.8,
+        "high": 77094.5,
+        "low": 76962.6,
+        "volume": 6.4025,
+        "rsi_14": 23.0,
+        "macd_hist": -337.0142,
+        "atr_14": 753.6811,
+        "bb_width_20": 0.1355,
+        "funding_rate": "0.0088%",
+        "funding_rate_zscore": "141.9763%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.0844,
-        "ret": "-0.6224%",
+        "momentum_12": -0.0856,
+        "ret": "-0.0795%",
         "btc_corr_24h": 1.0,
-        "natr_14": 0.0104
+        "natr_14": 0.0098
       }
     },
     {
       "symbol": "BNB",
-      "qlib_score": 0.301,
+      "qlib_score": 0.3264,
       "rank": 5,
       "market_data": {
-        "close": 756.5,
-        "high": 757.0,
-        "low": 756.5,
-        "volume": 4.706,
-        "rsi_14": 23.6,
-        "macd_hist": -7.3758,
-        "atr_14": 10.3905,
-        "bb_width_20": 0.1937,
-        "funding_rate": "-0.0090%",
-        "funding_rate_zscore": "-57.0165%",
+        "close": 759.9,
+        "high": 759.9,
+        "low": 758.6,
+        "volume": 16.6889,
+        "rsi_14": 25.54,
+        "macd_hist": -6.1155,
+        "atr_14": 9.8912,
+        "bb_width_20": 0.1995,
+        "funding_rate": "0.0082%",
+        "funding_rate_zscore": "209.7172%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.1135,
-        "ret": "0.9744%",
-        "btc_corr_24h": 0.8518,
-        "natr_14": 0.0137
+        "momentum_12": -0.115,
+        "ret": "0.4494%",
+        "btc_corr_24h": 0.8509,
+        "natr_14": 0.013
       }
     }
   ]
