@@ -1,27 +1,7 @@
 {
-  "nav": 10541.29,
-  "cash": 9511.101260812155,
+  "nav": 10505.18,
+  "cash": 8994.624088499932,
   "positions": [
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 4.909180166912126,
-      "entry_price": 101.85,
-      "leverage": 1.0,
-      "margin": 500.0,
-      "notional": 500.0,
-      "current_price": 102.33,
-      "unrealized_pnl": 2.36,
-      "exit_plan": {
-        "take_profit": 110.0,
-        "stop_loss": 99.0,
-        "invalidation": {
-          "zh": "如果价格跌破99.0（基于ATR和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 99.0 (based on ATR and support) or funding rate turns positive above 0.01% (short covering ends)."
-        }
-      },
-      "opened_at": "2026-01-31 20:01:30"
-    },
     {
       "symbol": "DOGE",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 0.11,
-      "unrealized_pnl": 27.83,
+      "current_price": 0.1064,
+      "unrealized_pnl": 10.56,
       "exit_plan": {
         "take_profit": 0.115,
         "stop_loss": 0.099,
@@ -41,7 +21,27 @@
         }
       },
       "opened_at": "2026-02-01 00:02:09"
+    },
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 0.9066306432091099,
+      "entry_price": 2205.97,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 2205.97,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 2300.0,
+        "stop_loss": 2150.0,
+        "invalidation": {
+          "zh": "如果价格跌破2150.0（基于ATR 41.5和支撑位）或融资费率Z-score降至正常水平（例如低于50%），则假设失效。",
+          "en": "Invalidated if price breaks below 2150.0 (based on ATR 41.5 and support) or funding rate Z-score drops to normal levels (e.g., below 50%)."
+        }
+      },
+      "opened_at": "2026-02-03 20:01:58"
     }
   ],
-  "last_update": "2026-02-03T16:01:25.923688"
+  "last_update": "2026-02-03T20:01:58.697781"
 }
