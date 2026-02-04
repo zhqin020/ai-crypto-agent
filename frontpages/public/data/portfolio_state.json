@@ -1,6 +1,6 @@
 {
-  "nav": 10360.24,
-  "cash": 8911.618673153043,
+  "nav": 10399.06,
+  "cash": 9893.777560173266,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 0.1035,
-      "unrealized_pnl": -3.36,
+      "current_price": 0.1053,
+      "unrealized_pnl": 5.28,
       "exit_plan": {
         "take_profit": 0.115,
         "stop_loss": 0.099,
@@ -21,27 +21,7 @@
         }
       },
       "opened_at": "2026-02-01 00:02:09"
-    },
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 0.9066306432091099,
-      "entry_price": 2205.97,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 2153.0,
-      "unrealized_pnl": -48.02,
-      "exit_plan": {
-        "take_profit": 2300.0,
-        "stop_loss": 2150.0,
-        "invalidation": {
-          "zh": "如果价格跌破2150.0（基于ATR 41.5和支撑位）或融资费率Z-score降至正常水平（例如低于50%），则假设失效。",
-          "en": "Invalidated if price breaks below 2150.0 (based on ATR 41.5 and support) or funding rate Z-score drops to normal levels (e.g., below 50%)."
-        }
-      },
-      "opened_at": "2026-02-03 20:01:58"
     }
   ],
-  "last_update": "2026-02-04T16:01:46.464920"
+  "last_update": "2026-02-04T20:01:08.557954"
 }
