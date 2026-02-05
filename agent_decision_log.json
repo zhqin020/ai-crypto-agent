@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 12.0），新闻显示比特币ETF流出29亿美元、BTC价格跌至2026年新低，但长期清算已发生（过去48小时多头清算5.3亿美元），这可能是旧消息（Priced In），存在价格反弹的潜在机会。2. 日线趋势全盘熊市（所有币种价格低于SMA50），但4H数据显示SOL、ETH、DOGE的Qlib评分较高，且SOL融资费率为负（-0.0008%），存在【痛苦交易】中的空头挤压机会。3. 我选择【微观结构/挤压】剧本，基于SOL融资费率负值、价格相对韧性（RSI 25.07超卖）和Qlib评分第一，做多SOL以博弈空头平仓反弹。",
+      "en": "1. 【Narrative Check】：The market is in extreme fear (Fear & Greed Index 12.0), with news showing Bitcoin ETF outflows of $2.9B and BTC price hitting a 2026 low, but long liquidations have already occurred ($529M over 48h), suggesting this may be old news (Priced In) and creating potential for a bounce. 2. Daily trends are bearish across all coins (price below SMA50), but 4H data shows high Qlib scores for SOL, ETH, DOGE, and SOL has negative funding rate (-0.0008%), indicating a 【Pain Trade】 short squeeze opportunity. 3. I select the 【Microstructure/Squeeze】 scenario, going long SOL based on negative funding, price resilience (RSI 25.07 oversold), and top Qlib score, betting on short covering rebound."
+    },
+    "actions": [
+      {
+        "symbol": "DOGE",
+        "action": "hold",
+        "leverage": 1.0,
+        "position_size_usd": 500.0,
+        "entry_reason": {
+          "zh": "持有现有DOGE多头头寸，因为价格接近入场价（0.1038 vs 0.1042），融资费率仍为负（-0.0018%），空头挤压剧本仍有效，且Qlib评分第三（0.4345）提供相对强度支撑。",
+          "en": "Hold existing DOGE long position as price is near entry (0.1038 vs 0.1042), funding rate remains negative (-0.0018%), short squeeze scenario still valid, and Qlib score third (0.4345) provides relative strength support."
+        },
+        "exit_plan": {
+          "take_profit": 0.115,
+          "stop_loss": 0.099,
+          "invalidation": {
+            "zh": "如果价格跌破0.099（基于ATR 0.0018和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
+            "en": "Invalidated if price breaks below 0.099 (based on ATR 0.0018 and support) or funding rate turns positive above 0.01% (short covering ends)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "持有现有SOL多头头寸，因为价格持平于入场价（92.1），融资费率负值（-0.0008%）和Qlib评分第一（0.8244）强化了空头挤压剧本，日线超卖（RSI 12.6）可能反弹。",
+          "en": "Hold existing SOL long position as price is flat at entry (92.1), negative funding rate (-0.0008%) and top Qlib score (0.8244) reinforce short squeeze scenario, and daily oversold condition (RSI 12.6) may lead to rebound."
+        },
+        "exit_plan": {
+          "take_profit": 100.0,
+          "stop_loss": 88.0,
+          "invalidation": {
+            "zh": "如果价格跌破88.0（基于ATR 1.6474和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
+            "en": "Invalidated if price breaks below 88.0 (based on ATR 1.6474 and support) or funding rate turns positive above 0.01% (short covering ends)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BTC",
+        "action": "hold",
+        "leverage": 2.0,
+        "position_size_usd": 2000.0,
+        "entry_reason": {
+          "zh": "持有现有BTC空头头寸，因为价格持平于入场价（73184.0），市场熊市趋势（BTC日线RSI 15.1超卖但价格低于SMA50）和Qlib评分低（0.3463）支持空头剧本，但需警惕极端超卖反弹。",
+          "en": "Hold existing BTC short position as price is flat at entry (73184.0), bearish market trend (BTC daily RSI 15.1 oversold but price below SMA50) and low Qlib score (0.3463) support short scenario, but watch for extreme oversold bounce."
+        },
+        "exit_plan": {
+          "take_profit": 71000.0,
+          "stop_loss": 75000.0,
+          "invalidation": {
+            "zh": "如果价格突破75000.0（基于ATR 869.511和阻力位）或融资费率转负超过-0.01%（多头平仓结束），则假设失效。",
+            "en": "Invalidated if price breaks above 75000.0 (based on ATR 869.511 and resistance) or funding rate turns negative below -0.01% (long covering ends)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2026-02-05 12:02:07"
+  },
+  {
+    "analysis_summary": {
       "zh": "1. 【叙事校验】：市场处于极端恐惧状态（恐惧贪婪指数12.0），比特币ETF持续流出（2.9B美元）和价格跌至2026年新低，显示利空消息已部分兑现（Priced In），但日线趋势仍为熊市（所有币种价格低于SMA50），宏观情绪偏空。2. 【痛苦交易检测】：SOL融资费率负值（-0.0008%）且Z-score极高（99.74%），显示空头拥挤，存在轧空风险；BTC融资费率正值（0.0082%）且Z-score高（111.03%），显示多头拥挤，存在轧多风险。3. 【假设剧本】：我选择【微观结构挤压】剧本，基于SOL空头拥挤（负融资费率）和Qlib评分最高（0.8511），做多SOL以博弈空头平仓；同时，基于BTC多头拥挤（正融资费率）和Qlib评分较低（0.4260），做空BTC以博弈多头清算。",
       "en": "1. 【Narrative Check】: The market is in extreme fear (Fear & Greed Index 12.0), with Bitcoin ETF outflows ($2.9B) and price hitting a new 2026 low, indicating bearish news is partially priced in, but the daily trend remains bearish (all coins below SMA50) and macro sentiment is negative. 2. 【Pain Trade Detection】: SOL has negative funding rate (-0.0008%) with extremely high Z-score (99.74%), showing crowded shorts and short squeeze risk; BTC has positive funding rate (0.0082%) with high Z-score (111.03%), showing crowded longs and long squeeze risk. 3. 【Hypothesis Scenario】: I choose the 【Microstructure Squeeze】 scenario, going long SOL based on crowded shorts (negative funding) and highest Qlib score (0.8511) to bet on short covering; simultaneously, going short BTC based on crowded longs (positive funding) and lower Qlib score (0.4260) to bet on long liquidation."
     },
@@ -3080,71 +3146,5 @@
       }
     ],
     "timestamp": "2026-01-28 08:01:43"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】：Fed利率决议在即，市场隐含利率下降8.5基点（鸽派），但新闻显示'Bitcoin price due sub-$80K bottom'和'Crypto market weakness persists'，表明利空情绪已部分消化（Priced In），价格未进一步下跌，存在看涨背离可能。2. 结合日线趋势：BTC、ETH、SOL、DOGE均处于熊市（价格<SMA50），但DOGE资金费率Z-Score为-86.56%（极端负值），显示空头拥挤，有轧空风险；ETH资金费率正但适中（0.0046%），无过度拥挤。3. 我选择【微观结构挤压】剧本：DOGE空头过度拥挤（资金费率极负）+价格韧性（RSI 55.3中性）+Qlib评分最高（0.5283），做多DOGE以博弈空头平仓；同时持有现有ETH和BTC多头（趋势跟随剧本），因ETH动量强（0.0579）且BTC资金费率正但不高（0.0057%），风险可控。",
-      "en": "1. 【Narrative Check】：Fed rate decision imminent, market-implied rates down 8.5 bps (dovish), but news shows 'Bitcoin price due sub-$80K bottom' and 'Crypto market weakness persists', indicating bearish sentiment partially priced in (Priced In), price not falling further, suggesting potential bullish divergence. 2. Combined with daily trend: BTC, ETH, SOL, DOGE all in bear market (price < SMA50), but DOGE funding rate Z-Score is -86.56% (extremely negative), showing crowded shorts with squeeze risk; ETH funding positive but moderate (0.0046%), no excessive crowding. 3. I choose the 【Microstructure Squeeze】 scenario: DOGE shorts overly crowded (extremely negative funding) + price resilience (RSI 55.3 neutral) + highest Qlib score (0.5283), long DOGE to bet on short covering; while holding existing ETH and BTC longs (Trend Following scenario), as ETH momentum strong (0.0579) and BTC funding positive but not high (0.0057%), with controlled risk."
-    },
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 1409.96,
-        "entry_reason": {
-          "zh": "持有现有ETH多头：符合【趋势跟随】剧本，Qlib评分高（0.52，排名第2），动量强（0.0579），资金费率适中（0.0046%），无过度拥挤风险，日线虽熊但4H结构稳健。",
-          "en": "Hold existing ETH long: Matches 【Trend Following】 scenario, high Qlib score (0.52, rank 2), strong momentum (0.0579), moderate funding rate (0.0046%), no excessive crowding risk, daily trend bearish but 4H structure stable."
-        },
-        "exit_plan": {
-          "take_profit": 2950,
-          "stop_loss": 2800,
-          "invalidation": {
-            "zh": "如果价格跌破2800（支撑位）或资金费率转为正且高于0.01%（空头压力缓解），则假设失效。",
-            "en": "Invalidated if price breaks below 2800 (support) or funding rate turns positive and above 0.01% (short pressure eases)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "BTC",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 34.08,
-        "entry_reason": {
-          "zh": "持有现有BTC多头：符合【趋势跟随】剧本，Qlib评分中等（0.3407），资金费率正但不高（0.0057%），日线熊市但4H无极端信号，风险小。",
-          "en": "Hold existing BTC long: Matches 【Trend Following】 scenario, moderate Qlib score (0.3407), funding positive but not high (0.0057%), daily trend bearish but 4H no extreme signals, low risk."
-        },
-        "exit_plan": {
-          "take_profit": 90000,
-          "stop_loss": 87000,
-          "invalidation": {
-            "zh": "如果价格跌破87000（近期低点附近）或资金费率转为正且高于-0.005%（空头压力显著缓解），则假设失效。",
-            "en": "Invalidated if price breaks below 87000 (near recent low) or funding rate turns positive and above -0.005% (short pressure significantly eases)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "DOGE",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 2000.0,
-        "entry_reason": {
-          "zh": "持有现有DOGE多头：符合【微观结构挤压】剧本，资金费率Z-Score极负（-86.56%），空头拥挤严重，Qlib评分最高（0.5283），价格韧性好（RSI 55.3），博弈空头平仓推动上涨。",
-          "en": "Hold existing DOGE long: Matches 【Microstructure Squeeze】 scenario, funding rate Z-Score extremely negative (-86.56%), shorts heavily crowded, highest Qlib score (0.5283), price resilient (RSI 55.3), betting on short covering to drive price up."
-        },
-        "exit_plan": {
-          "take_profit": 0.128,
-          "stop_loss": 0.118,
-          "invalidation": {
-            "zh": "如果价格跌破0.118（支撑位）或资金费率转为负且低于-0.005%（空头压力增加），则假设失效。",
-            "en": "Invalidated if price breaks below 0.118 (support) or funding rate turns negative and below -0.005% (short pressure increases)."
-          }
-        },
-        "status": "executed"
-      }
-    ],
-    "timestamp": "2026-01-28 04:01:21"
   }
 ]
