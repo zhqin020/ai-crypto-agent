@@ -1,47 +1,27 @@
 {
-  "nav": 10352.73,
-  "cash": 9570.08194934403,
+  "nav": 10340.76,
+  "cash": 9840.76206102257,
   "positions": [
     {
-      "symbol": "ETH",
+      "symbol": "SOL",
       "side": "long",
-      "quantity": 0.25495375138949794,
-      "entry_price": 1961.14,
+      "quantity": 6.346788525006347,
+      "entry_price": 78.78,
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 1926.9,
-      "unrealized_pnl": -8.73,
+      "current_price": 78.78,
+      "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 2050,
-        "stop_loss": 1900,
+        "take_profit": 85,
+        "stop_loss": 75,
         "invalidation": {
-          "zh": "如果价格跌破1900（基于ATR 44.7439和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 1900 (based on ATR 44.7439 and support) or funding rate turns positive above 0.01% (short covering ends)."
+          "zh": "如果价格跌破75（基于ATR 2.0128和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 75 (based on ATR 2.0128 and support) or funding rate turns positive above 0.01% (short covering ends)."
         }
       },
-      "opened_at": "2026-02-05 16:02:10"
-    },
-    {
-      "symbol": "DOGE",
-      "side": "long",
-      "quantity": 3194.888178913738,
-      "entry_price": 0.0939,
-      "leverage": 1.0,
-      "margin": 300.0,
-      "notional": 300.0,
-      "current_price": 0.0912,
-      "unrealized_pnl": -8.63,
-      "exit_plan": {
-        "take_profit": 0.105,
-        "stop_loss": 0.09,
-        "invalidation": {
-          "zh": "如果价格跌破0.09（基于ATR 0.002和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 0.09 (based on ATR 0.002 and support) or funding rate turns positive above 0.01% (short covering ends)."
-        }
-      },
-      "opened_at": "2026-02-05 16:02:10"
+      "opened_at": "2026-02-06 00:02:08"
     }
   ],
-  "last_update": "2026-02-05T20:01:31.269898"
+  "last_update": "2026-02-06T00:02:08.770284"
 }
