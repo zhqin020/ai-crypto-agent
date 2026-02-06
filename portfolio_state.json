@@ -1,27 +1,7 @@
 {
-  "nav": 10409.34,
-  "cash": 9376.785875377973,
+  "nav": 10438.24,
+  "cash": 9415.223422978886,
   "positions": [
-    {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 6.346788525006347,
-      "entry_price": 78.78,
-      "leverage": 1.0,
-      "margin": 500.0,
-      "notional": 500.0,
-      "current_price": 83.91,
-      "unrealized_pnl": 32.56,
-      "exit_plan": {
-        "take_profit": 85,
-        "stop_loss": 75,
-        "invalidation": {
-          "zh": "如果价格跌破75（基于ATR 2.0128和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 75 (based on ATR 2.0128 and support) or funding rate turns positive above 0.01% (short covering ends)."
-        }
-      },
-      "opened_at": "2026-02-06 00:02:08"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 1972.59,
-      "unrealized_pnl": 0.0,
+      "current_price": 2063.41,
+      "unrealized_pnl": 23.02,
       "exit_plan": {
         "take_profit": 2100,
         "stop_loss": 1900,
@@ -41,7 +21,27 @@
         }
       },
       "opened_at": "2026-02-06 16:02:08"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 0.7595321282090233,
+      "entry_price": 658.3,
+      "leverage": 1.0,
+      "margin": 500.0,
+      "notional": 500.0,
+      "current_price": 658.3,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 700,
+        "stop_loss": 630,
+        "invalidation": {
+          "zh": "如果价格跌破630（基于ATR 12.2999和支撑位）或融资费率转正超过0.02%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 630 (based on ATR 12.2999 and support) or funding rate turns positive above 0.02% (short covering ends)."
+        }
+      },
+      "opened_at": "2026-02-06 20:01:51"
     }
   ],
-  "last_update": "2026-02-06T16:02:08.098245"
+  "last_update": "2026-02-06T20:01:51.053723"
 }
