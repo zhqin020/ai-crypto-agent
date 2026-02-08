@@ -1,6 +1,72 @@
 [
   {
     "analysis_summary": {
+      "zh": "1. 【叙事校验】：市场处于极端恐惧（Fear & Greed Index 7.0），新闻显示比特币跌破7万美元引发机构关注（Bitwise CEO评论），但日线趋势为熊市（所有币种价格低于SMA50），RSI超卖（BTC 22.9，ETH 22.8），显示坏消息可能已部分消化（Priced In）。2. 【痛苦交易检测】：融资费率全为负值（ETH -0.0059%，BTC -0.0038%，SOL -0.0255%），显示空头拥挤，存在轧空风险；但高负值Z-score（ETH -173.1%）表明空头过度，价格若反弹可能引发挤压。3. 【假设剧本】：选择【微观结构挤压】剧本，基于Qlib相对强度排名（ETH第一，BTC第二）和负融资费率，做多强势币种（ETH、BTC），赌空头平仓反弹。",
+      "en": "1. 【Narrative Check】：Market in extreme fear (Fear & Greed Index 7.0), news shows Bitcoin below $70K attracting institutional interest (Bitwise CEO comment), but daily trend is bearish (all coins below SMA50) with oversold RSI (BTC 22.9, ETH 22.8), indicating bad news may be partially priced in. 2. 【Pain Trade Detection】：Funding rates all negative (ETH -0.0059%, BTC -0.0038%, SOL -0.0255%), showing crowded shorts with squeeze risk; high negative Z-scores (ETH -173.1%) indicate excessive shorts, potential for squeeze if price rebounds. 3. 【Hypothesis Menu】：Select 【Microstructure Squeeze】 scenario, based on Qlib relative strength ranking (ETH #1, BTC #2) and negative funding, go long on strong coins (ETH, BTC) betting on short covering rebound."
+    },
+    "actions": [
+      {
+        "symbol": "ETH",
+        "action": "hold",
+        "leverage": 1.0,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：Qlib排名第一（得分0.4792），融资费率负（-0.0059%）且Z-score极低（-173.1%），显示空头过度拥挤；价格在2120.9支撑位附近，日线超卖（RSI 22.8），存在反弹潜力。",
+          "en": "Matches 【Microstructure Squeeze】 scenario: Qlib rank #1 (score 0.4792), negative funding (-0.0059%) with extreme Z-score (-173.1%), indicating excessive short crowding; price near support at 2120.9, daily oversold (RSI 22.8), rebound potential."
+        },
+        "exit_plan": {
+          "take_profit": 2200,
+          "stop_loss": 1950,
+          "invalidation": {
+            "zh": "如果价格跌破1950（基于ATR 33.5211和支撑位）或融资费率转正超过0.03%（显示多头拥挤），则假设失效。",
+            "en": "Invalidated if price breaks below 1950 (based on ATR 33.5211 and support) or funding rate turns positive above 0.03% (indicating long crowding)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "SOL",
+        "action": "hold",
+        "leverage": 1.0,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "符合【微观结构挤压】剧本：Qlib排名第三（得分0.2834），融资费率负（-0.0255%）显示空头拥挤；价格在88.06支撑位附近，日线超卖（RSI 17.0），但强度弱于ETH/BTC，持有等待反弹。",
+          "en": "Matches 【Microstructure Squeeze】 scenario: Qlib rank #3 (score 0.2834), negative funding (-0.0255%) showing short crowding; price near support at 88.06, daily oversold (RSI 17.0), but weaker than ETH/BTC, hold for rebound."
+        },
+        "exit_plan": {
+          "take_profit": 95,
+          "stop_loss": 80,
+          "invalidation": {
+            "zh": "如果价格跌破80（基于ATR 1.4856和支撑位）或融资费率转正超过0.02%（空头平仓结束），则假设失效。",
+            "en": "Invalidated if price breaks below 80 (based on ATR 1.4856 and support) or funding rate turns positive above 0.02% (short covering ends)."
+          }
+        },
+        "status": "executed"
+      },
+      {
+        "symbol": "BNB",
+        "action": "hold",
+        "leverage": 1.0,
+        "position_size_usd": 1000.0,
+        "entry_reason": {
+          "zh": "符合【均值回归】剧本：Qlib排名第四（得分0.1337），融资费率负（-0.0120%）且Z-score低（-150.9%），日线超卖（RSI 18.4），但动量负（-0.0164），持有等待超卖反弹。",
+          "en": "Matches 【Mean Reversion】 scenario: Qlib rank #4 (score 0.1337), negative funding (-0.0120%) with low Z-score (-150.9%), daily oversold (RSI 18.4), but negative momentum (-0.0164), hold for oversold bounce."
+        },
+        "exit_plan": {
+          "take_profit": 700,
+          "stop_loss": 620,
+          "invalidation": {
+            "zh": "如果价格跌破620（基于ATR 7.7207和支撑位）或融资费率转正超过0.03%（显示多头拥挤），则假设失效。",
+            "en": "Invalidated if price breaks below 620 (based on ATR 7.7207 and support) or funding rate turns positive above 0.03% (indicating long crowding)."
+          }
+        },
+        "status": "executed"
+      }
+    ],
+    "timestamp": "2026-02-09 04:01:58"
+  },
+  {
+    "analysis_summary": {
       "zh": "首先进行【叙事校验】，当前市场处于极端恐惧（Fear & Greed Index 7.0），新闻显示比特币价格低于7万美元且以太坊跌破2千美元，但日线趋势为熊市（所有币种价格低于SMA50），RSI超卖（BTC 22.5，ETH 22.1），表明坏消息可能已部分消化（Priced In）。结合【痛苦交易】检测，融资费率普遍为负（如ETH -0.0059%，BNB -0.0120%），显示空头拥挤，存在轧空风险。我选择【微观结构挤压】剧本，做多融资费率最负且Qlib评分高的币种，以捕捉空头平仓反弹。",
       "en": "First, conducting a [Narrative vs Reality Check], the market is in extreme fear (Fear & Greed Index 7.0), with news indicating Bitcoin below $70K and Ethereum under $2K, but the daily trend is bearish (all coins below SMA50) and RSI is oversold (BTC 22.5, ETH 22.1), suggesting bad news may be partially priced in. Combined with [Pain Trade] detection, funding rates are generally negative (e.g., ETH -0.0059%, BNB -0.0120%), indicating crowded shorts and a short squeeze risk. I select the [Microstructure Squeeze] scenario, going long on coins with the most negative funding rates and high Qlib scores to capture short-covering rebounds."
     },
@@ -2950,54 +3016,5 @@
       }
     ],
     "timestamp": "2026-02-01 00:01:53"
-  },
-  {
-    "analysis_summary": {
-      "zh": "1. 【叙事校验】市场处于极端恐惧（Fear & Greed Index 20），ETF资金流出和看跌新闻（如比特币跌破8万美元风险）已被部分消化，但日线趋势仍为熊市（所有币种价格低于SMA50），显示利空可能已兑现（Priced In），但缺乏新催化剂。2. 结合日线趋势（熊市）和【痛苦交易】检测，DOGE资金费率正（0.0045%）且Z-score高（59%），存在轧多风险；SOL和BNB资金费率负（-0.0215%和-0.0026%），尤其SOL Z-score极低（-191.5%），显示空头拥挤，有轧空机会。3. 我选择【微观结构挤压】剧本，做多SOL（负费率+价格韧性），并持有现有ETH多头（负费率+超卖RSI），同时避免DOGE（正费率风险）。",
-      "en": "1. 【Narrative Check】Market is in extreme fear (Fear & Greed Index 20), ETF outflows and bearish news (e.g., Bitcoin flirting below $80K) are partially priced in, but daily trend remains bearish (all coins below SMA50), indicating bearishness may be priced in but lacks new catalysts. 2. Combined with daily trend (bearish) and 【Pain Trade】detection, DOGE has positive funding (0.0045%) with high Z-score (59%), posing long squeeze risk; SOL and BNB have negative funding (-0.0215% and -0.0026%), especially SOL with extremely low Z-score (-191.5%), showing crowded shorts and short squeeze opportunity. 3. I choose the 【Microstructure Squeeze】scenario, going long on SOL (negative funding + price resilience), holding existing ETH long (negative funding + oversold RSI), and avoiding DOGE (positive funding risk)."
-    },
-    "actions": [
-      {
-        "symbol": "ETH",
-        "action": "hold",
-        "leverage": 2,
-        "position_size_usd": 5160.0,
-        "entry_reason": {
-          "zh": "现有ETH多头符合【均值回归】剧本：日线RSI超卖（13.5），4H RSI超卖（24.06），资金费率略正（0.0018%）但Z-score中等（31.6%），价格接近支撑位，持有等待反弹。",
-          "en": "Existing ETH long aligns with 【Mean Reversion】scenario: daily RSI oversold (13.5), 4H RSI oversold (24.06), funding slightly positive (0.0018%) with moderate Z-score (31.6%), price near support, holding for bounce."
-        },
-        "exit_plan": {
-          "take_profit": 2850,
-          "stop_loss": 2650,
-          "invalidation": {
-            "zh": "如果价格跌破2650（支撑位）或资金费率转正超过0.03%（空头平仓结束），则假设失效。",
-            "en": "Invalidated if price breaks below 2650 (support) or funding rate turns positive above 0.03% (short covering ends)."
-          }
-        },
-        "status": "executed"
-      },
-      {
-        "symbol": "SOL",
-        "action": "open_long",
-        "leverage": 2,
-        "position_size_usd": 83.43,
-        "entry_reason": {
-          "zh": "符合【微观结构挤压】剧本：资金费率极负（-0.0215%），Z-score极低（-191.5%），显示空头拥挤；4H RSI中性（35.8），价格有韧性；Qlib评分高（0.6973，排名第2），日线超卖（RSI 14.2）提供反弹潜力。",
-          "en": "Matches 【Microstructure Squeeze】scenario: funding extremely negative (-0.0215%), Z-score very low (-191.5%), indicating crowded shorts; 4H RSI neutral (35.8), price resilient; high Qlib score (0.6973, rank 2), daily oversold (RSI 14.2) offers bounce potential."
-        },
-        "exit_plan": {
-          "take_profit": 125,
-          "stop_loss": 110,
-          "invalidation": {
-            "zh": "如果价格跌破110（关键支撑）或资金费率转正超过0.01%（空头平仓结束），则假设失效。",
-            "en": "Invalidated if price breaks below 110 (key support) or funding rate turns positive above 0.01% (short covering ends)."
-          }
-        },
-        "status": "executed",
-        "original_size_usd": 2000.0,
-        "rejection_reason": "Size Reduced due to Exposure Limit"
-      }
-    ],
-    "timestamp": "2026-01-31 20:01:33"
   }
 ]
