@@ -1,6 +1,6 @@
 {
-  "nav": 10436.25,
-  "cash": 8898.320339278445,
+  "nav": 10428.18,
+  "cash": 8397.820339278445,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 1.0,
       "margin": 1000.0,
       "notional": 1000.0,
-      "current_price": 2087.31,
-      "unrealized_pnl": 37.76,
+      "current_price": 2079.21,
+      "unrealized_pnl": 33.73,
       "exit_plan": {
         "take_profit": 2200,
         "stop_loss": 1950,
@@ -25,23 +25,23 @@
     {
       "symbol": "SOL",
       "side": "long",
-      "quantity": 5.719514985129261,
-      "entry_price": 87.42,
+      "quantity": 11.47789342576038,
+      "entry_price": 87.12400114777618,
       "leverage": 1.0,
-      "margin": 500.0,
-      "notional": 500.0,
-      "current_price": 87.45,
-      "unrealized_pnl": 0.17,
+      "margin": 1000.0,
+      "notional": 1000.0,
+      "current_price": 86.83,
+      "unrealized_pnl": -3.37,
       "exit_plan": {
         "take_profit": 95,
         "stop_loss": 80,
         "invalidation": {
-          "zh": "如果价格跌破80（基于ATR 2.1255和支撑位）或融资费率转正超过0.02%（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 80 (based on ATR 2.1255 and support) or funding rate turns positive above 0.02% (short covering ends)."
+          "zh": "如果价格跌破80（基于ATR 1.7627和支撑位）或融资费率转正超过0.02%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 80 (based on ATR 1.7627 and support) or funding rate turns positive above 0.02% (short covering ends)."
         }
       },
       "opened_at": "2026-02-07 00:01:44"
     }
   ],
-  "last_update": "2026-02-08T00:02:05.868694"
+  "last_update": "2026-02-08T04:01:53.111642"
 }
