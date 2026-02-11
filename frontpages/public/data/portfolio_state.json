@@ -1,6 +1,6 @@
 {
-  "nav": 10096.41,
-  "cash": 8123.047501948853,
+  "nav": 10174.98,
+  "cash": 7597.8993019488535,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.0889,
-      "unrealized_pnl": -26.64,
+      "current_price": 0.091,
+      "unrealized_pnl": 19.98,
       "exit_plan": {
         "take_profit": 0.095,
         "stop_loss": 0.088,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 66461.4,
-      "unrealized_pnl": 0.0,
+      "current_price": 67558.2,
+      "unrealized_pnl": 33.01,
       "exit_plan": {
         "take_profit": 69000,
         "stop_loss": 65000,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-02-11 16:01:39"
+    },
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 0.5373620965426732,
+      "entry_price": 1950.64,
+      "leverage": 2.0,
+      "margin": 524.1,
+      "notional": 1048.2,
+      "current_price": 1950.64,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 2100,
+        "stop_loss": 1850,
+        "invalidation": {
+          "zh": "如果价格跌破1850（基于ATR 28.2012和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 1850 (based on ATR 28.2012 and support) or funding rate turns positive above 0.01% (short covering ends)."
+        }
+      },
+      "opened_at": "2026-02-11 20:02:04"
     }
   ],
-  "last_update": "2026-02-11T16:01:39.414652"
+  "last_update": "2026-02-11T20:02:04.484640"
 }
