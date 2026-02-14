@@ -1,27 +1,7 @@
 {
-  "nav": 10338.23,
-  "cash": 8213.448730286806,
+  "nav": 10338.76,
+  "cash": 8698.878279405682,
   "positions": [
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 3.343922420999833,
-      "entry_price": 598.1,
-      "leverage": 2.0,
-      "margin": 1000.0,
-      "notional": 2000.0,
-      "current_price": 617.6,
-      "unrealized_pnl": 65.21,
-      "exit_plan": {
-        "take_profit": 620,
-        "stop_loss": 580,
-        "invalidation": {
-          "zh": "如果价格跌破580（基于ATR 6.65和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
-          "en": "Invalidated if price breaks below 580 (based on ATR 6.65 and support) or funding rate turns positive above 0.01% (short covering ends)."
-        }
-      },
-      "opened_at": "2026-02-13 08:01:45"
-    },
     {
       "symbol": "DOGE",
       "side": "long",
@@ -30,18 +10,38 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.0968,
-      "unrealized_pnl": 59.57,
+      "current_price": 0.0966,
+      "unrealized_pnl": 55.32,
       "exit_plan": {
         "take_profit": 0.105,
-        "stop_loss": 0.094,
+        "stop_loss": 0.096,
         "invalidation": {
-          "zh": "如果价格跌破0.094（入场价，基于风险管理）或融资费率超过0.03%（轧多风险加剧），则假设失效。",
-          "en": "Invalidated if price breaks below 0.094 (entry price, based on risk management) or funding rate exceeds 0.03% (long squeeze risk intensifies)."
+          "zh": "如果价格跌破0.096（新止损位）或融资费率超过0.03%（轧多风险进一步加剧），则假设失效。",
+          "en": "Invalidated if price breaks below 0.096 (new stop-loss) or funding rate exceeds 0.03% (long squeeze risk intensifies further)."
         }
       },
       "opened_at": "2026-02-13 12:01:47"
+    },
+    {
+      "symbol": "BTC",
+      "side": "long",
+      "quantity": 0.016888159567337694,
+      "entry_price": 69227.2,
+      "leverage": 2.0,
+      "margin": 584.56,
+      "notional": 1169.12,
+      "current_price": 69227.2,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 71000,
+        "stop_loss": 68000,
+        "invalidation": {
+          "zh": "如果价格跌破68000（基于ATR 641.76和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 68000 (based on ATR 641.76 and support) or funding rate turns positive above 0.01% (short covering ends)."
+        }
+      },
+      "opened_at": "2026-02-14 08:01:58"
     }
   ],
-  "last_update": "2026-02-14T04:02:17.798314"
+  "last_update": "2026-02-14T08:01:58.880414"
 }
