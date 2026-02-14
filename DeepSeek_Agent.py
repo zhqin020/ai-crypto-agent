@@ -70,17 +70,18 @@ Use this daily context to filter 4H signals.
 
 {{DAILY_CONTEXT}}
 
+
 🟨 3. NEWS & ON-CHAIN CONTEXT (OPTIONAL)
 If available, use this to validate or reject quantitative signals.
 
-**CRITICAL INSTRUCTION FOR ECONOMIC DATA:**
-The "Economic Calendar" provided below may only show Forecast/Previous values. You MUST cross-reference the "Latest News" section to find the **ACTUAL** released values.
-- Example: If Calendar says "CPI Forecast: 3.0%" and News says "US CPI hits 3.2%", then the ACTUAL value is 3.2% (Bearish/Hot).
-- Use these extracted actual values to determine the market impact.
-
 {{NEWS_CONTEXT}}
 
+🟦 3.1. SELF-REFLECTION & HISTORY (CRITICAL)
+Learn from your recent performance. If you are losing, adjust strategy.
+{{REFLECTION_CONTEXT}}
+
 🟥 4. ANALYSIS LOGIC (The "Dolores" Method)
+
 
 A. NARRATIVE VS REALITY CHECK (Crucial Step)
 For each major news item or market move, ask:
@@ -141,6 +142,24 @@ Structure:
     "zh": "必须是中文，综合叙述（3-4句话）。1. 首先进行【叙事校验】（Section 4A），判断当前宏观/新闻是Impulse还是Priced In。2. 结合日线趋势（Section 2.1）和【痛苦交易】检测（Section 4B），指出市场是否存在轧空/轧多风险。3. 阐述你选择的【假设剧本】（Section 4C）。例如：'尽管有ETF利好，但日线RSI超买且费率过高，显示利好已兑现（Priced In），存在轧多风险。我选择均值回归剧本，做空BTC...'",
     "en": "English translation of the above Chinese summary."
   },
+  "context_analysis": {
+    "technical_signal": {
+      "zh": "简评技术面（Qlib分/日线趋势/主要指标）。",
+      "en": "Brief review of technicals (Qlib score, trend, key indicators)."
+    },
+    "macro_onchain": {
+      "zh": "简评宏观与链上（新闻/恐慌指数/资金流向）。",
+      "en": "Brief review of macro & on-chain (News, Fear Index, Fund Flow)."
+    },
+    "portfolio_status": {
+      "zh": "简评当前持仓与风险敞口。",
+      "en": "Current portfolio exposure & risk status."
+    },
+    "reflection": {
+      "zh": "简评历史反思对本次决策的影响。",
+      "en": "How historical reflection influenced this decision."
+    }
+  },
   "actions": [
     {
       "symbol": "BTC",
@@ -197,6 +216,23 @@ def get_news_context():
     try:
         with open(snapshot_path, "r") as f:
             data = json.load(f)
+
+        # Merge external Whale Analysis (Telegram Source) if available to align with Frontend
+        whale_path = BASE_DIR.parent / "frontend/data/whale_analysis.json"
+        if whale_path.exists():
+            try:
+                with open(whale_path, "r") as wf:
+                    w_data = json.load(wf)
+                    # Merge 'eth', 'sol' stats into data if present
+                    for chain in ["eth", "sol"]:
+                        if chain in w_data:
+                            # Ensure structure exists in snapshot data
+                            if chain not in data: data[chain] = {}
+                            # Overwrite stats_24h with high quality data from whale_analysis
+                            if "stats_24h" in w_data[chain]:
+                                data[chain]["stats_24h"] = w_data[chain]["stats_24h"]
+            except Exception as we:
+                print(f"⚠️ Failed to merge whale analysis for context: {we}")
             
         # 1. News - Collect from all available sources
         news_dict = data.get("news", {})
@@ -225,24 +261,45 @@ def get_news_context():
         # Combine Calendar + News
         final_news_context = f"{calendar_str}\n{news_str}" if calendar_str else news_str
             
-        # 2. Liquidations (Derivatives)
+        # 2. On-Chain Liquidity & Whale Activity (ETH & SOL)
+        # These act as proxies for broad market sentiment/liquidity
+        onchain_str = "\n=== On-Chain Liquidity & Whale Activity (24h) ===\n"
+        onchain_str += "*Note: High stablecoin inflow often indicates potential buying power for the broader market (Positive correlation with BTC).*\n"
+        
+        for chain in ["eth", "sol"]:
+            chain_data = data.get(chain, {}).get("stats_24h", {})
+            if chain_data:
+                whale_cnt = chain_data.get("whale_count", "N/A")
+                stable_flow = chain_data.get("stablecoin_net_flow", 0)
+                token_flow = chain_data.get("token_net_flow", 0)
+                
+                # Format numbers millions/thousands
+                def fmt_num(n):
+                    if not isinstance(n, (int, float)): return str(n)
+                    if abs(n) >= 1_000_000: return f"${n/1_000_000:.1f}M"
+                    if abs(n) >= 1_000: return f"${n/1_000:.1f}K"
+                    return f"${n:.0f}"
+
+                onchain_str += f"- [{chain.upper()}] Active Whales: {whale_cnt} | Stablecoin Flow: {fmt_num(stable_flow)} | Token Flow: {fmt_num(token_flow)}\n"
+        
+        # 3. Liquidations (Derivatives)
         derivs = data.get("derivatives", {}).get("okx", {})
         liqs = derivs.get("eth_liquidations", {}).get("totals", {})
         long_liq = liqs.get("long_usd", 0)
         short_liq = liqs.get("short_usd", 0)
         
-        liq_str = f"\nLiquidation Context (48h):\n- Long Liquidations: ${long_liq:,.2f}\n- Short Liquidations: ${short_liq:,.2f}\n"
+        liq_str = f"\n=== Derivatives Market Context ===\nLiquidation Context (48h):\n- Long Liquidations: ${long_liq:,.2f}\n- Short Liquidations: ${short_liq:,.2f}\n"
         
         if long_liq > short_liq * 2:
             liq_str += "-> Longs have been flushed. Potential bounce?\n"
         elif short_liq > long_liq * 2:
             liq_str += "-> Shorts have been squeezed. Potential correction?\n"
             
-        # 3. Fear & Greed
+        # 4. Fear & Greed
         fng = data.get("fear_greed", {}).get("latest") or {}
-        fng_str = f"\nFear & Greed Index: {fng.get('value')} ({fng.get('classification')})\n"
+        fng_str = f"Fear & Greed Index: {fng.get('value')} ({fng.get('classification')})\n"
         
-        # 4. Fed Rate Probability (Implied from ZQ=F)
+        # 5. Fed Rate Probability
         fed_futures = data.get("fed_futures", {})
         fed_rate_str = ""
         if fed_futures and not fed_futures.get("error"):
@@ -250,12 +307,9 @@ def get_news_context():
             change = fed_futures.get("change_5d_bps")
             trend = fed_futures.get("trend", "Neutral")
             
-            fed_rate_str = f"\nFed Rate Expectations (Market Implied):\n- Current Implied Rate: {rate}%\n"
-            if change is not None:
-                fed_rate_str += f"- 5-Day Change: {change:+.1f} bps\n"
-            fed_rate_str += f"- Trend: {trend}\n"
+            fed_rate_str = f"Fed Rate Expectations: {rate}% (Trend: {trend})\n"
         
-        return final_news_context + fed_rate_str + liq_str + fng_str
+        return final_news_context + "\n" + onchain_str + liq_str + fng_str + fed_rate_str
         
     except Exception as e:
         return f"Error reading news data: {e}"
@@ -347,7 +401,40 @@ def run_agent():
     final_prompt = final_prompt.replace("{{DAILY_CONTEXT}}", daily_context)
     
     final_prompt = final_prompt.replace("{{PORTFOLIO_STATE_JSON}}", portfolio_state)
-    final_prompt = final_prompt.replace("{{NEWS_CONTEXT}}", news_context)
+    
+    # Load Analyst Report (Crypto Brain) to facilitate collaboration
+    analyst_report_str = ""
+    try:
+        whale_path = BASE_DIR.parent / "frontend/data/whale_analysis.json"
+        if whale_path.exists():
+            with open(whale_path, "r") as f:
+                w_data = json.load(f)
+                ai_summary = w_data.get("ai_summary", {})
+                # Prefer Chinese
+                report_text = ""
+                if isinstance(ai_summary, dict):
+                    report_text = ai_summary.get("zh") or ai_summary.get("en") or ""
+                elif isinstance(ai_summary, str):
+                    report_text = ai_summary
+                
+                if report_text:
+                    analyst_report_str = f"\n\n🔍 **SENIOR ANALYST REPORT (Input for Decision)**:\n{report_text}\n"
+                    print("✅ Loaded Senior Analyst Report for Context.")
+    except Exception as e:
+        print(f"⚠️ Failed to load analyst report: {e}")
+
+    final_prompt = final_prompt.replace("{{NEWS_CONTEXT}}", news_context + analyst_report_str)
+
+    # Add Reflection (History)
+    try:
+        from reflection import get_reflection_context
+        reflection_str = get_reflection_context()
+        print(f"\n🧠 Reflection Loaded:\n{reflection_str[:100]}...")
+    except Exception as e:
+        print(f"⚠️ Failed to load reflection: {e}")
+        reflection_str = "No reflection data available."
+    
+    final_prompt = final_prompt.replace("{{REFLECTION_CONTEXT}}", reflection_str)
     
     # 3. Call DeepSeek API with OpenAI SDK (with manual retry loop)
     try:
@@ -408,17 +495,26 @@ def run_agent():
             except:
                 history = []
         
-        # Add timestamp (Force overwrite with local time UTC+8)
+        # Add metadata and indicators
         import datetime as dt
         utc_now = dt.datetime.utcnow()
         beijing_time = utc_now + dt.timedelta(hours=8)
         decision["timestamp"] = beijing_time.strftime("%Y-%m-%d %H:%M:%S")
+        decision["market_indicators_at_time"] = market_summary # Save structured indicators
             
         history.insert(0, decision)
         history = history[:50]
         
         with open(log_path, "w") as f:
             json.dump(history, f, indent=2, ensure_ascii=False)
+
+        # 8. Send Notifications (Telegram & Discord)
+        try:
+            from notifier import send_notifications
+            print("📢 Sending notifications...")
+            send_notifications(decision)
+        except Exception as e:
+            print(f"⚠️ Notification failed: {e}")
                 
     except Exception as e:
         print(f"❌ Error calling DeepSeek (OpenAI SDK): {e}")
@@ -429,6 +525,13 @@ def run_agent():
             "actions": [],
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
+        
+        # Send error notification
+        try:
+            from notifier import send_notifications
+            send_notifications(error_decision)
+        except:
+            pass
         
         log_path = BASE_DIR / "agent_decision_log.json"
         
@@ -610,6 +713,23 @@ def validate_and_enforce_decision(decision, market_summary, daily_context_str, f
         
         if action_type in ["open_long", "open_short"]:
             print(f"  ✅ [Action #{i+1} {symbol}] {action_type} | Size: ${size} | Lev: {lev}x")
+        
+        action_type = act.get("action")
+        
+        # 1. Check Action Type
+        if action_type not in ALLOWED_ACTIONS:
+            print(f"  ⚠️ [Action #{i+1} {symbol}] Invalid action: '{action_type}'")
+            
+        # 2. Check Size & Leverage
+        size = float(act.get("position_size_usd", 0) or 0)
+        lev = float(act.get("leverage", 1) or 1)
+        
+        if size < 0:
+            print(f"  ⚠️ [Action #{i+1} {symbol}] Negative position size: ${size}")
+        
+        if lev > 3:
+            print(f"  ⚠️ [Action #{i+1} {symbol}] Leverage too high: {lev}x (Max 3x)")
+
             
     return decision
 
