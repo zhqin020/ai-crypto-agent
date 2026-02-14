@@ -1,5 +1,5 @@
 {
-  "nav": 10342.12,
+  "nav": 10338.23,
   "cash": 8213.448730286806,
   "positions": [
     {
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 619.4,
-      "unrealized_pnl": 71.23,
+      "current_price": 617.6,
+      "unrealized_pnl": 65.21,
       "exit_plan": {
         "take_profit": 620,
         "stop_loss": 580,
@@ -30,18 +30,18 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.0967,
-      "unrealized_pnl": 57.45,
+      "current_price": 0.0968,
+      "unrealized_pnl": 59.57,
       "exit_plan": {
         "take_profit": 0.105,
-        "stop_loss": 0.088,
+        "stop_loss": 0.094,
         "invalidation": {
-          "zh": "如果价格跌破0.088（基于ATR 0.001和日线支撑）或融资费率超过0.03%（轧多风险），则假设失效。",
-          "en": "Invalidated if price breaks below 0.088 (based on ATR 0.001 and daily support) or funding rate exceeds 0.03% (long squeeze risk)."
+          "zh": "如果价格跌破0.094（入场价，基于风险管理）或融资费率超过0.03%（轧多风险加剧），则假设失效。",
+          "en": "Invalidated if price breaks below 0.094 (entry price, based on risk management) or funding rate exceeds 0.03% (long squeeze risk intensifies)."
         }
       },
       "opened_at": "2026-02-13 12:01:47"
     }
   ],
-  "last_update": "2026-02-14T00:01:35.030151"
+  "last_update": "2026-02-14T04:02:17.798314"
 }
