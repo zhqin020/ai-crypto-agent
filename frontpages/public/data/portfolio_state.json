@@ -1,6 +1,6 @@
 {
-  "nav": 10429.29,
-  "cash": 8835.16338578866,
+  "nav": 10522.71,
+  "cash": 7833.163385788661,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 584.56,
       "notional": 1169.12,
-      "current_price": 69793.4,
-      "unrealized_pnl": 9.56,
+      "current_price": 69863.9,
+      "unrealized_pnl": 10.75,
       "exit_plan": {
         "take_profit": 71000,
         "stop_loss": 68000,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 0.104,
-      "unrealized_pnl": 0.0,
+      "current_price": 0.1089,
+      "unrealized_pnl": 94.23,
       "exit_plan": {
         "take_profit": 0.112,
         "stop_loss": 0.099,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-02-14 16:01:25"
+    },
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 0.9576113342877526,
+      "entry_price": 2088.53,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 2088.53,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 2150,
+        "stop_loss": 2050,
+        "invalidation": {
+          "zh": "如果价格跌破2050（基于ATR 21.99和支撑位）或融资费率Z-score超过95%（显示轧多风险），则假设失效。",
+          "en": "Invalidated if price breaks below 2050 (based on ATR 21.99 and support) or funding rate Z-score exceeds 95% (indicating long squeeze risk)."
+        }
+      },
+      "opened_at": "2026-02-14 20:02:02"
     }
   ],
-  "last_update": "2026-02-14T16:01:25.477468"
+  "last_update": "2026-02-14T20:02:02.972689"
 }
