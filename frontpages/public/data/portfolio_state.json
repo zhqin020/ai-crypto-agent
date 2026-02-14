@@ -1,27 +1,47 @@
 {
-  "nav": 10541.99,
-  "cash": 9541.987059995674,
+  "nav": 10429.29,
+  "cash": 8835.16338578866,
   "positions": [
     {
-      "symbol": "ETH",
+      "symbol": "BTC",
       "side": "long",
-      "quantity": 0.7094714437743881,
-      "entry_price": 2819.0,
+      "quantity": 0.016888159567337694,
+      "entry_price": 69227.2,
+      "leverage": 2.0,
+      "margin": 584.56,
+      "notional": 1169.12,
+      "current_price": 69793.4,
+      "unrealized_pnl": 9.56,
+      "exit_plan": {
+        "take_profit": 71000,
+        "stop_loss": 68000,
+        "invalidation": {
+          "zh": "如果价格跌破68000（基于ATR 641.76和支撑位）或融资费率转正超过0.01%（空头平仓结束），则假设失效。",
+          "en": "Invalidated if price breaks below 68000 (based on ATR 641.76 and support) or funding rate turns positive above 0.01% (short covering ends)."
+        }
+      },
+      "opened_at": "2026-02-14 08:01:58"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 19230.76923076923,
+      "entry_price": 0.104,
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 2819.0,
+      "current_price": 0.104,
       "unrealized_pnl": 0.0,
       "exit_plan": {
-        "take_profit": 2900,
-        "stop_loss": 2750,
+        "take_profit": 0.112,
+        "stop_loss": 0.099,
         "invalidation": {
-          "zh": "如果价格跌破2750（基于ATR 29.76和支撑位）或融资费率超过0.03%（多头拥挤），则假设失效。",
-          "en": "Invalidated if price breaks below 2750 (based on ATR 29.76 and support) or funding rate exceeds 0.03% (crowded longs)."
+          "zh": "如果价格跌破0.099（基于ATR 0.0013和支撑位）或融资费率Z-score超过60%（显示轧多风险），则假设失效。",
+          "en": "Invalidated if price breaks below 0.099 (based on ATR 0.0013 and support) or funding rate Z-score exceeds 60% (indicating long squeeze risk)."
         }
       },
-      "opened_at": "2026-02-14 12:14:39"
+      "opened_at": "2026-02-14 16:01:25"
     }
   ],
-  "last_update": "2026-02-14T20:14:39.847981"
+  "last_update": "2026-02-14T16:01:25.477468"
 }
