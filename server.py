@@ -35,6 +35,35 @@ def get_agent_decision():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/market-stats', methods=['GET'])
+def get_market_stats():
+    # This endpoint provides data for the top indicators (Fed, Japan, Whale flows, etc.)
+    # It reads from the unified whale_analysis.json file
+    whale_path = BASE_DIR.parent / "frontend/data/whale_analysis.json"
+    
+    # Also check if it's in the same directory (Railway fallback)
+    if not whale_path.exists():
+        whale_path = BASE_DIR / "whale_analysis.json"
+
+    if not whale_path.exists():
+        return jsonify({"error": "Market stats file not found"}), 404
+
+    try:
+        with open(whale_path, 'r') as f:
+            data = json.load(f)
+        
+        # Optionally add Agent Analysis text if available
+        if AGENT_LOG_PATH.exists():
+            with open(AGENT_LOG_PATH, 'r') as af:
+                agent_data = json.load(af)
+                # If agent_data is a list (history), take the first one
+                latest_decision = agent_data[0] if isinstance(agent_data, list) and len(agent_data) > 0 else agent_data
+                data["agent_analysis"] = latest_decision.get("analysis_summary", {})
+                
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
