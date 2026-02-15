@@ -1,6 +1,6 @@
 {
-  "nav": 10560.72,
-  "cash": 7949.408157144731,
+  "nav": 10558.37,
+  "cash": 6948.408157144731,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1584.56,
       "notional": 2169.12,
-      "current_price": 70811.0,
-      "unrealized_pnl": 26.75,
+      "current_price": 70309.5,
+      "unrealized_pnl": 11.2,
       "exit_plan": {
         "take_profit": 73000,
         "stop_loss": 70000,
@@ -30,8 +30,8 @@
       "leverage": 1.0,
       "margin": 1000.0,
       "notional": 1000.0,
-      "current_price": 2092.71,
-      "unrealized_pnl": -0.0,
+      "current_price": 2062.99,
+      "unrealized_pnl": 14.2,
       "exit_plan": {
         "take_profit": 2050,
         "stop_loss": 2150,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-02-15 08:22:24"
+    },
+    {
+      "symbol": "BNB",
+      "side": "short",
+      "quantity": -1.587553579933323,
+      "entry_price": 629.9,
+      "leverage": 1.0,
+      "margin": 1000.0,
+      "notional": 1000.0,
+      "current_price": 629.9,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 600,
+        "stop_loss": 650,
+        "invalidation": {
+          "zh": "如果价格突破650（阻力位）或融资费率Z-score降至30%以下（多头压力缓解），则假设失效。",
+          "en": "Invalidated if price breaks above 650 (resistance) or funding rate Z-score drops below 30% (long pressure easing)."
+        }
+      },
+      "opened_at": "2026-02-15 12:02:01"
     }
   ],
-  "last_update": "2026-02-15T08:22:24.326874"
+  "last_update": "2026-02-15T12:02:01.045643"
 }
