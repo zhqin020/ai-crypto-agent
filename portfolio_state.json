@@ -1,6 +1,6 @@
 {
-  "nav": 10576.21,
-  "cash": 9452.834739655065,
+  "nav": 10574.32,
+  "cash": 8952.334739655065,
   "positions": [
     {
       "symbol": "BNB",
@@ -10,8 +10,8 @@
       "leverage": 1.0,
       "margin": 110.07,
       "notional": 110.07,
-      "current_price": 627.1,
-      "unrealized_pnl": 0.97,
+      "current_price": 622.8,
+      "unrealized_pnl": 0.21,
       "exit_plan": {
         "take_profit": 650,
         "stop_loss": 600,
@@ -30,8 +30,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 1985.68,
-      "unrealized_pnl": 11.09,
+      "current_price": 1985.85,
+      "unrealized_pnl": 11.13,
       "exit_plan": {
         "take_profit": 2100,
         "stop_loss": 1850,
@@ -50,8 +50,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 68472.0,
-      "unrealized_pnl": 1.24,
+      "current_price": 68380.3,
+      "unrealized_pnl": 0.57,
       "exit_plan": {
         "take_profit": 75000,
         "stop_loss": 66000,
@@ -61,7 +61,27 @@
         }
       },
       "opened_at": "2026-02-15 20:02:04"
+    },
+    {
+      "symbol": "BNB",
+      "side": "short",
+      "quantity": -0.8028259473346179,
+      "entry_price": 622.8,
+      "leverage": 1.0,
+      "margin": 500.0,
+      "notional": 500.0,
+      "current_price": 622.8,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 600,
+        "stop_loss": 650,
+        "invalidation": {
+          "zh": "如果价格突破650（阻力位）或融资费率转负超过-0.005%（多头压力缓解），则假设失效。",
+          "en": "Invalidated if price breaks above 650 (resistance) or funding rate turns negative below -0.005% (long pressure easing)."
+        }
+      },
+      "opened_at": "2026-02-17 08:02:00"
     }
   ],
-  "last_update": "2026-02-17T04:01:51.582658"
+  "last_update": "2026-02-17T08:02:00.993812"
 }
