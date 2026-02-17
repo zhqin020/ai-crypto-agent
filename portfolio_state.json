@@ -1,27 +1,7 @@
 {
-  "nav": 10568.89,
-  "cash": 8952.334739655065,
+  "nav": 10566.79,
+  "cash": 9566.77009976058,
   "positions": [
-    {
-      "symbol": "BNB",
-      "side": "long",
-      "quantity": 0.17707528957528956,
-      "entry_price": 621.6,
-      "leverage": 1.0,
-      "margin": 110.07,
-      "notional": 110.07,
-      "current_price": 618.6,
-      "unrealized_pnl": -0.53,
-      "exit_plan": {
-        "take_profit": 650,
-        "stop_loss": 600,
-        "invalidation": {
-          "zh": "如果价格跌破600（支撑位）或融资费率转正超过0.005%（空头压力缓解），则假设失效。",
-          "en": "Invalidated if price breaks below 600 (support) or funding rate turns positive above 0.005% (short pressure easing)."
-        }
-      },
-      "opened_at": "2026-02-15 16:02:06"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 1969.54,
-      "unrealized_pnl": 6.93,
+      "current_price": 1968.83,
+      "unrealized_pnl": 6.75,
       "exit_plan": {
         "take_profit": 2100,
         "stop_loss": 1850,
@@ -50,8 +30,8 @@
       "leverage": 1.0,
       "margin": 500.0,
       "notional": 500.0,
-      "current_price": 67853.1,
-      "unrealized_pnl": -3.29,
+      "current_price": 67382.9,
+      "unrealized_pnl": -6.73,
       "exit_plan": {
         "take_profit": 75000,
         "stop_loss": 66000,
@@ -61,27 +41,7 @@
         }
       },
       "opened_at": "2026-02-15 20:02:04"
-    },
-    {
-      "symbol": "BNB",
-      "side": "short",
-      "quantity": -0.8028259473346179,
-      "entry_price": 622.8,
-      "leverage": 1.0,
-      "margin": 500.0,
-      "notional": 500.0,
-      "current_price": 618.6,
-      "unrealized_pnl": 3.37,
-      "exit_plan": {
-        "take_profit": 600,
-        "stop_loss": 650,
-        "invalidation": {
-          "zh": "如果价格突破650（阻力位）或融资费率转负超过-0.005%（多头压力缓解），则假设失效。",
-          "en": "Invalidated if price breaks above 650 (resistance) or funding rate turns negative below -0.005% (long pressure easing)."
-        }
-      },
-      "opened_at": "2026-02-17 08:02:00"
     }
   ],
-  "last_update": "2026-02-17T12:01:58.831205"
+  "last_update": "2026-02-17T16:01:53.309013"
 }
