@@ -1,6 +1,6 @@
 {
-  "nav": 10482.71,
-  "cash": 7149.768982971864,
+  "nav": 10405.48,
+  "cash": 8478.854200069998,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 1.0,
       "margin": 1500.0,
       "notional": 2500.0,
-      "current_price": 1980.54,
-      "unrealized_pnl": -8.0,
+      "current_price": 1949.01,
+      "unrealized_pnl": -47.67,
       "exit_plan": {
         "take_profit": 2200,
         "stop_loss": 1900,
@@ -23,26 +23,6 @@
       "opened_at": "2026-02-15 20:02:04"
     },
     {
-      "symbol": "SOL",
-      "side": "long",
-      "quantity": 33.315833835039136,
-      "entry_price": 83.05,
-      "leverage": 2.0,
-      "margin": 1383.44,
-      "notional": 2766.88,
-      "current_price": 82.37,
-      "unrealized_pnl": -22.65,
-      "exit_plan": {
-        "take_profit": 90,
-        "stop_loss": 81,
-        "invalidation": {
-          "zh": "如果价格跌破81（新止损）或融资费率转正超过0.005%（空头压力缓解），则假设失效。",
-          "en": "Invalidated if price breaks below 81 (new stop loss) or funding rate turns positive above 0.005% (short pressure easing)."
-        }
-      },
-      "opened_at": "2026-02-18 16:02:31"
-    },
-    {
       "symbol": "DOGE",
       "side": "long",
       "quantity": 9769.277721261446,
@@ -50,8 +30,8 @@
       "leverage": 2.0,
       "margin": 480.16,
       "notional": 960.32,
-      "current_price": 0.0983,
-      "unrealized_pnl": 0.0,
+      "current_price": 0.0977,
+      "unrealized_pnl": -5.86,
       "exit_plan": {
         "take_profit": 0.105,
         "stop_loss": 0.095,
@@ -63,5 +43,5 @@
       "opened_at": "2026-02-19 08:01:39"
     }
   ],
-  "last_update": "2026-02-19T08:01:39.272479"
+  "last_update": "2026-02-19T12:02:35.495971"
 }
