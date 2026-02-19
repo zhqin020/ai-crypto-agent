@@ -1,6 +1,6 @@
 {
-  "nav": 10405.48,
-  "cash": 8478.854200069998,
+  "nav": 10363.27,
+  "cash": 7477.854200069998,
   "positions": [
     {
       "symbol": "ETH",
@@ -10,8 +10,8 @@
       "leverage": 1.0,
       "margin": 1500.0,
       "notional": 2500.0,
-      "current_price": 1949.01,
-      "unrealized_pnl": -47.67,
+      "current_price": 1924.02,
+      "unrealized_pnl": -79.12,
       "exit_plan": {
         "take_profit": 2200,
         "stop_loss": 1900,
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 480.16,
       "notional": 960.32,
-      "current_price": 0.0977,
-      "unrealized_pnl": -5.86,
+      "current_price": 0.0967,
+      "unrealized_pnl": -15.63,
       "exit_plan": {
         "take_profit": 0.105,
         "stop_loss": 0.095,
@@ -41,7 +41,27 @@
         }
       },
       "opened_at": "2026-02-19 08:01:39"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 1.6672224074691566,
+      "entry_price": 599.8,
+      "leverage": 1.0,
+      "margin": 1000.0,
+      "notional": 1000.0,
+      "current_price": 599.8,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 650,
+        "stop_loss": 580,
+        "invalidation": {
+          "zh": "如果价格跌破580（低于近期低点）或融资费率转正超过0.001%（空头压力缓解），则假设失效。",
+          "en": "Invalidated if price breaks below 580 (below recent low) or funding rate turns positive above 0.001% (short pressure easing)."
+        }
+      },
+      "opened_at": "2026-02-19 16:02:36"
     }
   ],
-  "last_update": "2026-02-19T12:02:35.495971"
+  "last_update": "2026-02-19T16:02:36.468055"
 }
