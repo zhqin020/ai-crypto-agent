@@ -1,5 +1,5 @@
 {
-  "nav": 10466.06,
+  "nav": 10480.94,
   "cash": 7126.36416384459,
   "positions": [
     {
@@ -10,14 +10,14 @@
       "leverage": 1.0,
       "margin": 1500.0,
       "notional": 2500.0,
-      "current_price": 1976.06,
-      "unrealized_pnl": -13.64,
+      "current_price": 1981.29,
+      "unrealized_pnl": -7.06,
       "exit_plan": {
         "take_profit": 2200,
-        "stop_loss": 1950,
+        "stop_loss": 1960,
         "invalidation": {
-          "zh": "如果价格跌破1950（新止损）或融资费率转正超过0.005%（空头压力缓解），则假设失效。",
-          "en": "Invalidated if price breaks below 1950 (new stop-loss) or funding rate turns positive above 0.005% (short pressure easing)."
+          "zh": "如果价格跌破1960（新止损）或融资费率Z-score超过150%（轧多风险极高），则假设失效。",
+          "en": "Invalidated if price breaks below 1960 (new stop-loss) or funding rate Z-score exceeds 150% (extreme long squeeze risk)."
         }
       },
       "opened_at": "2026-02-15 20:02:04"
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 980.1600000000001,
       "notional": 1960.3200000000002,
-      "current_price": 0.0973,
-      "unrealized_pnl": -20.95,
+      "current_price": 0.0974,
+      "unrealized_pnl": -18.95,
       "exit_plan": {
         "take_profit": 0.105,
         "stop_loss": 0.095,
@@ -50,18 +50,18 @@
       "leverage": 2.0,
       "margin": 890.68,
       "notional": 1781.36,
-      "current_price": 622.7,
-      "unrealized_pnl": 3.44,
+      "current_price": 624.9,
+      "unrealized_pnl": 9.75,
       "exit_plan": {
         "take_profit": 680,
-        "stop_loss": 600,
+        "stop_loss": 610,
         "invalidation": {
-          "zh": "如果价格跌破600（止损）或融资费率Z-score超过90%（轧多风险增加），则假设失效。",
-          "en": "Invalidated if price breaks below 600 (stop-loss) or funding rate Z-score exceeds 90% (long squeeze risk increases)."
+          "zh": "如果价格跌破610（新止损）或融资费率Z-score超过30%（轧多风险增加），则假设失效。",
+          "en": "Invalidated if price breaks below 610 (new stop-loss) or funding rate Z-score exceeds 30% (long squeeze risk increases)."
         }
       },
       "opened_at": "2026-02-22 04:02:05"
     }
   ],
-  "last_update": "2026-02-22T08:01:33.785180"
+  "last_update": "2026-02-22T12:02:07.165292"
 }
