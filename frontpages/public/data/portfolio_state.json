@@ -1,6 +1,27 @@
 {
-  "nav": 10386.13,
-  "cash": 10386.132384523322,
-  "positions": [],
-  "last_update": "2026-02-22T20:01:39.974065"
+  "nav": 10382.13,
+  "cash": 8382.132384523322,
+  "positions": [
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 41841.00418410041,
+      "entry_price": 0.0956,
+      "leverage": 2.0,
+      "margin": 2000.0,
+      "notional": 4000.0,
+      "current_price": 0.0956,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.105,
+        "stop_loss": 0.09,
+        "invalidation": {
+          "zh": "如果价格跌破0.09（关键支撑）或融资费率转正超过-0.005%，则轧空剧本失效。",
+          "en": "Invalidation if price breaks below 0.09 (key support) or funding rate turns positive above -0.005%, negating the short squeeze scenario."
+        }
+      },
+      "opened_at": "2026-02-23 00:02:15"
+    }
+  ],
+  "last_update": "2026-02-23T00:02:15.367778"
 }
