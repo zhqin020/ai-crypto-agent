@@ -1,5 +1,5 @@
 {
-  "nav": 10172.07,
+  "nav": 10212.1,
   "cash": 7785.411324523322,
   "positions": [
     {
@@ -10,14 +10,14 @@
       "leverage": 2.0,
       "margin": 2000.0,
       "notional": 4000.0,
-      "current_price": 0.0912,
-      "unrealized_pnl": -184.1,
+      "current_price": 0.0918,
+      "unrealized_pnl": -159.0,
       "exit_plan": {
         "take_profit": 0.105,
-        "stop_loss": 0.091,
+        "stop_loss": 0.0912,
         "invalidation": {
-          "zh": "如果价格跌破0.091（收紧支撑）或融资费率转正超过0.005%，则趋势跟随剧本失效。",
-          "en": "Invalidation if price breaks below 0.091 (tightened support) or funding rate turns positive above 0.005%, negating the trend following scenario."
+          "zh": "如果价格跌破0.0912（当前价）或融资费率进一步转正超过0.001%，则趋势跟随剧本失效。",
+          "en": "Invalidation if price breaks below 0.0912 (current price) or funding rate turns more positive above 0.001%, negating the trend following scenario."
         }
       },
       "opened_at": "2026-02-23 00:02:15"
@@ -30,8 +30,8 @@
       "leverage": 2.0,
       "margin": 595.53,
       "notional": 1191.06,
-      "current_price": 1824.11,
-      "unrealized_pnl": -24.77,
+      "current_price": 1847.45,
+      "unrealized_pnl": -9.85,
       "exit_plan": {
         "take_profit": 1950,
         "stop_loss": 1800,
@@ -43,5 +43,5 @@
       "opened_at": "2026-02-23 04:01:55"
     }
   ],
-  "last_update": "2026-02-24T12:02:23.064360"
+  "last_update": "2026-02-24T16:02:30.370913"
 }
