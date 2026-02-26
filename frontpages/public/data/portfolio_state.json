@@ -1,27 +1,7 @@
 {
-  "nav": 10583.16,
-  "cash": 7753.411363467097,
+  "nav": 10572.81,
+  "cash": 9912.42809986877,
   "positions": [
-    {
-      "symbol": "DOGE",
-      "side": "long",
-      "quantity": 41841.00418410041,
-      "entry_price": 0.0956,
-      "leverage": 2.0,
-      "margin": 2000.0,
-      "notional": 4000.0,
-      "current_price": 0.0997,
-      "unrealized_pnl": 171.55,
-      "exit_plan": {
-        "take_profit": 0.105,
-        "stop_loss": 0.0995,
-        "invalidation": {
-          "zh": "如果价格跌破0.0995（新止损）或融资费率转正超过0.001%，则轧空剧本失效。",
-          "en": "Invalidation if price breaks below 0.0995 (new stop) or funding rate turns positive above 0.001%, negating the squeeze scenario."
-        }
-      },
-      "opened_at": "2026-02-23 00:02:15"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 2.0,
       "margin": 657.43,
       "notional": 1314.86,
-      "current_price": 2054.9,
-      "unrealized_pnl": 0.77,
+      "current_price": 2058.3,
+      "unrealized_pnl": 2.95,
       "exit_plan": {
         "take_profit": 2150,
         "stop_loss": 2020,
@@ -43,5 +23,5 @@
       "opened_at": "2026-02-26 04:01:23"
     }
   ],
-  "last_update": "2026-02-26T08:02:56.480620"
+  "last_update": "2026-02-26T12:01:40.433778"
 }
