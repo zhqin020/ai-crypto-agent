@@ -1,6 +1,6 @@
 {
-  "nav": 10486.61,
-  "cash": 9701.993883787918,
+  "nav": 10484.22,
+  "cash": 8699.993883787918,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 1.0,
       "margin": 800.0,
       "notional": 800.0,
-      "current_price": 66093.1,
-      "unrealized_pnl": -15.38,
+      "current_price": 66060.1,
+      "unrealized_pnl": -15.77,
       "exit_plan": {
         "take_profit": 71000,
         "stop_loss": 65000,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2026-02-26 16:01:40"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "long",
+      "quantity": 21299.254526091587,
+      "entry_price": 0.0939,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.0939,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 0.099,
+        "stop_loss": 0.091,
+        "invalidation": {
+          "zh": "如果价格跌破0.091（关键支撑）或融资费率Z-score回升至-30%以上（空头平仓完成），则轧空剧本失效。",
+          "en": "Invalidation if price breaks below 0.091 (key support) or funding rate Z-score rises above -30% (shorts covered), negating the squeeze scenario."
+        }
+      },
+      "opened_at": "2026-02-27 16:03:14"
     }
   ],
-  "last_update": "2026-02-27T12:02:33.229473"
+  "last_update": "2026-02-27T16:03:14.890449"
 }
