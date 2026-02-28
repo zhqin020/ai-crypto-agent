@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-02-28 00:00:00",
+  "as_of": "2026-02-28 04:00:00",
   "strategy": "Multi-Coin Relative Strength",
   "model_meta": {
     "trained_until": "2025-11-21",
@@ -12,142 +12,142 @@
     "volatility": "medium",
     "leverage_sentiment": "neutral",
     "metrics": {
-      "avg_momentum_12": -0.0525,
-      "avg_bb_width": 0.1231,
+      "avg_momentum_12": -0.0528,
+      "avg_bb_width": 0.1153,
       "avg_funding_rate": "0.0013%"
     }
   },
   "recommend_top": [
     {
       "symbol": "ETH",
-      "weight": 0.4,
-      "score": 0.887
+      "weight": 0.43,
+      "score": 0.7045
     },
     {
       "symbol": "DOGE",
-      "weight": 0.3,
-      "score": 0.655
+      "weight": 0.36,
+      "score": 0.5866
     },
     {
       "symbol": "SOL",
-      "weight": 0.3,
-      "score": 0.6514
+      "weight": 0.21,
+      "score": 0.3473
     }
   ],
   "coins": [
     {
       "symbol": "ETH",
-      "qlib_score": 0.887,
+      "qlib_score": 0.7045,
       "rank": 1,
       "market_data": {
-        "close": 1929.75,
-        "high": 1930.05,
-        "low": 1929.0,
-        "volume": 164.4796,
-        "rsi_14": 42.59,
-        "macd_hist": -12.3143,
-        "atr_14": 21.5642,
-        "bb_width_20": 0.1443,
+        "close": 1924.36,
+        "high": 1924.36,
+        "low": 1924.36,
+        "volume": 0.6368,
+        "rsi_14": 41.76,
+        "macd_hist": -13.662,
+        "atr_14": 20.4089,
+        "bb_width_20": 0.1341,
         "funding_rate": "0.0012%",
-        "funding_rate_zscore": "-41.0983%",
+        "funding_rate_zscore": "-52.4860%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.0615,
-        "ret": "0.3646%",
-        "btc_corr_24h": 0.9422,
-        "natr_14": 0.0112
+        "momentum_12": -0.063,
+        "ret": "-0.2793%",
+        "btc_corr_24h": 0.9419,
+        "natr_14": 0.0106
       }
     },
     {
       "symbol": "DOGE",
-      "qlib_score": 0.655,
+      "qlib_score": 0.5866,
       "rank": 2,
       "market_data": {
-        "close": 0.0933,
-        "high": 0.0934,
-        "low": 0.0933,
-        "volume": 118846.0268,
-        "rsi_14": 40.85,
+        "close": 0.0932,
+        "high": 0.0932,
+        "low": 0.0932,
+        "volume": 19233.8052,
+        "rsi_14": 40.6,
         "macd_hist": -0.0006,
-        "atr_14": 0.0013,
-        "bb_width_20": 0.1484,
+        "atr_14": 0.0012,
+        "bb_width_20": 0.1456,
         "funding_rate": "-0.0064%",
-        "funding_rate_zscore": "-142.8794%",
+        "funding_rate_zscore": "-130.5652%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.0745,
-        "ret": "0.3332%",
-        "btc_corr_24h": 0.8237,
-        "natr_14": 0.0137
+        "momentum_12": -0.0752,
+        "ret": "-0.1071%",
+        "btc_corr_24h": 0.8244,
+        "natr_14": 0.0128
       }
     },
     {
       "symbol": "SOL",
-      "qlib_score": 0.6514,
+      "qlib_score": 0.3473,
       "rank": 3,
       "market_data": {
-        "close": 81.85,
-        "high": 81.87,
-        "low": 81.78,
-        "volume": 235.1062,
-        "rsi_14": 42.62,
-        "macd_hist": -0.5868,
-        "atr_14": 1.1098,
-        "bb_width_20": 0.1465,
+        "close": 81.72,
+        "high": 81.73,
+        "low": 81.71,
+        "volume": 268.3893,
+        "rsi_14": 42.22,
+        "macd_hist": -0.6431,
+        "atr_14": 1.0406,
+        "bb_width_20": 0.1347,
         "funding_rate": "0.0022%",
-        "funding_rate_zscore": "27.2008%",
+        "funding_rate_zscore": "21.5574%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.07,
-        "ret": "0.3310%",
-        "btc_corr_24h": 0.8969,
-        "natr_14": 0.0136
-      }
-    },
-    {
-      "symbol": "BNB",
-      "qlib_score": 0.0621,
-      "rank": 4,
-      "market_data": {
-        "close": 613.3,
-        "high": 614.1,
-        "low": 613.3,
-        "volume": 5.0019,
-        "rsi_14": 48.52,
-        "macd_hist": -1.1587,
-        "atr_14": 4.6959,
-        "bb_width_20": 0.0938,
-        "funding_rate": "0.0014%",
-        "funding_rate_zscore": "-51.8068%",
-        "oi_change": "0.0000%",
-        "oi_rsi": 0.0,
-        "momentum_12": -0.0257,
-        "ret": "0.5740%",
-        "btc_corr_24h": 0.887,
-        "natr_14": 0.0077
+        "momentum_12": -0.0699,
+        "ret": "-0.1588%",
+        "btc_corr_24h": 0.8973,
+        "natr_14": 0.0127
       }
     },
     {
       "symbol": "BTC",
-      "qlib_score": 0.0568,
-      "rank": 5,
+      "qlib_score": 0.0424,
+      "rank": 4,
       "market_data": {
-        "close": 65848.4,
-        "high": 65873.2,
-        "low": 65838.1,
-        "volume": 1.9422,
-        "rsi_14": 44.9,
-        "macd_hist": -178.0878,
-        "atr_14": 581.3026,
-        "bb_width_20": 0.0826,
+        "close": 65794.5,
+        "high": 65794.5,
+        "low": 65794.4,
+        "volume": 0.1301,
+        "rsi_14": 44.57,
+        "macd_hist": -191.5293,
+        "atr_14": 543.6381,
+        "bb_width_20": 0.0777,
         "funding_rate": "0.0081%",
-        "funding_rate_zscore": "120.8874%",
+        "funding_rate_zscore": "109.4675%",
         "oi_change": "0.0000%",
         "oi_rsi": 0.0,
-        "momentum_12": -0.0309,
-        "ret": "0.6295%",
+        "momentum_12": -0.0355,
+        "ret": "-0.0819%",
         "btc_corr_24h": 1.0,
-        "natr_14": 0.0088
+        "natr_14": 0.0083
+      }
+    },
+    {
+      "symbol": "BNB",
+      "qlib_score": -0.0299,
+      "rank": 5,
+      "market_data": {
+        "close": 615.1,
+        "high": 615.1,
+        "low": 615.0,
+        "volume": 0.498,
+        "rsi_14": 50.06,
+        "macd_hist": -1.2084,
+        "atr_14": 4.489,
+        "bb_width_20": 0.0847,
+        "funding_rate": "0.0014%",
+        "funding_rate_zscore": "-71.7168%",
+        "oi_change": "0.0000%",
+        "oi_rsi": 0.0,
+        "momentum_12": -0.0205,
+        "ret": "0.2935%",
+        "btc_corr_24h": 0.886,
+        "natr_14": 0.0073
       }
     }
   ]
