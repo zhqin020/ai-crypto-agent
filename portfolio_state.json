@@ -1,6 +1,6 @@
 {
-  "nav": 10678.27,
-  "cash": 9577.177722078688,
+  "nav": 10666.58,
+  "cash": 8074.177722078688,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1055.95,
       "notional": 2111.9,
-      "current_price": 68425.9,
-      "unrealized_pnl": 45.14,
+      "current_price": 68150.2,
+      "unrealized_pnl": 36.45,
       "exit_plan": {
         "take_profit": 70000.0,
         "stop_loss": 65500.0,
@@ -21,7 +21,67 @@
         }
       },
       "opened_at": "2026-03-01 00:01:51"
+    },
+    {
+      "symbol": "BTC",
+      "side": "short",
+      "quantity": -0.014673471244398403,
+      "entry_price": 68150.2,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 68150.2,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 67000,
+        "stop_loss": 69500,
+        "invalidation": {
+          "zh": "失效条件：价格突破$69500（基于ATR调整），或融资费率Z-score回落至中性，或恐慌指数进一步下跌。",
+          "en": "Invalidation: Price breaks above $69500 (adjusted based on ATR), or funding rate Z-score falls to neutral, or Fear & Greed Index declines further."
+        }
+      },
+      "opened_at": "2026-03-03 08:02:40"
+    },
+    {
+      "symbol": "ETH",
+      "side": "short",
+      "quantity": -0.5008514474606832,
+      "entry_price": 1996.6,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 1996.6,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 1950,
+        "stop_loss": 2050,
+        "invalidation": {
+          "zh": "失效条件：价格突破$2050（基于ATR调整），或融资费率Z-score回落至中性，或市场情绪突然转向乐观。",
+          "en": "Invalidation: Price breaks above $2050 (adjusted based on ATR), or funding rate Z-score falls to neutral, or market sentiment suddenly turns optimistic."
+        }
+      },
+      "opened_at": "2026-03-03 08:02:40"
+    },
+    {
+      "symbol": "BNB",
+      "side": "long",
+      "quantity": 1.5787811809283234,
+      "entry_price": 633.4,
+      "leverage": 2.0,
+      "margin": 500.0,
+      "notional": 1000.0,
+      "current_price": 633.4,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 650,
+        "stop_loss": 620,
+        "invalidation": {
+          "zh": "失效条件：价格跌破$620（基于ATR调整），或融资费率Z-score回升至中性，或BTC大幅下跌拖累。",
+          "en": "Invalidation: Price breaks below $620 (adjusted based on ATR), or funding rate Z-score recovers to neutral, or BTC declines significantly dragging it down."
+        }
+      },
+      "opened_at": "2026-03-03 08:02:40"
     }
   ],
-  "last_update": "2026-03-03T04:02:48.860371"
+  "last_update": "2026-03-03T08:02:40.094917"
 }
