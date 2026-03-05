@@ -1,6 +1,6 @@
 {
-  "nav": 11164.86,
-  "cash": 10374.165867182572,
+  "nav": 11176.64,
+  "cash": 9372.165867182572,
   "positions": [
     {
       "symbol": "BTC",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 780.71,
       "notional": 1561.42,
-      "current_price": 71609.4,
-      "unrealized_pnl": 9.98,
+      "current_price": 70973.4,
+      "unrealized_pnl": 23.76,
       "exit_plan": {
         "take_profit": 70000,
         "stop_loss": 74000,
@@ -21,7 +21,27 @@
         }
       },
       "opened_at": "2026-03-05 08:02:44"
+    },
+    {
+      "symbol": "ETH",
+      "side": "long",
+      "quantity": 0.9633818556661304,
+      "entry_price": 2076.02,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 2076.02,
+      "unrealized_pnl": 0.0,
+      "exit_plan": {
+        "take_profit": 2150,
+        "stop_loss": 2000,
+        "invalidation": {
+          "zh": "失效条件：价格跌破$2000且RSI跌破50，或融资费率Z-score升至90%以上。",
+          "en": "Invalidation condition: Price breaks below $2000 with RSI falling below 50, or funding rate Z-score rises above 90%."
+        }
+      },
+      "opened_at": "2026-03-05 20:02:29"
     }
   ],
-  "last_update": "2026-03-05T16:02:23.082079"
+  "last_update": "2026-03-05T20:02:29.448474"
 }
