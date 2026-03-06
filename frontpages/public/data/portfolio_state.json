@@ -1,27 +1,7 @@
 {
-  "nav": 11176.64,
-  "cash": 9372.165867182572,
+  "nav": 11171.26,
+  "cash": 9175.176147712333,
   "positions": [
-    {
-      "symbol": "BTC",
-      "side": "short",
-      "quantity": -0.0216652953166431,
-      "entry_price": 72070.1,
-      "leverage": 2.0,
-      "margin": 780.71,
-      "notional": 1561.42,
-      "current_price": 70973.4,
-      "unrealized_pnl": 23.76,
-      "exit_plan": {
-        "take_profit": 70000,
-        "stop_loss": 74000,
-        "invalidation": {
-          "zh": "失效条件：价格突破前高$73000且RSI持续上升，或融资费率Z-score降至100%以下。",
-          "en": "Invalidation condition: Price breaks above previous high $73000 with RSI continuing to rise, or funding rate Z-score drops below 100%."
-        }
-      },
-      "opened_at": "2026-03-05 08:02:44"
-    },
     {
       "symbol": "ETH",
       "side": "long",
@@ -30,8 +10,8 @@
       "leverage": 2.0,
       "margin": 1000.0,
       "notional": 2000.0,
-      "current_price": 2076.02,
-      "unrealized_pnl": 0.0,
+      "current_price": 2071.95,
+      "unrealized_pnl": -3.92,
       "exit_plan": {
         "take_profit": 2150,
         "stop_loss": 2000,
@@ -41,7 +21,27 @@
         }
       },
       "opened_at": "2026-03-05 20:02:29"
+    },
+    {
+      "symbol": "DOGE",
+      "side": "short",
+      "quantity": -21390.374331550804,
+      "entry_price": 0.0935,
+      "leverage": 2.0,
+      "margin": 1000.0,
+      "notional": 2000.0,
+      "current_price": 0.0935,
+      "unrealized_pnl": -0.0,
+      "exit_plan": {
+        "take_profit": 0.085,
+        "stop_loss": 0.098,
+        "invalidation": {
+          "zh": "失效条件：价格突破前高$0.095且RSI持续上升，或融资费率Z-score降至50%以下。",
+          "en": "Invalidation condition: Price breaks above previous high $0.095 with RSI continuing to rise, or funding rate Z-score drops below 50%."
+        }
+      },
+      "opened_at": "2026-03-06 00:02:58"
     }
   ],
-  "last_update": "2026-03-05T20:02:29.448474"
+  "last_update": "2026-03-06T00:02:58.219256"
 }
