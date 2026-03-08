@@ -1,6 +1,6 @@
 {
-  "nav": 11019.48,
-  "cash": 8285.61975406551,
+  "nav": 10970.26,
+  "cash": 10000.656878249018,
   "positions": [
     {
       "symbol": "DOGE",
@@ -10,8 +10,8 @@
       "leverage": 2.0,
       "margin": 989.32,
       "notional": 1978.64,
-      "current_price": 0.09,
-      "unrealized_pnl": -6.57,
+      "current_price": 0.0894,
+      "unrealized_pnl": -19.72,
       "exit_plan": {
         "take_profit": 0.095,
         "stop_loss": 0.088,
@@ -21,47 +21,7 @@
         }
       },
       "opened_at": "2026-03-06 16:03:21"
-    },
-    {
-      "symbol": "ETH",
-      "side": "long",
-      "quantity": 1.5119062618117676,
-      "entry_price": 1984.25,
-      "leverage": 2.0,
-      "margin": 1500.0,
-      "notional": 3000.0,
-      "current_price": 1970.1,
-      "unrealized_pnl": -21.39,
-      "exit_plan": {
-        "take_profit": 2050,
-        "stop_loss": 1950,
-        "invalidation": {
-          "zh": "失效条件：价格跌破$1950且RSI跌破40，或融资费率Z-score回升至-100%以上（空头压力缓解），或BTC跌破$67500带动整体下跌。",
-          "en": "Invalidation condition: Price breaks below $1950 with RSI falling below 40, or funding rate Z-score recovers above -100% (short pressure eases), or BTC breaks below $67,500 dragging the market down."
-        }
-      },
-      "opened_at": "2026-03-06 20:02:17"
-    },
-    {
-      "symbol": "BTC",
-      "side": "long",
-      "quantity": 0.008173070546084791,
-      "entry_price": 67852.1,
-      "leverage": 2.0,
-      "margin": 277.28,
-      "notional": 554.56,
-      "current_price": 67268.0,
-      "unrealized_pnl": -4.77,
-      "exit_plan": {
-        "take_profit": 70000,
-        "stop_loss": 67000,
-        "invalidation": {
-          "zh": "失效条件：价格跌破$67000且RSI跌破38，或融资费率Z-score回升至-50%以上（空头压力大幅缓解），或市场恐慌加剧（恐惧指数低于10）。",
-          "en": "Invalidation condition: Price breaks below $67,000 with RSI falling below 38, or funding rate Z-score recovers above -50% (short pressure significantly eases), or market panic worsens (Fear Index below 10)."
-        }
-      },
-      "opened_at": "2026-03-07 16:02:36"
     }
   ],
-  "last_update": "2026-03-08T00:02:35.073760"
+  "last_update": "2026-03-08T04:02:57.251500"
 }
